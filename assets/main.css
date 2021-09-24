@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1 {
+    font-size:60px;
+    line-height: 70px;
+    font-weight: bold;
+    /* font-family: Be Vietnam; */
+}
+
+p {
+    font-size:18px;
+}
+
+a {
+    font-size:12px;
+}
+
+button {
+        /* font-family: Be Vietnam; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 16px;
+    color: #6F3E97;
+}
+#background {
+    background-image: linear-gradient(180deg, #6F3E97 30.88%, #6200EE 126.35%)
+}
