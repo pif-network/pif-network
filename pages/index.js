@@ -1,6 +1,7 @@
 import Head from 'next/head'
-import { Button, Space, DatePicker, Card } from 'antd';
+import { Space, DatePicker, Card } from 'antd';
 import { CiCircleFilled } from '@ant-design/icons';
+import Button from '../components/common/Button';
 
 export default function Home() {
   const onChange = () => {};
@@ -28,11 +29,11 @@ export default function Home() {
 
         <div className="m-5">
           <Space direction="vertical">
-            <Button type="primary">Primary Button</Button>
-            <Button type="ghost">Ghost Button</Button>
             <DatePicker onChange={onChange} />
             <CiCircleFilled />
           </Space>
+
+          <Button>Primary Button</Button>
         </div>
 
         <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">

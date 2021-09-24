@@ -1,0 +1,8 @@
+.btn {
+  @apply font-bold py-2 px-4 rounded bg-primary text-white border border-primary;
+}
+/* I'm making the hover up */
+/* TODO: Ask design what's the hover looks like */
+.btn:hover {
+  @apply bg-white text-primary;
+}
