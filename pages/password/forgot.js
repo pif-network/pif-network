@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/router';
 import { Row, Col, Input } from 'antd';
 import { CheckOutlined } from '@ant-design/icons'
 import Button from '../../components/common/Button'
@@ -9,7 +10,8 @@ import { useState } from 'react';
 
 export default function ForgotPassword() {
   const [sent, setSent] = useState(false);
-  const [email, setEmail] = useState(null);
+  const [email, setEmail] = useState('');
+  const router = useRouter();
 
   const handleInputChange = event => {
     setEmail(event.target.value);

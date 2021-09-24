@@ -3,15 +3,10 @@ import http from "../http-common";
 export const authService = {
   register,
   currentUser,
-  verifyPasswordReset,
   forgotPassword,
   passwordChange,
   updateProfile
 };
-
-function currentUser() {
-  return http.get('/mentees/me');
-}
 
 function forgotPassword(email) {
   return http.post(
@@ -21,10 +16,6 @@ function forgotPassword(email) {
   );
 }
 
-function verifyPasswordReset(token) {
-  return http.get(`/mentees/auth/password_reset/${token}`);
-}
-
 // TODO: check if BE compare the two password
 function passwordChange(password) {
   return http.post('/mentees/auth/password_change', {
@@ -32,6 +23,11 @@ function passwordChange(password) {
       password2: password
     }
   )
+}
+
+// Just an example
+function currentUser() {
+  return http.get('/mentees/me');
 }
 
 function register(params) {
