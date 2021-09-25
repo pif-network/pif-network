@@ -21,7 +21,7 @@ export default function PasswordRecovery() {
     // TODO: Contact with BE to proceed next step
     // authService.passwordChange(password)
     // .then(response => {
-      // setRecovered(current => !current);
+    //   setRecovered(current => !current);
     //   console.log(response);
     // })
     // .catch(e => {
