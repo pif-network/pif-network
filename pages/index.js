@@ -78,10 +78,12 @@ function HomePage() {
           </div>
 
           <div class="flex justify-center items-baseline mx-auto p-10 container">
-          <Image src={Microsoft_logo} alt="Microsoft_logo" class="m-12"/> 
-          <Image src={Amazon_logo} alt="Amazon_logo" class="m-12"/> 
-          <Image src={Google_logo} alt="Google_logo" class="m-12"/> 
-          <Image src={Ohmni_logo} alt="Ohmni_logo" class="m-12"/> </div>
+          <Image src={Microsoft_logo} alt="Microsoft_logo" class=""/> 
+          <Image src={Google_logo} alt="Google_logo" class=""/> 
+          <Image src={Amazon_logo} alt="Amazon_logo" class=""/>
+          <Image src={Ohmni_logo} alt="Ohmni_logo" class=""/> 
+          
+          </div> 
 
       </div>
       <Footer/>
