@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 const Header = () => {
   return (
-  <div class="container py-4 mx-20">
+  <div class="container py-6 mx-auto">
     <Image src={logo} alt="logo" width={130} height={33}/>
   </div>
   );
