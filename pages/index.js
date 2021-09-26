@@ -6,13 +6,10 @@ import section1_1 from "../public/images/section1_1.svg";
 import section1_2 from "../public/images/section1_2.svg";
 import section1_3 from "../public/images/section1_3.svg";
 import section1_4 from "../public/images/section1_4.svg";
-
-import Microsoft_logo from "../public/images/Microsoft_logo.svg";
-import Amazon_logo from "../public/images/Amazon_logo.svg";
-import Google_logo from "../public/images/Google_logo.svg";
+import Microsoft_logo from "../public/images/Microsoft_logo.png";
+import Amazon_logo from "../public/images/Amazon_logo.png";
+import Google_logo from "../public/images/Google_logo.png";
 import Ohmni_logo from "../public/images/Ohmni_logo.svg";
-
-
 
 function HomePage() {
   return (
@@ -80,11 +77,11 @@ function HomePage() {
           <h2>Đội ngũ SheCodes mentors đã và đang làm việc tại các công ty nào?</h2>
           </div>
 
-          <div class="flex justify-center items-baseline mx-auto py-5">
-          <Image src={Microsoft_logo} alt="Microsoft_logo" width={200} class="m-5"/> 
-          <Image src={Amazon_logo} alt="Amazon_logo" width={200} class="m-5"/> 
-          <Image src={Google_logo} alt="Google_logo" width={200} class="m-5"/> 
-          <Image src={Ohmni_logo} alt="Ohmni_logo" width={200} class="m-5"/> </div>
+          <div class="flex justify-center items-baseline mx-auto p-10 container">
+          <Image src={Microsoft_logo} alt="Microsoft_logo" class="m-12"/> 
+          <Image src={Amazon_logo} alt="Amazon_logo" class="m-12"/> 
+          <Image src={Google_logo} alt="Google_logo" class="m-12"/> 
+          <Image src={Ohmni_logo} alt="Ohmni_logo" class="m-12"/> </div>
 
       </div>
       <Footer/>
