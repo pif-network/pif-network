@@ -1,4 +1,5 @@
 import Head from "next/head"
+import { Link, LINK_TYPE } from "../components/link"
 
 export default function Home() {
   return (
@@ -7,7 +8,7 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <Link type={LINK_TYPE.PRIMARY}>aaaa</Link>
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
         <h1 className="text-6xl font-bold">
           Welcome to{" "}
