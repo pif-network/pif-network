@@ -17,90 +17,95 @@ export const Button = styled.button`
   order: 0;
   flex-grow: 0;
   margin: 0px 10px;
+
+  ${({ variant }) => 
+    variant == "outline" && css `
+    background: #FFFFFF;
+    color: #6F3E97;
+    border: 1px solid #6F3E97;
+    box-sizing: border-box;
+    border-radius: 4px;
+  
+    &:hover {
+      background: #F3EFF8;
+      color: #6F3E97;
+    }
+  
+    &:focus {
+      background: #E7DBF8;
+    }
+  
+    &:active {
+      background: #D8BFD8;
+      background-size: 100%;      
+    }
+  
+    &:disabled {
+      cursor: default;
+      color: grey;
+    }
+    `
+  }
+   
+  
+  ${({ variant }) => 
+    variant == "contained" && css `
+    background: #6F3E97;
+    color: white;
+    border: 1px solid #6F3E97;
+    box-sizing: border-box;
+    border-radius: 4px;
+  
+    &:hover {
+      background: #F3EFF8;
+      color: #6F3E97;
+    }
+  
+    &:focus {
+      background: #E7DBF8;
+    }
+  
+    &:active {
+      background: #D8BFD8;
+      background-size: 100%;
+    }
+  
+    &:disabled {
+      cursor: default;
+      color: grey;
+    }
+    ` 
+  }
+
+
+  ${({ variant }) => 
+    variant == "text" && css `
+    background: #FFFFFF;
+    color: #6F3E97;
+    border: 1px #6F3E97;
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    &:hover {
+      background: #F3EFF8;
+      color: #6F3E97;
+    }
+
+    &:focus {
+      background: #E7DBF8;
+    }
+
+    &:active {
+      background: #D8BFD8;
+      background-size: 100%;
+    }
+
+    &:disabled {
+      cursor: default;
+      color: grey;
+    }
+  `
+  }
 `
 
-export const OutlineButton = styled(Button)`
 
-  background: #FFFFFF;
-  color: #6F3E97;
-  border: 1px solid #6F3E97;
-  box-sizing: border-box;
-  border-radius: 4px;
-
-  &:hover {
-    background: #F3EFF8;
-    color: #6F3E97;
-  }
-
-  &:focus {
-    background: #E7DBF8;
-  }
-
-  &:active {
-    background: #E7DBF8;
-    background-size: 100%;
-    transition: background 1s;
-  }
-
-  &:disabled {
-    color: grey;
-  }
-`;
-
-export const ContainedButton = styled(Button)`
-  
-  background: #6F3E97;
-  color: white;
-  border: 1px solid #6F3E97;
-  box-sizing: border-box;
-  border-radius: 4px;
-
-  &:hover {
-    background: #F3EFF8;
-    color: #6F3E97;
-  }
-
-  &:focus {
-    background: #E7DBF8;
-  }
-
-  &:active {
-    background: #E7DBF8;
-    background-size: 100%;
-    transition: background 1s;
-  }
-
-  &:disabled {
-    color: grey;
-  }
-
-`;
-
-export const TextButton = styled(Button)`
-
-  background: #FFFFFF;
-  color: #6F3E97;
-  border: 1px #6F3E97;
-  box-sizing: border-box;
-  border-radius: 4px;
-
-  &:hover {
-    background: #F3EFF8;
-    color: #6F3E97;
-  }
-
-  &:focus {
-    background: #E7DBF8;
-  }
-
-  &:active {
-    background: #E7DBF8;
-    background-size: 100%;
-    transition: background 1s;
-  }
-
-  &:disabled {
-    color: grey;
-  }
-
-`;

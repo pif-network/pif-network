@@ -1,5 +1,5 @@
 import Head from "next/head"
-import { OutlineButton, ContainedButton, TextButton } from "../components/button";
+import { Button } from "../components/button";
 
 export default function Home() {
   return (
@@ -25,28 +25,16 @@ export default function Home() {
         </p>
 
         <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          
-          <OutlineButton> 
-            <span> Outline </span>
-          </OutlineButton>
 
-          <OutlineButton> 
-            <svg class="h-4 w-4 text-purple-800"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="12" y1="5" x2="12" y2="19" />  <line x1="5" y1="12" x2="19" y2="12" /></svg>
-            <span> Outline </span>
-          </OutlineButton>
+        <Button variant="outline"> Outline Button </Button> 
+        <Button variant="contained"> Contained Button </Button> 
+        <Button variant="text"> Text Button </Button>
 
-          <ContainedButton> 
-            <svg class="h-4 w-4 text-white-100"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="12" y1="5" x2="12" y2="19" />  <line x1="5" y1="12" x2="19" y2="12" /></svg>     
-            <span> Contained </span> 
-          </ContainedButton>
-          
-          <ContainedButton> Contained </ContainedButton>
-          
-          <TextButton> 
-            <svg class="h-4 w-4 text-purple-800"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="12" y1="5" x2="12" y2="19" />  <line x1="5" y1="12" x2="19" y2="12" /></svg>
-            <span> Text </span> 
-          </TextButton>
-          <TextButton> Text </TextButton>
+
+        <Button variant="outline">  
+          <svg class="h-4 w-4 text-purple-800"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="12" y1="5" x2="12" y2="19" />  <line x1="5" y1="12" x2="19" y2="12" /></svg>
+          Outline Button
+        </Button> 
 
         </div>
       </main>
