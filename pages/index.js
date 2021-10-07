@@ -26,7 +26,7 @@ export default function Home() {
 
         <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
 
-        <Button variant="outline"> Outline Button </Button> 
+        <Button variant="outline" onClick={() => alert('clicked!')}> Outline Button </Button> 
         <Button variant="contained"> Contained Button </Button> 
         <Button variant="text"> Text Button </Button>
 

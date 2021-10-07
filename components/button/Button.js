@@ -33,11 +33,13 @@ export const Button = styled.button`
   
     &:focus {
       background: #E7DBF8;
+      color: #6F3E97;
     }
   
     &:active {
-      background: #D8BFD8;
-      background-size: 100%;      
+      color: #6F3E97;  
+      background: #E7DBF8;
+      background-size: 100%; 
     }
   
     &:disabled {
@@ -66,7 +68,7 @@ export const Button = styled.button`
     }
   
     &:active {
-      background: #D8BFD8;
+      background: #E7DBF8;
       background-size: 100%;
     }
   
