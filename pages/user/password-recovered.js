@@ -4,8 +4,7 @@ import Image from "next/image"
 import { useRouter } from "next/router"
 import { Row, Col, Input } from "antd"
 import { CheckOutlined } from "@ant-design/icons"
-import Button from "../../components/common/Button"
-import { authService } from "../../services"
+import { authService } from "../../services/AuthService"
 import { useState } from "react"
 
 export default function PasswordRecovery() {
@@ -60,7 +59,7 @@ export default function PasswordRecovery() {
                 Mật khẩu của bạn đã được khôi phục!
               </h1>
               <div className="mt-6 flex items-center justify-center">
-                <Button>Đăng Nhập</Button>
+                <button>Đăng Nhập</button>
               </div>
             </div>
           </Col>
@@ -98,7 +97,7 @@ export default function PasswordRecovery() {
                 value={password}
               />
               <div className="mt-6 flex items-center justify-center">
-                <Button onClick={requestNewPassword}>Khôi phục mật khẩu</Button>
+                <button onClick={requestNewPassword}>Khôi phục mật khẩu</button>
               </div>
             </div>
           </Col>
