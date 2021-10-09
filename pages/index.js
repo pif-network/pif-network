@@ -10,82 +10,88 @@ import Microsoft_logo from "../public/images/Microsoft_logo.png";
 import Amazon_logo from "../public/images/Amazon_logo.png";
 import Google_logo from "../public/images/Google_logo.png";
 import Ohmni_logo from "../public/images/Ohmni_logo.svg";
+import {Button} from "../components/button/Button";
 
 function HomePage() {
   return (
     <div>
-      <Header/>
+      <div className="container flex flex-row place-content-between">
+      <div className="inline"><Header/></div>
+      <div className="inline-flex py-5">
+        <div className="inline"><Button variant="outline">Đăng nhập</Button></div>
+        <div className="inline"><Button variant="contained">Đăng ký</Button></div>
+      </div>
+      </div>
 
       {/* [] MastHead  */}
-       <div class="p-20" id="background">
-         <div class="container mx-auto flex content-middle justify-around md">
-           
-           <div class="py-10">
-             <h1 class="text-white">SheCodes Mentorship</h1>
-             <p class="text-white pb-8 pr-11">SheCodes Mentorship mang đến cho các bạn nữ cơ hội được tư vấn và hướng dẫn từ các cá nhân có nhiều kiến thức, kinh nghiệm cũng như kỹ năng trong lĩnh vực công nghệ.</p>
-             <button class="text-white bg-white text-purple-800 px-10 py-3 rounded">Tham gia ngay</button>
+       <div className="p-20 bg-gradient-to-b from-purple-600 to-purple-800 " id="background">
+         <div className="container mx-auto">
+           <div className="flex md">
+           <div className="col inline py-5">
+             <h1 className="text-white font-semibold text-4xl my-2">SheCodes Mentorship</h1>
+             <p className="text-white pb-8 pr-11">SheCodes Mentorship mang đến cho các bạn nữ cơ hội được tư vấn và hướng dẫn từ các cá nhân có nhiều kiến thức, kinh nghiệm cũng như kỹ năng trong lĩnh vực công nghệ.</p>
+             <button className="text-white bg-white text-purple-800 px-5 py-2 align-middle rounded">Tham gia ngay</button>
            </div>
         
-          <div class="flex content-end justify-end">
-            <Image src={homepageImg} alt="homepageImg" 
-            // width={500}
+           <div className="flex inline justify-center py-5">
+            <Image src={homepageImg} alt="homepageImg" width={500}
             />
           </div>
-
+          </div>
         </div>
        </div>
 
-      <div class="container mx-auto">
-        <div class="flex justify-center">
-          <div class="w-10 bg-purple-800 p-1 m-5"></div>
+      <div className="container mx-auto">
+        <div className="flex justify-center">
+          <div className="w-10 bg-purple-800 p-1 m-5"></div>
           </div>
       
-        <div class="flex justify-center">
-          <h2>Những lợi ích mà SheCodes Mentorship đem lại</h2></div>
+        <div className="flex justify-center">
+          <h2 className="text-2xl text-center">Những lợi ích mà SheCodes Mentorship đem lại</h2></div>
         
         <div>
-          <div class="flex justify-center">
-            <div class="mx-auto pr-5 m-10">
-            <Image src={section1_1} alt="section1_1" /> 
-            <p>Lựa chọn mentor 1-1 có trải nghiệm và background phù hợp với nhu cầu của bạn</p>
+          <div className="flex flex-inline align-baseline">
+            <div className="col sm px-auto m-5">
+            <div className="flex justify-center py-5"><Image src={section1_1} alt="section1_1" width={200}/></div>
+            <p className="text-center">Lựa chọn mentor 1-1 có trải nghiệm và background phù hợp với nhu cầu của bạn</p>
             </div>
 
-          <div class="col sm mx-auto px-5 m-10">
-            <Image src={section1_2} alt="section1_2" /> 
-            <p>Nhận lời khuyên về lộ trình hướng nghiệp cũng như các kỹ năng cần chuẩn bị,...</p>
+          <div className="col sm px-auto m-5">
+          <div className="flex justify-center py-5"><Image src={section1_2} alt="section1_2" width={200}/></div>
+            <p className="text-center">Nhận lời khuyên về lộ trình hướng nghiệp cũng như các kỹ năng cần chuẩn bị...</p>
             </div>
         
-         <div class="col sm mx-auto px-5 m-10">
-           <Image src={section1_3} alt="section1_3" /> 
-           <p>Được chia sẻ về cách tự học và phát triển trong lĩnh vực mà bạn mong muốn</p>
+         <div className="col sm px-auto m-5">
+         <div className="flex justify-center py-5"><Image src={section1_3} alt="section1_3" width={200}/></div>
+           <p className="text-center">Được chia sẻ về cách tự học và phát triển trong lĩnh vực mà bạn mong muốn</p>
            </div>
        
-          <div class="col sm mx-auto px-5 m-10">
-           <Image src={section1_4} alt="section1_4" /> 
-           <p>Liên lạc với mentor một cách linh hoạt, không ràng buộc về thời gian</p>
+          <div className="col sm px-auto m-5">
+          <div className="flex justify-center py-5 mt-3"><Image src={section1_4} alt="section1_4" width={200}/></div>
+           <p className="text-center">Liên lạc với mentor một cách linh hoạt, không ràng buộc về thời gian</p>
            </div>
       </div>
       </div>
       </div>
 
-      <div class="container mx-auto">
-        <div class="flex justify-center">
-          <div class="w-10 bg-purple-800 p-1 m-5"></div>
+      <div className="container mx-auto">
+        <div className="flex justify-center">
+          <div className="w-10 bg-purple-800 p-1 m-5"></div>
           </div>
 
-        <div class="flex justify-center">
-          <h2>Đội ngũ SheCodes mentors đã và đang làm việc tại các công ty nào?</h2>
+        <div className="flex justify-center">
+          <h2 className="text-2xl text-center">Đội ngũ SheCodes mentors đã và đang làm việc tại các công ty nào?</h2>
           </div>
 
-          <div class="flex justify-center items-baseline mx-auto p-10 container">
-          <Image src={Microsoft_logo} alt="Microsoft_logo" class=""/> 
-          <Image src={Google_logo} alt="Google_logo" class=""/> 
-          <Image src={Amazon_logo} alt="Amazon_logo" class=""/>
-          <Image src={Ohmni_logo} alt="Ohmni_logo" class=""/> 
-          
+          <div className="flex justify-center items-baseline mx-auto px-20">
+          <div className="flex justify-center py-5 mx-5"><Image src={Microsoft_logo} alt="Microsoft_logo"/></div>
+          <div className="flex justify-center py-5 mx-5"><Image src={Google_logo} alt="Google_logo"/></div>
+          <div className="flex justify-center py-5 mx-5"><Image src={Amazon_logo} alt="Amazon_logo"/></div>
+          <div className="flex justify-center py-5 mx-5 mb-16"><Image src={Ohmni_logo} alt="Ohmni_logo"/></div>
           </div> 
-
+      
       </div>
+      <div className="border"></div>
       <Footer/>
       
     </div>
