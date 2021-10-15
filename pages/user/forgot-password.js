@@ -4,8 +4,7 @@ import Image from "next/image"
 import { useRouter } from "next/router"
 import { Row, Col, Input } from "antd"
 import { CheckOutlined } from "@ant-design/icons"
-import Button from "../../components/common/Button"
-import { authService } from "../../services"
+import { authService } from "../../services/AuthService"
 import { useState } from "react"
 
 export default function ForgotPassword() {
@@ -86,9 +85,9 @@ export default function ForgotPassword() {
                 value={email}
               />
               <div className="mt-6 flex items-center justify-center">
-                <Button onClick={requestResetPassword}>
+                <button onClick={requestResetPassword}>
                   Gửi email cho tôi
-                </Button>
+                </button>
               </div>
               <div className="mt-4 flex items-center justify-center">
                 <Link href="/login">
