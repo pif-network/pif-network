@@ -1,11 +1,4 @@
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { Row, Col } from "antd";
-
 export default function RequestSuccess() {
-  const router = useRouter();
-
   return (
     <div className="min-h-screen-85 overflow-hidden flex">
       <div className="overflow-hidden w-screen my-3 bg-white">

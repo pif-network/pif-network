@@ -39,6 +39,7 @@ module.exports = {
       spacing: {
         72: "18rem",
         84: "21rem",
+        92: "23rem",
         96: "24rem",
         100: "25rem",
         104: "26rem",
@@ -65,6 +66,8 @@ module.exports = {
   variants: {
     extend: {
       backgroundColor: ["active"],
+      backgroundColor: ["checked"],
+      borderColor: ["checked"],
     },
   },
   plugins: [require("tailwindcss-ripple")()],
