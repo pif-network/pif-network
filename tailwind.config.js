@@ -33,6 +33,8 @@ module.exports = {
       },
       lineHeight: {
         12: "3rem",
+        14: "3.5rem",
+        16: "4rem",
       },
       spacing: {
         72: "18rem",
@@ -43,6 +45,14 @@ module.exports = {
         108: "27rem",
       },
       height: {
+        "screen/85": "85vh",
+        "screen/75": "75vh",
+        "screen/2": "50vh",
+        "screen/3": "calc(100vh / 3)",
+        "screen/4": "calc(100vh / 4)",
+        "screen/5": "calc(100vh / 5)",
+      },
+      width: {
         "screen/85": "85vh",
         "screen/75": "75vh",
         "screen/2": "50vh",
