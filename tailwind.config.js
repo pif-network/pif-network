@@ -24,7 +24,7 @@ module.exports = {
       colors: {
         primary: "#6F3E97",
         secondary: "#57A8DA",
-        gray: "#F2F2F2",
+        lightgray: "#F2F2F2",
         purple: "#5D268A",
       },
       textColor: {
@@ -35,6 +35,7 @@ module.exports = {
         12: "3rem",
         14: "3.5rem",
         16: "4rem",
+        20: "4.5rem",
       },
       spacing: {
         72: "18rem",

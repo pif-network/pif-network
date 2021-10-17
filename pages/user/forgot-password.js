@@ -30,7 +30,7 @@ export default function ForgotPassword() {
 
   return (
     <>
-      <div className="h-screen/85 md:bg-gray sm:bg-white md:px-16 md:py-12 sm:p-0">
+      <div className="h-screen/85 md:bg-lightgray sm:bg-white md:px-16 md:py-12 sm:p-0">
         <Row>
           <Col
             className="bg-primary hidden md:flex h-screen/75 justify-center items-center "
