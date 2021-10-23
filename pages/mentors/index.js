@@ -1,17 +1,12 @@
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { List } from "antd";
-import {
-  GithubFilled,
-  LinkedinFilled,
-  CalendarOutlined,
-  ProjectFilled,
-} from "@ant-design/icons";
+import Link from 'next/link'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { List } from 'antd'
+import { GithubFilled, LinkedinFilled, CalendarOutlined, ProjectFilled } from '@ant-design/icons'
 
 export default function MentorProfile() {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <>
@@ -24,21 +19,17 @@ export default function MentorProfile() {
                 className="rounded-full mt-48 w-56 md:w-56 sm:w-46"
                 alt="Mentor profile picture"
               />
-            </div>{" "}
+            </div>{' '}
           </div>
         </div>
         <div className="float-none md:float-right w-full md:w-10/12 min-h-screen border-t border-gray-100">
-          <button className="mt-36 md:mt-20 ml-32 md:mr-24 float-none md:float-right py-3 px-4 rounded bg-primary text-white hover:bg-purple focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50">
+          <button className="mt-36 md:mt-20 ml-32 md:mr-24 float-none md:float-right py-3 px-4 rounded bg-primary text-white hover:bg-violet focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50">
             Đặt lịch hẹn
           </button>
           <div className="relative">
             <div className="md:mt-40 mt-8 w-4/5 md:ml-56 ml-8">
-              <h1 className="pt-1 pb-4 text-2xl md:text-6xl md:leading-20 md:font-medium">
-                Nguyễn Thanh Tùng
-              </h1>
-              <h5 className="text-base md:text-2xl md:leading-8 pt-4 pb-6">
-                Nơi làm việc{" "}
-              </h5>
+              <h1 className="pt-1 pb-4 text-2xl md:text-6xl md:leading-20 md:font-medium">Nguyễn Thanh Tùng</h1>
+              <h5 className="text-base md:text-2xl md:leading-8 pt-4 pb-6">Nơi làm việc </h5>
               <div className="pb-4">
                 <Link href="https://github.com/npthao1312">
                   <a>
@@ -53,13 +44,11 @@ export default function MentorProfile() {
               </div>
               <hr />
               <p className="pt-3 pb-5 text-base leading-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua.{' '}
               </p>
               <ul className="mb-6 w-full rounded-lg">
                 <li>
@@ -72,9 +61,7 @@ export default function MentorProfile() {
                 </li>
               </ul>
               <hr />
-              <h5 className="text-2xl leading-8 pt-4 pb-4">
-                Kiến thức chuyên môn{" "}
-              </h5>
+              <h5 className="text-2xl leading-8 pt-4 pb-4">Kiến thức chuyên môn </h5>
               <div className="pb-6">
                 <span className="text-sm font-bold inline-block py-3 px-3 rounded-2xl bg-lightgray last:mr-0 mr-2">
                   Lập trình
@@ -98,11 +85,11 @@ export default function MentorProfile() {
                 <span className="text-sm font-bold inline-block py-3 px-3 rounded-2xl bg-lightgray last:mr-0 mr-2">
                   pink
                 </span>
-              </div>{" "}
+              </div>{' '}
             </div>
           </div>
         </div>
       </section>
     </>
-  );
+  )
 }

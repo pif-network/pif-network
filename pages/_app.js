@@ -1,6 +1,7 @@
 import 'tailwindcss/tailwind.css'
 import 'antd/dist/antd.css'
 import '../assets/main.css'
+import Layout from '../components/common/Layout'
 
 function MyApp({ Component, pageProps }) {
   return (

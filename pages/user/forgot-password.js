@@ -65,7 +65,7 @@ export default function ForgotPassword() {
                   Chúng tôi sẽ gửi email kèm theo hướng dẫn đặt lại mật khẩu cho bạn.{' '}
                 </p>
                 <Input
-                  className="mt-6 h-12 border border-primary hover:border-purple-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="mt-6 h-12 border border-primary hover:border-violet-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder="Nhập email của bạn"
                   type="email"
                   name="email"

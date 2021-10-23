@@ -75,7 +75,7 @@ export default function PasswordRecovery() {
                   Hãy nhập mật khẩu mới cho tài khoản của bạn
                 </p>
                 <Input.Password
-                  className="mt-6 h-12 border border-primary hover:border-purple-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="mt-6 h-12 border border-primary hover:border-violet-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder="Nhập mật khẩu mới"
                   onChange={handleInputChange}
                   value={password}
