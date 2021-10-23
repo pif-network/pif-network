@@ -1,65 +1,119 @@
 import Head from 'next/head'
 import { Button } from '../components/button'
 
-export default function Home() {
+function HomePage() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">pages/index.js</code>
-        </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <Button variant="outline" onClick={() => alert('clicked!')}>
-            {' '}
-            Outline Button{' '}
-          </Button>
-          <Button variant="contained"> Contained Button </Button>
-          <Button variant="text"> Text Button </Button>
-
-          <Button variant="outline">
-            <svg
-              class="h-4 w-4 text-purple-800"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              {' '}
-              <path stroke="none" d="M0 0h24v24H0z" /> <line x1="12" y1="5" x2="12" y2="19" />{' '}
-              <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
-            Outline Button
-          </Button>
+    <div>
+      <div className="container flex flex-row place-content-between">
+        <div className="inline">
+          <Header />
         </div>
-      </main>
+        <div className="inline-flex py-5">
+          <div className="inline">
+            <Button variant="outline">Đăng nhập</Button>
+          </div>
+          <div className="inline">
+            <Button variant="contained">Đăng ký</Button>
+          </div>
+        </div>
+      </div>
 
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
+      {/* [] MastHead  */}
+      <div className="p-20 bg-gradient-to-b from-purple-600 to-purple-800 " id="background">
+        <div className="container mx-auto">
+          <div className="flex md">
+            <div className="col inline py-5">
+              <h1 className="text-white font-semibold text-4xl my-2">SheCodes Mentorship</h1>
+              <p className="text-white pb-8 pr-11">
+                SheCodes Mentorship mang đến cho các bạn nữ cơ hội được tư vấn và hướng dẫn từ các cá nhân có nhiều kiến
+                thức, kinh nghiệm cũng như kỹ năng trong lĩnh vực công nghệ.
+              </p>
+              <button className="text-white bg-white text-purple-800 px-5 py-2 align-middle rounded">
+                Tham gia ngay
+              </button>
+            </div>
+
+            <div className="flex inline justify-center py-5">
+              <Image src={homepageImg} alt="homepageImg" width={500} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container mx-auto">
+        <div className="flex justify-center">
+          <div className="w-10 bg-purple-800 p-1 m-5"></div>
+        </div>
+
+        <div className="flex justify-center">
+          <h2 className="text-2xl text-center">Những lợi ích mà SheCodes Mentorship đem lại</h2>
+        </div>
+
+        <div>
+          <div className="flex flex-inline align-baseline">
+            <div className="col sm px-auto m-5">
+              <div className="flex justify-center py-5">
+                <Image src={section1_1} alt="section1_1" width={200} />
+              </div>
+              <p className="text-center">
+                Lựa chọn mentor 1-1 có trải nghiệm và background phù hợp với nhu cầu của bạn
+              </p>
+            </div>
+
+            <div className="col sm px-auto m-5">
+              <div className="flex justify-center py-5">
+                <Image src={section1_2} alt="section1_2" width={200} />
+              </div>
+              <p className="text-center">
+                Nhận lời khuyên về lộ trình hướng nghiệp cũng như các kỹ năng cần chuẩn bị...
+              </p>
+            </div>
+
+            <div className="col sm px-auto m-5">
+              <div className="flex justify-center py-5">
+                <Image src={section1_3} alt="section1_3" width={200} />
+              </div>
+              <p className="text-center">Được chia sẻ về cách tự học và phát triển trong lĩnh vực mà bạn mong muốn</p>
+            </div>
+
+            <div className="col sm px-auto m-5">
+              <div className="flex justify-center py-5 mt-3">
+                <Image src={section1_4} alt="section1_4" width={200} />
+              </div>
+              <p className="text-center">Liên lạc với mentor một cách linh hoạt, không ràng buộc về thời gian</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container mx-auto">
+        <div className="flex justify-center">
+          <div className="w-10 bg-purple-800 p-1 m-5"></div>
+        </div>
+
+        <div className="flex justify-center">
+          <h2 className="text-2xl text-center">Đội ngũ SheCodes mentors đã và đang làm việc tại các công ty nào?</h2>
+        </div>
+
+        <div className="flex justify-center items-baseline mx-auto px-20">
+          <div className="flex justify-center py-5 mx-5">
+            <Image src={Microsoft_logo} alt="Microsoft_logo" />
+          </div>
+          <div className="flex justify-center py-5 mx-5">
+            <Image src={Google_logo} alt="Google_logo" />
+          </div>
+          <div className="flex justify-center py-5 mx-5">
+            <Image src={Amazon_logo} alt="Amazon_logo" />
+          </div>
+          <div className="flex justify-center py-5 mx-5 mb-16">
+            <Image src={Ohmni_logo} alt="Ohmni_logo" />
+          </div>
+        </div>
+      </div>
+      <div className="border"></div>
+      <Footer />
     </div>
   )
 }
+
+export default HomePage
