@@ -6,7 +6,7 @@ export default function RequestSuccess() {
         <div className="flex justify-center -mt-8">
           <img
             src="/images/sample_profile.png"
-            className="rounded-full border-solid border-white border-2 -mt-20 w-56 md:w-56 sm:w-46"
+            className="rounded-full -mt-20 w-56 md:w-56 sm:w-46"
             alt="Mentor profile picture"
           />
         </div>
