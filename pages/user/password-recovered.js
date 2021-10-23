@@ -33,7 +33,11 @@ export default function PasswordRecovery() {
     <>
       {recovered ? (
         <Row>
-          <Col className="bg-secondary hidden md:flex h-screen justify-center items-center" xs={0} sm={12}>
+          <Col
+            className="bg-gradient-to-b from-primary via-primary to-lightviolet hidden md:flex h-screen justify-center items-center"
+            xs={0}
+            sm={12}
+          >
             <Image
               priority
               src="/images/password-recovery-icon.png"

@@ -32,7 +32,11 @@ export default function ForgotPassword() {
     <>
       <div className="h-screen/85 md:bg-lightgray sm:bg-white md:px-16 md:py-12 sm:p-0">
         <Row>
-          <Col className="bg-primary hidden md:flex h-screen/75 justify-center items-center " xs={0} sm={12}>
+          <Col
+            className="bg-gradient-to-b from-primary via-primary to-lightviolet hidden md:flex h-screen/75 justify-center items-center "
+            xs={0}
+            sm={12}
+          >
             <Image
               priority
               src="/images/forgot-password.svg"

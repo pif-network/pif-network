@@ -19,13 +19,13 @@ module.exports = {
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
     },
-
     extend: {
       colors: {
         primary: '#6F3E97',
         secondary: '#57A8DA',
         lightgray: '#F2F2F2',
         violet: '#5D268A',
+        lightviolet: '#6200EE',
         tertiary: '#E91F6F',
       },
       textColor: {

@@ -1,8 +1,26 @@
+import React, { useState, useEffect } from 'react'
 import { Row, Col } from 'antd'
 import { CalendarOutlined, MailOutlined, PhoneOutlined, ArrowLeftOutlined } from '@ant-design/icons'
 import Link from 'next/link'
+import UserService from '../services/UserService'
 
 export default function MyProfile() {
+  const [currentUser, setCurrentUser] = useState([])
+
+  useEffect(() => {
+    UserService.getCurrentUser().then(
+      response => {
+        setCurrentUser(response.data)
+      },
+      error => {
+        const message = (error.response && error.response.data) || error.message || error.toString()
+        console.log(message)
+      },
+    )
+  }, [])
+
+  console.log(currentUser)
+
   return (
     <div className="min-h-screen-85 overflow-hidden flex">
       <div className="overflow-hidden w-screen my-3 bg-white">
@@ -12,7 +30,7 @@ export default function MyProfile() {
           </div>
         </div>
         <div className="ml-4 md:ml-92 mb-7 md:mb-16 mt-12 md:mt-0 pt-2">
-          <h3 className="text-4xl font-bold leading-14">Ariana Grande</h3>
+          <h3 className="text-4xl font-bold leading-14">{currentUser.name}</h3>
           <h6 className="text-xl font-semibold text-primary leading-7">Đại học Bách khoa Hà Nội</h6>
         </div>
         <Row className="border-t border-gray-200 py-3">
@@ -38,15 +56,15 @@ export default function MyProfile() {
                 <ul className="w-full rounded-lg">
                   <li className="flex items-center">
                     <CalendarOutlined className="text-base text-primary w-8 h-8 bg-lightgray rounded-full" />
-                    <span className="ml-4 text-base leading-5">21/12/2002</span>
+                    <span className="ml-4 text-base leading-5">{currentUser.date_of_birth}</span>
                   </li>
                   <li className="mt-1 flex items-center">
                     <MailOutlined className="text-base text-primary w-8 h-8 bg-lightgray rounded-full" />
-                    <span className="ml-4 text-base leading-5">arianadihoc@gmail.com</span>
+                    <span className="ml-4 text-base leading-5">{currentUser.email}</span>
                   </li>
                   <li className="mt-1 flex items-center">
                     <PhoneOutlined className="text-base text-primary w-8 h-8 bg-lightgray rounded-full" />
-                    <span className="ml-4 text-base leading-5">0989143789</span>
+                    <span className="ml-4 text-base leading-5">{currentUser.phone}</span>
                   </li>
                 </ul>
               </div>

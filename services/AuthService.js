@@ -5,10 +5,8 @@ export const authService = {
   register,
   login,
   logout,
-  currentUser,
   forgotPassword,
   passwordChange,
-  updateProfile,
 }
 
 function forgotPassword(email) {
@@ -29,12 +27,6 @@ function passwordChange(password) {
       headers: authHeader(),
     },
   )
-}
-
-function currentUser() {
-  return http.get('/mentees/me', {
-    headers: authHeader(),
-  })
 }
 
 // TODO: Check what is the required params from BE
@@ -59,15 +51,12 @@ function login(email, password) {
       }
       return response.data
     })
+    .catch(error => {
+      return error.response.data.message
+    })
 }
 
 // BE doesn't have an official logout function
 function logout() {
   localStorage.removeItem('user')
-}
-
-function updateProfile(params) {
-  return http.put('/mentees/me', params, {
-    headers: authHeader(),
-  })
 }
