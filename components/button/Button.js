@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 
-
 export const Button = styled.button`
   padding: 6px 6px 6px 8px;
   font-family: Be Vietnam;
@@ -17,96 +16,93 @@ export const Button = styled.button`
   flex-grow: 0;
   margin: 0px 10px;
 
-  ${({ variant }) => 
-    variant == "outline" && css `
-    background: #FFFFFF;
-    color: #6F3E97;
-    border: 1px solid #6F3E97;
-    box-sizing: border-box;
-    border-radius: 4px;
-  
-    &:hover {
-      background: #F3EFF8;
-      color: #6F3E97;
-    }
-  
-    &:focus {
-      background: #E7DBF8;
-      color: #6F3E97;
-    }
-  
-    &:active {
-      color: #6F3E97;  
-      background: #E7DBF8;
-      background-size: 100%; 
-    }
-  
-    &:disabled {
-      cursor: default;
-      color: grey;
-    }
-    `
-  }
-   
-  
-  ${({ variant }) => 
-    variant == "contained" && css `
-    background: #6F3E97;
-    color: white;
-    border: 1px solid #6F3E97;
-    box-sizing: border-box;
-    border-radius: 4px;
-  
-    &:hover {
-      background: #F3EFF8;
-      color: #6F3E97;
-    }
-  
-    &:focus {
-      background: #E7DBF8;
-    }
-  
-    &:active {
-      background: #E7DBF8;
-      background-size: 100%;
-    }
-  
-    &:disabled {
-      cursor: default;
-      color: grey;
-    }
-    ` 
-  }
+  ${({ variant }) =>
+    variant == 'outline' &&
+    css`
+      background: #ffffff;
+      color: #6f3e97;
+      border: 1px solid #6f3e97;
+      box-sizing: border-box;
+      border-radius: 4px;
+
+      &:hover {
+        background: #f3eff8;
+        color: #6f3e97;
+      }
+
+      &:focus {
+        background: #e7dbf8;
+        color: #6f3e97;
+      }
+
+      &:active {
+        color: #6f3e97;
+        background: #e7dbf8;
+        background-size: 100%;
+      }
+
+      &:disabled {
+        cursor: default;
+        color: grey;
+      }
+    `}
+
+  ${({ variant }) =>
+    variant == 'contained' &&
+    css`
+      background: #6f3e97;
+      color: white;
+      border: 1px solid #6f3e97;
+      box-sizing: border-box;
+      border-radius: 4px;
+
+      &:hover {
+        background: #f3eff8;
+        color: #6f3e97;
+      }
+
+      &:focus {
+        background: #e7dbf8;
+      }
+
+      &:active {
+        background: #e7dbf8;
+        background-size: 100%;
+      }
+
+      &:disabled {
+        cursor: default;
+        color: grey;
+      }
+    `}
 
 
-  ${({ variant }) => 
-    variant == "text" && css `
-    background: #FFFFFF;
-    color: #6F3E97;
-    border: 1px #6F3E97;
-    box-sizing: border-box;
-    border-radius: 4px;
+  ${({ variant }) =>
+    variant == 'text' &&
+    css`
+      background: #ffffff;
+      color: #6f3e97;
+      border: 1px #6f3e97;
+      box-sizing: border-box;
+      border-radius: 4px;
 
-    &:hover {
-      background: #F3EFF8;
-      color: #6F3E97;
-    }
+      &:hover {
+        background: #f3eff8;
+        color: #6f3e97;
+      }
 
-    &:focus {
-      background: #E7DBF8;
-    }
+      &:focus {
+        background: #e7dbf8;
+      }
 
-    &:active {
-      background: #D8BFD8;
-      background-size: 100%;
-    }
+      &:active {
+        background: #d8bfd8;
+        background-size: 100%;
+      }
 
-    &:disabled {
-      cursor: default;
-      color: grey;
-    }
-  `
-  }
+      &:disabled {
+        cursor: default;
+        color: grey;
+      }
+    `}
 `
-
-

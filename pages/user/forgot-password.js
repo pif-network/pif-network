@@ -1,42 +1,38 @@
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { Row, Col, Input } from "antd";
-import { CheckOutlined } from "@ant-design/icons";
-import { authService } from "../../services/AuthService";
-import { useState } from "react";
-import { Button } from "../../components/button/Button";
+import Link from 'next/link'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { Row, Col, Input } from 'antd'
+import { CheckOutlined } from '@ant-design/icons'
+import { authService } from '../../services/AuthService'
+import { useState } from 'react'
+import { Button } from '../../components/button/Button'
 
 export default function ForgotPassword() {
-  const [sent, setSent] = useState(false);
-  const [email, setEmail] = useState("");
-  const router = useRouter();
+  const [sent, setSent] = useState(false)
+  const [email, setEmail] = useState('')
+  const router = useRouter()
 
-  const handleInputChange = (event) => {
-    setEmail(event.target.value);
-  };
+  const handleInputChange = event => {
+    setEmail(event.target.value)
+  }
 
   const requestResetPassword = () => {
     authService
       .forgotPassword(email)
-      .then((response) => {
-        setSent((current) => !current);
-        console.log(response);
+      .then(response => {
+        setSent(current => !current)
+        console.log(response)
       })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
+      .catch(e => {
+        console.log(e)
+      })
+  }
 
   return (
     <>
       <div className="h-screen/85 md:bg-lightgray sm:bg-white md:px-16 md:py-12 sm:p-0">
         <Row>
-          <Col
-            className="bg-primary hidden md:flex h-screen/75 justify-center items-center "
-            xs={0}
-            sm={12}
-          >
+          <Col className="bg-primary hidden md:flex h-screen/75 justify-center items-center " xs={0} sm={12}>
             <Image
               priority
               src="/images/forgot-password.svg"
@@ -46,10 +42,7 @@ export default function ForgotPassword() {
               alt="A drawing of a girl with red hair, in a business attire posing."
             />
           </Col>
-          <Col
-            className="bg-white flex h-screen/75 justify-center items-start"
-            sm={12}
-          >
+          <Col className="bg-white flex h-screen/75 justify-center items-start" sm={12}>
             {sent ? (
               <div className="md:mt-40 sm:mt-8 w-9/12">
                 <CheckOutlined className="text-5xl text-green-500 flex items-center justify-center" />
@@ -57,8 +50,7 @@ export default function ForgotPassword() {
                   Chúng tôi đã gửi email tới {email}
                 </h1>
                 <p className="pb-4 font-normal text-base leading-7 max-w-6xl mx-auto">
-                  Hãy kiểm tra hộp thư rác nếu bạn không thấy email đó trong hộp
-                  thư đến.
+                  Hãy kiểm tra hộp thư rác nếu bạn không thấy email đó trong hộp thư đến.
                 </p>
                 <div className="mt-6 flex items-center justify-center">
                   <Link href="/login">
@@ -68,12 +60,9 @@ export default function ForgotPassword() {
               </div>
             ) : (
               <div className="md:mt-40 sm:mt-8 w-96 mx-4">
-                <h1 className="pt-1 pb-4 text-4xl font-medium tracking-wide">
-                  Bạn quên mật khẩu?
-                </h1>
+                <h1 className="pt-1 pb-4 text-4xl font-medium tracking-wide">Bạn quên mật khẩu?</h1>
                 <p className="font-normal text-base leading-7 max-w-6xl mx-auto">
-                  Chúng tôi sẽ gửi email kèm theo hướng dẫn đặt lại mật khẩu cho
-                  bạn.{" "}
+                  Chúng tôi sẽ gửi email kèm theo hướng dẫn đặt lại mật khẩu cho bạn.{' '}
                 </p>
                 <Input
                   className="mt-6 h-12 border border-primary hover:border-purple-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -99,5 +88,5 @@ export default function ForgotPassword() {
         </Row>
       </div>
     </>
-  );
+  )
 }
