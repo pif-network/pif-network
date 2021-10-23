@@ -1,7 +1,7 @@
-import Head from "next/head";
+import Head from 'next/head'
 
-import Header from "./Header";
-import Footer from "./Footer";
+import Navbar from './Navbar'
+import Footer from './Footer'
 
 export default function Layout({ children }) {
   return (
@@ -11,9 +11,9 @@ export default function Layout({ children }) {
         <meta name="og:title" content="SheCodes Vietnam" />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <Header />
+      <Navbar />
       <main>{children}</main>
       <Footer />
     </>
-  );
+  )
 }

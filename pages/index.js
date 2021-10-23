@@ -1,5 +1,3 @@
-import Header from '../components/common/Header'
-import Footer from '../components/common/Footer'
 import Image from 'next/image'
 import homepageImg from '../public/images/mashead.svg'
 import section1_1 from '../public/images/section1_1.svg'
@@ -16,7 +14,7 @@ function HomePage() {
   return (
     <div>
       {/* [] MastHead  */}
-      <div className="p-20 bg-gradient-to-b from-purple-600 to-purple-800" id="background">
+      <div className="p-20 bg-gradient-to-b from-primary via-primary to-lightviolet" id="background">
         <div className="container mx-auto">
           <div className="flex md">
             <div className="col inline py-5">

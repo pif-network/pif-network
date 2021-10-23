@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import Image from 'next/image'
 import { Row, Col, Input } from 'antd'
 import { authService } from '../services/AuthService'
@@ -6,6 +5,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { Link } from '../components/link'
 
 export default function Login() {
   const router = useRouter()
@@ -91,10 +91,11 @@ export default function Login() {
                     Ghi nhớ tôi
                   </label>
                 </div>
-                <Link href="/user/forgot-password">
-                  <a className="inline-block align-baseline font-normal text-sm text-blue hover:text-blue-darker">
-                    Quên Mật khẩu?
-                  </a>
+                <Link
+                  className="inline-block align-baseline font-normal text-sm hover:text-primary hover:underline"
+                  href="/user/forgot-password"
+                >
+                  Quên Mật khẩu?
                 </Link>
               </div>
 
@@ -110,9 +111,7 @@ export default function Login() {
             <div className="mt-4 mb-4">
               Không có tài khoản?{' '}
               <span>
-                <Link href="/user/create-account">
-                  <a className="text-primary underline hover:text-violet">Tạo tài khoản ngay</a>
-                </Link>
+                <Link href="/user/create-account">Tạo tài khoản ngay</Link>
               </span>
             </div>
           </div>

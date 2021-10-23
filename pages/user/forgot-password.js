@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from '../../components/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { Row, Col, Input } from 'antd'
@@ -57,9 +57,7 @@ export default function ForgotPassword() {
                   Hãy kiểm tra hộp thư rác nếu bạn không thấy email đó trong hộp thư đến.
                 </p>
                 <div className="mt-6 flex items-center justify-center">
-                  <Link href="/login">
-                    <a>← Quay lại đăng nhập</a>
-                  </Link>
+                  <Link href="/login">← Quay lại đăng nhập </Link>
                 </div>
               </div>
             ) : (
@@ -82,9 +80,7 @@ export default function ForgotPassword() {
                   </Button>
                 </div>
                 <div className="mt-4 flex items-center justify-center">
-                  <Link href="/login">
-                    <a>← Quay lại đăng nhập</a>
-                  </Link>
+                  <Link href="/login">← Quay lại đăng nhập</Link>
                 </div>
               </div>
             )}

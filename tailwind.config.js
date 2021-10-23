@@ -26,6 +26,8 @@ module.exports = {
         lightgray: '#F2F2F2',
         violet: '#5D268A',
         lightviolet: '#6200EE',
+        extralightviolet: '#E7DBF8',
+        dimviolet: '#F3EFF8',
         tertiary: '#E91F6F',
       },
       textColor: {

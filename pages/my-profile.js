@@ -19,8 +19,6 @@ export default function MyProfile() {
     )
   }, [])
 
-  console.log(currentUser)
-
   return (
     <div className="min-h-screen-85 overflow-hidden flex">
       <div className="overflow-hidden w-screen my-3 bg-white">
