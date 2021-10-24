@@ -32,7 +32,6 @@ export default function Login() {
       AuthService.login(data.email, data.password)
         .then(() => {
           router.push('/my-profile')
-          window.location.reload()
         })
         .catch(error => {
           const resMessage =

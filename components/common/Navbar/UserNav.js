@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import UserService from '../../../services/UserService'
 import AuthService from '../../../services/AuthService'
 import { Menu, Dropdown } from 'antd'
 import { DownOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons'
 
 export default function UserNav() {
-  const router = useRouter()
   const [currentUser, setCurrentUser] = useState(null)
 
   useEffect(() => {
@@ -60,7 +58,6 @@ export default function UserNav() {
         <Menu.Item
           onClick={() => {
             AuthService.logout()
-            router.push('/')
           }}
           icon={<LogoutOutlined />}
         >

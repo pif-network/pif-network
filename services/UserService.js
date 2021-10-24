@@ -13,7 +13,14 @@ const updateProfile = data => {
   })
 }
 
+const getAllMentors = () => {
+  return http.get('/mentors', {
+    headers: authHeader(),
+  })
+}
+
 export default {
   getCurrentUser,
   updateProfile,
+  getAllMentors,
 }
