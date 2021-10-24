@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { Row, Col, Input } from 'antd'
 import { CheckOutlined } from '@ant-design/icons'
-import { authService } from '../../services/AuthService'
+import AuthService from '../../services/AuthService'
 import { useState } from 'react'
 import { Button } from '../../components/button/Button'
 
@@ -18,7 +18,7 @@ export default function PasswordRecovery() {
 
   const requestNewPassword = () => {
     // TODO: Contact with BE to proceed next step
-    // authService.passwordChange(password)
+    // AuthService.passwordChange(password)
     // .then(response => {
     //   setRecovered(current => !current);
     //   console.log(response);

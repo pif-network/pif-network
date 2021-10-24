@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { Row, Col, Input } from 'antd'
-import { authService } from '../services/AuthService'
+import AuthService from '../services/AuthService'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
@@ -17,7 +17,7 @@ export default function Login() {
     password: Yup.string()
       .required('Password is required')
       .min(6, 'Password must be at least 6 characters')
-      .max(40, 'Password must not exceed 40 characters'),
+      .max(128, 'Password must not exceed 128 characters'),
   })
 
   const formik = useFormik({
@@ -29,10 +29,10 @@ export default function Login() {
     onSubmit: data => {
       setMessage('')
       setLoading(true)
-      authService
-        .login(data.email, data.password)
+      AuthService.login(data.email, data.password)
         .then(() => {
           router.push('/my-profile')
+          window.location.reload()
         })
         .catch(error => {
           const resMessage =
@@ -60,7 +60,7 @@ export default function Login() {
               Chào mừng bạn <br /> quay trở lại!
             </h4>
             <form onSubmit={formik.handleSubmit}>
-              {message && <div class="mt-4 text-red-500 flex items-center justify-center">{message}</div>}
+              {message && <div className="mt-4 text-red-500 flex items-center justify-center">{message}</div>}
               <Input
                 className="mt-6 h-12 border border-primary hover:border-violet-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 placeholder="Nhập email của bạn"
@@ -87,7 +87,7 @@ export default function Login() {
                     id="remember"
                     className="mr-1 checked:bg-primary checked:border-transparent"
                   />{' '}
-                  <label for="remember" className="text-sm text-grey-dark">
+                  <label htmlFor="remember" className="text-sm text-grey-dark">
                     Ghi nhớ tôi
                   </label>
                 </div>
@@ -104,7 +104,13 @@ export default function Login() {
                   className="py-3 px-4 md:w-28 w-full rounded bg-primary text-white hover:bg-violet focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50"
                   type="submit"
                 >
-                  Đăng Nhập
+                  {loading ? (
+                    <div className=" flex justify-center items-center">
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                    </div>
+                  ) : (
+                    <>Đăng Nhập</>
+                  )}
                 </button>
               </div>
             </form>

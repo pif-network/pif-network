@@ -33,6 +33,7 @@ module.exports = {
       textColor: {
         primary: '#6F3E97',
         secondary: '#57A8DA',
+        caption: '#979797',
       },
       lineHeight: {
         12: '3rem',

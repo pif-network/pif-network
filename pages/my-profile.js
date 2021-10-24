@@ -34,7 +34,7 @@ export default function MyProfile() {
         <Row className="border-t border-gray-200 py-3">
           <Col sm={0} md={8} className="hidden md:block">
             <div className="pl-24">
-              <div className="bg-secondary w-64 rounded-lg pl-3 pb-2 mb-4">
+              <div className="bg-secondary w-9/12 lg:w-1/2 rounded-lg pl-3 pb-2 mb-4">
                 <h6 className="text-white text-xl font-medium leading-7">Thông tin cá nhân</h6>
               </div>
               <Link href="/">

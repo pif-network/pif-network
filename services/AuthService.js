@@ -1,22 +1,14 @@
 import http from '../http-common'
 import authHeader from './AuthHeader'
 
-export const authService = {
-  register,
-  login,
-  logout,
-  forgotPassword,
-  passwordChange,
-}
-
-function forgotPassword(email) {
+const forgotPassword = email => {
   return http.post('/mentees/auth/password_reset_request', {
     email: email,
   })
 }
 
 // TODO: check if BE compare the two password
-function passwordChange(password) {
+const passwordChange = password => {
   return http.post(
     '/mentees/auth/password_change',
     {
@@ -30,7 +22,7 @@ function passwordChange(password) {
 }
 
 // TODO: Check what is the required params from BE
-function register(email, password, name, phone) {
+const register = (email, password, name, phone) => {
   return http.post('/mentees', {
     email,
     password,
@@ -39,7 +31,7 @@ function register(email, password, name, phone) {
   })
 }
 
-function login(email, password) {
+const login = (email, password) => {
   return http
     .post('/mentees/auth', {
       email,
@@ -57,6 +49,14 @@ function login(email, password) {
 }
 
 // BE doesn't have an official logout function
-function logout() {
+const logout = () => {
   localStorage.removeItem('user')
+}
+
+export default {
+  register,
+  login,
+  logout,
+  forgotPassword,
+  passwordChange,
 }
