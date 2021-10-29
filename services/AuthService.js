@@ -22,7 +22,7 @@ const passwordChange = password => {
 }
 
 // TODO: Check what is the required params from BE
-const register = (email, password, name, phone) => {
+const register = (email, password, name, phone = '') => {
   return http.post('/mentees', {
     email,
     password,
