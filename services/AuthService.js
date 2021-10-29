@@ -1,45 +1,29 @@
-import http from "../http-common"
-import authHeader from "./AuthHeader"
+import http from '../http-common'
+import authHeader from './AuthHeader'
 
-export const authService = {
-  register,
-  login,
-  logout,
-  currentUser,
-  forgotPassword,
-  passwordChange,
-  updateProfile,
-}
-
-function forgotPassword(email) {
-  return http.post("/mentees/auth/password_reset_request", {
+const forgotPassword = email => {
+  return http.post('/mentees/auth/password_reset_request', {
     email: email,
   })
 }
 
 // TODO: check if BE compare the two password
-function passwordChange(password) {
+const passwordChange = password => {
   return http.post(
-    "/mentees/auth/password_change",
+    '/mentees/auth/password_change',
     {
       password: password,
       password2: password,
     },
     {
       headers: authHeader(),
-    }
+    },
   )
 }
 
-function currentUser() {
-  return http.get("/mentees/me", {
-    headers: authHeader(),
-  })
-}
-
 // TODO: Check what is the required params from BE
-function register(email, password, name, phone) {
-  return http.post("/mentees", {
+const register = (email, password, name, phone) => {
+  return http.post('/mentees', {
     email,
     password,
     name,
@@ -47,27 +31,32 @@ function register(email, password, name, phone) {
   })
 }
 
-function login(email, password) {
+const login = (email, password) => {
   return http
-    .post("/mentees/auth", {
+    .post('/mentees/auth', {
       email,
       password,
     })
-    .then((response) => {
+    .then(response => {
       if (response.data.access_token) {
-        localStorage.setItem("user", JSON.stringify(response.data))
+        localStorage.setItem('user', JSON.stringify(response.data))
       }
       return response.data
+    })
+    .catch(error => {
+      return error.response.data.message
     })
 }
 
 // BE doesn't have an official logout function
-function logout() {
-  localStorage.removeItem("user")
+const logout = () => {
+  localStorage.removeItem('user')
 }
 
-function updateProfile(params) {
-  return http.put("/mentees/me", params, {
-    headers: authHeader(),
-  })
+export default {
+  register,
+  login,
+  logout,
+  forgotPassword,
+  passwordChange,
 }
