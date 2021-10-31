@@ -1,13 +1,18 @@
-import * as React from 'react'
+import { useState } from 'react'
 import * as Yup from 'yup'
 import Image from 'next/image'
-import Link from 'next/link'
-import { ErrorMessage, Field, Form, Formik } from 'formik'
-import { Button } from '../../../components/button'
-import { authService } from '../../../services/AuthService'
+import { Row, Col, Input } from 'antd'
+import { useFormik } from 'formik'
+import { AuthService } from '../../../services/AuthService'
+import { useRouter } from 'next/router'
+import { Link } from '../../../components/link'
 
 const CreateAccount = () => {
-  const validationSchema = Yup.object({
+  const router = useRouter()
+  const [message, setMessage] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const validationSchema = Yup.object().shape({
     fullname: Yup.string()
       .min(2, 'Tên không được ngắn hơn 2 ký tự')
       .max(40, 'Tên không được dài quá 40 ký tự')
@@ -24,49 +29,98 @@ const CreateAccount = () => {
       .required('Vui lòng nhập mật khẩu'),
   })
 
-  const onSubmit = async values => {
-    const { fullname, email, password } = values
-    await authService.register(email, password, fullname)
-  }
+  const formik = useFormik({
+    initialValues: {
+      fullname: '',
+      email: '',
+      password: '',
+    },
+    validationSchema,
+    onSubmit: data => {
+      setMessage('')
+      setLoading(true)
+      AuthService.register(data.email, data.password, data.fullname)
+        .then(() => {
+          router.push('/login')
+        })
+        .catch(error => {
+          const resMessage =
+            (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+          setMessage(resMessage)
+          setLoading(false)
+          console.log(resMessage)
+        })
+    },
+  })
 
   return (
-    <div className="flex h-screen" style={{ position: 'relative' }}>
-      <div style={{ position: 'absolute', left: 0, bottom: 0 }}>
-        <Image priority src="/images/create-new-account.svg" width={813} height={625} />
-      </div>
-      <div className="bg-primary h-screen rounded-xl" style={{ width: '50%' }}></div>
-      <div className="bg-white h-screen flex flex-col justify-center items-center" style={{ width: '50%' }}>
-        <div className="flex flex-col justify-center items-center" style={{ width: '80%' }}>
-          <h1 className="text-4xl" style={{ marginBottom: '3.5rem' }}>
-            Tham gia SheCodes Mentorship ngay hôm nay!
-          </h1>
-          <div style={{ width: '80%' }}>
-            <Formik
-              initialValues={{ fullname: '', email: '', password: '' }}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}
-            >
-              <Form>
-                <div style={{ display: 'grid', rowGap: '2.5rem' }}>
-                  <Field name="fullname" type="text" placeholder="Họ và tên" />
-                  <ErrorMessage name="fullname" />
-                  <Field name="email" type="email" placeholder="Nhập email của bạn" />
-                  <ErrorMessage name="email" />
-                  <Field name="password" type="password" placeholder="Nhập mật khẩu của bạn" />
-                  <ErrorMessage name="password" />
-                </div>
-                <Button variant="contained" type="submit" style={{ marginTop: '2.5rem', marginBottom: '0.75rem' }}>
-                  Đăng ký
-                </Button>
-              </Form>
-            </Formik>
+    <div className="min-h-screen/85 md:bg-lightgray bg-white px-0 md:px-16 py-0 md:py-12">
+      <Row>
+        <Col
+          className="bg-gradient-to-b from-primary via-primary to-lightviolet hidden md:flex h-screen/75 justify-center items-center"
+          xs={0}
+          sm={12}
+        >
+          <Image priority src="/images/create-new-account.svg" width={813} height={625} />
+        </Col>
+        <Col className="h-screen/75 bg-white flex justify-center items-start" sm={24} md={12}>
+          <div className="mt-8 md:mt-8 lg:mt-24 ml-8 md:ml-10 lg:ml-32 mr-2 md:mr-8 lg:mr-36">
+            <h4 className="pb-4 text-2xl lg:text-4xl font-medium tracking-wide leading-10">
+              Tham gia SheCodes Mentorship ngay hôm nay!
+            </h4>
+            <form onSubmit={formik.handleSubmit}>
+              {message && <div className="mt-4 text-red-500 flex items-center justify-center">{message}</div>}
+              <Input
+                className="mt-6 h-12 border border-primary hover:border-violet-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                placeholder="Nhập họ và tên của bạn"
+                type="fullname"
+                name="fullname"
+                onChange={formik.handleChange}
+                value={formik.values.fullname}
+              />
+              <div className="text-red-500">{formik.errors.fullname ? formik.errors.email : null}</div>
+              <Input
+                className="mt-6 h-12 border border-primary hover:border-violet-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                placeholder="Nhập mật khẩu của bạn"
+                type="email"
+                name="email"
+                onChange={formik.handleChange}
+                value={formik.values.email}
+              />
+              <div className="text-red-500">{formik.errors.email ? formik.errors.email : null}</div>
+              <Input.Password
+                className="mt-6 h-12 border border-primary hover:border-violet-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                placeholder="Nhập mật khẩu của bạn"
+                type="password"
+                name="password"
+                onChange={formik.handleChange}
+                value={formik.values.password}
+              />
+              <div className="text-red-500">{formik.errors.password ? formik.errors.password : null}</div>
+              <div className="mt-8 flex items-center justify-center">
+                <button
+                  className="py-3 px-4 md:w-28 w-full rounded bg-primary text-white hover:bg-violet focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50"
+                  type="submit"
+                >
+                  {loading ? (
+                    <div className=" flex justify-center items-center">
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                    </div>
+                  ) : (
+                    <>Đăng ký</>
+                  )}
+                </button>
+              </div>
+            </form>
+            <div className="mt-4 mb-4 text-center">
+              Đã có tài khoản?{' '}
+              <span>
+                <Link href="/login"> Đăng nhập</Link>
+              </span>
+            </div>
           </div>
-          <p>
-            Đã có tài khoản?
-            <Link href="/login"> Đăng nhập</Link>
-          </p>
-        </div>
-      </div>
+        </Col>
+      </Row>
     </div>
   )
 }
