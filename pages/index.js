@@ -15,7 +15,7 @@ import {Button} from "../components/button/Button";
 function HomePage() {
   return (
     <div>
-      <div className="container flex flex-row place-content-between">
+      <div className="container mx-auto flex flex-row place-content-between">
       <div className="inline"><Header/></div>
       <div className="inline-flex py-5">
         <div className="inline"><Button variant="outline">Đăng nhập</Button></div>
@@ -30,12 +30,11 @@ function HomePage() {
            <div className="col inline py-5">
              <h1 className="text-white font-semibold text-4xl my-2">SheCodes Mentorship</h1>
              <p className="text-white pb-8 pr-11">SheCodes Mentorship mang đến cho các bạn nữ cơ hội được tư vấn và hướng dẫn từ các cá nhân có nhiều kiến thức, kinh nghiệm cũng như kỹ năng trong lĩnh vực công nghệ.</p>
-             <button className="text-white bg-white text-purple-800 px-5 py-2 align-middle rounded">Tham gia ngay</button>
+             <Button variant="outline">Tham gia ngay</Button>
            </div>
         
            <div className="flex inline justify-center py-5">
-            <Image src={homepageImg} alt="homepageImg" width={500}
-            />
+            <Image src={homepageImg} alt="homepageImg" width={500}/>
           </div>
           </div>
         </div>
