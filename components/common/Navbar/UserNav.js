@@ -18,7 +18,7 @@ export default function UserNav() {
         console.log(message)
       },
     )
-  }, [])
+  }, [currentUser])
 
   const LoggedOutNav = () => (
     <>
