@@ -3,7 +3,7 @@ module.exports = {
     return [
       {
         source: '/api/:slug*',
-        destination: `https://api.mentorship.shecodesvietnam.com/api/:slug*`
+        destination: `https://api-mentorship-shecodesvietnam.herokuapp.com/api/:slug*`,
       },
     ]
   },

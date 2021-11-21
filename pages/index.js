@@ -1,5 +1,3 @@
-import Header from '../components/common/Header'
-import Footer from '../components/common/Footer'
 import Image from 'next/image'
 import homepageImg from '../public/images/mashead.svg'
 import section1_1 from '../public/images/section1_1.svg'
@@ -15,20 +13,6 @@ import { Button } from '../components/button/Button'
 function HomePage() {
   return (
     <div>
-      <div className="container mx-auto flex flex-row place-content-between">
-        <div className="inline">
-          <Header />
-        </div>
-        <div className="inline-flex py-5">
-          <div className="inline">
-            <Button variant="outline">Đăng nhập</Button>
-          </div>
-          <div className="inline">
-            <Button variant="contained">Đăng ký</Button>
-          </div>
-        </div>
-      </div>
-
       {/* [x] MastHead  */}
       <div className="p-20 bg-gradient-to-b from-purple-600 to-purple-900 " id="background">
         <div className="container mx-auto">
@@ -127,7 +111,6 @@ function HomePage() {
       </div>
       <div className="m-10"></div>
       <div className="border"></div>
-      <Footer />
     </div>
   )
 }

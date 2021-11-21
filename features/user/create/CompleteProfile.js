@@ -15,7 +15,7 @@ const CompleteProfile = () => {
   const [loading, setLoading] = React.useState(false)
 
   const validationSchema = Yup.object().shape({
-    birthday: Yup.string().required('Vui lòng nhập ngày sinh'),
+    date_of_birth: Yup.string().required('Vui lòng nhập ngày sinh'),
     phone: Yup.string()
       .min(10, 'Số điện thoại bao gồm 10 ký số')
       .max(10, 'Số điện thoại bao gồm 10 ký số')
@@ -31,7 +31,7 @@ const CompleteProfile = () => {
 
   const formik = useFormik({
     initialValues: {
-      birthday: '',
+      date_of_birth: '',
       phone: '',
       school: '',
       exp: '',
@@ -73,11 +73,11 @@ const CompleteProfile = () => {
                 {message && <div className="mt-4 text-red-500 flex items-center justify-center">{message}</div>}
                 <div style={{ display: 'grid', rowGap: '2.25rem' }}>
                   <Input
-                    name="birthday"
+                    name="date_of_birth"
                     type="date"
                     placeholder="Ngày/tháng/năm sinh"
                     onChange={formik.handleChange}
-                    value={formik.values.birthday}
+                    value={formik.values.date_of_birth}
                   />
                   <Input
                     name="phone"
