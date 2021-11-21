@@ -1,16 +1,16 @@
-import Header from "../components/common/Header";
-import Footer from "../components/common/Footer";
-import Image from "next/image";
-import homepageImg from "../public/images/mashead.svg";
-import section1_1 from "../public/images/section1_1.svg";
-import section1_2 from "../public/images/section1_2.svg";
-import section1_3 from "../public/images/section1_3.svg";
-import section1_4 from "../public/images/section1_4.svg";
-import Microsoft_logo from "../public/images/Microsoft_logo.png";
-import Amazon_logo from "../public/images/Amazon_logo.png";
-import Google_logo from "../public/images/Google_logo.png";
-import Ohmni_logo from "../public/images/Ohmni_logo.svg";
-import { Button } from "../components/button/Button";
+import Header from '../components/common/Header'
+import Footer from '../components/common/Footer'
+import Image from 'next/image'
+import homepageImg from '../public/images/mashead.svg'
+import section1_1 from '../public/images/section1_1.svg'
+import section1_2 from '../public/images/section1_2.svg'
+import section1_3 from '../public/images/section1_3.svg'
+import section1_4 from '../public/images/section1_4.svg'
+import Microsoft_logo from '../public/images/Microsoft_logo.png'
+import Amazon_logo from '../public/images/Amazon_logo.png'
+import Google_logo from '../public/images/Google_logo.png'
+import Ohmni_logo from '../public/images/Ohmni_logo.svg'
+import { Button } from '../components/button/Button'
 
 function HomePage() {
   return (
@@ -30,10 +30,7 @@ function HomePage() {
       </div>
 
       {/* [x] MastHead  */}
-      <div
-        className="p-20 bg-gradient-to-b from-purple-600 to-purple-900 "
-        id="background"
-      >
+      <div className="p-20 bg-gradient-to-b from-purple-600 to-purple-900 " id="background">
         <div className="container mx-auto">
           <div className="flex xs:flex-col-reverse sm:flex-col-reverse md:flex-row lg:flex-row align-baseline">
             <div id="hompageText" className="flex flex-col py-5 m-5">
@@ -41,9 +38,8 @@ function HomePage() {
                 SheCodes Mentorship
               </h1>
               <p className="text-white md:text-left sm:text-center xs:text-center py-5">
-                SheCodes Mentorship mang đến cho các bạn nữ cơ hội được tư vấn
-                và hướng dẫn từ các cá nhân có nhiều kiến thức, kinh nghiệm cũng
-                như kỹ năng trong lĩnh vực công nghệ.
+                SheCodes Mentorship mang đến cho các bạn nữ cơ hội được tư vấn và hướng dẫn từ các cá nhân có nhiều kiến
+                thức, kinh nghiệm cũng như kỹ năng trong lĩnh vực công nghệ.
               </p>
               <div className="flex justify-center py-5 md:justify-start lg:justify-start">
                 <Button variant="outline">Tham gia ngay</Button>
@@ -62,9 +58,7 @@ function HomePage() {
         </div>
 
         <div className="flex justify-center">
-          <h2 className="text-2xl text-center p-5">
-            Những lợi ích mà SheCodes Mentorship đem lại
-          </h2>
+          <h2 className="text-2xl text-center p-5">Những lợi ích mà SheCodes Mentorship đem lại</h2>
         </div>
 
         <div>
@@ -135,7 +129,7 @@ function HomePage() {
       <div className="border"></div>
       <Footer />
     </div>
-  );
+  )
 }
 
-export default HomePage;
+export default HomePage
