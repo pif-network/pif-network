@@ -3,7 +3,7 @@ import * as Yup from 'yup'
 import Image from 'next/image'
 import { Row, Col, Input } from 'antd'
 import { useFormik } from 'formik'
-import { AuthService } from '../../../services/AuthService'
+import AuthService from '../../../services/AuthService'
 import { useRouter } from 'next/router'
 import { Link } from '../../../components/link'
 
