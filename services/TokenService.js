@@ -37,6 +37,7 @@ const getCurrentUser = () => {
 
 const removeUser = () => {
   localStorage.removeItem('user')
+  localStorage.removeItem('token')
 }
 
 const TokenService = {

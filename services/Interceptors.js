@@ -32,21 +32,24 @@ instance.interceptors.response.use(
       // Access Token was expired
       if (err.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true
+        TokenService.removeUser()
 
-        try {
-          const rs = await instance.post('/mentees/auth/token_refresh', null, {
-            headers: {
-              Authorization: 'Bearer ' + TokenService.getLocalRefreshToken(),
-            },
-          })
+        // BUG It sill uses the old access token in the headers
+        // originalConfig.headers['Authorization'] = 'Bearer ' + TokenService.getLocalRefreshToken()
+        // try {
+        //   const rs = await instance.post('/mentees/auth/token_refresh', null, {
+        //     headers: {
+        //       Authorization: 'Bearer ' + TokenService.getLocalRefreshToken(),
+        //     },
+        //   })
 
-          const { accessToken } = rs.data
-          TokenService.updateLocalAccessToken(accessToken)
+        //   const { accessToken } = rs.data
+        //   TokenService.updateLocalAccessToken(accessToken)
 
-          return instance(originalConfig)
-        } catch (_error) {
-          return Promise.reject(_error)
-        }
+        //   return instance(originalConfig)
+        // } catch (_error) {
+        //   return Promise.reject(_error)
+        // }
       }
     }
 
