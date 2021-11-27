@@ -1,5 +1,5 @@
-import http from '../http-common'
-import authHeader from './AuthHeader'
+import http from './Interceptors'
+import TokenService from './TokenService'
 
 const forgotPassword = email => {
   return http.post('/mentees/auth/password_reset_request', {
@@ -9,16 +9,10 @@ const forgotPassword = email => {
 
 // TODO: check if BE compare the two password
 const passwordChange = password => {
-  return http.post(
-    '/mentees/auth/password_change',
-    {
-      password: password,
-      password2: password,
-    },
-    {
-      headers: authHeader(),
-    },
-  )
+  return http.post('/mentees/auth/password_change', {
+    password: password,
+    password2: password,
+  })
 }
 
 // TODO: Check what is the required params from BE
@@ -38,7 +32,7 @@ const login = (email, password) => {
     })
     .then(response => {
       if (response.data.access_token) {
-        localStorage.setItem('user', JSON.stringify(response.data))
+        TokenService.setUser(response.data)
       }
       return response.data
     })
@@ -49,7 +43,7 @@ const login = (email, password) => {
 
 // BE doesn't have an official logout function
 const logout = () => {
-  localStorage.removeItem('user')
+  TokenService.removeUser()
 }
 
 export default {

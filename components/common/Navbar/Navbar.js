@@ -11,7 +11,9 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="block">
-        <div className="flex items-center">{/* <UserNav /> */}</div>
+        <div className="flex items-center">
+          <UserNav />
+        </div>
       </div>
     </nav>
   )

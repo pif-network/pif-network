@@ -4,9 +4,11 @@ import UserService from '../../../services/UserService'
 import AuthService from '../../../services/AuthService'
 import { Menu, Dropdown } from 'antd'
 import { DownOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons'
+import { useRouter } from 'next/router'
 
 export default function UserNav() {
   const [currentUser, setCurrentUser] = useState(null)
+  const router = useRouter()
 
   useEffect(() => {
     UserService.getCurrentUser().then(
@@ -18,7 +20,7 @@ export default function UserNav() {
         console.log(message)
       },
     )
-  })
+  }, [])
 
   const LoggedOutNav = () => (
     <>
@@ -40,9 +42,15 @@ export default function UserNav() {
       <Menu>
         <Menu.Item>
           <div className="mr-5 mb-2 flex justify-start items-center space-x-3 cursor-pointer">
-            <div className="w-8 h-8 rounded-full overflow-hidden ">
-              <img src="/images/sample_profile.png" alt="Profile Image" className="w-full h-full object-cover" />
-            </div>
+            {currentUser.avatar_url ? (
+              <div className="w-8 h-8 rounded-full overflow-hidden ">
+                <img src={`${currentUser.avatar_url}`} alt="Profile Image" className="w-full h-full object-cover" />
+              </div>
+            ) : (
+              <div className="w-8 h-8 rounded-full overflow-hidden ">
+                <img src="/images/sample_profile.png" alt="Profile Image" className="w-full h-full object-cover" />
+              </div>
+            )}
             <div className="font-medium">
               <div className="text-base cursor-pointer">{currentUser.name}</div>
               <div className="text-sm cursor-pointer text-caption">Mentee</div>
@@ -58,6 +66,7 @@ export default function UserNav() {
         <Menu.Item
           onClick={() => {
             AuthService.logout()
+            router.push('/')
           }}
           icon={<LogoutOutlined />}
         >

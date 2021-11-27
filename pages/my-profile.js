@@ -3,10 +3,12 @@ import { Row, Col } from 'antd'
 import { CalendarOutlined, MailOutlined, PhoneOutlined, ArrowLeftOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import UserService from '../services/UserService'
+import { useRouter } from 'next/router'
 
 export default function MyProfile() {
-  const [currentUser, setCurrentUser] = useState([])
+  const router = useRouter()
 
+  const [currentUser, setCurrentUser] = useState({})
   useEffect(() => {
     UserService.getCurrentUser().then(
       response => {
@@ -18,6 +20,10 @@ export default function MyProfile() {
       },
     )
   }, [])
+
+  // if (!currentUser) {
+  //   router.push('/')
+  // }
 
   return (
     <div className="min-h-screen-85 overflow-hidden flex">
@@ -52,29 +58,62 @@ export default function MyProfile() {
               <div className="mb-2 mb-8">
                 <h6 className="mb-2 text-xl font-semibold leading-7">Tổng quan về bạn</h6>
                 <ul className="w-full rounded-lg">
-                  <li className="flex items-center">
-                    <CalendarOutlined className="text-base text-primary w-8 h-8 bg-lightgray rounded-full" />
-                    <span className="ml-4 text-base leading-5">{currentUser.date_of_birth}</span>
-                  </li>
-                  <li className="mt-1 flex items-center">
-                    <MailOutlined className="text-base text-primary w-8 h-8 bg-lightgray rounded-full" />
-                    <span className="ml-4 text-base leading-5">{currentUser.email}</span>
-                  </li>
-                  <li className="mt-1 flex items-center">
-                    <PhoneOutlined className="text-base text-primary w-8 h-8 bg-lightgray rounded-full" />
-                    <span className="ml-4 text-base leading-5">{currentUser.phone}</span>
-                  </li>
+                  {currentUser.date_of_birth ? (
+                    <li className="flex items-center">
+                      <CalendarOutlined className="text-base text-primary w-8 h-8 bg-lightgray rounded-full" />
+                      <span className="ml-4 text-base leading-5">{currentUser.date_of_birth}</span>
+                    </li>
+                  ) : (
+                    <li className="flex items-center">
+                      <CalendarOutlined className="text-base text-primary w-8 h-8 bg-lightgray rounded-full" />
+                      <span className="ml-4 text-base leading-5">Trống</span>
+                    </li>
+                  )}
+                  {currentUser.email ? (
+                    <li className="mt-1 flex items-center">
+                      <MailOutlined className="text-base text-primary w-8 h-8 bg-lightgray rounded-full" />
+                      <span className="ml-4 text-base leading-5">{currentUser.email}</span>
+                    </li>
+                  ) : (
+                    <li className="mt-1 flex items-center">
+                      <MailOutlined className="text-base text-primary w-8 h-8 bg-lightgray rounded-full" />
+                      <span className="ml-4 text-base leading-5">Trống</span>
+                    </li>
+                  )}
+                  {currentUser.phone ? (
+                    <li className="mt-1 flex items-center">
+                      <PhoneOutlined className="text-base text-primary w-8 h-8 bg-lightgray rounded-full" />
+                      <span className="ml-4 text-base leading-5">{currentUser.phone}</span>
+                    </li>
+                  ) : (
+                    <li className="mt-1 flex items-center">
+                      <PhoneOutlined className="text-base text-primary w-8 h-8 bg-lightgray rounded-full" />
+                      <span className="ml-4 text-base leading-5">Trống</span>
+                    </li>
+                  )}
                 </ul>
               </div>
               <hr />
               <div className="mt-3 mb-7">
                 <h6 className="mb-2 text-xl font-semibold leading-7">Nơi học tập</h6>
                 <ul className="list-disc list-outside ml-6">
-                  <li className="text-primary">
-                    <span className="text-black font-semibold text-base leading-5">Đại học Bách khoa Hà Nội</span>
-                    <br />
-                    <p className="text-black font-normal text-base leading-5">Khoa học Máy tính</p>
-                  </li>
+                  {/* {currentUser.school &&
+                    currentUser.school.map((school, index) => (
+                      <li className="text-primary" key={index}>
+                        {school}
+                      </li>
+                    ))} */}
+
+                  {/* {currentUser.school ?
+                    (
+                    <li className="text-primary">
+                      <span className="text-black font-semibold text-base leading-5">Đại học Bách khoa Hà Nội</span>
+                      <br />
+                      <p className="text-black font-normal text-base leading-5">Khoa học Máy tính</p>
+                    </li>
+                ) : (
+                  <></>
+                )} */}
                 </ul>
               </div>
               <hr />

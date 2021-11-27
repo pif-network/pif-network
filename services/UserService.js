@@ -1,34 +1,30 @@
-import http from '../http-common'
-import authHeader from './AuthHeader'
-import axios from 'axios'
+import http from './Interceptors'
 
 const getCurrentUser = () => {
-  return http.get('/mentees/me', {
-    headers: authHeader(),
-  })
+  return http.get('/mentees/me')
 }
 
 const updateProfile = data => {
-  return http.put('/mentees/me', data, {
-    headers: authHeader(),
-  })
+  return http.put('/mentees/me', data)
 }
 
 const getAllMentors = () => {
-  return http.get('/mentors', {
-    headers: authHeader(),
-  })
+  return http.get('/mentors')
 }
 
 const getMentorById = id => {
-  return axios.get(`http://localhost:3000/api/mentors/${id}`, {
-    headers: authHeader(),
-  })
+  return http.get(`/mentors/${id}`)
 }
 
+const bookMentorById = id => {
+  return http.post('/requests', {
+    mentor_id: id,
+  })
+}
 export default {
   getCurrentUser,
   updateProfile,
   getAllMentors,
   getMentorById,
+  bookMentorById,
 }
