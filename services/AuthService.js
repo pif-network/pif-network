@@ -32,6 +32,12 @@ const login = (email, password) => {
     })
     .then(response => {
       if (response.data.access_token) {
+        TokenService.setToken(response.data)
+      }
+      return http.get('/mentees/me')
+    })
+    .then(response => {
+      if (response.data.name) {
         TokenService.setUser(response.data)
       }
       return response.data

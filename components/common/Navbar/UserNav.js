@@ -1,25 +1,20 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import UserService from '../../../services/UserService'
+import TokenService from '../../../services/TokenService'
 import AuthService from '../../../services/AuthService'
 import { Menu, Dropdown } from 'antd'
 import { DownOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/router'
 
 export default function UserNav() {
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(undefined)
   const router = useRouter()
 
   useEffect(() => {
-    UserService.getCurrentUser().then(
-      response => {
-        setCurrentUser(response.data)
-      },
-      error => {
-        const message = (error.response && error.response.data) || error.message || error.toString()
-        console.log(message)
-      },
-    )
+    const user = TokenService.getCurrentUser()
+    if (user) {
+      setCurrentUser(user)
+    }
   }, [])
 
   const LoggedOutNav = () => (
@@ -82,9 +77,15 @@ export default function UserNav() {
         <div>
           <a className="hidden lg:block ant-dropdown-link" onClick={e => e.preventDefault()}>
             <div className="flex justify-end items-center space-x-3 cursor-pointer">
-              <div className="w-8 h-8 rounded-full overflow-hidden ">
-                <img src="/images/sample_profile.png" alt="Profile Image" className="w-full h-full object-cover" />
-              </div>
+              {currentUser.avatar_url ? (
+                <div className="w-8 h-8 rounded-full overflow-hidden ">
+                  <img src={`${currentUser.avatar_url}`} alt="Profile Image" className="w-full h-full object-cover" />
+                </div>
+              ) : (
+                <div className="w-8 h-8 rounded-full overflow-hidden ">
+                  <img src="/images/sample_profile.png" alt="Profile Image" className="w-full h-full object-cover" />
+                </div>
+              )}
               <DownOutlined />
             </div>
           </a>
