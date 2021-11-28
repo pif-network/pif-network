@@ -6,6 +6,7 @@ import { CheckOutlined } from '@ant-design/icons'
 import AuthService from '../../services/AuthService'
 import { useState } from 'react'
 import { Button } from '../../components/button/Button'
+import Head from 'next/head'
 
 export default function ForgotPassword() {
   const [sent, setSent] = useState(false)
@@ -29,6 +30,10 @@ export default function ForgotPassword() {
 
   return (
     <>
+      <Head>
+        <title>Forgot Password</title>
+      </Head>
+
       <div className="h-screen/85 md:bg-lightgray sm:bg-white md:px-16 md:py-12 sm:p-0">
         <Row>
           <Col

@@ -6,6 +6,7 @@ import { CheckOutlined } from '@ant-design/icons'
 import AuthService from '../../services/AuthService'
 import { useState } from 'react'
 import { Button } from '../../components/button/Button'
+import Head from 'next/head'
 
 export default function PasswordRecovery() {
   const [password, setPassword] = useState(null)
@@ -18,19 +19,23 @@ export default function PasswordRecovery() {
 
   const requestNewPassword = () => {
     // TODO: Contact with BE to proceed next step
-    // AuthService.passwordChange(password)
-    // .then(response => {
-    //   setRecovered(current => !current);
-    //   console.log(response);
-    // })
-    // .catch(e => {
-    //   console.log(e);
-    // });
-    setRecovered(current => !current)
+    AuthService.passwordChange(password)
+      .then(response => {
+        setRecovered(current => !current)
+        console.log(response)
+      })
+      .catch(e => {
+        console.log(e)
+      })
+    // setRecovered(current => !current)
   }
 
   return (
     <>
+      <Head>
+        <title>Password Recovered</title>
+      </Head>
+
       {recovered ? (
         <Row>
           <Col
