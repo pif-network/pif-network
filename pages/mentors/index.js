@@ -61,15 +61,19 @@ const MentorList = () => {
                             <h5 className="mb-0 lg:mb-2 text-white font-medium text-base lg:text-xl leading-6">
                               {mentor.name}
                             </h5>
-                            <p className="text-sm leading-5 mb-0 lg:mb-2">Nơi làm việc</p>
+                            {/* {mentor.exp && <p className="text-sm leading-5 mb-0 lg:mb-2">{mentor.exp[0].name}</p>} */}
+
                             <ul className="hidden lg:block mb-2 w-full rounded-lg">
-                              <li>
-                                <UserOutlined className="text-3xl text-white" />
-                                <span className="ml-2">Chức vụ</span>
-                              </li>
+                              {/* {mentor.exp && (
+                                <li>
+                                  <UserOutlined className="text-3xl text-white" />
+                                  <span className="ml-2">{mentor.exp[0].position}</span>
+                                </li>
+                              )} */}
+
                               <li>
                                 <ProjectFilled className="text-3xl text-white" />
-                                <span className="ml-2">{mentor.offers}</span>
+                                <span className="ml-2">{mentor.domain_knowledge}</span>
                               </li>
                             </ul>
                           </div>

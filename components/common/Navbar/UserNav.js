@@ -7,15 +7,8 @@ import { DownOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/router'
 
 export default function UserNav() {
-  const [currentUser, setCurrentUser] = useState(undefined)
   const router = useRouter()
-
-  useEffect(() => {
-    const user = TokenService.getCurrentUser()
-    if (user) {
-      setCurrentUser(user)
-    }
-  }, [])
+  const currentUser = TokenService.getCurrentUser()
 
   const LoggedOutNav = () => (
     <>
