@@ -1,22 +1,27 @@
 import { BehaviorSubject } from 'rxjs'
 
 const getLocalRefreshToken = () => {
-  const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')))
-  const user = userSubject.value
-  return user?.refresh_token
+  const tokenSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('token')))
+  const token = tokenSubject.value
+  return token?.refresh_token
 }
 
 const getLocalAccessToken = () => {
-  const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')))
-  const user = userSubject.value
-  return user?.access_token
+  const tokenSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('token')))
+  const token = tokenSubject.value
+  return token?.access_token
 }
 
-const updateLocalAccessToken = token => {
-  let userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')))
-  let user = userSubject.value
-  user.access_token = token
-  localStorage.setItem('user', JSON.stringify(user))
+const updateLocalAccessToken = updatedToken => {
+  let tokenSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('token')))
+  let token = tokenSubject.value
+  token.access_token = updatedToken
+  localStorage.setItem('token', JSON.stringify(token))
+}
+
+const setToken = token => {
+  console.log(JSON.stringify(token))
+  localStorage.setItem('token', JSON.stringify(token))
 }
 
 const setUser = user => {
@@ -24,14 +29,23 @@ const setUser = user => {
   localStorage.setItem('user', JSON.stringify(user))
 }
 
+const getCurrentUser = () => {
+  const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')))
+  const user = userSubject.value
+  return user
+}
+
 const removeUser = () => {
   localStorage.removeItem('user')
+  localStorage.removeItem('token')
 }
 
 const TokenService = {
   getLocalRefreshToken,
   getLocalAccessToken,
   updateLocalAccessToken,
+  setToken,
+  getCurrentUser,
   setUser,
   removeUser,
 }

@@ -33,7 +33,6 @@ export default function Login() {
       AuthService.login(data.email, data.password)
         .then(() => {
           router.push('/mentors')
-          // router.reload(window.location.pathname)
         })
         .catch(error => {
           const resMessage =
