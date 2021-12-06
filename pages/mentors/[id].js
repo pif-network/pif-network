@@ -40,8 +40,8 @@ const MentorProfilePage = () => {
 
   useEffect(() => {
     const user = TokenService.getCurrentUser()
-    if (!user) {
-      router.push('/')
+    if (!user && router.pathway === '/') {
+      router.push('/mentors')
     }
   }, [])
 
@@ -63,10 +63,12 @@ const MentorProfilePage = () => {
             </div>{' '}
           </div>
         </div>
+
         <div className="float-none md:float-right w-full md:w-10/12 min-h-screen border-t border-gray-100">
           <button className="mt-36 md:mt-20 ml-32 md:mr-24 float-none md:float-right py-3 px-4 rounded bg-primary text-white hover:bg-violet focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50">
             Đặt lịch hẹn
           </button>
+
           <div className="relative">
             <div className="md:mt-40 mt-8 w-4/5 md:ml-56 ml-8">
               <h1 className="pt-1 pb-4 text-2xl md:text-6xl md:leading-20 md:font-medium">{mentor.name}</h1>

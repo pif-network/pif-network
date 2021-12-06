@@ -11,8 +11,33 @@ import Ohmni_logo from '../public/images/Ohmni_logo.svg'
 import { Button } from '../components/button/Button'
 import Head from 'next/head'
 import Link from 'next/link'
+import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import UserService from '../services/UserService'
+import TokenService from '../services/TokenService'
+import { ProjectFilled, UserOutlined } from '@ant-design/icons'
 
 function HomePage() {
+  const [mentors, setMentors] = useState(null)
+  const router = useRouter()
+
+  useEffect(() => {
+    const user = TokenService.getCurrentUser()
+    if (!user) {
+      router.push('/')
+    }
+
+    UserService.getAllMentors().then(
+      response => {
+        setMentors(response.data)
+      },
+      error => {
+        const message = (error.response && error.response.data) || error.message || error.toString()
+        console.log(message)
+      },
+    )
+  }, [])
+
   return (
     <>
       <Head>
@@ -45,7 +70,47 @@ function HomePage() {
             </div>
           </div>
         </div>
+        {/* Mentors' picture  */}
+        <div className="p-8 lg:p-24">
+          <div className="flex flex-wrap">
+            {mentors &&
+              mentors.map(mentor => (
+                <Link href={`mentors/${mentor.id}`}>
+                  <div className="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-2 lg:p-8">
+                    <a href="" className="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+                      <div className="relative pt-0 lg:pt-40 pb-40 lg:pb-84 overflow-hidden">
+                        <img
+                          className="absolute inset-0 h-full w-full object-cover"
+                          src={`${mentor.avatar_url}`}
+                          alt=""
+                        />
+                        <div className="opacity-0 hover:opacity-100 duration-500 absolute text-white inset-4 z-10 flex flex-col justify-end">
+                          <h5 className="mb-0 lg:mb-2 text-white font-medium text-base lg:text-xl leading-6">
+                            {mentor.name}
+                          </h5>
+                          {/* {mentor.exp && <p className="text-sm leading-5 mb-0 lg:mb-2">{mentor.exp[0].name}</p>} */}
 
+                          <ul className="hidden lg:block mb-2 w-full rounded-lg">
+                            {/* {mentor.exp && (
+                                <li>
+                                  <UserOutlined className="text-3xl text-white" />
+                                  <span className="ml-2">{mentor.exp[0].position}</span>
+                                </li>
+                              )} */}
+
+                            <li>
+                              <ProjectFilled className="text-3xl text-white" />
+                              <span className="ml-2">{mentor.domain_knowledge}</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </Link>
+              ))}
+          </div>
+        </div>
         {/* [x] Section 2  */}
         <div className="container mx-auto">
           <div className="flex justify-center">

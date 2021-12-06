@@ -12,6 +12,11 @@ const getLocalAccessToken = () => {
   return token?.access_token
 }
 
+const getLocalUserToken = () => {
+  const tokenSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('token')))
+  const token = tokenSubject.value
+  return token?.user_token
+}
 const updateLocalAccessToken = updatedToken => {
   let tokenSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('token')))
   let token = tokenSubject.value
@@ -43,6 +48,7 @@ const removeUser = () => {
 const TokenService = {
   getLocalRefreshToken,
   getLocalAccessToken,
+  getLocalUserToken,
   updateLocalAccessToken,
   setToken,
   getCurrentUser,
