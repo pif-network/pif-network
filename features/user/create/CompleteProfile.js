@@ -95,6 +95,9 @@ const CompleteProfile = () => {
                       onChange={formik.handleChange}
                       value={formik.values.date_of_birth}
                     />
+                    {formik.errors.date_of_birth ? (
+                      <div className="text-red-500">{formik.errors.date_of_birth}</div>
+                    ) : null}
                     <Input
                       name="phone"
                       type="tel"
@@ -102,6 +105,7 @@ const CompleteProfile = () => {
                       onChange={formik.handleChange}
                       value={formik.values.phone}
                     />
+                    {formik.errors.phone ? <div className="text-red-500">{formik.errors.phone}</div> : null}
                     <FieldArray
                       name="school"
                       render={arrayHelpers => (
@@ -142,6 +146,7 @@ const CompleteProfile = () => {
                         </div>
                       )}
                     />
+                    {formik.errors.school ? <div className="text-red-500">{formik.errors.school}</div> : null}
                     <FieldArray
                       name="exp"
                       render={arrayHelpers => (
@@ -182,18 +187,21 @@ const CompleteProfile = () => {
                         </div>
                       )}
                     />
+                    {formik.errors.exp ? <div className="text-red-500">{formik.errors.exp}</div> : null}
                   </div>
                   <div className="pt-4">
-                    <input
+                    <Input
                       type="checkbox"
-                      name="remember"
-                      id="remember"
+                      name="agreed"
+                      id="agreed"
                       className="mr-1 checked:bg-primary checked:border-transparent"
+                      onChange={formik.handleChange}
                     />{' '}
-                    <label htmlFor="remember" className="text-sm text-grey-dark">
+                    <label htmlFor="agreed" className="text-sm text-grey-dark">
                       Tôi đã đọc và đồng ý với các &nbsp;
                       <Link href="#">điều khoản dịch vụ và chính sách bảo mật</Link>
                     </label>
+                    {formik.errors.agreed ? <div className="text-red-500">{formik.errors.agreed}</div> : null}
                   </div>
                   <div className="mt-8 flex items-center justify-center">
                     <button
