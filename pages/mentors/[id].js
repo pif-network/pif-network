@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import MentorProfile from '../../features/mentors/detail/index'
+// import MentorProfile from '../../features/mentors/detail/index'
 import UserService from '../../services/UserService'
 import TokenService from '../../services/TokenService'
 import Link from 'next/link'
@@ -11,7 +11,6 @@ import { Modal } from 'antd'
 const MentorProfilePage = () => {
   const { query } = useRouter()
   const [isModalVisible, setIsModalVisible] = useState(false)
-
   const user = TokenService.getCurrentUser()
 
   const checkAuth = () => {
@@ -119,7 +118,7 @@ const MentorProfilePage = () => {
           <div className="relative">
             <div className="md:mt-40 mt-8 w-4/5 md:ml-56 ml-8">
               <h1 className="pt-1 pb-4 text-2xl md:text-6xl md:leading-20 md:font-medium">{mentor.name}</h1>
-              <h5 className="text-base md:text-2xl md:leading-8 pt-4 pb-6">{mentor.exp[0].name}</h5>
+              <h5 className="text-base md:text-2xl md:leading-8 pt-4 pb-6">{mentor.exp && mentor.exp[0].name}</h5>
               <div className="pb-4">
                 <Link href={`${mentor.linkedin_url}`}>
                   <a>
@@ -150,7 +149,7 @@ const MentorProfilePage = () => {
                 </li>
               </ul>
               <hr />
-              <h5 className="text-2xl leading-8 pt-4 pb-4">Kiến thức chuyên môn: </h5>
+              <h5 className="text-2xl leading-8 pt-4 pb-4">Kiến thức chuyên môn </h5>
               <div className="pb-6">
                 {mentor.offers &&
                   mentor.offers.split(' ').map((offer, index) => (
@@ -174,7 +173,7 @@ const MentorProfilePage = () => {
                       {hobby}
                     </span>
                   ))}
-              </div>{' '}
+              </div>
             </div>
           </div>
         </div>
