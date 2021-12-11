@@ -7,6 +7,7 @@ import { ArrowLeftOutlined, DeleteOutlined } from '@ant-design/icons'
 import UserService from '../../../services/UserService'
 import { Col, Input, Row, Tooltip, Button } from 'antd'
 import { useRouter } from 'next/router'
+import TokenService from '../../../services/TokenService'
 
 const CompleteProfile = () => {
   const router = useRouter()
@@ -57,8 +58,9 @@ const CompleteProfile = () => {
       setMessage('')
       setLoading(true)
       const { agreed, ...rest } = data
+      const user = TokenService.getCurrentUser()
       if (agreed) {
-        UserService.updateProfile(rest)
+        UserService.updateProfile({ name: user?.name, ...rest })
           .then(() => {
             router.push('/')
           })
@@ -190,7 +192,7 @@ const CompleteProfile = () => {
                     {formik.errors.exp ? <div className="text-red-500">{formik.errors.exp}</div> : null}
                   </div>
                   <div className="pt-4">
-                    <Input
+                    <input
                       type="checkbox"
                       name="agreed"
                       id="agreed"
