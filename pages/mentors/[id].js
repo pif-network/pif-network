@@ -6,10 +6,29 @@ import Link from 'next/link'
 import { GithubFilled, LinkedinFilled, FacebookOutlined, CalendarOutlined, ProjectFilled } from '@ant-design/icons'
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
+import { Modal } from 'antd'
 
 const MentorProfilePage = () => {
   const { query } = useRouter()
-  const router = useRouter()
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  const user = TokenService.getCurrentUser()
+
+  const checkAuth = () => {
+    if (user) {
+      setIsModalVisible(false)
+    } else {
+      setIsModalVisible(true)
+    }
+  }
+
+  const handleOk = () => {
+    setIsModalVisible(false)
+  }
+
+  const handleCancel = () => {
+    setIsModalVisible(false)
+  }
 
   const initialMentorState = {
     id: null,
@@ -27,7 +46,6 @@ const MentorProfilePage = () => {
     UserService.getMentorById(id)
       .then(response => {
         setMentor(response.data)
-        console.log(response.data)
       })
       .catch(e => {
         console.log(e)
@@ -37,13 +55,6 @@ const MentorProfilePage = () => {
   useEffect(() => {
     getMentor(query.id)
   }, [query.id])
-
-  useEffect(() => {
-    const user = TokenService.getCurrentUser()
-    if (!user && router.pathway === '/') {
-      router.push('/mentors')
-    }
-  }, [])
 
   return (
     <>
@@ -65,14 +76,50 @@ const MentorProfilePage = () => {
         </div>
 
         <div className="float-none md:float-right w-full md:w-10/12 min-h-screen border-t border-gray-100">
-          <button className="mt-36 md:mt-20 ml-32 md:mr-24 float-none md:float-right py-3 px-4 rounded bg-primary text-white hover:bg-violet focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50">
+          <button
+            onClick={checkAuth}
+            className="mt-36 md:mt-20 ml-32 md:mr-24 float-none md:float-right py-3 px-4 rounded bg-primary text-white hover:bg-violet focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50"
+          >
             Đặt lịch hẹn
           </button>
+
+          <Modal
+            title="Thông báo"
+            visible={isModalVisible}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            footer={[
+              <button
+                onClick={handleCancel}
+                className="bg-white border border-primary text-primary hover:bg-extralightviolet hover:text-primary focus:dimviolet text-center px-3 pt-1 py-2 rounded"
+              >
+                Quay trở lại
+              </button>,
+              <button
+                onClick={handleOk}
+                className="ml-4 px-3 pt-1 py-2 rounded bg-primary text-white hover:bg-violet hover:text-white focus:bg-violet"
+              >
+                OK
+              </button>,
+            ]}
+          >
+            <p>
+              Vui lòng
+              <Link href="/login">
+                <a> đăng nhập </a>
+              </Link>
+              /
+              <Link href="/user/create-account">
+                <a> đăng ký </a>
+              </Link>
+              trước khi đặt lịch
+            </p>
+          </Modal>
 
           <div className="relative">
             <div className="md:mt-40 mt-8 w-4/5 md:ml-56 ml-8">
               <h1 className="pt-1 pb-4 text-2xl md:text-6xl md:leading-20 md:font-medium">{mentor.name}</h1>
-              <h5 className="text-base md:text-2xl md:leading-8 pt-4 pb-6">Nơi làm việc </h5>
+              <h5 className="text-base md:text-2xl md:leading-8 pt-4 pb-6">{mentor.exp[0].name}</h5>
               <div className="pb-4">
                 <Link href={`${mentor.linkedin_url}`}>
                   <a>
@@ -105,15 +152,15 @@ const MentorProfilePage = () => {
               <hr />
               <h5 className="text-2xl leading-8 pt-4 pb-4">Kiến thức chuyên môn: </h5>
               <div className="pb-6">
-                <span className="text-sm font-bold inline-block py-3 px-3 rounded-2xl bg-lightgray last:mr-0 mr-2">
-                  Lập trình
-                </span>
-                <span className="text-sm font-bold inline-block py-3 px-3 rounded-2xl bg-lightgray last:mr-0 mr-2">
-                  Thiết kế UI/UX
-                </span>
-                <span className="text-sm font-bold inline-block py-3 px-3 rounded-2xl bg-lightgray last:mr-0 mr-2">
-                  pink
-                </span>
+                {mentor.offers &&
+                  mentor.offers.split(' ').map((offer, index) => (
+                    <span
+                      key={index}
+                      className="text-sm font-bold inline-block py-3 px-3 rounded-2xl bg-lightgray last:mr-0 mr-2"
+                    >
+                      {offer}
+                    </span>
+                  ))}
               </div>
               <hr />
               <h5 className="text-2xl leading-8 pt-4">Sở thích </h5>

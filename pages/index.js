@@ -22,11 +22,6 @@ function HomePage() {
   const router = useRouter()
 
   useEffect(() => {
-    const user = TokenService.getCurrentUser()
-    if (!user) {
-      router.push('/')
-    }
-
     UserService.getAllMentors().then(
       response => {
         setMentors(response.data)
@@ -73,7 +68,7 @@ function HomePage() {
         {/* Mentors' picture  */}
         <div className="p-8 lg:p-24">
           <div className="flex flex-wrap">
-            {mentors &&
+            {mentors ? (
               mentors.map(mentor => (
                 <Link href={`mentors/${mentor.id}`}>
                   <div className="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-2 lg:p-8">
@@ -82,21 +77,21 @@ function HomePage() {
                         <img
                           className="absolute inset-0 h-full w-full object-cover"
                           src={`${mentor.avatar_url}`}
-                          alt=""
+                          alt="Mentor Profile"
                         />
                         <div className="opacity-0 hover:opacity-100 duration-500 absolute text-white inset-4 z-10 flex flex-col justify-end">
                           <h5 className="mb-0 lg:mb-2 text-white font-medium text-base lg:text-xl leading-6">
                             {mentor.name}
                           </h5>
-                          {/* {mentor.exp && <p className="text-sm leading-5 mb-0 lg:mb-2">{mentor.exp[0].name}</p>} */}
+                          {mentor.exp && <p className="text-sm leading-5 mb-0 lg:mb-2">{mentor.exp[0].name}</p>}
 
                           <ul className="hidden lg:block mb-2 w-full rounded-lg">
-                            {/* {mentor.exp && (
-                                <li>
-                                  <UserOutlined className="text-3xl text-white" />
-                                  <span className="ml-2">{mentor.exp[0].position}</span>
-                                </li>
-                              )} */}
+                            {mentor.exp && (
+                              <li>
+                                <UserOutlined className="text-3xl text-white" />
+                                <span className="ml-2">{mentor.exp[0].position}</span>
+                              </li>
+                            )}
 
                             <li>
                               <ProjectFilled className="text-3xl text-white" />
@@ -108,7 +103,67 @@ function HomePage() {
                     </a>
                   </div>
                 </Link>
-              ))}
+              ))
+            ) : (
+              <>
+                <div className="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-2 lg:p-8">
+                  <div className="animate-pulse flex space-x-4">
+                    <div className="flex-1 space-y-6 py-1">
+                      <div className="h-2 bg-gray-100 rounded"></div>
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-3 gap-4">
+                          <div className="h-2 bg-gray-100 rounded col-span-2"></div>
+                          <div className="h-2 bg-gray-100 rounded col-span-1"></div>
+                        </div>
+                        <div className="h-2 bg-gray-100 rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-2 lg:p-8">
+                  <div className="animate-pulse flex space-x-4">
+                    <div className="flex-1 space-y-6 py-1">
+                      <div className="h-2 bg-gray-100 rounded"></div>
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-3 gap-4">
+                          <div className="h-2 bg-gray-100 rounded col-span-2"></div>
+                          <div className="h-2 bg-gray-100 rounded col-span-1"></div>
+                        </div>
+                        <div className="h-2 bg-gray-100 rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-2 lg:p-8">
+                  <div className="animate-pulse flex space-x-4">
+                    <div className="flex-1 space-y-6 py-1">
+                      <div className="h-2 bg-gray-100 rounded"></div>
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-3 gap-4">
+                          <div className="h-2 bg-gray-100 rounded col-span-2"></div>
+                          <div className="h-2 bg-gray-100 rounded col-span-1"></div>
+                        </div>
+                        <div className="h-2 bg-gray-100 rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-2 lg:p-8">
+                  <div className="animate-pulse flex space-x-4">
+                    <div className="flex-1 space-y-6 py-1">
+                      <div className="h-2 bg-gray-100 rounded"></div>
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-3 gap-4">
+                          <div className="h-2 bg-gray-100 rounded col-span-2"></div>
+                          <div className="h-2 bg-gray-100 rounded col-span-1"></div>
+                        </div>
+                        <div className="h-2 bg-gray-100 rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
         {/* [x] Section 2  */}
