@@ -119,7 +119,7 @@ const MentorProfilePage = () => {
           <div className="relative">
             <div className="md:mt-40 mt-8 w-4/5 md:ml-56 ml-8">
               <h1 className="pt-1 pb-4 text-2xl md:text-6xl md:leading-20 md:font-medium">{mentor.name}</h1>
-              <h5 className="text-base md:text-2xl md:leading-8 pt-4 pb-6">{mentor.exp[0].name}</h5>
+              <h5 className="text-base md:text-2xl md:leading-8 pt-4 pb-6">{mentor.exp && mentor.exp[0].name}</h5>
               <div className="pb-4">
                 <Link href={`${mentor.linkedin_url}`}>
                   <a>

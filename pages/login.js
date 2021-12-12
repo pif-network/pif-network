@@ -32,7 +32,7 @@ export default function Login() {
       setLoading(true)
       AuthService.login(data.email, data.password)
         .then(() => {
-          router.push('/mentors')
+          router.push('/')
         })
         .catch(error => {
           const resMessage =
