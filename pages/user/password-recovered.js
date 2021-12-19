@@ -18,7 +18,6 @@ export default function PasswordRecovery() {
   }
 
   const requestNewPassword = () => {
-    // TODO: Contact with BE to proceed next step
     AuthService.passwordChange(password)
       .then(response => {
         setRecovered(current => !current)
@@ -27,7 +26,6 @@ export default function PasswordRecovery() {
       .catch(e => {
         console.log(e)
       })
-    // setRecovered(current => !current)
   }
 
   return (
@@ -90,7 +88,12 @@ export default function PasswordRecovery() {
                   value={password}
                 />
                 <div className="mt-6 flex items-center justify-center">
-                  <Button onClick={requestNewPassword}>Khôi phục mật khẩu</Button>
+                  <button
+                    className="py-3 px-4 md:w-44 w-full rounded bg-primary text-white hover:bg-violet focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50"
+                    onClick={requestNewPassword}
+                  >
+                    Khôi phục mật khẩu
+                  </button>
                 </div>
               </div>
             </Col>

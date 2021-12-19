@@ -79,9 +79,12 @@ export default function ForgotPassword() {
                   value={email}
                 />
                 <div className="mt-6 flex items-center justify-center">
-                  <Button variant="contained" onClick={requestResetPassword}>
+                  <button
+                    className="py-3 px-4 md:w-44 w-full rounded bg-primary text-white hover:bg-violet focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50"
+                    onClick={requestResetPassword}
+                  >
                     Gửi email cho tôi
-                  </Button>
+                  </button>
                 </div>
                 <div className="mt-4 flex items-center justify-center">
                   <Link href="/login">← Quay lại đăng nhập</Link>
