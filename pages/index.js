@@ -19,15 +19,8 @@ import { ProjectFilled, UserOutlined } from '@ant-design/icons'
 
 function HomePage() {
   const [mentors, setMentors] = useState(null)
-  const [currentUser, setCurrentUser] = useState({})
   const router = useRouter()
-
-  useEffect(() => {
-    const user = TokenService.getCurrentUser()
-    if (user) {
-      setCurrentUser(user)
-    }
-  }, [])
+  const user = TokenService.getCurrentUser()
 
   useEffect(() => {
     UserService.getAllMentors().then(
@@ -60,7 +53,9 @@ function HomePage() {
                   SheCodes Mentorship mang đến cho các bạn nữ cơ hội được tư vấn và hướng dẫn từ các cá nhân có nhiều
                   kiến thức, kinh nghiệm cũng như kỹ năng trong lĩnh vực công nghệ.
                 </p>
-                {!currentUser && (
+                {user ? (
+                  <></>
+                ) : (
                   <div className="flex justify-center py-5 md:justify-start lg:justify-start">
                     <Link href="/user/create-account">
                       <a className="inline-block mr-4 bg-white border border-primary text-primary hover:bg-extralightviolet hover:text-primary focus:dimviolet text-center px-3 pt-1 py-2 rounded">
