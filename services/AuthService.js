@@ -42,9 +42,6 @@ const login = (email, password) => {
       }
       return response.data
     })
-    .catch(error => {
-      return error.response.data.message
-    })
 }
 
 // BE doesn't have an official logout function

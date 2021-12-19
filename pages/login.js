@@ -14,11 +14,11 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Email is invalid'),
+    email: Yup.string().required('Hãy nhập Email').email('Email không hợp lệ'),
     password: Yup.string()
-      .required('Password is required')
-      .min(6, 'Password must be at least 6 characters')
-      .max(128, 'Password must not exceed 128 characters'),
+      .required('Hãy nhập mật khẩu')
+      .min(6, 'Mật khẩu phải có ít nhất 6 kí tự')
+      .max(128, 'Mật khẩu không được vượt quá 128 kí tự'),
   })
 
   const formik = useFormik({
@@ -27,20 +27,36 @@ export default function Login() {
       password: '',
     },
     validationSchema,
-    onSubmit: data => {
-      setMessage('')
-      setLoading(true)
-      AuthService.login(data.email, data.password)
-        .then(() => {
-          router.push('/')
-        })
-        .catch(error => {
-          const resMessage =
-            (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
-          setMessage(resMessage)
-          setLoading(false)
-          console.log(resMessage)
-        })
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        setMessage('')
+        setLoading(true)
+        await AuthService.login(values.email, values.password)
+          .then(() => {
+            router.push('/')
+          })
+          .catch(error => {
+            setSubmitting(false)
+            setLoading(false)
+            const resMessage = error.response.data.message
+            switch (resMessage) {
+              case "Mentee's not found":
+                setMessage('Email không tồn tại')
+                setErrors({ email: 'Email không tồn tại' })
+              case "Mentee has's not confirm their email.":
+                setMessage('Hãy xác nhận email để đăng nhập')
+                setErrors({ email: 'Hãy xác nhận email để đăng nhập' })
+              case 'Wrong password.':
+                setMessage('Mật khẩu không đúng')
+                setError({ password: 'Mật khẩu không đúng' })
+              default:
+                setMessage(resMessage)
+                setErrors({ email: resMessage })
+            }
+          })
+      } catch (e) {
+        throw e
+      }
     },
   })
 
