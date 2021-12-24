@@ -191,7 +191,7 @@ const CompleteProfile = () => {
                     />
                     {formik.errors.exp ? <div className="text-red-500">{formik.errors.exp}</div> : null}
                   </div>
-                  <div className="pt-4">
+                  <div className="pt-4 flex flex-row items-center">
                     <input
                       type="checkbox"
                       name="agreed"
@@ -199,12 +199,14 @@ const CompleteProfile = () => {
                       className="mr-1 checked:bg-primary checked:border-transparent"
                       onChange={formik.handleChange}
                     />{' '}
-                    <label htmlFor="agreed" className="text-sm text-grey-dark">
-                      Tôi đã đọc và đồng ý với các &nbsp;
-                      <Link href="#">điều khoản dịch vụ và chính sách bảo mật</Link>
+                    <label htmlFor="agreed" className="text-sm text-grey-dark flex flex-row">
+                      Tôi đã đọc và đồng ý với các&nbsp;
+                      <div style={{ color: '#7d59a0', textDecoration: 'underline' }}>
+                        <Link href="#">điều khoản dịch vụ và chính sách bảo mật</Link>
+                      </div>
                     </label>
-                    {formik.errors.agreed ? <div className="text-red-500">{formik.errors.agreed}</div> : null}
                   </div>
+                  {formik.errors.agreed ? <div className="text-red-500">{formik.errors.agreed}</div> : null}
                   <div className="mt-8 flex items-center justify-center">
                     <button
                       className="py-3 px-4 md:w-28 w-full rounded bg-primary text-white hover:bg-violet focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50"

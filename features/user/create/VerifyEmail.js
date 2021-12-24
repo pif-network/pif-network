@@ -3,9 +3,18 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeftOutlined, ArrowRightOutlined, CheckOutlined } from '@ant-design/icons'
 import { Col, Row } from 'antd'
+import { useRouter } from 'next/router'
+import AuthService from '../../../services/AuthService'
 
 const VerifyEmail = () => {
   const [verified, setVerified] = React.useState(true)
+  const { query } = useRouter()
+
+  React.useEffect(() => {
+    if (query.token) {
+      AuthService.verifyEmail(query.token)
+    }
+  }, [query.token])
 
   return (
     <div className="min-h-screen/85 md:bg-lightgray bg-white px-0 md:px-16 py-0 md:py-12">
@@ -23,7 +32,7 @@ const VerifyEmail = () => {
                   <CheckOutlined className="text-green" />
                 </div>
                 <div className="flex justify-center items-center text-white" style={{ marginTop: '1.75rem' }}>
-                  <Link href="/user/complete-profile">Tiếp tục</Link>
+                  <Link href="/login">Tiếp tục</Link>
                   <ArrowRightOutlined style={{ marginLeft: '6px' }} />
                 </div>
               </div>
@@ -53,7 +62,7 @@ const VerifyEmail = () => {
                 <div className="flex justify-center items-center text-white" style={{ marginTop: '40px' }}>
                   <ArrowLeftOutlined style={{ marginRight: '6px' }} />
                   <Link href="#">Quay lại đăng ký</Link>
-                </div>h
+                </div>
               </div>
             </Col>
             <Col className="bg-white flex h-screen justify-center hidden" xs={0} sm={12}>

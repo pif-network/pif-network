@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Link } from '../components/link'
 import Head from 'next/head'
+import TokenService from '../services/TokenService'
 
 export default function Login() {
   const router = useRouter()
@@ -33,7 +34,12 @@ export default function Login() {
         setLoading(true)
         await AuthService.login(values.email, values.password)
           .then(() => {
-            router.push('/')
+            const user = TokenService.getCurrentUser()
+            if (user && user.date_of_birth) {
+              router.push('/')
+            } else {
+              router.push('/user/complete-profile')
+            }
           })
           .catch(error => {
             setSubmitting(false)

@@ -44,6 +44,10 @@ const login = (email, password) => {
     })
 }
 
+const verifyEmail = token => {
+  return http.get(`/mentees/auth/email_confirmation/${token}`)
+}
+
 // BE doesn't have an official logout function
 const logout = () => {
   TokenService.removeUser()
@@ -55,4 +59,5 @@ export default {
   logout,
   forgotPassword,
   passwordChange,
+  verifyEmail,
 }
