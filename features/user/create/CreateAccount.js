@@ -78,10 +78,10 @@ const CreateAccount = () => {
                 onChange={formik.handleChange}
                 value={formik.values.fullname}
               />
-              <div className="text-red-500">{formik.errors.fullname ? formik.errors.email : null}</div>
+              <div className="text-red-500">{formik.errors.fullname ? formik.errors.fullname : null}</div>
               <Input
                 className="mt-6 h-12 border border-primary hover:border-violet-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                placeholder="Nhập mật khẩu của bạn"
+                placeholder="Nhập email của bạn"
                 type="email"
                 name="email"
                 onChange={formik.handleChange}
