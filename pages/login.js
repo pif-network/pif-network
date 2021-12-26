@@ -50,7 +50,7 @@ export default function Login() {
                 setMessage('Email không tồn tại')
                 setErrors({ email: 'Email không tồn tại' })
               case "Mentee has's not confirm their email.":
-                setMessage('Hãy xác nhận email để đăng nhập')
+                setMessage('Kiểm tra email của bạn và xác nhận tài khoản')
                 setErrors({ email: 'Hãy xác nhận email để đăng nhập' })
               case 'Wrong password.':
                 setMessage('Mật khẩu không đúng')
