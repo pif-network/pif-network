@@ -32,7 +32,6 @@ const CompleteProfile = () => {
         position: Yup.string().max(50, 'Tên công việc không được dài quá 50 ký tự'),
       }),
     ),
-    agreed: Yup.boolean().test('checked', 'Vui lòng chọn "Đồng ý" khi hoàn tất đăng ký', (value, context) => value),
   })
 
   const formik = useFormik({
@@ -51,29 +50,23 @@ const CompleteProfile = () => {
           position: '',
         },
       ],
-      agreed: false,
     },
     validationSchema,
     onSubmit: data => {
       setMessage('')
       setLoading(true)
-      const { agreed, ...rest } = data
       const user = TokenService.getCurrentUser()
-      if (agreed) {
-        UserService.updateProfile({ name: user?.name, ...rest })
-          .then(() => {
-            router.push('/')
-          })
-          .catch(error => {
-            const resMessage =
-              (error.response && error.response.data && error.response.data.message) ||
-              error.message ||
-              error.toString()
-            setMessage(resMessage)
-            setLoading(false)
-            console.log(resMessage)
-          })
-      }
+      UserService.updateProfile({ name: user?.name, ...rest })
+        .then(() => {
+          router.push('/')
+        })
+        .catch(error => {
+          const resMessage =
+            (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+          setMessage(resMessage)
+          setLoading(false)
+          console.log(resMessage)
+        })
     },
   })
 
@@ -191,22 +184,6 @@ const CompleteProfile = () => {
                     />
                     {formik.errors.exp ? <div className="text-red-500">{formik.errors.exp}</div> : null}
                   </div>
-                  <div className="pt-4 flex flex-row items-center">
-                    <input
-                      type="checkbox"
-                      name="agreed"
-                      id="agreed"
-                      className="mr-1 checked:bg-primary checked:border-transparent"
-                      onChange={formik.handleChange}
-                    />{' '}
-                    <label htmlFor="agreed" className="text-sm text-grey-dark flex flex-row">
-                      Tôi đã đọc và đồng ý với các&nbsp;
-                      <div style={{ color: '#7d59a0', textDecoration: 'underline' }}>
-                        <Link href="#">điều khoản dịch vụ và chính sách bảo mật</Link>
-                      </div>
-                    </label>
-                  </div>
-                  {formik.errors.agreed ? <div className="text-red-500">{formik.errors.agreed}</div> : null}
                   <div className="mt-8 flex items-center justify-center">
                     <button
                       className="py-3 px-4 md:w-28 w-full rounded bg-primary text-white hover:bg-violet focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50"

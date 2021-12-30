@@ -50,6 +50,7 @@ module.exports = {
         100: '25rem',
         104: '26rem',
         108: '27rem',
+        270: '67.5rem',
       },
       height: {
         'screen/85': '85vh',

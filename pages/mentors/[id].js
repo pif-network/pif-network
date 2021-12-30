@@ -7,27 +7,12 @@ import { GithubFilled, LinkedinFilled, FacebookOutlined, CalendarOutlined, Proje
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { Modal } from 'antd'
+import { openPopupWidget } from 'react-calendly'
 
 const MentorProfilePage = () => {
   const { query } = useRouter()
   const [isModalVisible, setIsModalVisible] = useState(false)
   const user = TokenService.getCurrentUser()
-
-  const checkAuth = () => {
-    if (user) {
-      setIsModalVisible(false)
-    } else {
-      setIsModalVisible(true)
-    }
-  }
-
-  const handleOk = () => {
-    setIsModalVisible(false)
-  }
-
-  const handleCancel = () => {
-    setIsModalVisible(false)
-  }
 
   const initialMentorState = {
     id: null,
@@ -55,14 +40,32 @@ const MentorProfilePage = () => {
     getMentor(query.id)
   }, [query.id])
 
+  const checkAuth = () => {
+    if (user) {
+      setIsModalVisible(false)
+      const bookingUrl = mentor.booking_url
+      openPopupWidget({ bookingUrl })
+    } else {
+      setIsModalVisible(true)
+    }
+  }
+
+  const handleOk = () => {
+    setIsModalVisible(false)
+  }
+
+  const handleCancel = () => {
+    setIsModalVisible(false)
+  }
+
   return (
     <>
       <Head>
         <title>Mentor Profile</title>
       </Head>
 
-      <section className="min-h-screen-85 overflow-hidden min-w-screen">
-        <div className="bg-primary text-white float-none md:float-left w-full md:w-2/12 h-48 md:min-h-screen">
+      <section className="min-h-screen overflow-hidden min-w-screen">
+        <div className="bg-primary text-white float-none md:float-left w-full md:w-2/12 h-48 md:h-270">
           <div className="relative">
             <div className="flex justify-center -translate-y-0 sm:-translate-y-1/4 md:-translate-y-0 md:translate-x-1/2">
               <img
@@ -81,7 +84,6 @@ const MentorProfilePage = () => {
           >
             Đặt lịch hẹn
           </button>
-
           <Modal
             title="Thông báo"
             visible={isModalVisible}
@@ -114,53 +116,43 @@ const MentorProfilePage = () => {
               trước khi đặt lịch
             </p>
           </Modal>
-
           <div className="relative">
             <div className="md:mt-40 mt-8 w-4/5 md:ml-56 ml-8">
               <h1 className="pt-1 pb-4 text-2xl md:text-6xl md:leading-20 md:font-medium">{mentor.name}</h1>
               <h5 className="text-base md:text-2xl md:leading-8 pt-4 pb-6">{mentor.exp && mentor.exp[0].name}</h5>
               <div className="pb-4">
-                <Link href={`${mentor.linkedin_url}`}>
-                  <a>
-                    <LinkedinFilled className="text-3xl text-primary mr-3" />
-                  </a>
-                </Link>
-                <Link href={`${mentor.github_url}`}>
-                  <a>
-                    <GithubFilled className="text-3xl text-primary mr-3" />
-                  </a>
-                </Link>
-                <Link href={`${mentor.fb_url}`}>
-                  <a>
-                    <FacebookOutlined className="text-3xl text-primary" />
-                  </a>
-                </Link>
+                {mentor.linkedin_url && (
+                  <Link href={`${mentor.linkedin_url}`}>
+                    <a>
+                      <LinkedinFilled className="text-3xl text-primary mr-3" />
+                    </a>
+                  </Link>
+                )}
+                {mentor.github_url && (
+                  <Link href={`${mentor.github_url}`}>
+                    <a>
+                      <GithubFilled className="text-3xl text-primary mr-3" />
+                    </a>
+                  </Link>
+                )}
+                {mentor.fb_url && (
+                  <Link href={`${mentor.fb_url}`}>
+                    <a>
+                      <FacebookOutlined className="text-3xl text-primary" />
+                    </a>
+                  </Link>
+                )}
               </div>
               <hr />
-              <p className="pt-3 pb-5 text-base leading-6">{mentor.bio}</p>
-              <ul className="mb-6 w-full rounded-lg">
+              <ul className="pt-4 mb-6 w-full rounded-lg">
                 <li>
                   <ProjectFilled className="text-3xl text-primary" />
                   <span className="ml-2">Lĩnh vực mentor: {mentor.domain_knowledge}</span>
                 </li>
-                <li>
-                  <CalendarOutlined className="text-3xl text-primary" />
-                  <span className="ml-2">Thời gian mentor</span>
-                </li>
               </ul>
               <hr />
               <h5 className="text-2xl leading-8 pt-4 pb-4">Kiến thức chuyên môn </h5>
-              <div className="pb-6">
-                {mentor.offers &&
-                  mentor.offers.split(' ').map((offer, index) => (
-                    <span
-                      key={index}
-                      className="text-sm font-bold inline-block py-3 px-3 rounded-2xl bg-lightgray last:mr-0 mr-2"
-                    >
-                      {offer}
-                    </span>
-                  ))}
-              </div>
+              <div className="pb-6">{mentor.offers}</div>
               <hr />
               <h5 className="text-2xl leading-8 pt-4">Sở thích </h5>
               <div className="pt-4 pb-6">

@@ -41,14 +41,18 @@ const CreateAccount = () => {
       setLoading(true)
       AuthService.register(data.email, data.password, data.fullname)
         .then(() => {
-          router.push('/login')
+          router.push('/user/confirm-email')
         })
         .catch(error => {
-          const resMessage =
-            (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
-          setMessage(resMessage)
+          const resMessage = error.response.data.message
           setLoading(false)
-          console.log(resMessage)
+          switch (resMessage) {
+            case 'Email is already taken':
+              setMessage('Email này đã được dùng đăng ký tài khoản')
+              break
+            default:
+              setMessage(resMessage)
+          }
         })
     },
   })

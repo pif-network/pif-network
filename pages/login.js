@@ -48,16 +48,15 @@ export default function Login() {
             switch (resMessage) {
               case "Mentee's not found":
                 setMessage('Email không tồn tại')
-                setErrors({ email: 'Email không tồn tại' })
+                break
               case "Mentee has's not confirm their email.":
                 setMessage('Kiểm tra email của bạn và xác nhận tài khoản')
-                setErrors({ email: 'Hãy xác nhận email để đăng nhập' })
+                break
               case 'Wrong password.':
                 setMessage('Mật khẩu không đúng')
-                setError({ password: 'Mật khẩu không đúng' })
+                break
               default:
                 setMessage(resMessage)
-                setErrors({ email: resMessage })
             }
           })
       } catch (e) {
