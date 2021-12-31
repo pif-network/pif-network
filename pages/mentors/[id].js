@@ -43,8 +43,8 @@ const MentorProfilePage = () => {
   const checkAuth = () => {
     if (user) {
       setIsModalVisible(false)
-      const bookingUrl = mentor.booking_url
-      openPopupWidget({ bookingUrl })
+      const url = mentor.booking_url
+      openPopupWidget({ url })
     } else {
       setIsModalVisible(true)
     }

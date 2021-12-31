@@ -25,12 +25,10 @@ const updateLocalAccessToken = updatedToken => {
 }
 
 const setToken = token => {
-  console.log(JSON.stringify(token))
   localStorage.setItem('token', JSON.stringify(token))
 }
 
 const setUser = user => {
-  console.log(JSON.stringify(user))
   localStorage.setItem('user', JSON.stringify(user))
 }
 

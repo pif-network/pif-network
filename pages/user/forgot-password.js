@@ -21,7 +21,6 @@ export default function ForgotPassword() {
     AuthService.forgotPassword(email)
       .then(response => {
         setSent(current => !current)
-        console.log(response)
       })
       .catch(e => {
         console.log(e)

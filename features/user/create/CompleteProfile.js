@@ -55,9 +55,13 @@ const CompleteProfile = () => {
     onSubmit: data => {
       setMessage('')
       setLoading(true)
+      const { ...rest } = data
       const user = TokenService.getCurrentUser()
       UserService.updateProfile({ name: user?.name, ...rest })
-        .then(() => {
+        .then(response => {
+          if (response.data.name) {
+            TokenService.setUser(response.data)
+          }
           router.push('/')
         })
         .catch(error => {
