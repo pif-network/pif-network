@@ -4,7 +4,7 @@ import { http } from '~/services'
 import { Mentor, User } from '~/lib/types/user'
 
 const localUser = JSON.parse(
-  (typeof window !== undefined && localStorage.getItem('user')) || '""',
+  (typeof window === 'object' && localStorage.getItem('user')) || '""',
 )
 const userSubject = new BehaviorSubject<User | null>(
   localUser ? localUser : null,
@@ -15,7 +15,7 @@ const userSubject = new BehaviorSubject<User | null>(
  */
 userSubject.subscribe(
   u =>
-    typeof window !== undefined &&
+    typeof window === 'object' &&
     localStorage.setItem('user', JSON.stringify(u)),
 )
 

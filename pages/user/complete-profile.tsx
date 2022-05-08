@@ -1,7 +1,4 @@
-import { CompleteProfile } from '~/components/user/prerequisites'
+import { CompleteProfilePage } from '~/components/common/user'
 
-const CompleteProfilePage = () => {
-  return <CompleteProfile />
-}
 
 export default CompleteProfilePage

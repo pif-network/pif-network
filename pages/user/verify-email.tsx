@@ -1,7 +1,3 @@
-import { VerifyEmail } from '~/components/user/prerequisites'
+import { VerifyEmailPage } from '~/components/common/user'
 
-const EmailSentPage = () => {
-  return <VerifyEmail />
-}
-
-export default EmailSentPage
+export default VerifyEmailPage

@@ -36,6 +36,7 @@ const VerifyEmail = () => {
       <Head>
         <title>Verify Your Email</title>
       </Head>
+
       <div className="min-h-screen/85 md:bg-lightgray bg-white px-0 md:px-16 py-0 md:py-12">
         <Row>
           <Col
