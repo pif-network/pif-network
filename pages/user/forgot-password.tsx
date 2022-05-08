@@ -1,7 +1,3 @@
-import { RequestNewPassword } from '~/components/user/actions'
+import { RequestNewPasswordPage } from '~/components/common/user'
 
-const ForgotPasswordPage = () => {
-  return <RequestNewPassword />
-}
-
-export default ForgotPasswordPage
+export default RequestNewPasswordPage

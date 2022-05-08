@@ -9,7 +9,7 @@ import { useRouter } from 'next/router'
 import { TokenService } from '~/services'
 import { Head, Layout } from '~/components/common'
 
-const App = ({ Component, pageProps }: AppProps) => {
+const Website = ({ Component, pageProps }: AppProps) => {
   const [isAuthorised, setIsAuthorised] = useState(false)
   const router = useRouter()
   const currentUrl = router.asPath
@@ -64,4 +64,4 @@ const App = ({ Component, pageProps }: AppProps) => {
   )
 }
 
-export default App
+export default Website

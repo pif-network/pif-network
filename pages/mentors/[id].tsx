@@ -39,7 +39,7 @@ const MentorProfilePage = () => {
     linkedinUrl: '',
     bookingUrl: '',
   })
-  const { query, isReady } = useRouter()
+  const { query, isReady, push } = useRouter()
 
   const getCurrentMentor = async (
     id: string | string[] | undefined,
@@ -125,30 +125,20 @@ const MentorProfilePage = () => {
             onCancel={handleRequestAuthModalOnCancel}
             footer={[
               <button
-                onClick={handleRequestAuthModalOnCancel}
+                onClick={() => push('/login')}
                 className="bg-white border border-primary text-primary hover:bg-extralightviolet hover:text-primary focus:dimviolet text-center px-3 pt-1 py-2 rounded"
               >
-                Quay trở lại
+                Đăng ký
               </button>,
               <button
-                onClick={handleRequestAuthModalOnOk}
+                onClick={() => push('/user/create-account')}
                 className="ml-4 px-3 pt-1 py-2 rounded bg-primary text-white hover:bg-violet hover:text-white focus:bg-violet"
               >
-                OK
+                Đăng nhập
               </button>,
             ]}
           >
-            <p>
-              Vui lòng
-              <Link href="/login">
-                <a> đăng nhập </a>
-              </Link>
-              /
-              <Link href="/user/create-account">
-                <a> đăng ký </a>
-              </Link>
-              trước khi đặt lịch
-            </p>
+            <p>Vui lòng đăng nhập trước khi đặt lịch</p>
           </Modal>
 
           {/* 
@@ -156,9 +146,9 @@ const MentorProfilePage = () => {
           */}
           {calendlyProps.shouldCalendlyWidgetOpen && (
             <PopupWidget
-              url={calendlyProps.url}
-              rootElement={document.getElementById('root')!}
+              // rootElement={document.getElementById('root')!}
               text=""
+              url={calendlyProps.url}
             />
           )}
 

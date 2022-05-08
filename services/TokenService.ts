@@ -2,7 +2,7 @@ import { BehaviorSubject } from 'rxjs'
 import { Token } from '~/lib/types/service'
 
 const localToken = JSON.parse(
-  (typeof window !== undefined && localStorage.getItem('token')) || '""',
+  (typeof window === 'object' && localStorage.getItem('token')) || '""',
 )
 const tokenSubject = new BehaviorSubject<Token | null>(
   localToken ? localToken : null,
@@ -13,7 +13,7 @@ const tokenSubject = new BehaviorSubject<Token | null>(
  */
 tokenSubject.subscribe(
   t =>
-    typeof window !== undefined &&
+    typeof window === 'object' &&
     localStorage.setItem('token', JSON.stringify(t)),
 )
 

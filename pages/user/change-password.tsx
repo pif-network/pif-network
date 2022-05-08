@@ -1,7 +1,3 @@
-import { ChangePassword } from '~/components/user/actions'
-
-const ChangePasswordPage = () => {
-  return <ChangePassword />
-}
+import { ChangePasswordPage } from '~/components/common/user'
 
 export default ChangePasswordPage
