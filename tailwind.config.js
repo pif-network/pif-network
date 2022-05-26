@@ -1,9 +1,6 @@
 module.exports = {
   mode: 'jit',
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./pages/**/*.{jsx,tsx}', './components/**/*.{jsx,tsx}'],
   theme: {
     screens: {
       sm: '375px',
@@ -21,23 +18,31 @@ module.exports = {
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
     },
+    fontFamily: {
+      lora: ['Lora', 'serif'],
+      manrope: ['Manrope', 'san-serif'],
+    },
+    colors: {
+      black: '#000',
+      white: '#fff',
+      gray: {
+        50: '#F2F2F2',
+        200: '#CCCCCC',
+        300: '#B3B3B3',
+        400: '#999999',
+        600: '#666666',
+        700: '#303030',
+      },
+      primary: {
+        100: '#9470C2',
+        200: '#6F5095',
+        300: '#723A9E',
+        400: '#53288A',
+        800: '#25044E',
+        900: '#120227',
+      },
+    },
     extend: {
-      colors: {
-        primary: '#6F3E97',
-        secondary: '#57A8DA',
-        lightgray: '#F2F2F2',
-        violet: '#5D268A',
-        lightviolet: '#6200EE',
-        extralightviolet: '#E7DBF8',
-        dimviolet: '#F3EFF8',
-        tertiary: '#E91F6F',
-      },
-      textColor: {
-        primary: '#6F3E97',
-        secondary: '#57A8DA',
-        caption: '#979797',
-        green: '#468727',
-      },
       lineHeight: {
         12: '3rem',
         14: '3.5rem',
@@ -70,13 +75,6 @@ module.exports = {
         'screen/4': 'calc(100vh / 4)',
         'screen/5': 'calc(100vh / 5)',
       },
-    },
-  },
-  variants: {
-    extend: {
-      backgroundColor: ['active'],
-      // backgroundColor: ['checked'],
-      borderColor: ['checked'],
     },
   },
   plugins: [require('tailwindcss-ripple')()],
