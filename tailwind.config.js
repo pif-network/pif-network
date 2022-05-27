@@ -22,6 +22,23 @@ module.exports = {
       lora: ['Lora', 'serif'],
       manrope: ['Manrope', 'san-serif'],
     },
+    fontSize: {
+      caption: ['0.75rem', { lineHeight: '1rem' }],
+      'body-sm': ['0.8125rem', { lineHeight: '1.125rem' }],
+      body: ['0.875rem', { lineHeight: '1.1875rem' }],
+      'body-lg': ['1.3125rem', { lineHeight: '1.8125rem' }],
+      'sub-heading': ['1.3125rem', { lineHeight: '1.6875rem' }],
+      'heading-sm': ['1.1875rem', { lineHeight: '1.5rem' }],
+      heading: ['1.75rem', { lineHeight: '2.25rem' }],
+      'title-sm': ['2.3125rem', { lineHeight: '2.9375rem' }],
+      title: ['4.25rem', { lineHeight: '5.4375rem' }],
+    },
+    fontWeight: {
+      regular: 400,
+      medium: 500,
+      'semi-bold': 600,
+      bold: 700,
+    },
     colors: {
       black: '#000',
       white: '#fff',
