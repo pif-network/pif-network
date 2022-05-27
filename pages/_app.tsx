@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 
 import { TokenService } from '~/services'
 import { Head, Layout } from '~/components/common'
+import { ScrollObserver } from '~/lib/scroll'
 
 const Website = ({ Component, pageProps }: AppProps) => {
   const [isAuthorised, setIsAuthorised] = useState(false)
@@ -59,7 +60,10 @@ const Website = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head />
-      <Layout>{isAuthorised && <Component {...pageProps} />}</Layout>
+
+      <ScrollObserver>
+        <Layout>{isAuthorised && <Component {...pageProps} />}</Layout>
+      </ScrollObserver>
     </>
   )
 }
