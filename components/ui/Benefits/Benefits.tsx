@@ -15,7 +15,7 @@ const Benefits = () => {
   const { scrollY } = useContext(ScrollContext)
   const ref = useRef<HTMLDivElement>(null)
 
-  const numberOfBlock = 3
+  const numberOfBlocks = 3
   let progress = 0
 
   const { current: currentRef } = ref
@@ -31,14 +31,17 @@ const Benefits = () => {
       ) / clientHeight
 
     progress = Math.min(
-      numberOfBlock - 0.5,
-      Math.max(0.5, percentY * numberOfBlock),
+      numberOfBlocks - 0.5,
+      Math.max(0.5, percentY * numberOfBlocks),
     )
   }
 
   return (
-    <div ref={ref} className="bg-black text-white">
-      <div className="min-h-screen max-w-5xl mx-auto px-10 lg:px-10 py-24 md:py-28 lg:py-36 flex flex-col justify-center items-center text-4xl md:text-6xl lg:text-7xl">
+    <div
+      ref={ref}
+      className="bg-primary-900 text-gray-50 font-lora font-semi-bold text-heading md:text-title-sm lg:text-title"
+    >
+      <div className="min-h-screen md:min-h-screen lg:min-h-min max-w-5xl mx-auto px-4 lg:px-12 py-24 md:py-28 lg:py-36 flex flex-col justify-center items-center">
         <div>
           {/* First block */}
           <div
@@ -52,7 +55,7 @@ const Benefits = () => {
             className={`${s.benefitsText} inline-block after:content-['_']`}
             style={{ opacity: textSectionOpacity(progress, 1) }}
           >
-            sẵn sàng giúp đỡ dù bạn ở bất kì đâu{' '}
+            sẵn sàng giúp đỡ dù bạn ở bất kì đâu
           </span>
           {/* Third block */}
           <span
