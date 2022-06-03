@@ -1,5 +1,5 @@
 export interface Mentor {
-  id: null
+  id: number
   name: string
   bio: string
   domainKnowledge: string
@@ -11,8 +11,8 @@ export interface Mentor {
   exp: {
     name: string
     position: string
-    startDate: string
-    endDate: string
+    startDate?: string
+    endDate?: string
   }[]
 }
 
