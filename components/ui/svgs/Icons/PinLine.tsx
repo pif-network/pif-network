@@ -1,4 +1,6 @@
-const PinLine = ({ colour, ...props }: { colour: string }) => {
+import { SVGProps } from '.'
+
+const PinLine = ({ colour, ...props }: SVGProps) => {
   return (
     <svg
       width="16"

@@ -1,4 +1,6 @@
-const GithubFill = ({ colour, ...props }: { colour: string }) => {
+import { SVGProps } from '.'
+
+const GithubFill = ({ colour, ...props }: SVGProps) => {
   return (
     <svg
       width="24"

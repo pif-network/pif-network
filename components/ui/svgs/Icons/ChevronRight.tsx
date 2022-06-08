@@ -1,4 +1,6 @@
-const ChevronRight = ({ colour, ...props }: { colour: string }) => {
+import { SVGProps } from '.'
+
+const ChevronRight = ({ colour, ...props }: SVGProps) => {
   return (
     <svg
       width="24"

@@ -1,4 +1,6 @@
-const LocationFill = ({ colour, ...props }: { colour: string }) => {
+import { SVGProps } from '.'
+
+const LocationFill = ({ colour, ...props }: SVGProps) => {
   ;<svg
     width="24"
     height="24"

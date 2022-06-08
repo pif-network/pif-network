@@ -1,4 +1,6 @@
-const FacebookFill = ({ colour, ...props }: { colour: string }) => {
+import { SVGProps } from '.'
+
+const FacebookFill = ({ colour, ...props }: SVGProps) => {
   return (
     <svg
       width="29"

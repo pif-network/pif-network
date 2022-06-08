@@ -1,4 +1,6 @@
-const Search = ({ colour, ...props }: { colour: string }) => {
+import { SVGProps } from '.'
+
+const Search = ({ colour, ...props }: SVGProps) => {
   return (
     <svg
       width="24"

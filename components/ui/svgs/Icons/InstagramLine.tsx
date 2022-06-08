@@ -1,4 +1,6 @@
-const InstagramLine = ({ colour, ...props }: { colour: string }) => {
+import { SVGProps } from '.'
+
+const InstagramLine = ({ colour, ...props }: SVGProps) => {
   return (
     <svg
       width="64"

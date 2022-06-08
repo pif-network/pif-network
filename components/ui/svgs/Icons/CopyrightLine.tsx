@@ -1,4 +1,6 @@
-const CopyrightLine = ({ colour, ...props }: { colour: string }) => {
+import { SVGProps } from '.'
+
+const CopyrightLine = ({ colour, ...props }: SVGProps) => {
   return (
     <svg
       width="24"

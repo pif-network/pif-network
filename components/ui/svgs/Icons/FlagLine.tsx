@@ -1,4 +1,6 @@
-const FlagLine = ({ colour, ...props }: { colour: string }) => {
+import { SVGProps } from '.'
+
+const FlagLine = ({ colour, ...props }: SVGProps) => {
   return (
     <svg
       width="24"

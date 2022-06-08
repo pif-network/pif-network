@@ -1,4 +1,6 @@
-const MortarboardHatFill = ({ colour, ...props }: { colour: string }) => {
+import { SVGProps } from '.'
+
+const MortarboardHatFill = ({ colour, ...props }: SVGProps) => {
   return (
     <svg
       width="24"
