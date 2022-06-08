@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   mode: 'jit',
   content: ['./pages/**/*.{jsx,tsx}', './components/**/*.{jsx,tsx}'],
@@ -40,6 +42,7 @@ module.exports = {
       'semi-bold': 600,
       bold: 700,
     },
+    wordSpacing: {},
     colors: {
       black: '#000',
       white: '#fff',
@@ -95,5 +98,37 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwindcss-ripple')()],
+  plugins: [
+    require('tailwindcss-ripple')(),
+    // @ts-expect-error: Expression not callable, importing 'plugin'
+    plugin(function ({ matchUtilities, addUtilities, addComponents, theme }) {
+      matchUtilities(
+        {
+          word: value => ({
+            wordSpacing: value,
+          }),
+        },
+        { values: theme('wordSpacing') },
+      )
+
+      addUtilities({
+        'text-mask': {
+          background:
+            'linear-gradient(1.71deg,#000000 -5.31%,rgba(28, 28, 28, 0.3559) 36.07%, rgba(87, 87, 87, 0.278144) 45.96%, rgba(255, 255, 255, 0) 61.23%)',
+        },
+      })
+
+      addComponents({
+        '.card-mentor': {
+          maxWidth: '294px',
+          width: '100%',
+          height: '352px',
+
+          position: 'relative',
+          justifySelf: 'center',
+          transition: 'all 0.3s cubic- bezier(0.25, 0.45, 0.45, 0.95)',
+        },
+      })
+    }),
+  ],
 }
