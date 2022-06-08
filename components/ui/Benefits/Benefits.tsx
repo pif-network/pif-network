@@ -39,9 +39,9 @@ const Benefits = () => {
   return (
     <div
       ref={ref}
-      className="bg-primary-900 text-gray-50 font-lora font-semi-bold text-heading md:text-title-sm lg:text-title"
+      className="bg-primary-900 text-gray-50 font-lora font-semi-bold word-[-0.4rem] lg:word-[-1rem] text-heading md:text-title-sm lg:text-title"
     >
-      <div className="min-h-screen md:min-h-screen lg:min-h-min max-w-5xl mx-auto px-4 lg:px-12 py-24 md:py-28 lg:py-36 flex flex-col justify-center items-center">
+      <div className="min-h-[600px] md:min-h-max lg:min-h-min max-w-5xl mx-auto px-6 lg:px-12 py-24 md:py-28 lg:py-36 flex flex-col justify-center items-center">
         <div>
           {/* First block */}
           <div
