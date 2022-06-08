@@ -1,3 +1,9 @@
+import { SVGProps as ReactSVGProps } from 'react'
+
+export interface SVGProps extends ReactSVGProps<SVGSVGElement> {
+  colour: string
+}
+
 export { default as LinkedinLine } from './LinkedinLine'
 export { default as FacebookFill } from './FacebookFill'
 export { default as GithubFill } from './GithubFill'
