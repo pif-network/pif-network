@@ -1,4 +1,6 @@
-const ChevronRight = ({ ...props }) => {
+import { SVGProps } from '.'
+
+const ChevronRight = ({ colour, ...props }: SVGProps) => {
   return (
     <svg
       width="24"
@@ -12,7 +14,7 @@ const ChevronRight = ({ ...props }) => {
         fill-rule="evenodd"
         clip-rule="evenodd"
         d="M15.108 12.0361L8.57251 5.50056L9.49951 4.57056L16.5 11.5741V12.5011L9.49951 19.5001L8.57251 18.5716L15.108 12.0361Z"
-        fill="black"
+        fill={colour}
       />
     </svg>
   )
