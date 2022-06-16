@@ -13,7 +13,7 @@ instance.interceptors.request.use(
     const token = TokenService.currentToken
 
     if (token) {
-      config.headers['Authorization'] = 'Bearer ' + token
+      config.headers!['Authorization'] = 'Bearer ' + token
     }
 
     return config
@@ -34,7 +34,7 @@ instance.interceptors.response.use(
       // Access Token was expired
       if (err.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true
-        TokenService.removeUser()
+        // TokenService.removeUser()
 
         // BUG It sill uses the old access token in the headers
         // originalConfig.headers['Authorization'] = 'Bearer ' + TokenService.getLocalRefreshToken()

@@ -28,7 +28,7 @@ const MentorProfilePage = () => {
     url: '',
   })
   const [mentor, setMentor] = useState<Mentor>({
-    id: null,
+    id: 0,
     name: '',
     bio: '',
     exp: [],

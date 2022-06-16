@@ -11,27 +11,16 @@ const Button = styled.button`
   align-items: center;
   text-align: center;
 
-  font-family: Be Vietnam;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  font-feature-settings: 'case' on;
-
-  line-height: 16px;
-
-  padding: 6px 6px 6px 8px;
-  margin: 0px 10px;
-
   order: 0;
 
   ${({ variant }: Props) =>
     variant == 'outline' &&
     css`
-      background: #ffffff;
-      color: #6f3e97;
-      border: 1px solid #6f3e97;
+      background: #f2f2f2;
+      color: #303030;
+      border: 2px solid #6f3e97;
       box-sizing: border-box;
-      border-radius: 4px;
+      border-radius: 12px;
 
       &:hover {
         background: #f3eff8;
@@ -62,19 +51,19 @@ const Button = styled.button`
       color: white;
       border: 1px solid #6f3e97;
       box-sizing: border-box;
-      border-radius: 4px;
+      border-radius: 12px;
 
       &:hover {
-        background: #f3eff8;
-        color: #6f3e97;
+        background: #895dac;
+        color: white;
       }
 
       &:focus {
-        background: #e7dbf8;
+        background: #a17fbd;
       }
 
       &:active {
-        background: #e7dbf8;
+        background: #a17fbd;
         background-size: 100%;
       }
 

@@ -1,4 +1,4 @@
-import LineLG from '~/assets/section-title/section-title__line-lg.jpg'
+// import LineLG from '~/assets/section-title/section-title__line-lg.jpg'
 import LineSM from '~/assets/section-title/section-title__line-sm.jpg'
 
 const SectionTitle = ({
@@ -11,7 +11,7 @@ const SectionTitle = ({
   return (
     <div className={className}>
       <img
-        src={LineLG.src}
+        src={LineSM.src}
         alt="decorator"
         className="hidden md:inline-block"
       />
