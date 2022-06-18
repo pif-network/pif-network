@@ -1,6 +1,6 @@
-import ValueCard from './ValueCard'
-import { Card } from './ValueCard'
+import ValueCards from './ValueCards'
 import SectionTitle from '../SectionTitle'
+import { Card } from './ValueCard'
 import valueImg1 from '~/assets/value-card/value-card-1.png'
 import valueImg2 from '~/assets/value-card/value-card-2.png'
 import valueImg3 from '~/assets/value-card/value-card-3.png'
@@ -37,18 +37,15 @@ const VALUES = [
     url: `${valueImg4.src}`,
   },
 ] as Card[]
-
-const Value = () => {
+const Values = () => {
   return (
-    <div className="lg:px-[170px] m-auto max-w-[1440px]">
-      <SectionTitle content="Cách chúng tôi hỗ trợ bạn" className='hidden sm:block' />
-      <div className="hidden md:flex md:flex-wrap md:items-center md:justify-center lg:gap-4">
-        {VALUES.map((item, index) => (
-          <ValueCard key={item.id} card={item} />
-        ))}
-      </div>
-        <ValueCardMobile />
+    <div className="2xl:px-[170px] m-auto max-w-[1440px] md:px-[50px]">
+      <SectionTitle
+        content="Cách chúng tôi hỗ trợ bạn"
+        className="hidden md:block -ml-[4px]"
+      />
+      <ValueCards value={VALUES} />
     </div>
   )
 }
-export default Value
+export default Values
