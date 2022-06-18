@@ -1,14 +1,14 @@
 import styled, { css } from 'styled-components'
-import { string } from 'yup'
 import Link from 'next/link'
 
 interface Props {
   content: string
-  type: string //bg color: outlined, filled
-  variant: string //text color: black, white, primary
-  size: string //size of button
-  fontSize: string
-  onClick: any
+  type: 'Outlined' | 'Filled' //bg color: outlined, filled
+  variant: 'Default' | 'Purple' //text color: black, white, primary
+  size: 'Medium' | 'Small' //size of button
+  fontFamily: 'manrope' | 'lora'
+  fontStyle: 'bold' | 'semibold'
+  onClick: React.MouseEventHandler<HTMLButtonElement>
   link: string
 }
 
@@ -17,21 +17,31 @@ const Button = ({
   size,
   variant,
   type,
-  fontSize,
+  fontFamily,
+  fontStyle,
   onClick,
   link,
-}: Props) => {
+}: Partial<Props>) => {
   let sizeButton = ''
-  let bgcolor = ''
-  size == 'small' ? (sizeButton = 'py-1 px-6') : ''
-  size == 'medium' ? (sizeButton = 'py-2 px-20 h-12 w-60') : ''
-  type == 'filled' ? (bgcolor = 'primary-800') : ''
-  type == 'outlined' ? (bgcolor = 'gray-50') : ''
+  let typeButton = ''
+  let colour = ''
+
+  size === 'Small' ? (sizeButton = 'py-1 px-6 text-sm') : ''
+  size === 'Medium' ? (sizeButton = 'py-2 px-20 text-lg') : ''
+  type === 'Filled' ? (typeButton = 'bg-primary-800') : ''
+  type === 'Outlined' ? (typeButton = 'bg-gray-50 border-2') : ''
+  variant === 'Default'
+    ? type === 'Filled'
+      ? (colour = 'text-white')
+      : (colour = 'text-gray-700')
+    : ''
+  variant === 'Purple' ? (colour = 'text-primary-400') : ''
+
   return (
     <div>
-      <Link href={link}>
+      <Link href={`${link}`}>
         <button
-          className={`bg-${bgcolor} text-${variant} font-bold ${sizeButton} rounded-xl text-${fontSize}`}
+          className={`${typeButton} font-${fontStyle} ${colour} ${sizeButton} rounded-xl font-${fontFamily}`}
           onClick={onClick}
         >
           {content}
