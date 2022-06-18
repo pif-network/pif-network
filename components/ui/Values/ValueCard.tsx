@@ -1,4 +1,5 @@
 export interface Card {
+  id: number
   title: string
   content: string
   url: string
@@ -6,7 +7,7 @@ export interface Card {
 function ValueCard({ card }: { card: Partial<Card> }) {
   return (
     <div
-      className="rounded-xl relative md:mt-4 overflow-hidden md:h-[298px] md:w-[525px] "
+      className="rounded-xl relative sm:mt-4 overflow-hidden md:h-[298px] md:w-[525px] "
       style={{
         background: `url(${card.url}) no-repeat`,
         backgroundSize: 'contain',
