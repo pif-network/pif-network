@@ -7,8 +7,7 @@ interface Props {
   variant: 'Default' | 'Purple' //text color: black, white, primary
   size: 'Medium' | 'Small' //size of button
   fontFamily: 'manrope' | 'lora'
-  fontStyle: 'bold' | 'semibold'
-  onClick: React.MouseEventHandler<HTMLButtonElement>
+  onClick: React.MouseEventHandler
   link: string
 }
 
@@ -18,7 +17,6 @@ const Button = ({
   variant,
   type,
   fontFamily,
-  fontStyle,
   onClick,
   link,
 }: Partial<Props>) => {
@@ -26,22 +24,33 @@ const Button = ({
   let typeButton = ''
   let colour = ''
 
-  size === 'Small' ? (sizeButton = 'py-1 px-6 text-sm') : ''
-  size === 'Medium' ? (sizeButton = 'py-2 px-20 text-lg') : ''
-  type === 'Filled' ? (typeButton = 'bg-primary-800') : ''
-  type === 'Outlined' ? (typeButton = 'bg-gray-50 border-2') : ''
-  variant === 'Default'
-    ? type === 'Filled'
-      ? (colour = 'text-white')
-      : (colour = 'text-gray-700')
-    : ''
-  variant === 'Purple' ? (colour = 'text-primary-400') : ''
+  if (size === 'Small') {
+    sizeButton = 'py-1 px-6 text-sm'
+  } else {
+    sizeButton = 'py-2 px-20 text-lg'
+  }
+
+  if (type === 'Filled') {
+    typeButton = 'bg-primary-800'
+  } else {
+    typeButton = 'bg-gray-50 border-2'
+  }
+
+  if (variant === 'Default') {
+    if (type === 'Filled') {
+      colour = 'text-white'
+    } else {
+      colour = 'text-gray-700'
+    }
+  } else if (variant === 'Purple') {
+    colour = 'text-primary-400'
+  }
 
   return (
     <div>
       <Link href={`${link}`}>
         <button
-          className={`${typeButton} font-${fontStyle} ${colour} ${sizeButton} rounded-xl font-${fontFamily}`}
+          className={`${typeButton} ${colour} ${sizeButton} rounded-xl font-${fontFamily}`}
           onClick={onClick}
         >
           {content}
