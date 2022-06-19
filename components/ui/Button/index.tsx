@@ -47,7 +47,7 @@ const Button = styled.button`
   ${({ variant }: Props) =>
     variant == 'contained' &&
     css`
-      background: #6f3e97;
+      background: #25044e;
       color: white;
       border: 1px solid #6f3e97;
       box-sizing: border-box;
