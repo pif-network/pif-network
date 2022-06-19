@@ -49,7 +49,6 @@ export const Tag: React.FC<TagProps> = ({
   return (
     <div
       className={`${colorClasses} border rounded-3xl px-2 py-1 inline-block relative group`}
-      onClick={onClose}
     >
       {children}
       {closable && (
@@ -58,6 +57,7 @@ export const Tag: React.FC<TagProps> = ({
             type === 'light' ? 'bg-white' : deleteBgByType[color]
           }`}
           style={{ fontSize: '12px' }}
+          onClick={onClose}
         />
       )}
     </div>
