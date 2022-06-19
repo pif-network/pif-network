@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import Link from 'next/link'
+import { FlagLine } from '../svgs/Icons'
 
 interface Props {
   content: string
@@ -9,9 +10,11 @@ interface Props {
   fontFamily: 'manrope' | 'lora'
   onClick: React.MouseEventHandler
   link: string
+  withIcon: boolean
 }
 
 const Button = ({
+  withIcon,
   content,
   size,
   variant,
@@ -38,9 +41,9 @@ const Button = ({
 
   if (variant === 'Default') {
     if (type === 'Filled') {
-      colour = 'text-white'
+      colour = 'white'
     } else {
-      colour = 'text-gray-700'
+      colour = 'black'
     }
   } else if (variant === 'Purple') {
     colour = 'text-primary-400'
@@ -50,10 +53,13 @@ const Button = ({
     <div>
       <Link href={`${link}`}>
         <button
-          className={`${typeButton} ${colour} ${sizeButton} rounded-xl font-${fontFamily}`}
+          className={`${typeButton} text-${colour} ${sizeButton} text-bold rounded-xl font-${fontFamily}`}
           onClick={onClick}
         >
-          {content}
+          <span className="inline-flex">
+            {content}
+            {withIcon && <FlagLine colour={`${colour}`} />}
+          </span>
         </button>
       </Link>
     </div>
