@@ -42,7 +42,6 @@ const HomePage = () => {
         <Hero />
         <Benefits />
         <Values />
-
         {/* <div className="p-8 lg:p-24">
           <div className="flex flex-wrap">
             {mentors ? (

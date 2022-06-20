@@ -1,16 +1,15 @@
 import styled, { css } from 'styled-components'
 import Link from 'next/link'
-import { FlagLine } from '../svgs/Icons'
+import { ChevronRight, FlagLine } from '../svgs/Icons'
 
 interface Props {
   content: string
   type: 'Outlined' | 'Filled' //bg color: outlined, filled
   variant: 'Default' | 'Purple' //text color: black, white, primary
   size: 'Medium' | 'Small' //size of button
-  fontFamily: 'manrope' | 'lora'
   onClick: React.MouseEventHandler
   link: string
-  withIcon: boolean
+  withIcon: 'ChevronRight' | 'FlagLine'
 }
 
 const Button = ({
@@ -19,7 +18,6 @@ const Button = ({
   size,
   variant,
   type,
-  fontFamily,
   onClick,
   link,
 }: Partial<Props>) => {
@@ -30,22 +28,18 @@ const Button = ({
   if (size === 'Small') {
     sizeButton = 'py-1 px-6 text-sm'
   } else {
-    sizeButton = 'py-2 px-20 text-lg'
+    sizeButton = 'py-2.5 px-7 text-lg'
   }
 
   if (type === 'Filled') {
-    typeButton = 'bg-primary-800'
+    typeButton = 'bg-primary-800 font-lora text-white'
+    colour = 'white'
   } else {
-    typeButton = 'bg-gray-50 border-2'
+    typeButton =
+      'bg-white border-2 border-primary-800 font-manrope text-gray-700'
+    colour = 'black'
   }
-
-  if (variant === 'Default') {
-    if (type === 'Filled') {
-      colour = 'white'
-    } else {
-      colour = 'black'
-    }
-  } else if (variant === 'Purple') {
+  if (variant === 'Purple') {
     colour = 'text-primary-400'
   }
 
@@ -53,12 +47,15 @@ const Button = ({
     <div>
       <Link href={`${link}`}>
         <button
-          className={`${typeButton} text-${colour} ${sizeButton} text-bold rounded-xl font-${fontFamily}`}
+          className={`${typeButton} text-${colour} ${sizeButton} text-bold rounded-xl`}
           onClick={onClick}
         >
           <span className="inline-flex">
             {content}
-            {withIcon && <FlagLine colour={`${colour}`} />}
+            {withIcon === 'ChevronRight' && (
+              <ChevronRight colour={`${colour}`} />
+            )}
+            {withIcon === 'FlagLine' && <FlagLine colour={`${colour}`} />}
           </span>
         </button>
       </Link>
