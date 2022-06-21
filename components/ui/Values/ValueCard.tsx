@@ -3,6 +3,7 @@ export interface Card {
   title: string
   content: string
   url: string
+  url2: string
 }
 function ValueCard({ card }: { card: Partial<Card> }) {
   return (

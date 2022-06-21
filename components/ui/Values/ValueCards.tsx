@@ -1,6 +1,5 @@
 import ValueCard from './ValueCard'
 import { Card } from './ValueCard'
-import ValueCardMobile from './ValueCardMobile'
 
 const ValueCards = ({ value }: { value: Card[] }) => {
   return (
@@ -10,7 +9,6 @@ const ValueCards = ({ value }: { value: Card[] }) => {
           <ValueCard key={item.id} card={item} />
         ))}
       </div>
-        <ValueCardMobile />
     </>
 
   )
