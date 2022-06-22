@@ -2,7 +2,11 @@ const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   mode: 'jit',
-  content: ['./pages/**/*.{jsx,tsx}', './components/**/*.{jsx,tsx}'],
+  content: [
+    './pages/**/*.{jsx,tsx}',
+    './components/**/*.{jsx,tsx}',
+    './features/**/*.{jsx,tsx}',
+  ],
   theme: {
     screens: {
       sm: '375px',
@@ -61,6 +65,16 @@ module.exports = {
         400: '#53288A',
         800: '#25044E',
         900: '#120227',
+      },
+      red: {
+        100: '#B36670',
+        200: '#9E3A46',
+        300: '#851C2A',
+      },
+      cyan: {
+        100: '#6BB8B3',
+        200: '#40A59F',
+        300: '#1AACA3',
       },
     },
     extend: {
