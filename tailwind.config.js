@@ -1,8 +1,12 @@
 const plugin = require('tailwindcss/plugin')
-
 module.exports = {
   mode: 'jit',
   content: ['./pages/**/*.{jsx,tsx}', './components/**/*.{jsx,tsx}'],
+  safeList: [
+    {
+      pattern: /^(.*?)/
+    },
+  ],
   theme: {
     screens: {
       sm: '375px',
