@@ -1,66 +1,78 @@
-import styled, { css } from 'styled-components'
+import React, {
+  MouseEvent,
+  ButtonHTMLAttributes,
+  useRef,
+  forwardRef,
+  DetailedHTMLProps,
+  createRef,
+  Ref,
+  ForwardedRef,
+} from 'react'
 import Link from 'next/link'
 import { ChevronRight, FlagLine } from '../svgs/Icons'
 
-interface Props {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   content: string
-  type: 'Outlined' | 'Filled' //bg color: outlined, filled
-  variant: 'Default' | 'Purple' //text color: black, white, primary
-  size: 'Medium' | 'Small' //size of button
-  onClick: React.MouseEventHandler
-  link: string
-  withIcon: 'ChevronRight' | 'FlagLine'
+  className: string
+  href?: string
+  size: 'medium' | 'small'
+  fillType: 'outlined' | 'filled'
+  rightIcon?: 'ChevronRight' | 'FlagLine'
 }
 
-const Button = ({
-  withIcon,
-  content,
-  size,
-  variant,
-  type,
-  onClick,
-  link,
-}: Partial<Props>) => {
-  let sizeButton = ''
-  let typeButton = ''
-  let colour = ''
+// good night
+const Button = forwardRef(
+  (
+    { content, className, href, size, fillType, rightIcon, ...others }: Props,
+    ref: ForwardedRef<HTMLButtonElement>,
+  ) => {
+    const styleByType = {
+      filled: {
+        small:
+          'py-1 px-6 border border-primary-900 bg-primary-800 text-white font-manrope font-bold text-body-md',
+        medium:
+          'py-2.5 px-7 border border-primary-900 bg-primary-800 text-white font-lora font-semi-bold text-sub-heading',
+        iconFill: 'white',
+      },
+      outlined: {
+        small:
+          'py-1 px-6 border border-primary-900 bg-primary-800 text-white font-manrope font-bold text-body-md',
+        medium:
+          'py-2.5 px-7 border border-primary-900 bg-primary-800 text-white font-lora font-semi-bold text-sub-heading',
+        iconFill: 'black',
+      },
+    }
 
-  if (size === 'Small') {
-    sizeButton = 'py-1 px-6 text-sm'
-  } else {
-    sizeButton = 'py-2.5 px-7 text-lg'
-  }
+    const cn = `${styleByType[fillType][size]} ${className} rounded-xl`
 
-  if (type === 'Filled') {
-    typeButton = 'bg-primary-800 font-lora text-white'
-    colour = 'white'
-  } else {
-    typeButton =
-      'bg-white border-2 border-primary-800 font-manrope text-gray-700'
-    colour = 'black'
-  }
-  if (variant === 'Purple') {
-    colour = 'text-primary-400'
-  }
-
-  return (
-    <div>
-      <Link href={`${link}`}>
-        <button
-          className={`${typeButton} text-${colour} ${sizeButton} text-bold rounded-xl`}
-          onClick={onClick}
-        >
-          <span className="inline-flex">
-            {content}
-            {withIcon === 'ChevronRight' && (
-              <ChevronRight colour={`${colour}`} />
-            )}
-            {withIcon === 'FlagLine' && <FlagLine colour={`${colour}`} />}
-          </span>
+    if (!href) {
+      return (
+        <button className={cn} ref={ref} {...others}>
+          <span className="inline-flex">{content}</span>
+          {rightIcon === 'ChevronRight' && (
+            <ChevronRight colour={`${styleByType[fillType]['iconFill']}`} />
+          )}
+          {rightIcon === 'FlagLine' && (
+            <FlagLine colour={`${styleByType[fillType]['iconFill']}`} />
+          )}
         </button>
-      </Link>
-    </div>
-  )
-}
+      )
+    } else {
+      return (
+        <Link href={`${href}`} passHref>
+          <button className={cn} ref={ref} {...others}>
+            <span className="inline-flex">{content}</span>
+            {rightIcon === 'ChevronRight' && (
+              <ChevronRight colour={`${styleByType[fillType]['iconFill']}`} />
+            )}
+            {rightIcon === 'FlagLine' && (
+              <FlagLine colour={`${styleByType[fillType]['iconFill']}`} />
+            )}
+          </button>
+        </Link>
+      )
+    }
+  },
+)
 
 export default Button
