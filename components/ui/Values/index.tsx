@@ -1,7 +1,6 @@
 import ValueCards from './ValueCards'
 import SectionTitle from '../SectionTitle'
-import { Card } from './ValueCard'
-import ValueCardMobile from './ValueCardMobile'
+import type { Card } from './ValueCard'
 import valueImg1 from '~/assets/value-card/value-card-1.png'
 import valueImg2 from '~/assets/value-card/value-card-2.png'
 import valueImg3 from '~/assets/value-card/value-card-3.png'
@@ -18,7 +17,7 @@ const VALUES = [
     content:
       'Kết nối 1-1 với nhiều mentor có kinh nghiệm  và background phù hợp với nhu cầu của bạn',
     url: `${valueImg1.src}`,
-    url2: `${valueImgMobile2.src}`,
+    urlMobile: `${valueImgMobile2.src}`,
   },
   {
     id: 2,
@@ -26,7 +25,7 @@ const VALUES = [
     content:
       'Nhận được tư vấn về lộ trình và cách thức phát triển cơ hội nghề nghiệp trong lĩnh vực công nghệ',
     url: `${valueImg2.src}`,
-    url2: `${valueImgMobile1.src}`,
+    urlMobile: `${valueImgMobile1.src}`,
   },
   {
     id: 3,
@@ -34,7 +33,7 @@ const VALUES = [
     content:
       'Được hỗ trợ review CV/ Resume cũng như phỏng vấn thử bởi những mentor dày dặn kinh nghiệm',
     url: `${valueImg3.src}`,
-    url2: `${valueImgMobile3.src}`,
+    urlMobile: `${valueImgMobile3.src}`,
   },
   {
     id: 4,
@@ -42,9 +41,10 @@ const VALUES = [
     content:
       'Cùng nhau chia sẻ về phương pháp tự học, rèn luyện kỹ năng và kiến thức trong lĩnh vực mong muốn',
     url: `${valueImg4.src}`,
-    url2: `${valueImgMobile4.src}`,
+    urlMobile: `${valueImgMobile4.src}`,
   },
 ] as Card[]
+
 const Values = () => {
   return (
     <div className="2xl:px-[170px] m-auto max-w-[1440px] md:px-[50px]">
@@ -52,8 +52,7 @@ const Values = () => {
         content="Cách chúng tôi hỗ trợ bạn"
         className="hidden md:block -ml-[4px]"
       />
-      <ValueCards value={VALUES} />
-      <ValueCardMobile card={VALUES} />
+      <ValueCards card={VALUES} />
     </div>
   )
 }

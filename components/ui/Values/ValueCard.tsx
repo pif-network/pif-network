@@ -2,10 +2,10 @@ export interface Card {
   id: number
   title: string
   content: string
-  url: string
-  url2: string
+  url?: string
+  urlMobile?: string
 }
-function ValueCard({ card }: { card: Partial<Card> }) {
+function ValueCard({ card }: { card: Card }) {
   return (
     <div
       className="rounded-xl relative sm:mt-4 overflow-hidden md:h-[298px] md:w-1/2 -mx-[4px]"
