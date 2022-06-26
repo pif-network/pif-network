@@ -4,8 +4,16 @@ import Head from 'next/head'
 import { UserService } from '~/services'
 import { Mentor } from '~/lib/types/user'
 import { getErrorMessage } from '~/lib/types/service'
-import { Skeleton, Hero, Benefits, Values, Feedback } from '~/components/ui'
+import {
+  Skeleton,
+  Hero,
+  Benefits,
+  Values,
+  Feedback,
+  Button,
+} from '~/components/ui'
 import { MentorCard } from '~/components/mentor'
+import { FlagLine } from '~/components/ui/svgs/Icons'
 
 const HomePage = () => {
   const [mentors, setMentors] = useState<Mentor[]>()
@@ -34,7 +42,6 @@ const HomePage = () => {
         <Hero />
         <Benefits />
         <Values />
-
         {/* <div className="p-8 lg:p-24">
           <div className="flex flex-wrap">
             {mentors ? (
