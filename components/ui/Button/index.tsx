@@ -1,13 +1,4 @@
-import React, {
-  MouseEvent,
-  ButtonHTMLAttributes,
-  useRef,
-  forwardRef,
-  DetailedHTMLProps,
-  createRef,
-  Ref,
-  ForwardedRef,
-} from 'react'
+import React, { ButtonHTMLAttributes, forwardRef, ForwardedRef } from 'react'
 import Link from 'next/link'
 import { ChevronRight, FlagLine } from '../svgs/Icons'
 
@@ -20,12 +11,8 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   rightIcon?: 'ChevronRight' | 'FlagLine'
 }
 
-// good night
-const Button = forwardRef(
-  (
-    { content, className, href, size, fillType, rightIcon, ...others }: Props,
-    ref: ForwardedRef<HTMLButtonElement>,
-  ) => {
+const Button = forwardRef<HTMLButtonElement, Props>(
+  ({ content, className, href, size, fillType, rightIcon, ...others }, ref) => {
     const styleByType = {
       filled: {
         small:
