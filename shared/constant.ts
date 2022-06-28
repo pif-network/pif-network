@@ -24,3 +24,9 @@ export const FAQs = [
     a: "Bạn vui lòng huỷ lịch meeting ít nhất trước 24h đồng hồ và kèm theo chú thích lý do nhé! Đội ngũ phát triển sản phẩm mentorship có quy định về 'no-show'. Đối với mentee không tham gia 2 buổi meeting mà không huỷ lịch trước đó, tài khoản của các bạn sẽ bị khoá tạm thời. Trong trường hợp bạn có lý do chính đáng và muốn mở lại tài khoản, bạn vui lòng email về địa chỉ handinh.shecodes@gmail.com nhé.",
   },
 ]
+
+export const INTERNAL_URI = {
+  HOME: '/',
+  SEARCH: '/search',
+  MENTOR_PROFILE: (id: string) => `/mentors/${id}` as const,
+} as const
