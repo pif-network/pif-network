@@ -1,18 +1,33 @@
-import React, { ButtonHTMLAttributes, forwardRef, ForwardedRef } from 'react'
-import Link from 'next/link'
-import { ChevronRight, FlagLine } from '../svgs/Icons'
+import React, { ButtonHTMLAttributes, forwardRef } from 'react'
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+import type { ExternalHrefProps } from '~/lib/types'
+import { ChevronRight, FlagLine } from '~/components/ui/svgs/Icons'
+import { Link } from '~/components/ui'
+
+interface GeneralButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   content: string
-  className: string
-  href?: string
+  className?: string
   size: 'medium' | 'small'
   fillType: 'outlined' | 'filled'
   rightIcon?: 'ChevronRight' | 'FlagLine'
 }
 
+type Props = GeneralButtonProps & ExternalHrefProps
+
 const Button = forwardRef<HTMLButtonElement, Props>(
-  ({ content, className, href, size, fillType, rightIcon, ...others }, ref) => {
+  (
+    {
+      content,
+      className,
+      href,
+      external,
+      size,
+      fillType,
+      rightIcon,
+      ...others
+    },
+    ref,
+  ) => {
     const styleByType = {
       filled: {
         small:
@@ -44,21 +59,21 @@ const Button = forwardRef<HTMLButtonElement, Props>(
           )}
         </button>
       )
-    } else {
-      return (
-        <Link href={`${href}`} passHref>
-          <button className={cn} ref={ref} {...others}>
-            <span className="inline-flex">{content}</span>
-            {rightIcon === 'ChevronRight' && (
-              <ChevronRight colour={`${styleByType[fillType]['iconFill']}`} />
-            )}
-            {rightIcon === 'FlagLine' && (
-              <FlagLine colour={`${styleByType[fillType]['iconFill']}`} />
-            )}
-          </button>
-        </Link>
-      )
     }
+
+    return (
+      <Link external href={href} passHref>
+        <button className={cn} ref={ref} {...others}>
+          <span className="inline-flex">{content}</span>
+          {rightIcon === 'ChevronRight' && (
+            <ChevronRight colour={`${styleByType[fillType]['iconFill']}`} />
+          )}
+          {rightIcon === 'FlagLine' && (
+            <FlagLine colour={`${styleByType[fillType]['iconFill']}`} />
+          )}
+        </button>
+      </Link>
+    )
   },
 )
 
