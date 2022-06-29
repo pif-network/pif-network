@@ -1,3 +1,5 @@
+import { LinkProps } from 'next/link'
+
 import { INTERNAL_URI } from '~/shared/constant'
 
 type valueof<T> = T[keyof T]
@@ -13,3 +15,7 @@ type InferReturnTypeIfValueIsFunction<U> = {
 type InternalUriObject = InferReturnTypeIfValueIsFunction<typeof INTERNAL_URI>
 
 export type InternalUri = valueof<InternalUriObject>
+
+export type ExternalHrefProps =
+  | { external: true; href: LinkProps['href'] }
+  | { external?: false; href: InternalUri }
