@@ -1,4 +1,4 @@
-import { Avatar, Divider } from 'antd'
+import { Avatar } from 'antd'
 import { ChevronRight, CopyrightLine, FacebookFill } from '../svgs/Icons'
 import ChevronLeft from '../svgs/Icons/ChevronLeft'
 import DoubleQuote from '../svgs/Icons/DoubleQuote'
