@@ -1,6 +1,5 @@
 import { Avatar } from 'antd'
 import { ChevronRight, CopyrightLine, FacebookFill } from '../svgs/Icons'
-import ChevronLeft from '../svgs/Icons/ChevronLeft'
 import DoubleQuote from '../svgs/Icons/DoubleQuote'
 
 const Feedback = () => {
@@ -41,7 +40,10 @@ const Feedback = () => {
                 </div>
               </div>
               <div className="inline-flex pt-5">
-                <ChevronLeft colour="black"></ChevronLeft>
+                <ChevronRight
+                  colour="black"
+                  className="transform rotate-180"
+                ></ChevronRight>
                 <ChevronRight colour="black"></ChevronRight>
               </div>
             </div>
