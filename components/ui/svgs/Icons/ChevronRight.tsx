@@ -13,7 +13,7 @@ const ChevronRight = ({ colour, ...props }: SVGProps) => {
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
-        d="M15.108 12.0361L8.57251 5.50056L9.49951 4.57056L16.5 11.5741V12.5011L9.49951 19.5001L8.57251 18.5716L15.108 12.0361Z"
+        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
         fill={colour}
       />
     </svg>
