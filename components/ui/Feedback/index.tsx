@@ -5,41 +5,41 @@ import DoubleQuote from '../svgs/Icons/DoubleQuote'
 const Feedback = () => {
   return (
     <div>
-      <div className="text-black font-lora font-semi-bold text-title-sm grid justify-items-center">
+      <div className="md:text-black font-lora font-semi-bold md:text-title-sm pb-11 sm:pb-8 sm:text-heading-sm sm:text-primary-900 grid justify-items-center">
         Mentee nói gì về &lt;product_name&gt;?
       </div>
-      <div className="flex justify-center px-28 pt-11">
-        <div className="block bg-gray-100 justify-items-center w-3/4 rounded-2xl">
-          <div className="pt-16 pl-14 pr-20 pb-14">
-            <div className="relative h-32">
+      <div className="flex justify-center md:px-28 sm:p-0">
+        <div className="block bg-gray-100 justify-items-center md:w-3/4 sm:w-11/12 rounded-2xl">
+          <div className="md:pt-16 md:pl-14 md:pr-20 md:pb-14 sm:pt-8 sm:pl-7 sm:pr-10 sm:pb-7">
+            <div className="relative h-full">
               <DoubleQuote
                 colour="black"
-                className="absolute -top-5 -left-3 w-12 h-8"
+                className="absolute md:-top-5 md:-left-3 md:w-12 md:h-8 sm:w-4 sm:h-3 sm:-top-1 sm:-left-2"
               ></DoubleQuote>
-              <div className="absolute grid justify-center items-center ml-9">
-                <p className="text-black font-lora font-semi-bold text-sub-heading text-left">
+              <div className="grid justify-center items-center md:ml-9 sm:ml-2 ">
+                <p className="text-black font-lora font-semi-bold md:text-sub-heading sm:text-[10px] text-left">
                   My gave me a lot of valuable advice, especially how to improve
                   my portfolio, as well as how to correctly communicate with
                   people.
                 </p>
-                <p className="text-gray-400 font-manrope font-regular text-body text-left pb-10">
+                <p className="text-gray-400 font-manrope font-regular md:text-body sm:text-[8px] text-left">
                   And something more that I don’t remember
                 </p>
               </div>
             </div>
-            <div className="flex flex-row justify-between border-t border-black pl-8 pr-20">
-              <div className="inline-flex pt-5">
-                <Avatar size={44} src="./images/avatar_mentee.png"></Avatar>
+            <div className="flex flex-row justify-between border-t border-black md:pl-8 md:pr-20 sm:pl-4 sm:pr-10">
+              <div className="inline-flex md:pt-5 sm:pt-2">
+                <Avatar src="./images/avatar_mentee.png"></Avatar>
                 <div className="pl-2">
-                  <p className="text-back font-lora font-semi-bold text-body">
+                  <p className="text-back font-lora font-semi-bold md:text-body sm:text-[8px]">
                     Nguyễn Mai Anh
                   </p>
-                  <p className="text-gray-600 font-manrope text-caption">
+                  <p className="text-gray-600 font-manrope md:text-caption sm:text-[6px]">
                     Student, UEH.
                   </p>
                 </div>
               </div>
-              <div className="inline-flex pt-5">
+              <div className="inline-flex md:pt-5 sm:pt-2">
                 <ChevronRight
                   colour="black"
                   className="transform rotate-180"
