@@ -1,4 +1,4 @@
-import { AxiosPromise, AxiosResponse } from 'axios'
+import { AxiosError, AxiosPromise, AxiosResponse } from 'axios'
 import { Mentee } from '../user'
 
 export interface Token {
@@ -6,43 +6,43 @@ export interface Token {
   refreshToken: string
 }
 
-export interface Register {
-  (email: string, password: string, name: string): AxiosPromise<Mentee>
+export interface APIResponse<T = unknown>
+  extends AxiosResponse<{
+    isError: boolean
+    data: T
+    message: string
+  }> {}
+
+export interface RegisterParams {
+  email: string
+  password: string
+  name: string
 }
-export interface Login {
-  (email: string, password: string): Promise<void>
+export interface LogInParams {
+  email: string
+  password: string
 }
 
 export interface VerifyEmail {
-  (token: string | string[] | undefined): Promise<{
+  (): Promise<{
     hasVerifiedSuccess: boolean
     message: string
   }>
 }
-interface EmailVerificationResponsePayload {
-  message: string
-}
-export interface EmailVerificationResponse
-  extends AxiosResponse<EmailVerificationResponsePayload> {}
 
-export interface ResetPassword {
-  (email: string): AxiosPromise<string>
-}
-export interface ChangePassword {
-  (password: string, passwordConfirmation: string): AxiosPromise<string>
+export interface ChangePasswordParams {
+  password: string
+  passwordConfirmation: string
 }
 
 /**
  * Error's type handling
  */
 
-export interface ErrorResponse {
+export interface ErrorResponse
+  extends Omit<AxiosError<APIResponse>, 'response'> {
   response: {
-    data: {
-      error: string
-      message: string
-      statusCode: number
-    }
+    data: APIResponse
   }
 }
 
@@ -57,7 +57,7 @@ const hasMessageError = (error: unknown): error is ErrorResponse => {
 
 export const getErrorMessage = (error: unknown): string => {
   if (hasMessageError(error)) {
-    const errorMessage = error.response.data.message
+    const errorMessage = error.response.data.data.message
     return errorMessage
   }
 
