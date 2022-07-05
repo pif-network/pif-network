@@ -1,118 +1,80 @@
-import styled, { css } from 'styled-components'
+import React, { ButtonHTMLAttributes, forwardRef } from 'react'
 
-interface Props {
-  variant: string
+import type { ExternalHrefProps } from '~/lib/types'
+import { ChevronRight, FlagLine } from '~/components/ui/svgs/Icons'
+import { Link } from '~/components/ui'
+
+interface GeneralButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  content: string
+  className?: string
+  size: 'medium' | 'small'
+  fillType: 'outlined' | 'filled'
+  rightIcon?: 'ChevronRight' | 'FlagLine'
 }
 
-const Button = styled.button`
-  display: flex;
-  flex-grow: 0;
-  flex: none;
-  align-items: center;
-  text-align: center;
+type Props = GeneralButtonProps & ExternalHrefProps
 
-  font-family: Be Vietnam;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  font-feature-settings: 'case' on;
+const Button = forwardRef<HTMLButtonElement, Props>(
+  (
+    {
+      content,
+      className,
+      href,
+      external,
+      size,
+      fillType,
+      rightIcon,
+      ...others
+    },
+    ref,
+  ) => {
+    const styleByType = {
+      filled: {
+        small:
+          'py-1 px-6 border border-primary-900 bg-primary-800 text-white font-manrope font-bold text-body-md',
+        medium:
+          'py-2.5 px-7 border border-primary-900 bg-primary-800 text-white font-lora font-semi-bold text-sub-heading',
+        iconFill: 'white',
+      },
+      outlined: {
+        small:
+          'py-1 px-6 border border-primary-900 bg-primary-800 text-white font-manrope font-bold text-body-md',
+        medium:
+          'py-2.5 px-7 border border-primary-900 bg-primary-800 text-white font-lora font-semi-bold text-sub-heading',
+        iconFill: 'black',
+      },
+    }
 
-  line-height: 16px;
+    const cn = `${styleByType[fillType][size]} ${className} rounded-xl`
 
-  padding: 6px 6px 6px 8px;
-  margin: 0px 10px;
+    if (!href) {
+      return (
+        <button className={cn} ref={ref} {...others}>
+          <span className="inline-flex">{content}</span>
+          {rightIcon === 'ChevronRight' && (
+            <ChevronRight colour={`${styleByType[fillType]['iconFill']}`} />
+          )}
+          {rightIcon === 'FlagLine' && (
+            <FlagLine colour={`${styleByType[fillType]['iconFill']}`} />
+          )}
+        </button>
+      )
+    }
 
-  order: 0;
-
-  ${({ variant }: Props) =>
-    variant == 'outline' &&
-    css`
-      background: #ffffff;
-      color: #6f3e97;
-      border: 1px solid #6f3e97;
-      box-sizing: border-box;
-      border-radius: 4px;
-
-      &:hover {
-        background: #f3eff8;
-        color: #6f3e97;
-      }
-
-      &:focus {
-        background: #e7dbf8;
-        color: #6f3e97;
-      }
-
-      &:active {
-        color: #6f3e97;
-        background: #e7dbf8;
-        background-size: 100%;
-      }
-
-      &:disabled {
-        cursor: default;
-        color: grey;
-      }
-    `}
-
-  ${({ variant }: Props) =>
-    variant == 'contained' &&
-    css`
-      background: #6f3e97;
-      color: white;
-      border: 1px solid #6f3e97;
-      box-sizing: border-box;
-      border-radius: 4px;
-
-      &:hover {
-        background: #f3eff8;
-        color: #6f3e97;
-      }
-
-      &:focus {
-        background: #e7dbf8;
-      }
-
-      &:active {
-        background: #e7dbf8;
-        background-size: 100%;
-      }
-
-      &:disabled {
-        cursor: default;
-        color: grey;
-      }
-    `}
-
-
-  ${({ variant }: Props) =>
-    variant == 'text' &&
-    css`
-      background: #ffffff;
-      color: #6f3e97;
-      border: 1px #6f3e97;
-      box-sizing: border-box;
-      border-radius: 4px;
-
-      &:hover {
-        background: #f3eff8;
-        color: #6f3e97;
-      }
-
-      &:focus {
-        background: #e7dbf8;
-      }
-
-      &:active {
-        background: #d8bfd8;
-        background-size: 100%;
-      }
-
-      &:disabled {
-        cursor: default;
-        color: grey;
-      }
-    `}
-`
+    return (
+      <Link external href={href} passHref>
+        <button className={cn} ref={ref} {...others}>
+          <span className="inline-flex">{content}</span>
+          {rightIcon === 'ChevronRight' && (
+            <ChevronRight colour={`${styleByType[fillType]['iconFill']}`} />
+          )}
+          {rightIcon === 'FlagLine' && (
+            <FlagLine colour={`${styleByType[fillType]['iconFill']}`} />
+          )}
+        </button>
+      </Link>
+    )
+  },
+)
 
 export default Button

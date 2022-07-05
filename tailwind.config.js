@@ -7,6 +7,10 @@ module.exports = {
     './components/**/*.{jsx,tsx}',
     './features/**/*.{jsx,tsx}',
   ],
+   safeList: [
+    {
+      pattern: /^(.*?)/
+    },
   theme: {
     screens: {
       sm: '375px',
@@ -129,6 +133,10 @@ module.exports = {
         'text-mask': {
           background:
             'linear-gradient(1.71deg,#000000 -5.31%,rgba(28, 28, 28, 0.3559) 36.07%, rgba(87, 87, 87, 0.278144) 45.96%, rgba(255, 255, 255, 0) 61.23%)',
+        },
+        'value-card--text-mask': {
+          background:
+            'linear-gradient(179.95deg, #170330 9.05%, rgba(23, 3, 48, 0.1) 48.73%, rgba(23, 3, 48, 0.410738) 48.73%, rgba(23, 3, 48, 0.1) 48.73%)',
         },
       })
 
