@@ -1,16 +1,15 @@
-import { http, TokenService, UserService } from '~/services'
+import http, { TokenService, UserService } from '~/services'
 import {
-  ChangePassword,
-  EmailVerificationResponse,
-  Login,
-  Register,
-  ResetPassword,
-  VerifyEmail,
+  APIResponse,
+  ChangePasswordParams,
+  LogInParams,
+  RegisterParams,
 } from '~/lib/types/service'
+import { ENDPOINT } from '~/shared/constant'
+import { Mentee } from '~/lib/types/user'
 
-// TODO: Check what is the required params from BE
-const register: Register = async (email, password, name = '') => {
-  const response = await http.post('/mentees', {
+const register = async ({ email, password, name = '' }: RegisterParams) => {
+  const response: APIResponse = await http.post(ENDPOINT.REGISTER, {
     email,
     name,
     password,
@@ -19,38 +18,54 @@ const register: Register = async (email, password, name = '') => {
   return response
 }
 
-const login: Login = async (email, password) => {
-  const requestAuthResponse = await http.post('/mentees/auth', {
+const logIn = async ({ email, password }: LogInParams) => {
+  const responseLogInRequest: APIResponse = await http.post(ENDPOINT.LOGIN, {
     email,
     password,
   })
-  const token = requestAuthResponse.data
+
+  const token = {
+    /** Since this request succeeded... */
+    accessToken: responseLogInRequest.headers['Authorization'] as string,
+    refreshToken: responseLogInRequest.headers['Refresh-Token'] as string,
+  }
+
   TokenService.setToken(token)
 
-  const requestUserResponse = await http.get('/mentee/me')
-  const user = requestUserResponse.data
+  /** Set tokens for all up-coming request. */
+  http.defaults.headers.common['Authorization'] = `Bearer ${token.accessToken}`
+  http.defaults.headers.common['Refresh-Token'] = token.refreshToken
+
+  const responseUserRequest: APIResponse<Mentee> = await http.get(
+    ENDPOINT.GET_CURRENT_USER,
+  )
+  const user = responseUserRequest.data.data
   UserService.setUser(user)
+
+  return user
 }
 
-const logout = () => {
+const logOut = async () => {
+  const response: APIResponse = await http.post(ENDPOINT.LOGOUT)
   TokenService.setToken(null)
   UserService.setUser(null)
+
+  return response
 }
 
-const requestPasswordReset: ResetPassword = async email => {
-  const response = await http.post('/mentees/auth/password_reset_request', {
+const requestPasswordReset = async (email: string) => {
+  const response: APIResponse = await http.post(ENDPOINT.RESET_PASSWORD, {
     email,
   })
 
   return response
 }
 
-// TODO: check if BE compare the two password
-const requestPasswordChange: ChangePassword = async (
+const requestPasswordChange = async ({
   password,
   passwordConfirmation,
-) => {
-  const response = await http.post('/mentees/auth/password_change', {
+}: ChangePasswordParams) => {
+  const response: APIResponse = await http.post(ENDPOINT.CHANGE_PASSWORD, {
     password: password,
     password2: passwordConfirmation,
   })
@@ -58,23 +73,25 @@ const requestPasswordChange: ChangePassword = async (
   return response
 }
 
-const requestEmailVerification: VerifyEmail = async token => {
-  const response: EmailVerificationResponse = await http.get(
-    `/mentees/auth/email_confirmation/${token}`,
+const requestEmailVerification = async (
+  token: string | string[] | undefined,
+) => {
+  const response: APIResponse = await http.get(
+    `${ENDPOINT.VERIFY_EMAIL}${token}`,
   )
   const status = response.status
   const message = response.data.message
   let hasVerifiedSuccess = false
 
-  status === 400 ? (hasVerifiedSuccess = false) : true
+  status === 200 ? (hasVerifiedSuccess = true) : false
 
   return { hasVerifiedSuccess, message }
 }
 
 const AuthService = {
   register,
-  login,
-  logout,
+  logIn,
+  logOut,
   requestPasswordReset,
   requestPasswordChange,
   requestEmailVerification,
