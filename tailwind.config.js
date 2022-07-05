@@ -7,10 +7,11 @@ module.exports = {
     './components/**/*.{jsx,tsx}',
     './features/**/*.{jsx,tsx}',
   ],
-   safeList: [
+  safeList: [
     {
-      pattern: /^(.*?)/
+      pattern: /^(.*?)/,
     },
+  ],
   theme: {
     screens: {
       sm: '375px',
