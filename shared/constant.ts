@@ -34,15 +34,18 @@ export const INTERNAL_URI = {
 export const ENDPOINT = {
   REGISTER: '/account/register',
   LOGIN: '/account/login',
+  LOGOUT: '/account/logout',
 
+  VERIFY_EMAIL: '/account/verify-email/',
   CHANGE_PASSWORD: '/account/change-password',
   RESET_PASSWORD: '/account/reset-password',
 
   GET_CURRENT_USER: '/me',
   UPDATE_USER_AVATAR: '/me',
+  UPDATE_USER_PROFILE: '/me',
   GET_ALL_MENTOR: '/mentors',
   GET_MENTOR_BY_ID: '/mentors/',
   SEARCH_MENTOR: '/search',
 
   REFRESH_ACCESS_TOKEN: '/auth/refresh-token',
-}
+} as const

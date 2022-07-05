@@ -6,37 +6,33 @@ export interface Token {
   refreshToken: string
 }
 
-export interface APIResponse
+export interface APIResponse<T = unknown>
   extends AxiosResponse<{
     isError: boolean
-    data?: unknown
+    data: T
     message: string
   }> {}
 
-export interface Register {
-  (email: string, password: string, name: string): AxiosPromise<Mentee>
+export interface RegisterParams {
+  email: string
+  password: string
+  name: string
 }
-export interface LogIn {
-  (email: string, password: string): Promise<void>
+export interface LogInParams {
+  email: string
+  password: string
 }
 
 export interface VerifyEmail {
-  (token: string | string[] | undefined): Promise<{
+  (): Promise<{
     hasVerifiedSuccess: boolean
     message: string
   }>
 }
-interface EmailVerificationResponsePayload {
-  message: string
-}
-export interface EmailVerificationResponse
-  extends AxiosResponse<EmailVerificationResponsePayload> {}
 
-export interface ResetPassword {
-  (email: string): AxiosPromise<string>
-}
-export interface ChangePassword {
-  (password: string, passwordConfirmation: string): AxiosPromise<string>
+export interface ChangePasswordParams {
+  password: string
+  passwordConfirmation: string
 }
 
 /**
