@@ -51,11 +51,11 @@ const Feedback = () => {
                 className="absolute md:hidden sm:top-[91px] sm:left-[34px] sm:w-[19px] sm:h-[19px]"
               ></Avatar>
 
-              <div className="absolute md:top-[316px] md:left-[195px] sm:top-[94px] sm:left-[55px]">
-                <p className="text-black font-lora font-semi-bold md:text-sub-heading sm:text-[8px]">
+              <div className="absolute md:top-[316px] md:left-[195px] sm:top-[92px] sm:left-[55px]">
+                <p className="text-black font-lora font-semi-bold md:text-sub-heading sm:text-[7px]">
                   Nguyễn Mai Anh
                 </p>
-                <p className="text-gray-600 font-manrope md:text-caption sm:text-[6px]">
+                <p className="text-gray-600 font-manrope md:text-caption sm:text-[4px]">
                   Student, UEH.
                 </p>
               </div>
