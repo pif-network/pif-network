@@ -1,51 +1,84 @@
 import { Avatar } from 'antd'
-import { ChevronRight, CopyrightLine, FacebookFill } from '../svgs/Icons'
-import DoubleQuote from '../svgs/Icons/DoubleQuote'
+import { ChevronRight } from '../svgs/Icons'
+import DoubleQuoteSm from '~/assets/feedback/feedback_double-quote-sm.png'
+import DoubleQuoteLg from '~/assets/feedback/feedback_double-quote-lg.png'
+import LineLG from '~/assets/feedback/feedback_line-lg.png'
+import MenteeAvatar from '~/assets/feedback/feedback_avatar.png'
 
 const Feedback = () => {
   return (
     <div>
-      <div className="md:text-black font-lora font-semi-bold md:text-title-sm pb-11 sm:pb-8 sm:text-heading-sm sm:text-primary-900 grid justify-items-center">
+      <div className="grid md:text-black sm:text-primary-900 font-lora font-semi-bold md:text-title-sm sm:text-heading-sm md:pb-11 sm:pb-8 justify-items-center">
         Mentee nói gì về &lt;product_name&gt;?
       </div>
-      <div className="flex justify-center md:px-28 sm:p-0">
-        <div className="block bg-gray-100 justify-items-center md:w-3/4 sm:w-11/12 rounded-2xl">
-          <div className="md:pt-16 md:pl-14 md:pr-20 md:pb-14 sm:pt-8 sm:pl-7 sm:pr-10 sm:pb-7">
-            <div className="relative h-full">
-              <DoubleQuote
-                colour="black"
-                className="absolute md:-top-5 md:-left-3 md:w-12 md:h-8 sm:w-4 sm:h-3 sm:-top-1 sm:-left-2"
-              ></DoubleQuote>
-              <div className="grid justify-center items-center md:ml-9 sm:ml-2 ">
-                <p className="text-black font-lora font-semi-bold md:text-sub-heading sm:text-[10px] text-left">
-                  My gave me a lot of valuable advice, especially how to improve
-                  my portfolio, as well as how to correctly communicate with
-                  people.
+      <div className="flex justify-center">
+        <div className="relative bg-gray-100 justify-items-center overflow-hidden rounded-2xl md:h-[426px] md:w-[1068px] sm:w-[314px] sm:h-[126px]">
+          <div>
+            <img
+              src={DoubleQuoteLg.src}
+              className="absolute hidden md:inline-block md:top-[63px] md:left-[54px]"
+            />
+            <img
+              src={DoubleQuoteSm.src}
+              className="absolute md:hidden sm:top-[19px] sm:left-[15px]"
+            />
+
+            <div className="grid items-center justify-center absolute md:top-[83px] md:left-[121px] md:w-[859px] sm:top-[24px] sm:left-[35px]">
+              <p className="text-black font-lora font-semi-bold md:text-heading md:leading-10 md:word-[-2px] sm:word-[-2px] sm:text-[10px] text-left">
+                My gave me a lot of valuable advice, especially how to improve
+                my portfolio, as well as how to correctly communicate with
+                people.
+              </p>
+              <p className="text-gray-400 font-manrope font-regular md:text-heading-sm sm:text-[8px] text-left">
+                And something more that I don’t remember
+              </p>
+            </div>
+          </div>
+
+          <img
+            src={LineLG.src}
+            className="absolute md:top-[287px] md:left-[88px] sm:top-[85px] sm:left-[26px]"
+          />
+
+          <div className="flex flex-row justify-between">
+            <div>
+              <Avatar
+                src={MenteeAvatar.src}
+                className="absolute hidden md:inline-block md:top-[306px] md:left-[120px] md:w-[64px] md:h-[64px]"
+              ></Avatar>
+              <Avatar
+                src={MenteeAvatar.src}
+                className="absolute md:hidden sm:top-[91px] sm:left-[34px] sm:w-[19px] sm:h-[19px]"
+              ></Avatar>
+
+              <div className="absolute md:top-[316px] md:left-[195px] sm:top-[94px] sm:left-[55px]">
+                <p className="text-black font-lora font-semi-bold md:text-sub-heading sm:text-[8px]">
+                  Nguyễn Mai Anh
                 </p>
-                <p className="text-gray-400 font-manrope font-regular md:text-body sm:text-[8px] text-left">
-                  And something more that I don’t remember
+                <p className="text-gray-600 font-manrope md:text-caption sm:text-[6px]">
+                  Student, UEH.
                 </p>
               </div>
             </div>
-            <div className="flex flex-row justify-between border-t border-black md:pl-8 md:pr-20 sm:pl-4 sm:pr-10">
-              <div className="inline-flex md:pt-5 sm:pt-2">
-                <Avatar src="./images/avatar_mentee.png"></Avatar>
-                <div className="pl-2">
-                  <p className="text-back font-lora font-semi-bold md:text-body sm:text-[8px]">
-                    Nguyễn Mai Anh
-                  </p>
-                  <p className="text-gray-600 font-manrope md:text-caption sm:text-[6px]">
-                    Student, UEH.
-                  </p>
-                </div>
-              </div>
-              <div className="inline-flex md:pt-5 sm:pt-2">
-                <ChevronRight
-                  colour="black"
-                  className="transform rotate-180"
-                ></ChevronRight>
-                <ChevronRight colour="black"></ChevronRight>
-              </div>
+
+            <div className="inline-flex">
+              <ChevronRight
+                colour="black"
+                className="transform rotate-180 absolute hidden md:inline-block md:left-[840px] md:top-[333px]"
+              ></ChevronRight>
+              <ChevronRight
+                colour="black"
+                className="absolute hidden md:inline-block md:left-[884px] md:top-[333px]"
+              ></ChevronRight>
+
+              <ChevronRight
+                colour="black"
+                className="transform rotate-180 absolute sm:w-[6px] md:hidden sm:left-[247px] sm:top-[90px]"
+              ></ChevronRight>
+              <ChevronRight
+                colour="black"
+                className="absolute md:hidden sm:w-[6px] sm:left-[260px] sm:top-[90px]"
+              ></ChevronRight>
             </div>
           </div>
         </div>
