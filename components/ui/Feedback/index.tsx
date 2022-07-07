@@ -8,7 +8,7 @@ import MenteeAvatar from '~/assets/feedback/feedback_avatar.png'
 const Feedback = () => {
   return (
     <div>
-      <div className="grid text-black font-lora font-semi-bold md:text-title-sm sm:text-heading-sm md:pb-11 sm:pb-8 justify-items-center">
+      <div className="grid text-black font-lora font-semi-bold md:text-title-sm sm:text-heading-sm md:pb-11 sm:pb-8 justify-items-center sm:word-[-7px] md:word-[-10px]">
         Mentee nói gì về &lt;product_name&gt;?
       </div>
       <div className="flex justify-center">
@@ -23,13 +23,13 @@ const Feedback = () => {
               className="absolute md:hidden sm:top-[19px] sm:left-[15px]"
             />
 
-            <div className="grid items-center justify-center absolute md:top-[83px] md:left-[121px] md:w-[859px] sm:top-[24px] sm:left-[35px]">
-              <p className="text-black font-lora font-semi-bold md:text-heading md:leading-10 md:word-[-2px] sm:word-[-2px] sm:text-[10px] text-left">
+            <div className="grid items-center justify-center absolute md:top-[83px] md:left-[121px] md:w-[830px] sm:top-[24px] sm:left-[36px]">
+              <p className="text-black font-lora font-semi-bold md:text-[32px] md:leading-10 md:word-[-8px] sm:word-[-3px] sm:text-[10px] text-left">
                 My gave me a lot of valuable advice, especially how to improve
                 my portfolio, as well as how to correctly communicate with
                 people.
               </p>
-              <p className="text-gray-400 font-manrope font-regular text-semi-bold md:text-heading-sm sm:text-[8px] text-left">
+              <p className="text-gray-400 font-manrope font-regular text-semi-bold md:text-heading-sm sm:text-[8px] md:word-[0.8px] sm:word-[-0.3px] text-left">
                 And something more that I don’t remember
               </p>
             </div>
@@ -44,7 +44,7 @@ const Feedback = () => {
             <div>
               <Avatar
                 src={MenteeAvatar.src}
-                className="absolute hidden md:inline-block md:top-[306px] md:left-[120px] md:w-[64px] md:h-[64px]"
+                className="absolute hidden md:inline-block md:top-[306px] md:left-[121px] md:w-[64px] md:h-[64px]"
               ></Avatar>
               <Avatar
                 src={MenteeAvatar.src}
@@ -52,10 +52,10 @@ const Feedback = () => {
               ></Avatar>
 
               <div className="absolute md:top-[316px] md:left-[195px] sm:top-[92px] sm:left-[55px]">
-                <p className="text-primary-900 font-lora font-semi-bold md:text-sub-heading sm:text-[7px]">
+                <p className="text-primary-900 font-lora font-semi-bold md:text-sub-heading sm:text-[7px] md:word-[-6px] sm:word-[-2px]">
                   Nguyễn Mai Anh
                 </p>
-                <p className="text-gray-600 font-manrope md:text-caption sm:text-[4px]">
+                <p className="text-gray-600 font-manrope md:text-caption sm:text-[4px] md:word-[-0.8px] sm:word-[-0.3px]">
                   Student, UEH.
                 </p>
               </div>
