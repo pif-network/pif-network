@@ -8,11 +8,11 @@ import MenteeAvatar from '~/assets/feedback/feedback_avatar.png'
 const Feedback = () => {
   return (
     <div>
-      <div className="grid md:text-black sm:text-primary-900 font-lora font-semi-bold md:text-title-sm sm:text-heading-sm md:pb-11 sm:pb-8 justify-items-center">
+      <div className="grid text-black font-lora font-semi-bold md:text-title-sm sm:text-heading-sm md:pb-11 sm:pb-8 justify-items-center">
         Mentee nói gì về &lt;product_name&gt;?
       </div>
       <div className="flex justify-center">
-        <div className="relative bg-gray-100 justify-items-center overflow-hidden rounded-2xl md:h-[426px] md:w-[1068px] sm:w-[314px] sm:h-[126px]">
+        <div className="relative bg-gray-50 justify-items-center overflow-hidden rounded-2xl md:h-[426px] md:w-[1068px] sm:w-[314px] sm:h-[126px]">
           <div>
             <img
               src={DoubleQuoteLg.src}
@@ -29,7 +29,7 @@ const Feedback = () => {
                 my portfolio, as well as how to correctly communicate with
                 people.
               </p>
-              <p className="text-gray-400 font-manrope font-regular md:text-heading-sm sm:text-[8px] text-left">
+              <p className="text-gray-400 font-manrope font-regular text-semi-bold md:text-heading-sm sm:text-[8px] text-left">
                 And something more that I don’t remember
               </p>
             </div>
@@ -52,7 +52,7 @@ const Feedback = () => {
               ></Avatar>
 
               <div className="absolute md:top-[316px] md:left-[195px] sm:top-[92px] sm:left-[55px]">
-                <p className="text-black font-lora font-semi-bold md:text-sub-heading sm:text-[7px]">
+                <p className="text-primary-900 font-lora font-semi-bold md:text-sub-heading sm:text-[7px]">
                   Nguyễn Mai Anh
                 </p>
                 <p className="text-gray-600 font-manrope md:text-caption sm:text-[4px]">
