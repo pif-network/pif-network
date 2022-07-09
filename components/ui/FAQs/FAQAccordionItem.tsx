@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react'
 
-import { ChevronRight } from '../svgs/Icons'
+import { ChevronRight } from '~/components/ui/svgs/Icons'
 
 interface Props {
-  FAQ: { q: string; a: string }
+  FAQ: { q: string; a: string | JSX.Element }
   idx: number
 }
 
@@ -15,10 +15,10 @@ const FAQAccordionItem = ({ FAQ, idx }: Props) => {
   const { current: currentAnswerRef } = answerRef
 
   const handleOpenAnswer = () => {
-    const { childNodes } = currentAnswerRef
-    const answerDiv = childNodes[0] as HTMLDivElement
-
     if (currentAnswerRef) {
+      const { childNodes } = currentAnswerRef
+      const answerDiv = childNodes[0] as HTMLDivElement
+
       const { offsetHeight: currentAnswerH } = answerDiv
       setIsAnswerShow(!isAnswerShow)
       setAnswerH(`${currentAnswerH ?? +20}px`)
@@ -57,7 +57,7 @@ const FAQAccordionItem = ({ FAQ, idx }: Props) => {
         className="duration-300"
         style={isAnswerShow ? { height: answerH } : { height: '0px' }}
       >
-        <p className="text-gray-600 font-manrope font-regular text-body pr-5 pb-3">
+        <p className="whitespace-pre-line text-gray-600 font-manrope font-regular text-body pr-5 pb-3">
           {FAQ.a}
         </p>
       </div>
