@@ -45,7 +45,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       },
     }
 
-    const cn = `${styleByType[fillType][size]} ${className} rounded-xl`
+    const cn = `${styleByType[fillType][size]} ${className} text-center rounded-xl`
 
     if (!href) {
       return (
@@ -62,8 +62,8 @@ const Button = forwardRef<HTMLButtonElement, Props>(
     }
 
     return (
-      <Link external href={href} passHref>
-        <button className={cn} ref={ref} {...others}>
+      <Link external href={href} passHref className={cn}>
+        <button ref={ref} {...others}>
           <span className="inline-flex">{content}</span>
           {rightIcon === 'ChevronRight' && (
             <ChevronRight colour={`${styleByType[fillType]['iconFill']}`} />

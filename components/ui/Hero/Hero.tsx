@@ -15,11 +15,12 @@ import hero3 from '../../../assets/landing/hero3.png'
 import hero4 from '../../../assets/landing/hero4.png'
 import hero5 from '../../../assets/landing/hero5.png'
 import Button from '../../../components/ui/Button'
+import s from 'Hero.module.css'
 import { RightOutlined } from '@ant-design/icons'
 const Hero = () => {
   return (
-    <div className="flex sm:flex-col md:justify-center xl:justify-center 2xl:justify-center sm:py-24 md:flex-row md:px-20 md:py-24 md:gap-12 lg:px-24 lg:gap-24  xl:py-32 xl:pl-32 xl:pr-40  xl:gap-24 2xl:gap-24 2xl:pl-32 2xl:pr-44 md:overflow-auto md:bg-white sm:bg-gray-50">
-      <div className="flex flex-col basis-full lg:basis-auto xl:basis-6/12 2xl:basis-6/12 order-2 md:order-1">
+    <div className="flex sm:flex-col md:justify-center xl:justify-center 2xl:justify-center sm:pt-20 sm:pb-10 md:flex-row md:px-20 md:py-24 md:gap-12 lg:px-24 lg:gap-24  xl:py-32 xl:px-32  xl:gap-24 2xl:gap-24 2xl:px-32 md:overflow-auto md:bg-white sm:bg-gray-50">
+      <div className="flex flex-col max-w-xl min-w-sm basis-full lg:basis-auto xl:basis-6/12 2xl:basis-6/12 order-2 md:order-1">
         <div className="flex basis-full md:basis-1/4 sm:flex-row sm:my-11 sm:gap-4 sm:font-lora sm:font-body-sm sm:items-center sm:justify-center md:hidden">
           <div className="flex sm:rounded sm:px-2 sm:py-1 sm:flex-col sm:items-center sm:italic sm:font-regular sm:bg-gray-100 sm:drop-shadow-xl sm:shadow-gray-700">
             {'<shecodes/>'}
@@ -47,7 +48,7 @@ const Hero = () => {
             <div className="flex flex-row flex-wrap">
               đang{' '}
               <span className="flex flex-row items-center ml-3 font-medium border-[1px] border-dashed  border-black rounded">
-                <div className="relative font-lora font-medium italic mx-1 before:absolute before:bg-black before:h-1 before:left-0 before:right-0 sm:before:bottom-1 md:before:bottom-2">
+                <div className="relative font-lora font-medium italic mx-1 before:absolute before:bg-black sm:before:h-[1px] md:before:h-[2px] before:left-0 before:right-0 sm:before:bottom-1 md:before:bottom-2">
                   tìm kiếm
                 </div>
                 <SearchIcon className="ml-1 w-8 h-8 md:ml-1 md:w-8 md:h-8 lg:ml-2 lg:w-12 lg:h-12" />
@@ -66,28 +67,41 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* <div className="flex flex-row mt-8 gap-3">
-          <Button 
-            {children}
-            // type="filled"
-            // variant="neutral"
-            // className="text-body font-lora px-8 py-2 text-[16px]"
-          >
-            Đặt lịch hẹn ngay
-          </Button>
-          <Button 
-            {children}
-            // className="text-body  px-8 py-2 pt-2 font-manrope font-semi-bold"
-          >
-            <div className="flex gap-2 items-center">
-              <div>Về SheCodes</div>
-              <RightOutlined className="w-4 h-4" />
-            </div>
-          </Button>
-        </div> */}
+        <div className="flex sm:flex-col md:flex-row mt-8 sm:gap-2 md:gap-5 sm:items-stretch md:items-start sm:mx-14 md:mx-0 md:mr-10">
+          <Button
+            fillType="filled"
+            className="w-full sm:hidden md:block"
+            size="medium"
+            content="Đặt lịch hẹn ngay!"
+            href="/"
+          />
+          <Button
+            className="w-full sm:hidden md:block"
+            fillType="outlined"
+            size="medium"
+            content="Về SheCodes"
+            href="/"
+            rightIcon="ChevronRight"
+          />
+          <Button
+            fillType="filled"
+            className="w-full sm:block md:hidden"
+            size="medium"
+            content="Đặt lịch hẹn ngay"
+            href="/"
+            rightIcon="ChevronRight"
+          />
+          <Button
+            className="w-full sm:block md:hidden"
+            fillType="outlined"
+            size="medium"
+            content="Đăng nhập"
+            href="/"
+          />
+        </div>
         {/* <div className="flex sm:flex-col"> */}
-        <div className="flex sm:flex-col md:hidden items-center justify-center w-32 border-t-2  border-t-gray-300 mx-auto mt-4">
-          <ChevronDownIcon className="w-4 h-4" />
+        <div className="flex sm:flex-col md:hidden items-center justify-center w-48 border-t-[1px]  border-t-gray-300 mx-auto mt-12">
+          <ChevronDownIcon className="w-6 h-6" />
         </div>
         {/* </div> */}
       </div>
