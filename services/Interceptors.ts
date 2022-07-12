@@ -15,11 +15,15 @@ interface RequestsThatRequireRefreshAccessTokenQueue
     reject: (reason?: unknown) => void
   }> {}
 
+let isRefreshing = false
+const setIsRefreshing = (newState:boolean)=>{
+	isRefreshing = newState
+}
+
 const setupInterceptorsTo = (instance: AxiosInstance): AxiosInstance => {
   if (!instance.interceptors)
     throw new Error(`Invalid axios instance: ${instance}`)
 
-  const [isRefreshing, setIsRefreshing] = useState(false)
   let queue: RequestsThatRequireRefreshAccessTokenQueue = []
 
   const resolveQueue = (token?: string) => {
