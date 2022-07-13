@@ -38,9 +38,9 @@ const Button = forwardRef<HTMLButtonElement, Props>(
 			},
 			outlined: {
 				small:
-					'py-1 px-6 border border-primary-900 bg-primary-800 text-white font-manrope font-bold text-body-md',
+					'py-1 px-6 border border-primary-900 bg-white text-gray-700 font-manrope font-bold text-body-md',
 				medium:
-					'py-2.5 px-7 border border-primary-900 bg-primary-800 text-white font-lora font-semi-bold text-sub-heading',
+					'py-2.5 px-7 border border-primary-900 bg-white text-gray-700 font-manrope font-bold text-sub-heading',
 				iconFill: 'black',
 			},
 		}
@@ -50,13 +50,18 @@ const Button = forwardRef<HTMLButtonElement, Props>(
 		if (!href) {
 			return (
 				<button className={cn} ref={ref} {...others}>
-					<span className="inline-flex">{content}</span>
-					{rightIcon === 'ChevronRight' && (
-						<ChevronRight colour={`${styleByType[fillType]['iconFill']}`} />
-					)}
-					{rightIcon === 'FlagLine' && (
-						<FlagLine colour={`${styleByType[fillType]['iconFill']}`} />
-					)}
+					<span className="inline-flex">
+						{content}
+						{rightIcon === 'ChevronRight' && (
+							<ChevronRight
+								className="mt-[1.5px]"
+								colour={`${styleByType[fillType]['iconFill']}`}
+							/>
+						)}
+						{rightIcon === 'FlagLine' && (
+							<FlagLine colour={`${styleByType[fillType]['iconFill']}`} />
+						)}
+					</span>
 				</button>
 			)
 		}
@@ -64,13 +69,18 @@ const Button = forwardRef<HTMLButtonElement, Props>(
 		return (
 			<Link external={external as any} href={href} passHref>
 				<button className={cn} ref={ref} {...others}>
-					<span className="inline-flex">{content}</span>
-					{rightIcon === 'ChevronRight' && (
-						<ChevronRight colour={`${styleByType[fillType]['iconFill']}`} />
-					)}
-					{rightIcon === 'FlagLine' && (
-						<FlagLine colour={`${styleByType[fillType]['iconFill']}`} />
-					)}
+					<span className="inline-flex gap-[2px]">
+						{content}
+						{rightIcon === 'ChevronRight' && (
+							<ChevronRight
+								className="mt-[1.5px]"
+								colour={`${styleByType[fillType]['iconFill']}`}
+							/>
+						)}
+						{rightIcon === 'FlagLine' && (
+							<FlagLine colour={`${styleByType[fillType]['iconFill']}`} />
+						)}
+					</span>
 				</button>
 			</Link>
 		)

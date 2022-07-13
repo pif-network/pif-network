@@ -16,6 +16,7 @@ const Link = forwardRef<HTMLAnchorElement, PropsWithChildren<Props>>(
 			newTab,
 			external,
 			href,
+			passHref,
 			prefetch,
 			replace,
 			scroll,
@@ -49,7 +50,7 @@ const Link = forwardRef<HTMLAnchorElement, PropsWithChildren<Props>>(
 				shallow={shallow}
 				locale={locale}
 				prefetch={prefetch}
-				passHref
+				passHref={passHref}
 			>
 				<a
 					className={className}
