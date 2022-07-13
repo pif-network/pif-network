@@ -40,7 +40,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
 				small:
 					'py-1 px-6 border border-primary-900 bg-white text-gray-700 font-manrope font-bold text-body-md',
 				medium:
-					'py-2.5 px-7 border border-primary-900 bg-white text-gray-700 font-manrope font-bold text-sub-heading',
+					'py-2.5 pl-7 pr-5 border border-primary-900 bg-white text-gray-700 font-manrope font-bold text-sub-heading',
 				iconFill: 'black',
 			},
 		}
