@@ -1,3 +1,5 @@
+import Avatar from '~/assets/MentorAvatar.jpg'
+
 export const FourthQuestionAnswer = () => {
 	return (
 		<>
@@ -112,3 +114,50 @@ export const ENDPOINT = {
 
 	REFRESH_ACCESS_TOKEN: '/auth/refresh-token',
 } as const
+
+export const RANDOM_MENTORS = [
+	{
+		name: 'Uncle Ben',
+		avatarUrl: Avatar.src,
+		exp: [
+			{
+				name: 'Shecodes',
+				position: 'Mentor',
+			},
+		],
+		domainKnowledge: 'Something, another thing',
+	},
+	{
+		name: 'Uncle Ben',
+		avatarUrl: Avatar.src,
+		exp: [
+			{
+				name: 'Shecodes',
+				position: 'Mentor',
+			},
+		],
+		domainKnowledge: 'Something, another thing',
+	},
+	{
+		name: 'Uncle Ben',
+		avatarUrl: Avatar.src,
+		exp: [
+			{
+				name: 'Shecodes',
+				position: 'Mentor',
+			},
+		],
+		domainKnowledge: 'Something, another thing',
+	},
+	{
+		name: 'Uncle Ben',
+		avatarUrl: Avatar.src,
+		exp: [
+			{
+				name: 'Shecodes',
+				position: 'Mentor',
+			},
+		],
+		domainKnowledge: 'Something, another thing',
+	},
+]
