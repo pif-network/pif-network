@@ -15,7 +15,6 @@ import {
 	FAQs,
 } from '~/components/ui'
 import { MentorCard } from '~/components/mentor'
-import { FlagLine } from '~/components/ui/svgs/Icons'
 import { RANDOM_MENTORS } from '~/shared/constant'
 
 const HomePage = () => {
@@ -24,7 +23,9 @@ const HomePage = () => {
 	useEffect(() => {
 		const getAllMentors = async () => {
 			try {
-				const mentors = await UserService.getAllMentors()
+				const responseAllMentorsRequest = await UserService.getAllMentors()
+				const { data } = responseAllMentorsRequest
+				const { data: mentors } = data
 				setMentors(mentors)
 			} catch (error) {
 				const errorMessage = getErrorMessage(error)
@@ -48,9 +49,9 @@ const HomePage = () => {
 				<section className="my-8 mx-6">
 					<div className="flex flex-col justify-center md:max-w-[525px] md:m-auto xl:max-w-[1112px] xl:m-auto">
 						<SectionTitle content="Những mentors đầu ngành" className="mb-6" />
-						{/* {mentors ? (
-							mentors.map(mentor => <MentorCard mentor={mentor} />) */}
 						<div className="flex flex-col gap-4 items-center xl:flex-row xl:gap-2">
+							{/* {mentors ? (
+							mentors.map(mentor => <MentorCard mentor={mentor} />) */}
 							{RANDOM_MENTORS ? (
 								RANDOM_MENTORS.map((mentor, idx) => (
 									<MentorCard key={idx} mentor={mentor} />
@@ -72,7 +73,13 @@ const HomePage = () => {
 				</section>
 
 				<Values />
+
+				<div className="mt-16 md:mt-32" />
+
 				<Feedback />
+
+				<div className="mt-16 md:mt-32" />
+
 				<FAQs />
 			</div>
 		</>
