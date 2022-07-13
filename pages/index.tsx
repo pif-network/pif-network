@@ -12,10 +12,11 @@ import {
 	Feedback,
 	Button,
 	SectionTitle,
+	FAQs,
 } from '~/components/ui'
 import { MentorCard } from '~/components/mentor'
 import { FlagLine } from '~/components/ui/svgs/Icons'
-import { RANDOM_MENTORS } from '~/shared/constants'
+import { RANDOM_MENTORS } from '~/shared/constant'
 
 const HomePage = () => {
 	const [mentors, setMentors] = useState<Mentor[]>()
@@ -72,6 +73,7 @@ const HomePage = () => {
 
 				<Values />
 				<Feedback />
+				<FAQs />
 			</div>
 		</>
 	)
