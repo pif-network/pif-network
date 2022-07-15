@@ -5,37 +5,37 @@ import Head from 'next/head'
 
 import { AuthService } from '~/services'
 import { getErrorMessage } from '~/lib/types/service'
-import { Link, Input as FormikInput } from '~/components/ui'
+import { Link, Input as FormikInput, Button } from '~/components/ui'
 
 import { object, string } from 'yup'
 import { Field, Form, FormikProvider, useFormik } from 'formik'
 
 import { Row, Col } from 'antd'
+import { INTERNAL_URI } from '~/shared/constant'
 
 const CreateAccount = () => {
 	const router = useRouter()
 	const [message, setMessage] = useState('')
 
 	const validationSchema = object().shape({
-		fullname: string()
-			.min(2, 'Tên không được ngắn hơn 2 ký tự')
-			.max(40, 'Tên không được dài quá 40 ký tự')
-			.required('Vui lòng nhập tên của bạn'),
+		name: string()
+			.min(2, 'Tên không được ngắn hơn 2 ký tự.')
+			.max(40, 'Tên không được dài quá 40 ký tự.')
+			.required('Vui lòng nhập tên của bạn.'),
 		email: string()
-			.min(6, 'Email không được ngắn hơn 6 ký tự')
-			.max(50, 'Email không được dài quá 50 ký tự')
-			.email('Địa chỉ email không hợp lệ')
-			.required('Vui lòng nhập địa chỉ email'),
+			.min(6, 'Email không được ngắn hơn 6 ký tự.')
+			.max(50, 'Email không được dài quá 50 ký tự.')
+			.email('Địa chỉ email không hợp lệ.')
+			.required('Vui lòng nhập địa chỉ email.'),
 		password: string()
-			.min(6, 'Password không được ngắn hơn 6 ký tự')
-			.max(128, 'Password không được dài quá 128 ký tự')
-			.required('Vui lòng nhập mật khẩu'),
+			.min(6, 'Password không được ngắn hơn 6 ký tự.')
+			.max(128, 'Password không được dài quá 128 ký tự.')
+			.required('Vui lòng nhập mật khẩu.'),
 	})
 
 	const formik = useFormik({
 		initialValues: {
 			name: '',
-
 			email: '',
 			password: '',
 		},
@@ -44,13 +44,14 @@ const CreateAccount = () => {
 			setMessage('')
 			try {
 				await AuthService.register(data)
-				router.push('/user/confirm-email')
+				router.push(INTERNAL_URI.COMPLETE_PROFILE)
 			} catch (error) {
 				const errorMessage = getErrorMessage(error)
+				console.log(errorMessage)
 
 				switch (errorMessage) {
 					case 'Email is already taken':
-						setMessage('Email này đã được dùng đăng ký tài khoản')
+						setMessage('Email này đã được dùng đăng ký tài khoản.')
 						break
 					default:
 						setMessage(errorMessage)
@@ -62,15 +63,13 @@ const CreateAccount = () => {
 	return (
 		<>
 			<Head>
-				<title>Create New Account</title>
+				<title>Welcome!</title>
 			</Head>
-			<div className="min-h-screen/85 md:bg-lightgray bg-white px-0 md:px-16 py-0 md:py-12">
-				<Row>
-					<Col
-						className="bg-gradient-to-b from-primary via-primary to-lightviolet hidden md:flex h-screen/75 justify-center items-center"
-						xs={0}
-						sm={12}
-					>
+
+			<div className="bg-white px-0 md:px-16 py-0 md:py-12">
+				<Row className="">
+					{/* Left */}
+					<Col className="hidden md:inline md:pt-12" xs={0} sm={12}>
 						<Image
 							priority
 							src="/images/create-new-account.svg"
@@ -78,56 +77,59 @@ const CreateAccount = () => {
 							height={625}
 						/>
 					</Col>
-					<Col
-						className="h-screen/75 bg-white flex justify-center items-start"
-						sm={24}
-						md={12}
-					>
-						<div className="mt-8 md:mt-8 lg:mt-24 ml-8 md:ml-10 lg:ml-32 mr-2 md:mr-8 lg:mr-36">
-							<h4 className="pb-4 text-2xl lg:text-4xl font-medium tracking-wide leading-10">
-								Tham gia SheCodes Mentorship ngay hôm nay!
+
+					{/* Right */}
+					<Col className="" sm={24} md={12}>
+						<div className="bg-[#f9f9f9] m-8 p-12 rounded-2xl">
+							<h4 className="pb-8 text-center font-lora word-[-0.23rem] text-heading font-medium">
+								Chào mừng bạn đến với
+								<br />
+								<span className="text-primary-900">&#60;product_name&#62;</span>
 							</h4>
+
 							<FormikProvider value={formik}>
 								<Form>
 									{message && (
-										<div className="mt-4 text-red-500 flex items-center justify-center">
-											{message}
-										</div>
+										// <div className="mt-4 text-red-300 flex items-center justify-center">
+										<div className="mt-4 text-red-300">{message}</div>
 									)}
 									<Field
-										className="mt-6 h-12 border border-primary hover:border-violet-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+										// className="mt-6 h-12 border border-primary hover:border-violet-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+										className="mt-6"
 										name="name"
-										type="fullname"
+										type="name"
 										placeholder="Nhập họ và tên của bạn"
 										as={FormikInput}
 									/>
 									<Field
-										className="mt-6 h-12 border border-primary hover:border-violet-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+										// className="mt-6 h-12 border border-primary hover:border-violet-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+										className="mt-6"
 										name="email"
 										type="email"
 										placeholder="Nhập email của bạn"
 										as={FormikInput}
 									/>
 									<Field
-										className="mt-6 h-12 border border-primary hover:border-violet-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+										// className="mt-6 h-12 border border-primary hover:border-violet-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+										className="mt-6"
 										name="password"
 										type="password"
 										placeholder="Nhập mật khẩu của bạn"
 										as={FormikInput}
 									/>
 									<div className="mt-8 flex items-center justify-center">
-										<button
-											className="py-3 px-4 md:w-28 w-full rounded bg-primary text-white hover:bg-violet focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50"
-											type="submit"
-										>
-											{formik.isSubmitting ? (
-												<div className=" flex justify-center items-center">
-													<div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-												</div>
-											) : (
-												<>Đăng ký</>
-											)}
-										</button>
+										{formik.isSubmitting ? (
+											<div className=" flex justify-center items-center">
+												<div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black"></div>
+											</div>
+										) : (
+											<Button
+												type="submit"
+												fillType="filled"
+												size="small"
+												content="Đăng ký"
+											/>
+										)}
 									</div>
 								</Form>
 							</FormikProvider>

@@ -18,4 +18,4 @@ export type InternalUri = valueof<InternalUriObject>
 
 export type ExternalHrefProps =
 	| { external: true; href: LinkProps['href'] }
-	| { external?: false; href: InternalUri }
+	| { external?: false; href?: InternalUri }
