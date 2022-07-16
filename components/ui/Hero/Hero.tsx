@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { Children, useContext, useRef } from 'react'
 import { SearchIcon } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/outline'
+import heroBorder from '../../../assets/landing/heroBorder.svg'
 import heroMobile from '../../../assets/landing/heroMobile.png'
 import heroMiddle from '../../../assets/landing/heroMiddle.png'
 import heroUp from '../../../assets/landing/heroUp.png'
@@ -15,7 +16,6 @@ import hero3 from '../../../assets/landing/hero3.png'
 import hero4 from '../../../assets/landing/hero4.png'
 import hero5 from '../../../assets/landing/hero5.png'
 import Button from '../../../components/ui/Button'
-import s from 'Hero.module.css'
 import { RightOutlined } from '@ant-design/icons'
 const Hero = () => {
   return (
@@ -28,30 +28,21 @@ const Hero = () => {
           <div>MENTORSHIP PROGRAMME</div>
         </div>
 
-        {/* <div className="font-lora font-semi-bold word-[-0.3rem] text-title-sm text-primary-900 lg:word-[-1rem]  md:text-title-sm lg:text-title">
-          <div className="flex flex-row justify-center md:justify-start flex-wrap">
-            <div className="mr-2">Sự giúp đỡ</div>
-            <div className="mr-3">mà bạn đang</div>
-            <span className="flex flex-row items-center font-medium border-2 border-dashed border-black rounded">
-              <div className="relative font-lora font-medium italic mx-1 break-normal before:absolute before:bg-black before:h-1 before:left-0 before:right-0 sm:before:bottom-1 md:before:bottom-2">
-                tìm kiếm
-              </div>
-              <SearchIcon className="ml-1 w-8 h-8 md:ml-2 md:w-12 md:h-12" />
-            </span>
-          </div>
-        </div> */}
-
         <div className="font-lora font-semi-bold word-[-0.3rem] text-title-sm text-primary-900 lg:word-[-1rem]  md:text-title-sm lg:text-title">
           <div className="flex flex-col items-center md:items-start  ">
             <div>Sự giúp đỡ</div>
             <div>mà bạn</div>
             <div className="flex flex-row flex-wrap">
               đang{' '}
-              <span className="flex flex-row items-center ml-3 font-medium border-[1px] border-dashed  border-black rounded">
-                <div className="relative font-lora font-medium italic mx-1 before:absolute before:bg-black sm:before:h-[1px] md:before:h-[2px] before:left-0 before:right-0 sm:before:bottom-1 md:before:bottom-2">
+              <span className="flex flex-row relative items-center ml-3 font-medium rounded">
+                <div className="absolute h-full ">
+                  <Image src={heroBorder} />
+                </div>
+
+                <div className="relative font-lora font-medium italic mx-1 ml-3 mb-2 before:absolute before:bg-black sm:before:h-[1px] md:before:h-[2px] before:left-0 before:right-0 sm:before:bottom-1 md:before:bottom-2">
                   tìm kiếm
                 </div>
-                <SearchIcon className="ml-1 w-8 h-8 md:ml-1 md:w-8 md:h-8 lg:ml-2 lg:w-12 lg:h-12" />
+                <SearchIcon className="ml-1 w-8 h-8 mr-3 md:ml-1 md:w-8 md:h-8 lg:ml-2 lg:w-12 lg:h-12" />
               </span>
             </div>
           </div>
