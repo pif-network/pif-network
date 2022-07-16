@@ -1,7 +1,10 @@
 import { BehaviorSubject } from 'rxjs'
 
-import { http } from '~/services'
-import { Mentor, User } from '~/lib/types/user'
+import { Mentee, Mentor, User } from '~/lib/types/user'
+import { ENDPOINT } from '~/shared/constant'
+import { APIResponse } from '~/lib/types/service'
+
+import http from '.'
 
 const localUser = JSON.parse(
   (typeof window === 'object' && localStorage.getItem('user')) || '""',
@@ -24,28 +27,30 @@ const setUser = (user: User | null) => {
 }
 
 const updateProfile = async <T>(updateData: T): Promise<void> => {
-  const response = await http.put('/mentees/me', updateData)
-  const newUser = response.data
+  const response: APIResponse<Mentee> = await http.put(
+    ENDPOINT.UPDATE_USER_PROFILE,
+    updateData,
+  )
+  const newUser = response.data.data
 
   setUser(newUser)
 }
 
-const getMentorById = (id: string | string[] | undefined) => {
-  return http.get(`/mentors/${id}`)
+const getMentorById = async (id: string | string[] | undefined) => {
+  const response: APIResponse<Mentor> = await http.get(
+    `${ENDPOINT.GET_MENTOR_BY_ID}${id}`,
+  )
+
+  return response
 }
 
-const getAllMentors = async (): Promise<Mentor[]> => {
-  const response = await http.get('/mentors')
-  const mentors = response.data
+const getAllMentors = async () => {
+  const response: APIResponse<Mentor[]> = await http.get(
+    ENDPOINT.GET_ALL_MENTOR,
+  )
 
-  return mentors
+  return response
 }
-
-// const bookMentorById = id => {
-//   return http.post('/requests', {
-//     mentor_id: id,
-//   })
-// }
 
 const UserService = {
   get currentUser() {

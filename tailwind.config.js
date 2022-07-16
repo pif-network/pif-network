@@ -2,7 +2,16 @@ const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   mode: 'jit',
-  content: ['./pages/**/*.{jsx,tsx}', './components/**/*.{jsx,tsx}'],
+  content: [
+    './pages/**/*.{jsx,tsx}',
+    './components/**/*.{jsx,tsx}',
+    './features/**/*.{jsx,tsx}',
+  ],
+  safeList: [
+    {
+      pattern: /^(.*?)/,
+    },
+  ],
   theme: {
     screens: {
       sm: '375px',
@@ -63,6 +72,16 @@ module.exports = {
         800: '#25044E',
         900: '#120227',
       },
+      red: {
+        100: '#B36670',
+        200: '#9E3A46',
+        300: '#851C2A',
+      },
+      cyan: {
+        100: '#6BB8B3',
+        200: '#40A59F',
+        300: '#1AACA3',
+      },
     },
     extend: {
       lineHeight: {
@@ -116,6 +135,10 @@ module.exports = {
         'text-mask': {
           background:
             'linear-gradient(1.71deg,#000000 -5.31%,rgba(28, 28, 28, 0.3559) 36.07%, rgba(87, 87, 87, 0.278144) 45.96%, rgba(255, 255, 255, 0) 61.23%)',
+        },
+        'value-card--text-mask': {
+          background:
+            'linear-gradient(179.95deg, #170330 9.05%, rgba(23, 3, 48, 0.1) 48.73%, rgba(23, 3, 48, 0.410738) 48.73%, rgba(23, 3, 48, 0.1) 48.73%)',
         },
       })
 

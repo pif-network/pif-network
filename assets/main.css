@@ -5,26 +5,26 @@
 
 @tailwind components;
 @layer components {
-  .card-mentor {
-    max-width: 294px;
-    width: 100%;
-    height: 352px;
+	.card-mentor {
+		max-width: 294px;
+		width: 100%;
+		height: 352px;
 
-    position: relative;
-    justify-self: center;
-    transition: all 0.3s cubic-bezier(0.25, 0.45, 0.45, 0.95);
-  }
+		position: relative;
+		justify-self: center;
+		transition: all 0.3s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+	}
 }
 
 @tailwind utilities;
 @layer utilities {
-  .text-mask {
-    background: linear-gradient(
-      1.71deg,
-      #000000 -5.31%,
-      rgba(28, 28, 28, 0.3559) 36.07%,
-      rgba(87, 87, 87, 0.278144) 45.96%,
-      rgba(255, 255, 255, 0) 61.23%
-    );
-  }
+	.text-mask {
+		background: linear-gradient(
+			1.71deg,
+			#000000 -5.31%,
+			rgba(28, 28, 28, 0.3559) 36.07%,
+			rgba(87, 87, 87, 0.278144) 45.96%,
+			rgba(255, 255, 255, 0) 61.23%
+		);
+	}
 }

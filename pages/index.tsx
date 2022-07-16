@@ -4,51 +4,86 @@ import Head from 'next/head'
 import { UserService } from '~/services'
 import { Mentor } from '~/lib/types/user'
 import { getErrorMessage } from '~/lib/types/service'
-import { Skeleton, Hero, Benefits, Values, Feedback } from '~/components/ui'
+import {
+	Skeleton,
+	Hero,
+	Benefits,
+	Values,
+	Feedback,
+	Button,
+	SectionTitle,
+	FAQs,
+} from '~/components/ui'
 import { MentorCard } from '~/components/mentor'
+import { RANDOM_MENTORS } from '~/shared/constant'
 
 const HomePage = () => {
-  const [mentors, setMentors] = useState<Mentor[]>()
+	const [mentors, setMentors] = useState<Mentor[]>()
 
-  useEffect(() => {
-    const getAllMentors = async () => {
-      try {
-        const mentors = await UserService.getAllMentors()
-        setMentors(mentors)
-      } catch (error) {
-        const errorMessage = getErrorMessage(error)
-        console.log(errorMessage)
-      }
-    }
+	useEffect(() => {
+		const getAllMentors = async () => {
+			try {
+				const responseAllMentorsRequest = await UserService.getAllMentors()
+				const { data } = responseAllMentorsRequest
+				const { data: mentors } = data
+				setMentors(mentors)
+			} catch (error) {
+				const errorMessage = getErrorMessage(error)
+				console.log(errorMessage)
+			}
+		}
 
-    getAllMentors()
-  }, [])
+		getAllMentors()
+	}, [])
 
-  return (
-    <>
-      <Head>
-        <title>Homepage</title>
-      </Head>
+	return (
+		<>
+			<Head>
+				<title>Homepage</title>
+			</Head>
 
-      <div>
-        <Hero />
-        <Benefits />
-        <Values />
+			<div>
+				<Hero />
+				<Benefits />
 
-        {/* <div className="p-8 lg:p-24">
-          <div className="flex flex-wrap">
-            {mentors ? (
-              mentors.map(mentor => <MentorCard mentor={mentor} />)
-            ) : (
-              <Skeleton />
-            )}
-          </div>
-        </div> */}
+				<section className="my-8 mx-6">
+					<div className="flex flex-col justify-center md:max-w-[525px] md:m-auto xl:max-w-[1112px] xl:m-auto">
+						<SectionTitle content="Những mentors đầu ngành" className="mb-6" />
+						<div className="flex flex-col gap-4 items-center xl:flex-row xl:gap-2">
+							{/* {mentors ? (
+							mentors.map(mentor => <MentorCard mentor={mentor} />) */}
+							{RANDOM_MENTORS ? (
+								RANDOM_MENTORS.map((mentor, idx) => (
+									<MentorCard key={idx} mentor={mentor} />
+								))
+							) : (
+								<Skeleton />
+							)}
+						</div>
+						<div className="self-center mt-10 md:self-end md:mt-24">
+							<Button
+								content="Explore more"
+								fillType="outlined"
+								size="medium"
+								href="/search"
+								rightIcon="ChevronRight"
+							/>
+						</div>
+					</div>
+				</section>
 
-        <Feedback />
-      </div>
-    </>
-  )
+				<Values />
+
+				<div className="mt-16 md:mt-32" />
+
+				<Feedback />
+
+				<div className="mt-16 md:mt-32" />
+
+				<FAQs />
+			</div>
+		</>
+	)
 }
 
 export default HomePage
