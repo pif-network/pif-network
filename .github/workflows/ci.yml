@@ -7,22 +7,14 @@ on:
     branches: [dev]
 
 jobs:
-  build:
+  git-sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Pushes to another repository
-        id: push_directory
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-          # API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      - name: git-sync
+        uses: wei/git-sync@v3
         with:
-          source-directory: ./
-          destination-github-username: 'npthao1312'
-          destination-repository-name: 'shecodes-mentorship'
-          user-email: npthao1312@gmail.com
-          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
-          target-branch: dev
-      - name: Test get variable exported by push-to-another-repository
-        run: echo $DESTINATION_CLONED_DIRECTORY
+          source_repo: 'git@github.com:shecodesvietnam/fe-mentorship.git'
+          source_branch: 'dev'
+          destination_repo: 'git@github.com:npthao1312/shecodes-mentorship.git'
+          destination_branch: 'dev'
+          destination_ssh_private_key: ${{ secrets.SSH_DEPLOY_KEY }}
