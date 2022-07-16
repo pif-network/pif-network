@@ -17,4 +17,5 @@ jobs:
           source_branch: 'dev'
           destination_repo: 'git@github.com:npthao1312/shecodes-mentorship.git'
           destination_branch: 'dev'
-          destination_ssh_private_key: ${{ secrets.SSH_DEPLOY_KEY }}
+          ssh_private_key: ${{ secrets.API_TOKEN_GITHUB }}
+          # destination_ssh_private_key: ${{ secrets.SSH_DEPLOY_KEY }}
