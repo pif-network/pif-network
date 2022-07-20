@@ -125,12 +125,14 @@ const MentorProfilePage = () => {
             onCancel={handleRequestAuthModalOnCancel}
             footer={[
               <button
+                key={0}
                 onClick={() => push('/login')}
                 className="bg-white border border-primary text-primary hover:bg-extralightviolet hover:text-primary focus:dimviolet text-center px-3 pt-1 py-2 rounded"
               >
                 Đăng ký
               </button>,
               <button
+                key={1}
                 onClick={() => push('/user/create-account')}
                 className="ml-4 px-3 pt-1 py-2 rounded bg-primary text-white hover:bg-violet hover:text-white focus:bg-violet"
               >
