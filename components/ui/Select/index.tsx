@@ -1,71 +1,60 @@
-import { ReactChildren } from 'react'
-import { ChevronRight } from '../svgs/Icons'
-
+import { Select as AntSelect } from 'antd'
+import { useState } from 'react'
+import { Tag } from '../Tag'
 interface GeneralSelectProps {
 	content: string
-	className?: string
 	options: Array<string>
 }
 
-const toggleSelectBox = () => {
-	const selectBox = document.querySelector('.options-container')
-	selectBox?.classList.toggle('hidden')
-}
+const { Option } = AntSelect
 
-const selectOptions = (i: number) => {
-	const options = document.querySelectorAll(
-		'.option input[type="checkbox"]',
-	) as NodeListOf<HTMLInputElement>
-	const optionDivs = document.querySelectorAll('.option')
-	options.forEach((option, index) => {
-		if (index === i) {
-			if (!option.checked) {
-				option.checked = true
-				optionDivs[index]?.classList.add('bg-primary-100')
-			} else {
-				option.checked = false
-				optionDivs[index]?.classList.remove('bg-primary-100')
-			}
-		}
-	})
-}
+const Select = ({ content, options }: GeneralSelectProps) => {
+	const [selects, setSelects] = useState<string[]>([])
 
-const Select = ({ content, className, options }: GeneralSelectProps) => {
+	const handleSelect = (value: string) => {
+		console.log(selects)
+		setSelects([...selects, value])
+	}
+
+	const handleDeselect = (value: string) => {
+		setSelects(selects.filter(select => select !== value))
+	}
+
 	return (
-		<div className="flex justify-center">
-			<div className="relative pl-8 select-box">
-				<div
-					onClick={toggleSelectBox}
-					className="py-2.5 px-7 border rounded-t-lg w-96 border-primary-900 bg-white text-gray-700 font-manrope font-bold text-sub-heading selected"
-				>
-					<span className="grid grid-cols-8 gap-4">
-						<div className="col-span-7">{content}</div>
-						<div>
-							<ChevronRight
-								colour="black"
-								className="transform rotate-90"
-							></ChevronRight>
-						</div>
-					</span>
-				</div>
-
-				<div className="absolute hidden overflow-hidden overflow-y-auto bg-white border rounded-b-lg border-b-black border-l-black border-r-black w-96 options-container max-h-48 shadow-gray-200">
-					{options.map((option, i) => (
-						<div
-							className="p-3 option hover:bg-primary-100 active:bg-primary-200"
-							onClick={() => selectOptions(i)}
+		<div>
+			<AntSelect
+				mode="tags"
+				style={{ width: '25%', color: 'black' }}
+				showArrow
+				placeholder={content}
+				maxTagCount={0}
+				value={selects}
+				maxTagPlaceholder={content}
+				onSelect={handleSelect}
+				onDeselect={handleDeselect}
+			>
+				{options.map((option, i) => {
+					return (
+						<Option value={option} key={i}>
+							{option}
+						</Option>
+					)
+				})}
+			</AntSelect>
+			<div>
+				{selects.map(select => {
+					return (
+						<Tag
+							type="outlined"
+							deletable
+							onDelete={() => {
+								handleDeselect(select)
+							}}
 						>
-							<input
-								type="checkbox"
-								id={option}
-								className="w-4 h-4 checkbox accent-primary-400"
-							></input>
-							<label htmlFor={option} className="w-8 ml-3 text-body-lg">
-								{option}
-							</label>
-						</div>
-					))}
-				</div>
+							{select}
+						</Tag>
+					)
+				})}
 			</div>
 		</div>
 	)
