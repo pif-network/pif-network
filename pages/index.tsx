@@ -52,19 +52,6 @@ const HomePage = () => {
             )}
           </div>
         </div> */}
-				<Select
-					content="Lĩnh vực"
-					options={['Product', 'HR', 'SWE', 'Data']}
-				></Select>
-				<div>jafhjasfhjafhiasfhjakfsj</div>
-				<div>jafhjasfhjafhiasfhjakfsj</div>
-				<div>jafhjasfhjafhiasfhjakfsj</div>
-				<div>jafhjasfhjafhiasfhjakfsj</div>
-				<div>jafhjasfhjafhiasfhjakfsj</div>
-				<div>jafhjasfhjafhiasfhjakfsj</div>
-				<div>jafhjasfhjafhiasfhjakfsj</div>
-				<div>jafhjasfhjafhiasfhjakfsj</div>
-				<div>jafhjasfhjafhiasfhjakfsj</div>
 
 				<Feedback />
 			</div>
