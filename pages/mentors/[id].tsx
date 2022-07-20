@@ -1,34 +1,34 @@
-import { useState, useEffect, MouseEvent } from 'react'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import Head from 'next/head'
+import { useState, useEffect, MouseEvent } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import Head from 'next/head';
 
-import { UserService } from '~/services'
-import { Mentor } from '~/lib/types/user'
-import { getErrorMessage } from '~/lib/types/service'
+import { UserService } from '~/services';
+import { Mentor } from '~/lib/types/user';
+import { getErrorMessage } from '~/lib/types/service';
 
-import { PopupWidget } from 'react-calendly'
+import { PopupWidget } from 'react-calendly';
 import {
   GithubFilled,
   LinkedinFilled,
   FacebookOutlined,
   ProjectFilled,
-} from '@ant-design/icons'
-import { Modal } from 'antd'
+} from '@ant-design/icons';
+import { Modal } from 'antd';
 
 interface Calendly {
-  shouldCalendlyWidgetOpen: boolean
-  url: string
+  shouldCalendlyWidgetOpen: boolean;
+  url: string;
 }
 
 const MentorProfilePage = () => {
-  const [toggleAuthRequestModal, setToggleAuthRequestModal] = useState(false)
+  const [toggleAuthRequestModal, setToggleAuthRequestModal] = useState(false);
   const [calendlyProps, setCalendlyProps] = useState<Calendly>({
     shouldCalendlyWidgetOpen: false,
     url: '',
-  })
+  });
   const [mentor, setMentor] = useState<Mentor>({
-    id: null,
+    id: -1,
     name: '',
     bio: '',
     exp: [],
@@ -38,55 +38,55 @@ const MentorProfilePage = () => {
     githubUrl: '',
     linkedinUrl: '',
     bookingUrl: '',
-  })
-  const { query, isReady, push } = useRouter()
+  });
+  const { query, isReady, push } = useRouter();
 
   const getCurrentMentor = async (
-    id: string | string[] | undefined,
+    id: string | string[] | undefined
   ): Promise<void> => {
     try {
-      const getMentorResponse = await UserService.getMentorById(id)
-      const mentor = getMentorResponse.data
-
-      setMentor(mentor)
+      const responseSingleMentorRequest = await UserService.getMentorById(id);
+      const { data } = responseSingleMentorRequest;
+      const { data: mentor } = data;
+      setMentor(mentor);
     } catch (error) {
-      const errorMessage = getErrorMessage(error)
+      const errorMessage = getErrorMessage(error);
 
-      console.log(errorMessage)
+      console.log(errorMessage);
     }
-  }
+  };
 
   const handleOnBooking = async (event: MouseEvent<HTMLElement>) => {
-    const currentUser = await UserService.currentUser
-    const url = mentor.bookingUrl
+    const currentUser = await UserService.currentUser;
+    const url = mentor.bookingUrl;
 
     if (!currentUser) {
-      setToggleAuthRequestModal(true)
+      setToggleAuthRequestModal(true);
     } else {
-      setToggleAuthRequestModal(false)
+      setToggleAuthRequestModal(false);
       setCalendlyProps(p => {
         return {
           ...p,
           shouldCalendlyWidgetOpen: true,
           url,
-        }
-      })
+        };
+      });
     }
-  }
+  };
 
   const handleRequestAuthModalOnOk = () => {
-    setToggleAuthRequestModal(false)
-  }
+    setToggleAuthRequestModal(false);
+  };
 
   const handleRequestAuthModalOnCancel = () => {
-    setToggleAuthRequestModal(false)
-  }
+    setToggleAuthRequestModal(false);
+  };
 
   useEffect(() => {
-    if (!isReady) return
+    if (!isReady) return;
 
-    getCurrentMentor(query.id)
-  }, [isReady, query.id])
+    getCurrentMentor(query.id);
+  }, [isReady, query.id]);
 
   return (
     <>
@@ -215,7 +215,7 @@ const MentorProfilePage = () => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default MentorProfilePage
+export default MentorProfilePage;
