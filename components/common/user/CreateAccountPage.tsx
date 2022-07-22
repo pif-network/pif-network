@@ -10,12 +10,12 @@ import { Link, Input as FormikInput, Button } from '~/components/ui'
 import { object, string } from 'yup'
 import { Field, Form, FormikProvider, useFormik } from 'formik'
 
-import { Row, Col } from 'antd'
+import { Row, Col, Alert } from 'antd'
 import { INTERNAL_URI } from '~/shared/constant'
 
 const CreateAccount = () => {
-	const router = useRouter()
 	const [message, setMessage] = useState('')
+	const router = useRouter()
 
 	const validationSchema = object().shape({
 		name: string()
@@ -53,6 +53,9 @@ const CreateAccount = () => {
 					case 'Email is already taken':
 						setMessage('Email này đã được dùng đăng ký tài khoản.')
 						break
+					case undefined:
+						setMessage('Đã có lỗi xảy ra. Vui lòng thử lại.')
+						break
 					default:
 						setMessage(errorMessage)
 				}
@@ -63,13 +66,14 @@ const CreateAccount = () => {
 	return (
 		<>
 			<Head>
-				<title>Welcome!</title>
+				<title>Registering to &#60;product_name&#62;</title>
 			</Head>
 
-			<div className="bg-white px-0 md:px-16 py-0 md:py-12">
+			<article className="bg-white mx-2 md:mx-6 lg:mx-12 xl:mx-20 px-0 md:px-16 py-0 md:py-12">
 				<Row className="">
 					{/* Left */}
-					<Col className="hidden md:inline md:pt-12" xs={0} sm={12}>
+					{/* <Col className="hidden md:inline md:pt-12" xs={0} sm={12}> */}
+					<Col className="" xs={0} sm={0} md={0} lg={12}>
 						<Image
 							priority
 							src="/images/create-new-account.svg"
@@ -80,38 +84,48 @@ const CreateAccount = () => {
 
 					{/* Right */}
 					<Col className="" sm={24} md={12}>
-						<div className="bg-[#f9f9f9] m-8 p-12 rounded-2xl">
-							<h4 className="pb-8 text-center font-lora word-[-0.23rem] text-heading font-medium">
-								Chào mừng bạn đến với
+						<section className="md:max-w-lg m-8 pl-12 lg:pl-20 pr-12 py-12 lg:border-l-[1px]">
+							{/* Page title */}
+							<h4 className="pb-8 text-center font-lora word-[-0.23rem] text-heading">
+								<span className="font-regular">Chào mừng bạn đến với</span>
 								<br />
-								<span className="text-primary-900">&#60;product_name&#62;</span>
+								<span className="text-primary-900 font-semi-bold">
+									&#60;product_name&#62;!
+								</span>
 							</h4>
+
+							<div className="pb-8 flex items-center justify-center">
+								<Button
+									content="Đăng ký với Google"
+									fillType="outlined"
+									size="medium"
+									className="w-full border-[#0063CC]"
+								/>
+							</div>
 
 							<FormikProvider value={formik}>
 								<Form>
 									{message && (
-										// <div className="mt-4 text-red-300 flex items-center justify-center">
-										<div className="mt-4 text-red-300">{message}</div>
+										<Alert
+											className="mt-2 mb-6 font-manrope"
+											message={message}
+											type="error"
+											showIcon
+										/>
 									)}
 									<Field
-										// className="mt-6 h-12 border border-primary hover:border-violet-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-										className="mt-6"
 										name="name"
 										type="name"
 										placeholder="Nhập họ và tên của bạn"
 										as={FormikInput}
 									/>
 									<Field
-										// className="mt-6 h-12 border border-primary hover:border-violet-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-										className="mt-6"
 										name="email"
 										type="email"
 										placeholder="Nhập email của bạn"
 										as={FormikInput}
 									/>
 									<Field
-										// className="mt-6 h-12 border border-primary hover:border-violet-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-										className="mt-6"
 										name="password"
 										type="password"
 										placeholder="Nhập mật khẩu của bạn"
@@ -120,14 +134,15 @@ const CreateAccount = () => {
 									<div className="mt-8 flex items-center justify-center">
 										{formik.isSubmitting ? (
 											<div className=" flex justify-center items-center">
-												<div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black"></div>
+												<div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black" />
 											</div>
 										) : (
 											<Button
+												content="Tạo tài khoản ngay"
 												type="submit"
 												fillType="filled"
-												size="small"
-												content="Đăng ký"
+												size="medium"
+												className="w-full rounded-lg"
 											/>
 										)}
 									</div>
@@ -136,13 +151,13 @@ const CreateAccount = () => {
 							<div className="mt-4 mb-4 text-center">
 								Đã có tài khoản?{' '}
 								<span>
-									<Link href="/login"> Đăng nhập</Link>
+									<Link href="/login">Đăng nhập</Link>
 								</span>
 							</div>
-						</div>
+						</section>
 					</Col>
 				</Row>
-			</div>
+			</article>
 		</>
 	)
 }

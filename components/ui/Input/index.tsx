@@ -12,25 +12,28 @@ const FormikInput = ({
 	const [field, meta] = useField(name)
 	const isPasswordInput = type === 'password'
 
+	const cn = `h-12 mb-2 border-b-[1px] border-gray-300 rounded-lg`
+
 	return (
 		<>
 			{isPasswordInput ? (
 				<Input.Password
-					className={`${meta.error && meta.touched ? 'border-red-500' : ''}`}
+					className={cn}
+					status={meta.error ? 'error' : ''}
 					{...field}
 					{...props}
 				/>
 			) : (
 				<Input
-					// className={`${meta.error && meta.touched ? 'border-red-500' : ''}`}
-					className="border-gray-300"
+					className={cn}
+					status={meta.error ? 'error' : ''}
 					{...field}
 					{...props}
 				/>
 			)}
 			<ErrorMessage name={field.name} component="div">
 				{message => (
-					<div className="mt-2 text-red-300 font-manrope text-body-sm">
+					<div className="ml-4 mb-2 text-red-300 font-manrope text-[10px]">
 						{message}
 					</div>
 				)}
