@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="flex flex-col max-w-[100%] pt-4 md:grid md:grid-cols-[50%_50%] md:pt-14">
         <div className="pl-2 text-body-md sm:pl-5 sm:text-body md:pl-0 md:m-auto md:text-sub-heading text-gray-400">
           <div>SheCodes Việt Nam</div>
-          <div className="text-secondary-green-200 font-lora">MENTORSHIP PROGRAMME</div>
+          <div className="text-green-200 font-lora">MENTORSHIP PROGRAMME</div>
           <div className="hidden pt-6 text-body-md md:block">SINCE 2021</div>
         </div>
         <div className="flex relative justify-between pl-2 pt-5 pt-2 sm:pl-5 md:pt-0 md:justify-start md:pl-0 md:m-auto">
