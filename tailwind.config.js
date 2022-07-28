@@ -81,6 +81,9 @@ module.exports = {
         200: '#40A59F',
         300: '#1AACA3',
       },
+      green: {
+        200: '#8CC587',
+      }
     },
     extend: {
       lineHeight: {
