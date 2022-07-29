@@ -1,4 +1,3 @@
-import s from './style.module.scss'
 import { RoleChoosingPopover } from './components'
 
 import { useState } from 'react'
@@ -76,11 +75,11 @@ const CreateAccount = () => {
         <title>Registering to &#60;product_name&#62;</title>
       </Head>
 
-      <article className="mx-2 md:mx-6 lg:mx-12 xl:mx-24 px-0 md:px-16 py-0 md:py-12">
-        <Row className="">
-          {/* Left */}
+      <article className="grid place-items-center xl:inline mx-2 md:mx-6 lg:mx-12 xl:mx-24 px-0 md:px-16 py-0 md:py-12">
+        <Row className="" align='middle' justify='center'>
           {/* <Col className="hidden md:inline md:pt-12" xs={0} sm={12}> */}
-          <Col className="" xs={0} sm={0} md={0} lg={13}>
+          {/* Left */}
+          <Col className="max-w-2xl h-full mt-10 ml-12" xs={0} sm={0} md={0} lg={0} xl={12}>
             <Image
               priority
               src="/images/create-new-account.svg"
@@ -90,15 +89,15 @@ const CreateAccount = () => {
           </Col>
 
           {/* Right */}
-          <Col className="" md={24} lg={11}>
+          <Col className="" lg={24} xl={10}>
             <section
-              className="md:max-w-lg m-8 py-12 px-16 bg-white rounded-xl"
+              className="md:max-w-lg m-1 md:m-8 py-12 px-8 md:px-16 bg-white rounded-xl"
               style={{
                 boxShadow: '1.47608px 3.42451px 33.0643px rgba(0, 0, 0, 0.1)',
               }}
             >
               {/* Page title */}
-              <h1 className="text-center font-lora word-[-0.23rem] text-heading">
+              <h1 className="text-center font-lora word-[-0.23rem] text-sub-heading md:text-heading">
                 <span className="text-black font-regular">Chào mừng bạn đến với</span>
                 <br />
                 <span className="text-primary-900 font-semi-bold">
@@ -109,7 +108,7 @@ const CreateAccount = () => {
               <div className="mb-5" />
 
               <div className='grid place-items-center'>
-                <h4 className="text-center text-black font-manrope word-[0rem] text-body">
+                <h4 className="text-center text-black font-manrope word-[0rem] text-body-md md:text-body">
                   Vui lòng lựa chọn vị trí mà bạn muốn đăng ký.
                 </h4>
 
@@ -123,7 +122,7 @@ const CreateAccount = () => {
 
               </div>
 
-              <div className="mb-8" />
+              <div className="mb-6 md:mb-8" />
 
               <div className="flex justify-center space-x-4">
                 <RoleChoosingPopover role="Mentor" onClick={() => setRole('Mentor')} />
@@ -137,7 +136,7 @@ const CreateAccount = () => {
                   content="Đăng ký với Google"
                   fillType="outlined"
                   size="medium"
-                  className="max-w-md w-full border-[1px] border-gray-600 text-[19px]"
+                  className="max-w-md w-full border-[1px] border-gray-600/50 text-[18px] md:text-sub-heading"
                 />
               </div>
 
@@ -151,7 +150,7 @@ const CreateAccount = () => {
                     content="Đăng ký với email"
                     fillType="outlined"
                     size="medium"
-                    className="max-w-md w-full border-[1px] border-gray-600 text-[19px]"
+                    className="max-w-md w-full border-[1px] border-gray-600/50 text-[18px] md:text-sub-heading"
                     onClick={() => setShouldRegisterWithEmail(true)}
                   />
                 </div>
@@ -199,7 +198,7 @@ const CreateAccount = () => {
                           type="submit"
                           fillType="filled"
                           size="medium"
-                          className="w-full rounded-lg"
+                          className="w-full rounded-lg !text-[19px] md:text-sub-heading"
                         />
                       )}
                     </div>

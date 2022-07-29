@@ -27,8 +27,8 @@ export const RoleChoosingPopover = ({ role, onClick }: Props) => {
     <Popover placement="bottom" content={RoleChoosingPopoverContent(role)}>
       <button
         className="px-6 py-3 transition ease-in-out duration-600 box-border border-[1px] border-primary-900 
-        hover:border-primary-100 hover:bg-primary-100 active:bg-primary-300 focus:bg-primary-300 focus:text-white
-        focus:scale-105 focus:shadow-2xl rounded hover:text-white font-lora font-semi-bold text-body"
+        hover:border-primary-100 hover:bg-primary-100 active:bg-primary-300 focus:bg-primary-300 focus:border-primary-300
+        focus:text-white focus:scale-105 focus:shadow-2xl rounded hover:text-white font-lora font-semi-bold text-[18px]"
         onClick={onClick}
       >
         {role}
