@@ -1,31 +1,32 @@
-import { useRef, useState } from 'react'
+import { useRef, useState } from 'react';
 
-import { ChevronRight } from '~/components/ui/svgs/Icons'
+import { ChevronRight } from '~/components/ui/svgs/Icons';
 
 interface Props {
-  FAQ: { q: string; a: string | JSX.Element }
-  idx: number
+  FAQ: { q: string; a: string | JSX.Element };
+  idx: number;
 }
 
 const FAQAccordionItem = ({ FAQ, idx }: Props) => {
-  const [isAnswerShow, setIsAnswerShow] = useState(false)
-  const [answerH, setAnswerH] = useState('0px')
-  const answerRef = useRef<HTMLDivElement>(null!)
-
-  const { current: currentAnswerRef } = answerRef
+  const [isAnswerShow, setIsAnswerShow] = useState(false);
+  const [answerH, setAnswerH] = useState('0px');
+  const answerRef = useRef<HTMLDivElement>(null!);
 
   const handleOpenAnswer = () => {
+    const { current: currentAnswerRef } = answerRef;
     if (currentAnswerRef) {
-      const { childNodes } = currentAnswerRef
-      const answerDiv = childNodes[0] as HTMLDivElement
+      const { childNodes } = currentAnswerRef;
+      const answerDiv = childNodes[0] as HTMLDivElement;
 
-      const { offsetHeight: currentAnswerH } = answerDiv
-      setIsAnswerShow(!isAnswerShow)
-      setAnswerH(`${currentAnswerH ?? +20}px`)
+      const { offsetHeight: currentAnswerH } = answerDiv;
+      setIsAnswerShow(!isAnswerShow);
+      setAnswerH(`${currentAnswerH ?? +20}px`);
     }
-  }
+  };
 
-  const questionTextColour = isAnswerShow ? 'text-primary-900' : 'text-gray-700'
+  const questionTextColour = isAnswerShow
+    ? 'text-primary-900'
+    : 'text-gray-600';
 
   return (
     <div
@@ -62,7 +63,7 @@ const FAQAccordionItem = ({ FAQ, idx }: Props) => {
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FAQAccordionItem
+export default FAQAccordionItem;

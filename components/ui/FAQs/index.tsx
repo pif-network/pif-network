@@ -8,7 +8,7 @@ const FAQSection = () => {
         <h1 className="text-primary-900 font-lora font-semi-bold word-[-0.6rem] text-title-sm">
           Những câu hỏi thường gặp
         </h1>
-        <p className="max-w-xs md:max-w-none mx-auto text-gray-600 text-body-md">
+        <p className="max-w-xs md:max-w-none mx-auto text-gray-600 text-body">
           SheCodes trả lời những câu hỏi mà có thể bạn sẽ thắc mắc.
         </p>
       </div>
