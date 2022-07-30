@@ -1,5 +1,5 @@
-import { FAQs } from '~/shared/constant';
-import FAQAccordionItem from './FAQAccordionItem';
+import { FAQs } from '~/shared/constant'
+import FAQAccordionItem from './FAQAccordionItem'
 
 const FAQSection = () => {
   return (
@@ -8,14 +8,14 @@ const FAQSection = () => {
         <h1 className="text-primary-900 font-lora font-semi-bold word-[-0.6rem] text-title-sm">
           Những câu hỏi thường gặp
         </h1>
-        <p className="max-w-xs md:max-w-none mx-auto text-gray-600 text-body">
+        <p className="max-w-lg mx-auto text-gray-600 text-body-md">
           SheCodes trả lời những câu hỏi mà có thể bạn sẽ thắc mắc.
         </p>
       </div>
 
       <div className="mt-14 max-w-2xl mx-auto">
         {FAQs.map((item, idx) => (
-          <FAQAccordionItem key={idx} idx={idx} FAQ={item} />
+          <FAQAccordionItem idx={idx} FAQ={item} />
         ))}
       </div>
 
@@ -29,7 +29,7 @@ const FAQSection = () => {
         </p>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default FAQSection;
+export default FAQSection

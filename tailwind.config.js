@@ -57,6 +57,7 @@ module.exports = {
       white: '#fff',
       gray: {
         50: '#F2F2F2',
+        100: '#E6E6E6',
         200: '#CCCCCC',
         300: '#B3B3B3',
         400: '#999999',
@@ -81,6 +82,9 @@ module.exports = {
         200: '#40A59F',
         300: '#1AACA3',
       },
+      green: {
+        200: '#8CC587',
+      }
     },
     extend: {
       lineHeight: {
