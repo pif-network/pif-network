@@ -1,14 +1,14 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-import { AuthService, UserService } from '~/services'
+import { AuthService, UserService } from '~/services';
 
-import { Menu, Dropdown } from 'antd'
-import { DownOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons'
+import { Menu, Dropdown } from 'antd';
+import { DownOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
 
 const UserNav = () => {
-  const router = useRouter()
-  const currentUser = UserService.currentUser
+  const router = useRouter();
+  const currentUser = UserService.currentUser;
 
   const LoggedOutNav = () => (
     <>
@@ -23,7 +23,7 @@ const UserNav = () => {
         </a>
       </Link>
     </>
-  )
+  );
 
   const ProfileDropDown = () => (
     <>
@@ -62,9 +62,9 @@ const UserNav = () => {
           </Link>
         </Menu.Item>
         <Menu.Item
-          onClick={() => {
-            AuthService.logout()
-            router.push('/')
+          onClick={async () => {
+            await AuthService.logOut();
+            router.push('/');
           }}
           icon={<LogoutOutlined />}
         >
@@ -72,7 +72,7 @@ const UserNav = () => {
         </Menu.Item>
       </Menu>
     </>
-  )
+  );
 
   const LoggedInNav = () => (
     <>
@@ -122,9 +122,9 @@ const UserNav = () => {
         </div>
       </Dropdown>
     </>
-  )
+  );
 
-  return <>{currentUser ? <LoggedInNav /> : <LoggedOutNav />}</>
-}
+  return <>{currentUser ? <LoggedInNav /> : <LoggedOutNav />}</>;
+};
 
-export default UserNav
+export default UserNav;

@@ -1,31 +1,31 @@
-import { useState } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-import Head from 'next/head'
+import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import Head from 'next/head';
 
-import { AuthService } from '~/services'
-import { getErrorMessage } from '~/lib/types/service'
-import { Input as FormikInput } from '~/components/ui'
+import { AuthService } from '~/services';
+import { getErrorMessage } from '~/lib/types/service';
+import { Input as FormikInput } from '~/components/ui';
 
-import { object, string } from 'yup'
-import { Field, Form, FormikProvider, useFormik } from 'formik'
+import { object, string } from 'yup';
+import { Field, Form, FormikProvider, useFormik } from 'formik';
 
-import { Row, Col } from 'antd'
-import { CheckOutlined } from '@ant-design/icons'
+import { Row, Col } from 'antd';
+import { CheckOutlined } from '@ant-design/icons';
 
 const ChangePassword = () => {
   const [hasFiredPasswordChangeRequest, setHasFiredPasswordChangeRequest] =
-    useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
+    useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const validationSchema = object({
     password: string().required('Password is required'),
     passwordConfirmation: string()
       .required('Please confirm your password.')
       .test('passwords-should-match', 'Passwords must match', function (value) {
-        return this.parent.password === value
+        return this.parent.password === value;
       }),
-  })
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -33,18 +33,18 @@ const ChangePassword = () => {
       passwordConfirmation: '',
     },
     validationSchema,
-    onSubmit: async ({ password, passwordConfirmation }) => {
+    onSubmit: async data => {
       try {
-        await AuthService.requestPasswordChange(password, passwordConfirmation)
-        setHasFiredPasswordChangeRequest(current => !current)
+        await AuthService.requestPasswordChange(data);
+        setHasFiredPasswordChangeRequest(current => !current);
       } catch (error) {
-        const errorMessage = getErrorMessage(error)
-        setErrorMessage(errorMessage)
+        const errorMessage = getErrorMessage(error);
+        setErrorMessage(errorMessage);
       } finally {
-        setHasFiredPasswordChangeRequest(true)
+        setHasFiredPasswordChangeRequest(true);
       }
     },
-  })
+  });
 
   return (
     <>
@@ -153,7 +153,7 @@ const ChangePassword = () => {
         )}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ChangePassword
+export default ChangePassword;
