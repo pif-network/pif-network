@@ -58,9 +58,9 @@ const FAQAccordionItem = ({ FAQ, idx }: Props) => {
         className="duration-300"
         style={isAnswerShow ? { height: answerH } : { height: '0px' }}
       >
-        <p className="whitespace-pre-line text-gray-600 font-manrope font-regular text-body pr-5 pb-3">
+        <div className="whitespace-pre-line text-gray-600 font-manrope font-regular text-body pr-5 pb-3">
           {FAQ.a}
-        </p>
+        </div>
       </div>
     </div>
   );
