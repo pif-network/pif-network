@@ -76,10 +76,17 @@ const CreateAccount = () => {
       </Head>
 
       <article className="grid place-items-center xl:inline mx-2 md:mx-6 lg:mx-12 xl:mx-24 px-0 md:px-16 py-0 md:py-12">
-        <Row className="" align='middle' justify='center'>
+        <Row className="" align="middle" justify="center">
           {/* <Col className="hidden md:inline md:pt-12" xs={0} sm={12}> */}
           {/* Left */}
-          <Col className="max-w-2xl h-full mt-10 ml-12" xs={0} sm={0} md={0} lg={0} xl={12}>
+          <Col
+            className="max-w-2xl h-full mt-10 ml-12"
+            xs={0}
+            sm={0}
+            md={0}
+            lg={0}
+            xl={12}
+          >
             <Image
               priority
               src="/images/create-new-account.svg"
@@ -98,7 +105,9 @@ const CreateAccount = () => {
             >
               {/* Page title */}
               <h1 className="text-center font-lora word-[-0.23rem] text-sub-heading md:text-heading">
-                <span className="text-black font-regular">Chào mừng bạn đến với</span>
+                <span className="text-black font-regular">
+                  Chào mừng bạn đến với
+                </span>
                 <br />
                 <span className="text-primary-900 font-semi-bold">
                   &#60;product_name&#62;!
@@ -107,7 +116,7 @@ const CreateAccount = () => {
 
               <div className="mb-5" />
 
-              <div className='grid place-items-center'>
+              <div className="grid place-items-center">
                 <h4 className="text-center text-black font-manrope word-[0rem] text-body-md md:text-body">
                   Vui lòng lựa chọn vị trí mà bạn muốn đăng ký.
                 </h4>
@@ -116,22 +125,33 @@ const CreateAccount = () => {
 
                 <h4 className="text-center text-black/50 font-manrope word-[0rem] text-body-sm">
                   Bằng việc đăng ký, tôi đồng ý với{' '}
-                  <Link external href='#' >Terms of Use</Link>
-                  {' '}và <Link external href='#' >Prvacy policy</Link>.
+                  <Link external href="#">
+                    Terms of Use
+                  </Link>{' '}
+                  và{' '}
+                  <Link external href="#">
+                    Prvacy policy
+                  </Link>
+                  .
                 </h4>
-
               </div>
 
               <div className="mb-6 md:mb-8" />
 
               <div className="flex justify-center space-x-4">
-                <RoleChoosingPopover role="Mentor" onClick={() => setRole('Mentor')} />
-                <RoleChoosingPopover role="Mentee" onClick={() => setRole('Mentee')} />
+                <RoleChoosingPopover
+                  role="Mentor"
+                  onClick={() => setRole('Mentor')}
+                />
+                <RoleChoosingPopover
+                  role="Mentee"
+                  onClick={() => setRole('Mentee')}
+                />
               </div>
 
               <div className="mb-8" />
 
-              <div className="flex items-start">
+              <div className="grid place-items-center">
                 <Button
                   content="Đăng ký với Google"
                   fillType="outlined"
@@ -160,7 +180,7 @@ const CreateAccount = () => {
 
               {shouldRegisterWithEmail && (
                 <FormikProvider value={formik}>
-                  <Form>
+                  <Form className='max-w-md'>
                     {message && (
                       <Alert
                         className="mt-2 mb-6 font-manrope"
@@ -198,7 +218,10 @@ const CreateAccount = () => {
                           type="submit"
                           fillType="filled"
                           size="medium"
-                          className="w-full rounded-lg !text-[19px] md:text-sub-heading"
+                          className={`w-full rounded-lg ${!(formik.isValid && formik.dirty)
+                              ? '!bg-primary-800/60'
+                              : ''
+                            } text-[19px] md:text-sub-heading`}
                         />
                       )}
                     </div>
@@ -209,7 +232,7 @@ const CreateAccount = () => {
               <div className="mt-4 mb-4 text-center font-manrope font-regular text-body-sm">
                 Đã có tài khoản?{' '}
                 <span>
-                  <Link href="/login" >Đăng nhập.</Link>
+                  <Link href="/login">Đăng nhập.</Link>
                 </span>
               </div>
             </section>
