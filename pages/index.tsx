@@ -15,6 +15,7 @@ import {
 } from '~/components/ui'
 import { MentorCard } from '~/components/mentor'
 import { FlagLine } from '~/components/ui/svgs/Icons'
+import FilterSection from '~/components/ui/FilterSection'
 
 const HomePage = () => {
 	const [mentors, setMentors] = useState<Mentor[]>()
