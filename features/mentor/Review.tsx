@@ -14,6 +14,9 @@ type FormProps = {
   onSubmit: (value: Review) => void;
 };
 
+const boxShadowStyle =
+  'shadow-[67px_155px_101px_rgba(0,0,0,0.01),30px_69px_75px_rgba(0,0,0,0.02),7px_17px_41px_rgba(0,0,0,0.02),0px_0px_0px_rgba(0,0,0,0.02)]';
+
 const ReviewForm: React.FC<FormProps> = ({
   initialValues = { value: '' },
   onSubmit,
@@ -25,7 +28,9 @@ const ReviewForm: React.FC<FormProps> = ({
   });
 
   return (
-    <div className="px-5 py-3.5 md:px-8 md:py-6 bg-white shadow-md col-span-2 rounded-3xl">
+    <div
+      className={`px-5 py-3.5 md:px-8 md:py-6 bg-white col-span-2 rounded-3xl ${boxShadowStyle}`}
+    >
       <div className="mb-3 flex justify-between">
         {/* TODO: handle populate reviewer info */}
         <div className="flex items-center">
@@ -64,13 +69,15 @@ export const CreateReview: React.FC<FormProps> = props => {
 };
 
 export const ReviewCard: React.FC = () => (
-  <div className="px-5 py-3.5 md:px-8 md:py-6 bg-white shadow-md col-span-2 rounded-3xl">
+  <div
+    className={`px-5 py-3.5 md:px-8 md:py-6 bg-white col-span-2 rounded-3xl ${boxShadowStyle}`}
+  >
     <div className="mb-3 flex justify-between">
       <div className="flex items-center">
         <Avatar />
         <div className="ml-2">
           <div className="flex items-center gap-2">
-            <h2 className="text-body-md md:text-sub-heading font-semi-bold font-lora">
+            <h2 className="text-body-md md:text-sub-heading text-primary-900 font-semi-bold font-lora">
               Nguyễn Mai Anh
             </h2>
             <span className="text-[#D9D9D9]">●</span>
@@ -88,7 +95,7 @@ export const ReviewCard: React.FC = () => (
           </Menu>
         }
       >
-        <button className="h-fit">
+        <button className="h-9 w-9 rounded-[50%] hover:bg-gray-50">
           <EllipsisOutlined style={{ fontSize: '20px' }} />
         </button>
       </Dropdown>

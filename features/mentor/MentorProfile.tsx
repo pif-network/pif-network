@@ -104,7 +104,7 @@ export const MentorProfile: React.FC<{ data: Mentor }> = ({ data }) => {
         </div>
         <div className="w-full flex flex-col items-center md:block">
           <div className="mt-4 md:my-0 flex flex-col md:flex-row items-center justify-between">
-            <h1 className="text-title-sm md:text-title font-lora font-semi-bold mb-2">
+            <h1 className="text-title-sm md:text-title text-primary-900 font-lora font-semi-bold mb-2">
               {data.name}
             </h1>
             <Button
@@ -114,7 +114,7 @@ export const MentorProfile: React.FC<{ data: Mentor }> = ({ data }) => {
               content="Đặt lịch hẹn"
             />
           </div>
-          <span className="text-body-lg text-center">
+          <span className="text-body-lg text-center text-primary-900">
             {getWorkDescription()}
           </span>
           <div className="flex mt-8 mb-6 gap-2">{socialLinkComponents}</div>
@@ -153,16 +153,22 @@ export const MentorProfile: React.FC<{ data: Mentor }> = ({ data }) => {
             Phạm vi mentor
           </h3>
           <div className="mt-3 mb-10 md:mb-8 flex flex-wrap gap-2">
-            <Tag>Resume Revision</Tag>
-            <Tag>Career Advise</Tag>
-            <Tag>Mock Interview</Tag>
+            <Tag color="cyan">Resume Revision</Tag>
+            <Tag color="red">Career Advise</Tag>
+            <Tag color="primary">Mock Interview</Tag>
           </div>
           <PartialDivider size="small" />
           <h3 className="text-heading-sm font-semi-bold font-lora">Lĩnh vực</h3>
           <div className="mt-3 flex flex-wrap gap-2">
-            <Tag type="filled">Web Development</Tag>
-            <Tag type="filled">Devops</Tag>
-            <Tag type="filled">Mobile</Tag>
+            <Tag type="filled" color="cyan">
+              Web Development
+            </Tag>
+            <Tag type="filled" color="primary">
+              Devops
+            </Tag>
+            <Tag type="filled" color="red">
+              Mobile
+            </Tag>
           </div>
         </div>
       </div>
