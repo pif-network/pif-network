@@ -4,74 +4,113 @@ import { Tag } from '../Tag'
 interface GeneralSelectProps {
 	placeholder: string
 	options: Array<string>
+	values: Array<string>
+	handleSelect: (value: string) => void
+	handleDeselect: (value: string) => void
 }
 
 const { Option } = AntSelect
 
-const Select = ({ placeholder, options }: GeneralSelectProps) => {
-	const [selects, setSelects] = useState<string[]>([])
-
-	const handleSelect = (value: string) => {
-		setSelects([...selects, value])
+const FilterSection = () => {
+	const [phamVi, setPhamVi] = useState<string[]>([])
+	const handleSelectPhamVi = (value: string) => {
+		setPhamVi([...phamVi, value])
+	}
+	const handleDeselectPhamVi = (value: string) => {
+		setPhamVi(phamVi.filter(select => select !== value))
 	}
 
-	const handleDeselect = (value: string) => {
-		setSelects(selects.filter(select => select !== value))
+	const [linhVuc, setLinhVuc] = useState<string[]>([])
+	const handleSelectLinhVuc = (value: string) => {
+		setLinhVuc([...linhVuc, value])
+	}
+	const handleDeselectLinhVuc = (value: string) => {
+		setLinhVuc(linhVuc.filter(select => select !== value))
+	}
+
+	const Select = ({
+		placeholder,
+		options,
+		values,
+		handleSelect,
+		handleDeselect,
+	}: GeneralSelectProps) => {
+		return (
+			<div>
+				<AntSelect
+					mode="tags"
+					style={{ width: '180px', color: 'black' }}
+					showArrow
+					placeholder={placeholder}
+					maxTagCount={0}
+					value={values}
+					maxTagPlaceholder={placeholder}
+					onSelect={handleSelect}
+					onDeselect={handleDeselect}
+					className="mb-3"
+				>
+					{options.map((option, i) => {
+						return (
+							<Option value={option} key={i}>
+								{option}
+							</Option>
+						)
+					})}
+				</AntSelect>
+			</div>
+		)
 	}
 	return (
-		<div className="w-full">
-			<AntSelect
-				mode="tags"
-				style={{ width: '180px', color: 'black' }}
-				showArrow
-				placeholder={placeholder}
-				maxTagCount={0}
-				value={selects}
-				maxTagPlaceholder={placeholder}
-				onSelect={handleSelect}
-				onDeselect={handleDeselect}
-			>
-				{options.map((option, i) => {
-					return (
-						<Option value={option} key={i}>
-							{option}
-						</Option>
-					)
-				})}
-			</AntSelect>
-			<div>
-				{selects.map(select => {
+		<div>
+			<div className="flex justify-center gap-4">
+				<div>
+					<Select
+						values={linhVuc}
+						handleSelect={handleSelectLinhVuc}
+						handleDeselect={handleDeselectLinhVuc}
+						placeholder="Lĩnh vực"
+						options={['Product', 'HR', 'SWE', 'Data']}
+					></Select>
+				</div>
+				<div>
+					<Select
+						values={phamVi}
+						handleSelect={handleSelectPhamVi}
+						handleDeselect={handleDeselectPhamVi}
+						placeholder="Phạm vi mentor"
+						options={['Phỏng vấn thử', 'Viết resume', 'Tư vấn nghề nghiệp']}
+					></Select>
+				</div>
+			</div>
+			<div className="flex justify-center">
+				{linhVuc.map(select => {
 					return (
 						<Tag
 							type="outlined"
+							color="primary"
 							deletable
 							onDelete={() => {
-								handleDeselect(select)
+								handleDeselectLinhVuc(select)
 							}}
 						>
 							{select}
 						</Tag>
 					)
 				})}
-			</div>
-		</div>
-	)
-}
-
-const FilterSection = () => {
-	return (
-		<div>
-			<div className="flex justify-center">
-				<div className="grid grid-cols-2">
-					<Select
-						placeholder="Lĩnh vực"
-						options={['Product', 'HR', 'SWE', 'Data']}
-					></Select>
-					<Select
-						placeholder="Phạm vi mentor"
-						options={['Phỏng vấn thử', 'Viết resume', 'Tư vấn nghề nghiệp']}
-					></Select>
-				</div>
+				{phamVi.map(select => {
+					return (
+						<Tag
+							type="filled"
+							color="primary"
+							deletable
+							onDelete={() => {
+								handleDeselectPhamVi(select)
+							}}
+						>
+							{select}
+						</Tag>
+					)
+				})}
 			</div>
 		</div>
 	)
