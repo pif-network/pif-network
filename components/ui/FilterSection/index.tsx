@@ -1,6 +1,9 @@
 import { Select as AntSelect } from 'antd'
 import { useState } from 'react'
 import { Tag } from '../Tag'
+
+type TagColorPreset = 'gray' | 'primary' | 'red' | 'cyan'
+
 interface GeneralSelectProps {
 	placeholder: string
 	options: Array<string>
@@ -28,6 +31,19 @@ const FilterSection = () => {
 		setLinhVuc(linhVuc.filter(select => select !== value))
 	}
 
+	const randomTagColor = (): TagColorPreset => {
+		const colorID = Math.floor(Math.random() * 3)
+		let tagColors: TagColorPreset = 'primary'
+		if (colorID === 1) {
+			tagColors = 'red'
+			return tagColors
+		} else if (colorID === 2) {
+			tagColors = 'cyan'
+			return tagColors
+		}
+		return tagColors
+	}
+
 	const Select = ({
 		placeholder,
 		options,
@@ -39,7 +55,7 @@ const FilterSection = () => {
 			<div>
 				<AntSelect
 					mode="tags"
-					style={{ width: '180px', color: 'black' }}
+					style={{ width: '300px', color: 'black' }}
 					showArrow
 					placeholder={placeholder}
 					maxTagCount={0}
@@ -62,8 +78,8 @@ const FilterSection = () => {
 	}
 	return (
 		<div>
-			<div className="flex justify-center gap-4">
-				<div>
+			<div className="flex justify-between gap-4 ml-84 mr-84">
+				<div className="w-[300px]">
 					<Select
 						values={linhVuc}
 						handleSelect={handleSelectLinhVuc}
@@ -71,8 +87,27 @@ const FilterSection = () => {
 						placeholder="Lĩnh vực"
 						options={['Product', 'HR', 'SWE', 'Data']}
 					></Select>
+					<div>
+						{linhVuc.map(select => {
+							const tagColor = randomTagColor()
+							return (
+								<div className="inline-flex m-1.5">
+									<Tag
+										type="outlined"
+										color={tagColor}
+										deletable
+										onDelete={() => {
+											handleDeselectLinhVuc(select)
+										}}
+									>
+										{select}
+									</Tag>
+								</div>
+							)
+						})}
+					</div>
 				</div>
-				<div>
+				<div className="w-[300px]">
 					<Select
 						values={phamVi}
 						handleSelect={handleSelectPhamVi}
@@ -80,37 +115,26 @@ const FilterSection = () => {
 						placeholder="Phạm vi mentor"
 						options={['Phỏng vấn thử', 'Viết resume', 'Tư vấn nghề nghiệp']}
 					></Select>
+					<div>
+						{phamVi.map(select => {
+							const tagColor = randomTagColor()
+							return (
+								<div className="inline-flex m-1.5">
+									<Tag
+										type="filled"
+										color={tagColor}
+										deletable
+										onDelete={() => {
+											handleDeselectPhamVi(select)
+										}}
+									>
+										{select}
+									</Tag>
+								</div>
+							)
+						})}
+					</div>
 				</div>
-			</div>
-			<div className="flex justify-center">
-				{linhVuc.map(select => {
-					return (
-						<Tag
-							type="outlined"
-							color="primary"
-							deletable
-							onDelete={() => {
-								handleDeselectLinhVuc(select)
-							}}
-						>
-							{select}
-						</Tag>
-					)
-				})}
-				{phamVi.map(select => {
-					return (
-						<Tag
-							type="filled"
-							color="primary"
-							deletable
-							onDelete={() => {
-								handleDeselectPhamVi(select)
-							}}
-						>
-							{select}
-						</Tag>
-					)
-				})}
 			</div>
 		</div>
 	)
