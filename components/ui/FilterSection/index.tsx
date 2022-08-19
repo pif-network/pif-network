@@ -1,6 +1,7 @@
-import { Select as AntSelect } from 'antd'
+import { Select as AntSelect, Tag as AntTag } from 'antd'
 import { useState } from 'react'
 import { Tag } from '../Tag'
+import s from './FilterSection.module.css'
 
 type TagColorPreset = 'gray' | 'primary' | 'red' | 'cyan'
 
@@ -42,6 +43,18 @@ const FilterSection = () => {
 			return tagColors
 		}
 		return tagColors
+	}
+	const tagRender = () => {
+		const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
+			event.preventDefault()
+			event.stopPropagation()
+		}
+		return (
+			<AntTag
+				onMouseDown={onPreventMouseDown}
+				style={{ marginRight: 3 }}
+			></AntTag>
+		)
 	}
 
 	const Select = ({
