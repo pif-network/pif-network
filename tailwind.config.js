@@ -1,4 +1,4 @@
-const plugin = require('tailwindcss/plugin')
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   mode: 'jit',
@@ -31,7 +31,8 @@ module.exports = {
     },
     fontFamily: {
       lora: ['Lora', 'serif'],
-      manrope: ['Manrope', 'san-serif'],
+      manrope: ['Manrope', 'sans-serif'],
+      'bm-daniel': ['BMDaniel', 'sans-serif'],
     },
     fontSize: {
       caption: ['0.75rem', { lineHeight: '1rem' }],
@@ -129,15 +130,15 @@ module.exports = {
     // TODO: add type declaration for this, although it's not working..
     require('tailwindcss-ripple')(),
     // @ts-expect-error: Expression not callable, importing 'plugin'
-    plugin(function({ matchUtilities, addUtilities, addComponents, theme }) {
+    plugin(function ({ matchUtilities, addUtilities, addComponents, theme }) {
       matchUtilities(
         {
           word: value => ({
             wordSpacing: value,
           }),
         },
-        { values: theme('wordSpacing') },
-      )
+        { values: theme('wordSpacing') }
+      );
 
       addUtilities({
         'text-mask': {
@@ -148,7 +149,7 @@ module.exports = {
           background:
             'linear-gradient(179.95deg, #170330 9.05%, rgba(23, 3, 48, 0.1) 48.73%, rgba(23, 3, 48, 0.410738) 48.73%, rgba(23, 3, 48, 0.1) 48.73%)',
         },
-      })
+      });
 
       addComponents({
         '.card-mentor': {
@@ -160,7 +161,7 @@ module.exports = {
           justifySelf: 'center',
           transition: 'all 0.3s cubic- bezier(0.25, 0.45, 0.45, 0.95)',
         },
-      })
+      });
     }),
   ],
-}
+};

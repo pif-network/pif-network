@@ -1,27 +1,26 @@
-import { RoleChoosingPopover } from './components'
+import { RoleChoosingPopover } from './components';
 
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-import Image from 'next/image'
-import Head from 'next/head'
+import { useState } from 'react';
+import Image from 'next/image';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 
-import { AuthService } from '~/services'
-import { getErrorMessage } from '~/lib/types/service'
-import { Link, Input as FormikInput, Button } from '~/components/ui'
-import { INTERNAL_URI } from '~/shared/constant'
+import { AuthService } from '~/services';
+import { getErrorMessage } from '~/lib/types/service';
+import { Link, Input as FormikInput, Button } from '~/components/ui';
+import { INTERNAL_URI } from '~/shared/constant';
 
-import { object, string } from 'yup'
-import { Field, Form, FormikProvider, useFormik } from 'formik'
+import { object, string } from 'yup';
+import { Field, Form, FormikProvider, useFormik } from 'formik';
 
-import { Row, Col, Alert, Divider } from 'antd'
-
-type Role = 'Mentor' | 'Mentee' | null
+import { Row, Col, Alert, Divider } from 'antd';
+import { UserRole } from '~/lib/types/user';
 
 const CreateAccount = () => {
-  const [message, setMessage] = useState('')
-  const [shouldRegisterWithEmail, setShouldRegisterWithEmail] = useState(false)
-  const [role, setRole] = useState<Role>()
-  const router = useRouter()
+  const [message, setMessage] = useState('');
+  const [shouldRegisterWithEmail, setShouldRegisterWithEmail] = useState(false);
+  const [role, setRole] = useState<UserRole>();
+  const router = useRouter();
 
   const validationSchema = object().shape({
     name: string()
@@ -37,7 +36,7 @@ const CreateAccount = () => {
       .min(6, 'Password không được ngắn hơn 6 ký tự.')
       .max(128, 'Password không được dài quá 128 ký tự.')
       .required('Vui lòng nhập mật khẩu.'),
-  })
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -47,27 +46,31 @@ const CreateAccount = () => {
     },
     validationSchema,
     onSubmit: async data => {
-      setMessage('')
-      try {
-        await AuthService.register(data)
-        router.push(INTERNAL_URI.COMPLETE_PROFILE)
-      } catch (error) {
-        const errorMessage = getErrorMessage(error)
-        console.log(errorMessage)
+      if (role) {
+        setMessage('');
+        try {
+          await AuthService.register({ ...data, role });
+          router.push(INTERNAL_URI.COMPLETE_PROFILE);
+        } catch (error) {
+          const errorMessage = getErrorMessage(error);
+          console.log(errorMessage);
 
-        switch (errorMessage) {
-          case 'Email is already taken':
-            setMessage('Email này đã được dùng đăng ký tài khoản.')
-            break
-          case undefined:
-            setMessage('Đã có lỗi xảy ra. Vui lòng thử lại.')
-            break
-          default:
-            setMessage(errorMessage)
+          switch (errorMessage) {
+            case 'Email is already taken':
+              setMessage('Email này đã được dùng đăng ký tài khoản.');
+              break;
+            case undefined:
+              setMessage('Đã có lỗi xảy ra. Vui lòng thử lại.');
+              break;
+            default:
+              setMessage(errorMessage);
+          }
         }
+      } else {
+        setMessage('Hãy chọn vai trò của bạn.');
       }
     },
-  })
+  });
 
   return (
     <div className="bg-[#fafafa]">
@@ -77,8 +80,6 @@ const CreateAccount = () => {
 
       <article className="grid place-items-center xl:inline mx-2 md:mx-6 lg:mx-12 xl:mx-24 px-0 md:px-16 py-0 md:py-12">
         <Row className="" align="middle" justify="center">
-          {/* <Col className="hidden md:inline md:pt-12" xs={0} sm={12}> */}
-          {/* Left */}
           <Col
             className="max-w-2xl h-full mt-10 ml-12"
             xs={0}
@@ -180,7 +181,7 @@ const CreateAccount = () => {
 
               {shouldRegisterWithEmail && (
                 <FormikProvider value={formik}>
-                  <Form className='max-w-md'>
+                  <Form className="max-w-md">
                     {message && (
                       <Alert
                         className="mt-2 mb-6 font-manrope"
@@ -218,10 +219,12 @@ const CreateAccount = () => {
                           type="submit"
                           fillType="filled"
                           size="medium"
-                          className={`w-full rounded-lg ${!(formik.isValid && formik.dirty)
+                          className={`w-full rounded-lg ${
+                            !(formik.isValid && formik.dirty)
                               ? '!bg-primary-800/60'
                               : ''
-                            } text-[19px] md:text-sub-heading`}
+                          } text-[19px] md:text-sub-heading`}
+                          disabled={formik.isValid && formik.dirty}
                         />
                       )}
                     </div>
@@ -232,7 +235,7 @@ const CreateAccount = () => {
               <div className="mt-4 mb-4 text-center font-manrope font-regular text-body-sm">
                 Đã có tài khoản?{' '}
                 <span>
-                  <Link href="/login">Đăng nhập.</Link>
+                  <Link href={INTERNAL_URI.LOGIN}>Đăng nhập.</Link>
                 </span>
               </div>
             </section>
@@ -240,7 +243,7 @@ const CreateAccount = () => {
         </Row>
       </article>
     </div>
-  )
-}
+  );
+};
 
-export default CreateAccount
+export default CreateAccount;

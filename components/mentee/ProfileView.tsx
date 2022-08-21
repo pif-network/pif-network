@@ -1,17 +1,21 @@
-import Head from 'next/head'
-import Link from 'next/link'
+import Head from 'next/head';
+import Link from 'next/link';
 
-import { Mentee } from '~/lib/types/user'
+import { User } from '~/lib/types/user';
 
-import { Row, Col } from 'antd'
+import { Row, Col } from 'antd';
 import {
   CalendarOutlined,
   MailOutlined,
   PhoneOutlined,
   ArrowLeftOutlined,
-} from '@ant-design/icons'
+} from '@ant-design/icons';
 
-const MenteeProfileView = ({ currentUser }: { currentUser: Mentee | null }) => {
+const MenteeProfileView = ({
+  currentUser,
+}: {
+  currentUser: User<'Mentee' | 'Mentor'> | null;
+}) => {
   return (
     <>
       <Head>
@@ -21,10 +25,10 @@ const MenteeProfileView = ({ currentUser }: { currentUser: Mentee | null }) => {
       <div className="min-h-screen-85 overflow-hidden flex">
         <div className="overflow-hidden w-screen my-3 bg-white">
           <div className="bg-primary md:h-48 sm:h-40 w-screen">
-            {currentUser?.avatarUrl ? (
+            {currentUser?.avatar ? (
               <div className="ml-4 md:ml-24 translate-y-2/3 md:translate-y-1/3 ">
                 <img
-                  src={`${currentUser?.avatarUrl}`}
+                  src={`${currentUser?.avatar}`}
                   className="rounded-full w-32 h-32 md:w-56 md:h-56"
                   alt="My profile picture"
                 />
@@ -44,7 +48,7 @@ const MenteeProfileView = ({ currentUser }: { currentUser: Mentee | null }) => {
               {currentUser?.name}
             </h3>
             <h6 className="text-xl font-semibold text-primary leading-7">
-              {currentUser?.school[0]?.name}
+              {currentUser?.school}
             </h6>
           </div>
           <Row className="border-t border-gray-200 py-3">
@@ -74,11 +78,11 @@ const MenteeProfileView = ({ currentUser }: { currentUser: Mentee | null }) => {
                     Tổng quan về bạn
                   </h6>
                   <ul className="w-full rounded-lg">
-                    {currentUser?.dateOfBirth && (
+                    {currentUser?.birthday && (
                       <li className="flex items-center">
                         <CalendarOutlined className="text-base text-primary w-8 h-8 bg-lightgray rounded-full" />
                         <span className="ml-4 text-base leading-5">
-                          {currentUser.dateOfBirth}
+                          {currentUser.birthday}
                         </span>
                       </li>
                     )}
@@ -105,20 +109,20 @@ const MenteeProfileView = ({ currentUser }: { currentUser: Mentee | null }) => {
                   <h6 className="mb-2 text-xl font-semibold leading-7">
                     Nơi học tập
                   </h6>
-                  <ul className="list-disc list-outside ml-6">
-                    {currentUser?.school &&
-                      currentUser.school.map((school, index) => (
-                        <li key={index} className="text-primary">
-                          <span className="text-black font-semibold text-base leading-5">
-                            {school.name}
-                          </span>
-                          <br />
-                          <p className="text-black font-normal text-base leading-5">
-                            {school.major}
-                          </p>
-                        </li>
-                      ))}
-                  </ul>
+                  {/* <ul className="list-disc list-outside ml-6"> */}
+                  {/*   {currentUser?.school && */}
+                  {/*     currentUser.school.map((school, index) => ( */}
+                  {/*       <li key={index} className="text-primary"> */}
+                  {/*         <span className="text-black font-semibold text-base leading-5"> */}
+                  {/*           {school.name} */}
+                  {/*         </span> */}
+                  {/*         <br /> */}
+                  {/*         <p className="text-black font-normal text-base leading-5"> */}
+                  {/*           {school.major} */}
+                  {/*         </p> */}
+                  {/*       </li> */}
+                  {/*     ))} */}
+                  {/* </ul> */}
                 </div>
                 <hr />
                 <div className="mt-3 mb-16">
@@ -126,18 +130,17 @@ const MenteeProfileView = ({ currentUser }: { currentUser: Mentee | null }) => {
                     Nơi làm việc
                   </h6>
                   <ul className="list-disc list-outside ml-6">
-                    {currentUser?.exp &&
-                      currentUser.exp.map((exp, index) => (
-                        <li key={index} className="text-primary">
-                          <span className="text-black font-semibold text-base leading-5">
-                            {exp.name}
-                          </span>
-                          <br />
-                          <p className="text-black font-normal text-base leading-5">
-                            {exp.position}
-                          </p>
-                        </li>
-                      ))}
+                    {currentUser?.exp && (
+                      <li className="text-primary">
+                        <span className="text-black font-semibold text-base leading-5">
+                          {currentUser.exp.title}
+                        </span>
+                        <br />
+                        <p className="text-black font-normal text-base leading-5">
+                          {currentUser.exp.title}
+                        </p>
+                      </li>
+                    )}
                   </ul>
                 </div>
               </div>
@@ -146,7 +149,7 @@ const MenteeProfileView = ({ currentUser }: { currentUser: Mentee | null }) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default MenteeProfileView
+export default MenteeProfileView;

@@ -1,41 +1,49 @@
-export interface Mentor {
-  id: number
-  name: string
-  bio: string
-  domainKnowledge: string
-  avatarUrl: string
-  fbUrl: string
-  githubUrl: string
-  linkedinUrl: string
-  bookingUrl: string
-  exp: {
-    name: string
-    position: string
-    startDate?: string
-    endDate?: string
-  }[]
+export type UserRole = 'Mentor' | 'Mentee';
+
+interface BaseMentee {}
+interface BaseMentor {
+  scopes: string[];
+  fields: string[];
+  offers: string[];
 }
 
+interface BaseUser<R extends UserRole> {
+  id: number;
+  userId: number;
+  avatar?: string;
+  /** to satisfy tsc */
+  avatarUrl?: string;
+  name: string;
+  birthday?: Date;
+  email: string;
+  phone?: string;
+  description?: string;
+  school?: string;
+  location: string;
+  github?: string;
+  linkedin?: string;
+  bookingUrl: string;
+  exp?: {
+    title: string;
+    workspace: string;
+  };
+  isActive?: boolean;
+  isConfirmed?: boolean;
+  method?: string;
+  readonly role: R;
+  memberSince: Date;
+  updatedAt: Date;
+  createdAt: Date;
+}
+
+export type User<R extends UserRole> = R extends 'Mentor'
+  ? BaseUser<'Mentor'> & BaseMentor
+  : BaseUser<'Mentee'> & BaseMentee;
+
+/** to satisfy tsc */
 export interface Mentee {
-  id: number
-  name: string
-  email: string
-  memberSince: string
-  hasConfirmedEmail: boolean
-  avatarUrl: string
-  isActive: boolean
-
-  dateOfBirth: string
-  phone: string
-  school: {
-    name: string
-    major: string
-  }[]
-  exp: {
-    name: string
-    position: string
-  }[]
+  [key: string]: any;
 }
-
-// export type User = Mentor | Mentee
-export type User = Mentee
+export interface Mentor {
+  [key: string]: any;
+}
