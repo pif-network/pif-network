@@ -1,5 +1,5 @@
-import { FAQs } from '~/shared/constant'
-import FAQAccordionItem from './FAQAccordionItem'
+import { FAQs } from '~/shared/constant';
+import FAQAccordionItem from './FAQAccordionItem';
 
 const FAQSection = () => {
   return (
@@ -15,7 +15,7 @@ const FAQSection = () => {
 
       <div className="mt-14 max-w-2xl mx-auto">
         {FAQs.map((item, idx) => (
-          <FAQAccordionItem idx={idx} FAQ={item} />
+          <FAQAccordionItem key={idx} idx={idx} FAQ={item} />
         ))}
       </div>
 
@@ -29,7 +29,7 @@ const FAQSection = () => {
         </p>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default FAQSection
+export default FAQSection;
