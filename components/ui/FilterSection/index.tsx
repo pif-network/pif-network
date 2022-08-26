@@ -132,7 +132,7 @@ const FilterSection = () => {
 						{phamVi.map(select => {
 							const tagColor = randomTagColor()
 							return (
-								<div className="inline-flex m-1.5">
+								<div className="inline-flex m-0.5">
 									<Tag
 										type="filled"
 										color={tagColor}
