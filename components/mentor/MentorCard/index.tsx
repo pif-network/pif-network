@@ -1,14 +1,14 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
-import { Mentor } from '~/lib/types/user'
-import { FlagLine, PinLine } from '~/components/ui/svgs/Icons'
+import { User } from '~/lib/types/user';
+import { FlagLine, PinLine } from '~/components/ui/svgs/Icons';
 
-const MentorCard = ({ mentor }: { mentor: Partial<Mentor> }) => {
+const MentorCard = ({ mentor }: { mentor: User<'Mentor'> }) => {
   return (
     <Link href={`mentors/${mentor.id}`}>
       <div
         className="card-mentor shadow-2xl hover:scale-105 rounded-xl overflow-hidden"
-        style={{ background: `url(${mentor.avatarUrl}) no-repeat center` }}
+        style={{ background: `url(${mentor.avatar}) no-repeat center` }}
       >
         <div className="w-full h-full text-mask">
           <div className="absolute bottom-0 left-[30px] ">
@@ -17,7 +17,7 @@ const MentorCard = ({ mentor }: { mentor: Partial<Mentor> }) => {
             </h5>
             {mentor.exp && (
               <p className="text-gray-200 font-manrope font-regular text-body-sm mb-3">
-                {mentor.exp[0]?.name}
+                {mentor.exp.title}
               </p>
             )}
 
@@ -26,23 +26,26 @@ const MentorCard = ({ mentor }: { mentor: Partial<Mentor> }) => {
                 <li className="flex">
                   <PinLine colour="white" />
                   <span className="text-white font-manrope font-regular text-body-md ml-2">
-                    {mentor.exp[0]?.position}
+                    {mentor.exp.workspace}
                   </span>
                 </li>
               )}
 
               <li className="flex">
                 <FlagLine colour="white" width="16" height="16" />
-                <span className="text-white font-manrope font-regular text-body-md ml-2">
-                  {mentor.domainKnowledge}
-                </span>
+                {mentor.scopes &&
+                  mentor.scopes.map(scope => {
+                    <span className="text-white font-manrope font-regular text-body-md ml-2">
+                      {scope}
+                    </span>;
+                  })}
               </li>
             </ul>
           </div>
         </div>
       </div>
     </Link>
-  )
-}
+  );
+};
 
-export default MentorCard
+export default MentorCard;

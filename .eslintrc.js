@@ -18,5 +18,6 @@ module.exports = {
     '@typescript-eslint/no-empty-interface': 'off',
     // a bit too fancy at this point
     'react/display-name': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
   },
 };
