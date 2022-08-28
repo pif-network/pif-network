@@ -82,6 +82,11 @@ module.exports = {
         300: '#1AACA3',
       },
     },
+    ripple: {
+      ripple: theme => ({
+        colors: theme('colors'),
+      }),
+    },
     extend: {
       lineHeight: {
         12: '3rem',
@@ -115,12 +120,16 @@ module.exports = {
         'screen/4': 'calc(100vh / 4)',
         'screen/5': 'calc(100vh / 5)',
       },
+      scale: {
+        175: '1.75',
+      },
     },
   },
   plugins: [
+    // TODO: add type declaration for this, although it's not working..
     require('tailwindcss-ripple')(),
     // @ts-expect-error: Expression not callable, importing 'plugin'
-    plugin(function ({ matchUtilities, addUtilities, addComponents, theme }) {
+    plugin(function({ matchUtilities, addUtilities, addComponents, theme }) {
       matchUtilities(
         {
           word: value => ({

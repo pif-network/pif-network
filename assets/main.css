@@ -47,4 +47,10 @@
 .ant-select-multiple .ant-select-selection-item {
 	background: white;
 	border: solid 0px white;
+.ant-input:hover {
+	border-color: #170330;
+}
+
+.ant-input-affix-wrapper:hover {
+	border-color: #170330 !important;
 }
