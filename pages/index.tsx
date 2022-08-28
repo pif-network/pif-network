@@ -12,7 +12,7 @@ import {
   Feedback,
   Button,
   SectionTitle,
-  FAQs,
+  FAQSection,
 } from '~/components/ui';
 import { MentorCard } from '~/components/mentor';
 import { RANDOM_MENTORS } from '~/shared/constant';
@@ -74,13 +74,13 @@ const HomePage = () => {
 
         <Values />
 
-       {/* <div className="mt-16 md:mt-32" />
+        {/* <div className="mt-16 md:mt-32" />
 
          <Feedback /> */}
 
         <div className="mt-16 md:mt-32" />
 
-        <FAQs />
+        <FAQSection />
 
         {/* Space to footer */}
         <div className="mb-4" />
