@@ -14,6 +14,8 @@
 		justify-self: center;
 		transition: all 0.3s cubic-bezier(0.25, 0.45, 0.45, 0.95);
 	}
+
+	
 }
 
 @tailwind utilities;
@@ -38,6 +40,14 @@
 	}
 }
 
+.ant-select-multiple .ant-select-selection-placeholder {
+	color: black;
+}
+
+.ant-select-multiple .ant-select-selection-item {
+	background: white;
+	border: solid 0px white;
+}
 .ant-input:hover {
 	border-color: #170330;
 }
