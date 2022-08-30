@@ -42,7 +42,10 @@ const SearchPage = () => {
 
   return (
     <div className="container mx-auto">
-      <SectionTitle content="Lựa chọn mentor phù hợp với bạn tại đây" />
+      <SectionTitle
+        className="mb-4"
+        content="Lựa chọn mentor phù hợp với bạn tại đây"
+      />
       <div>
         <FilterSection></FilterSection>
       </div>
