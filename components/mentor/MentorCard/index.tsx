@@ -4,6 +4,7 @@ import { Mentor } from '~/lib/types/user'
 import { FlagLine, PinLine } from '~/components/ui/svgs/Icons'
 import { Skeleton } from 'antd'
 import { useEffect, useState } from 'react'
+import MentorCardSkeleton from './MentorCardSkeleton'
 
 const MentorCard = ({ mentor }: { mentor: Partial<Mentor> }) => {
 	// const [isLoading, setIsLoading] = useState(true)
@@ -17,10 +18,11 @@ const MentorCard = ({ mentor }: { mentor: Partial<Mentor> }) => {
 	return (
 		<Link href={`mentors/${mentor.id}`}>
 			{/* {isLoading ? (
-				<Skeleton.Avatar active size={200} shape="square" />
+				<MentorCardSkeleton />
 			) : ( */}
 			<div
-				className="card-mentor shadow-2xl hover:scale-105 rounded-xl overflow-hidden animate__animated animate__fadeInRight"
+				className="card-mentor shadow-2xl hover:scale-105 rounded-xl overflow-hidden "
+				// animate__animated animate__fadeInRight
 				style={{ background: `url(${mentor.avatarUrl}) no-repeat center` }}
 			>
 				<div className="w-full h-full text-mask">
