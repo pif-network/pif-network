@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap');
 
 @tailwind base;
@@ -25,15 +25,6 @@
 			rgba(28, 28, 28, 0.3559) 36.07%,
 			rgba(87, 87, 87, 0.278144) 45.96%,
 			rgba(255, 255, 255, 0) 61.23%
-		);
-	}
-	.value-card--text-mask {
-		background: linear-gradient(
-			179.95deg,
-			#170330 9.05%,
-			rgba(23, 3, 48, 0.1) 48.73%,
-			rgba(23, 3, 48, 0.410738) 48.73%,
-			rgba(23, 3, 48, 0.1) 48.73%
 		);
 	}
 }

@@ -38,7 +38,16 @@ export const FAQs = [
 
 export const INTERNAL_URI = {
 	HOME: '/',
+	LOGIN: '/login',
 	SEARCH: '/search',
+
+	REGISTER: '/user/create-account',
+	COMPLETE_PROFILE: '/user/complete-profile',
+	FORGOT_PASSWORD: '/user/forgot-password',
+	CHANGE_PASSWORD: '/user/change-password',
+	SUCCESSFULLY_REGISTERED: '/user/successfully-registered',
+	VERIFY_EMAIL: '/user/verify-email',
+
 	MENTOR_PROFILE: (id: string) => `/mentors/${id}` as const,
 } as const
 

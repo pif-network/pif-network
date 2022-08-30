@@ -81,6 +81,9 @@ const HomePage = () => {
 				<div className="mt-16 md:mt-32" />
 
 				<FAQs />
+
+				{/* Space to footer */}
+				<div className="mb-4" />
 			</div>
 		</>
 	)
