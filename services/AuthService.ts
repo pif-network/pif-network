@@ -9,7 +9,7 @@ import { ENDPOINT } from '~/shared/constant'
 import { Mentee } from '~/lib/types/user'
 
 const register = async ({ email, password, name = '' }: RegisterParams) => {
-  const response: APIResponse = await http.post(ENDPOINT.REGISTER, {
+  const response: APIResponse<Mentee> = await http.post(ENDPOINT.REGISTER, {
     email,
     name,
     password,

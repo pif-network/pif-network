@@ -1,4 +1,4 @@
-import { SVGProps } from '.'
+import { SVGProps } from '.';
 
 const ChevronRight = ({ colour, ...props }: SVGProps) => {
   return (
@@ -11,13 +11,13 @@ const ChevronRight = ({ colour, ...props }: SVGProps) => {
       {...props}
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M15.108 12.0361L8.57251 5.50056L9.49951 4.57056L16.5 11.5741V12.5011L9.49951 19.5001L8.57251 18.5716L15.108 12.0361Z"
         fill={colour}
       />
     </svg>
-  )
-}
+  );
+};
 
-export default ChevronRight
+export default ChevronRight;

@@ -1,7 +1,7 @@
-import { SVGProps } from '.'
+import { SVGProps } from './';
 
-const LocationFill = ({ colour, ...props }: SVGProps) => {
-  ;<svg
+const LocationFill = ({ colour, ...props }: SVGProps) => (
+  <svg
     width="24"
     height="24"
     viewBox="0 0 24 24"
@@ -14,6 +14,6 @@ const LocationFill = ({ colour, ...props }: SVGProps) => {
       fill={colour}
     />
   </svg>
-}
+);
 
-export default LocationFill
+export default LocationFill;
