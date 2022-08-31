@@ -51,8 +51,6 @@ const HomePage = () => {
             )}
           </div>
         </div> */}
-
-        <Feedback />
       </div>
     </>
   )

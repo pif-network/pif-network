@@ -24,12 +24,12 @@ const Feedback = () => {
             />
 
             <div className="grid items-center justify-center absolute md:top-[83px] md:left-[121px] md:w-[830px] sm:top-[24px] sm:left-[36px]">
-              <p className="text-black font-lora font-semi-bold md:text-[32px] md:leading-10 md:word-[-8px] sm:word-[-3px] sm:text-[10px] text-left">
+              <p className="text-black font-lora font-semi-bold md:text-[32px] md:leading-10 md:word-[-8px] sm:word-[-3px] sm:text-[10px] text-left mb-16 md:mb-0">
                 My gave me a lot of valuable advice, especially how to improve
                 my portfolio, as well as how to correctly communicate with
                 people.
               </p>
-              <p className="text-gray-400 font-manrope font-regular text-semi-bold md:text-heading-sm sm:text-[8px] md:word-[0.8px] sm:word-[-0.3px] text-left">
+              <p className="text-gray-400 font-manrope font-regular text-semi-bold md:text-heading-sm sm:text-[8px] md:word-[0.8px] sm:word-[-0.3px] text-left absolute md:static">
                 And something more that I don’t remember
               </p>
             </div>
@@ -42,14 +42,15 @@ const Feedback = () => {
 
           <div className="flex flex-row justify-between">
             <div>
-              <Avatar
+              <img
                 src={MenteeAvatar.src}
                 className="absolute hidden md:inline-block md:top-[306px] md:left-[121px] md:w-[64px] md:h-[64px]"
-              ></Avatar>
-              <Avatar
+              ></img>
+
+              <img
                 src={MenteeAvatar.src}
-                className="absolute md:hidden sm:top-[91px] sm:left-[34px] sm:w-[19px] sm:h-[19px]"
-              ></Avatar>
+                className=" absolute md:hidden sm:top-[91px] sm:left-[34px] sm:w-[19px] sm:h-[19px]"
+              ></img>
 
               <div className="absolute md:top-[316px] md:left-[195px] sm:top-[92px] sm:left-[55px]">
                 <p className="text-primary-900 font-lora font-semi-bold md:text-sub-heading sm:text-[7px] md:word-[-6px] sm:word-[-2px]">
