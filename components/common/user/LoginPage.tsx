@@ -13,6 +13,8 @@ import { object, string } from 'yup';
 
 import { Row, Col, Divider, Alert } from 'antd';
 
+import { useSession, signIn, signOut } from 'next-auth/react';
+
 const Login = () => {
   const [message, setMessage] = useState<string | undefined>('');
   const [shouldRegisterWithEmail, setShouldRegisterWithEmail] = useState(false);
@@ -120,6 +122,7 @@ const Login = () => {
                   fillType="outlined"
                   size="medium"
                   className="max-w-md w-full border-[1px] border-gray-600/50 text-[18px] md:text-sub-heading"
+                  onClick={() => signIn()}
                 />
               </div>
 
