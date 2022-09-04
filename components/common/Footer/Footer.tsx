@@ -9,7 +9,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-[url('~/components/ui/svgs/FooterBackground-sm.svg')] bg-cover font-manrope md:bg-[url('~/components/ui/svgs/FooterBackground-lg.svg')] md:py-8">
+    <footer className="bg-[url('/FooterBackground-sm.svg')] bg-cover font-manrope md:bg-[url('/FooterBackground-lg.svg')] md:py-8">
       <div className="flex flex-col max-w-[100%] pt-4 md:grid md:grid-cols-[50%_50%] md:pt-14">
         <div className="pl-4 pt-9 text-body-md sm:text-body md:pt-0 md:pl-0 md:m-auto md:text-sub-heading text-gray-400">
           <div>SheCodes Việt Nam</div>

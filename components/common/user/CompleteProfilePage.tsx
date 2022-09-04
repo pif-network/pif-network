@@ -1,23 +1,23 @@
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import Image from 'next/image'
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import Image from 'next/image';
 
-import { UserService } from '~/services'
-import { getErrorMessage } from '~/lib/types/service'
-import { Mentee } from '~/lib/types/user'
-import { Input as FormikInput } from '~/components/ui'
+import { UserService } from '~/services';
+import { getErrorMessage } from '~/lib/types/service';
+import { User } from '~/lib/types/user';
+import { Input as FormikInput } from '~/components/ui';
 
-import { Field, FieldArray, Form, FormikProvider, useFormik } from 'formik'
-import { object, string, array } from 'yup'
+import { Field, FieldArray, Form, FormikProvider, useFormik } from 'formik';
+import { object, string, array } from 'yup';
 
-import { ArrowLeftOutlined, DeleteOutlined } from '@ant-design/icons'
-import { Col, Row, Tooltip, Button, Input } from 'antd'
-import Head from 'next/head'
+import { ArrowLeftOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Col, Row, Tooltip, Button, Input } from 'antd';
+import Head from 'next/head';
 
 const CompleteProfile = () => {
-  const router = useRouter()
-  const [message, setMessage] = useState('')
+  const router = useRouter();
+  const [message, setMessage] = useState('');
 
   const validationSchema = object().shape({
     dateOfBirth: string().required('Vui lòng nhập ngày sinh'),
@@ -29,15 +29,15 @@ const CompleteProfile = () => {
       object().shape({
         name: string().max(50, 'Tên trường học không được dài quá 50 ký tự'),
         major: string().max(50, 'Tên ngành học không được dài quá 50 ký tự'),
-      }),
+      })
     ),
     exp: array().of(
       object().shape({
         name: string().max(50, 'Tên công ty không được dài quá 50 ký tự'),
         position: string().max(50, 'Tên công việc không được dài quá 50 ký tự'),
-      }),
+      })
     ),
-  })
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -59,16 +59,16 @@ const CompleteProfile = () => {
     validationSchema,
     onSubmit: async values => {
       try {
-        setMessage('')
-        await UserService.updateProfile<Partial<Mentee>>(values)
+        setMessage('');
+        await UserService.updateProfile(values);
 
-        router.push('/')
+        router.push('/');
       } catch (error) {
-        const errorMessage = getErrorMessage(error)
-        setMessage(errorMessage)
+        const errorMessage = getErrorMessage(error);
+        setMessage(errorMessage);
       }
     },
-  })
+  });
 
   return (
     <>
@@ -238,7 +238,7 @@ const CompleteProfile = () => {
         </Row>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default CompleteProfile
+export default CompleteProfile;
