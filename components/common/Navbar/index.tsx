@@ -2,25 +2,29 @@ import Link from 'next/link'
 import UserNav from './UserNav'
 
 const NavBar = () => {
-  return (
-    <nav className="flex items-center justify-between flex-wrap pt-4 pb-2 px-4">
-      <div className="flex items-center flex-shrink-0 text-white mr-6">
-        <Link href="/" prefetch={false}>
-          <img
-            src="/images/logo.png"
-            width={130}
-            height={33}
-            alt="SheCodes Mentor"
-          />
-        </Link>
-      </div>
-      <div className="block">
-        <div className="flex items-center">
-          <UserNav />
-        </div>
-      </div>
-    </nav>
-  )
+	return (
+		<div className="container mx-auto sm:hidden md:block">
+			{/* <div className="flex "> */}
+			<nav className="flex items-center justify-between  pt-8 pb-8 px-16 ">
+				<div className="flex shrink-0  items-center font-semi-bold text-title-sm font-lora text-gray-700 mr-6 ">
+					<Link href="/" prefetch={false}>
+						<img
+							src="/images/logo.png"
+							width={130}
+							height={33}
+							alt="SheCodes Mentor"
+						/>
+					</Link>
+					{/* shecodes */}
+				</div>
+				<div className="inline-block ">
+					<div className="flex flex-wrap items-center">
+						<UserNav />
+					</div>
+				</div>
+			</nav>
+		</div>
+	)
 }
 
 export default NavBar
