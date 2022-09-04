@@ -11,7 +11,10 @@ import { ScrollObserver } from '~/lib/scroll';
 
 import { SessionProvider } from 'next-auth/react';
 
-const Website = ({ Component, pageProps }: AppProps) => {
+const Website = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) => {
   const [isAuthorised, setIsAuthorised] = useState(false);
   const router = useRouter();
   const currentUrl = router.asPath;
@@ -62,12 +65,10 @@ const Website = ({ Component, pageProps }: AppProps) => {
     <>
       <Head />
 
-      <ScrollObserver>
-        <Layout>{isAuthorised && <Component {...pageProps} />}</Layout>
-      </ScrollObserver>
-
-      <SessionProvider session={pageProps.session} refetchInterval={0}>
-        <Component {...pageProps} />
+      <SessionProvider session={session} refetchInterval={0}>
+        <ScrollObserver>
+          <Layout>{isAuthorised && <Component {...pageProps} />}</Layout>
+        </ScrollObserver>
       </SessionProvider>
     </>
   );
