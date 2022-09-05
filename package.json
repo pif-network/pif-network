@@ -26,6 +26,7 @@
     "rxjs": "^7.5.5",
     "styled-components": "^5.3.5",
     "tailwindcss-ripple": "^0.7.1",
+    "yarn": "^1.22.19",
     "yup": "^0.32.11"
   },
   "devDependencies": {

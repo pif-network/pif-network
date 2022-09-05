@@ -96,6 +96,7 @@ export const MentorProfile: React.FC<{ data: Mentor }> = ({ data }) => {
     setIsCreatingReview(false);
   };
 
+  // Button dat lich hen: neu chua auth -> text tool tip xin dang nhap, auth -> redirect to <sth> (chua co)
   return (
     <div className="px-6 py-10 md:px-48 md:py-24 font-manrope">
       <div className="flex flex-col md:flex-row justify-center items-center">
@@ -107,6 +108,7 @@ export const MentorProfile: React.FC<{ data: Mentor }> = ({ data }) => {
             <h1 className="text-title-sm md:text-title text-primary-900 font-lora font-semi-bold mb-2">
               {data.name}
             </h1>
+            
             <Button
               fillType="outlined"
               size="medium"

@@ -122,7 +122,7 @@ const Login = () => {
                   fillType="outlined"
                   size="medium"
                   className="max-w-md w-full border-[1px] border-gray-600/50 text-[18px] md:text-sub-heading"
-                  onClick={() => signIn()}
+                  onClick={() => signIn('google')}
                 />
               </div>
 
