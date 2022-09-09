@@ -3,15 +3,13 @@ import DoubleQuoteSm from '~/assets/feedback/feedback_double-quote-sm.png'
 import DoubleQuoteLg from '~/assets/feedback/feedback_double-quote-lg.png'
 import LineLG from '~/assets/feedback/feedback_line-lg.png'
 import MenteeAvatar from '~/assets/feedback/feedback_avatar.png'
-import { NumberSchema } from 'yup'
 
 interface feedbackCard {
-  num: number
   isActive: boolean
   onShow: () => void
 }
 
-const FeedbackCard = ({ isActive, onShow, num }: feedbackCard) => {
+const FeedbackCard = ({ isActive, onShow }: feedbackCard) => {
   return (
     <>
       {isActive && (
@@ -36,7 +34,6 @@ const FeedbackCard = ({ isActive, onShow, num }: feedbackCard) => {
                 <p className="text-gray-400 font-manrope font-regular text-semi-bold md:text-heading-sm sm:text-[8px] md:word-[0.8px] sm:word-[-0.3px] text-left absolute md:static">
                   And something more that I don’t remember
                 </p>
-                <div>{num}</div>
               </div>
             </div>
 

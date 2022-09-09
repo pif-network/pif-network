@@ -2,7 +2,7 @@ import FeedbackCard from './feedback_card'
 import { useState } from 'react'
 
 const Feedback = () => {
-  const [activeIndex, setActiveIndex] = useState(1)
+  const [activeIndex, setActiveIndex] = useState(0)
   return (
     <div>
       <div className="grid text-black font-lora font-semi-bold md:text-title-sm sm:text-heading-sm md:pb-11 sm:pb-8 justify-items-center sm:word-[-7px] md:word-[-10px]">
@@ -10,13 +10,13 @@ const Feedback = () => {
       </div>
       <FeedbackCard
         isActive={activeIndex === 0}
-        num={0}
-        onShow={() => setActiveIndex(0)}
+        onShow={() => {
+          setActiveIndex(1)
+        }}
       ></FeedbackCard>
       <FeedbackCard
-        num={1}
         isActive={activeIndex === 1}
-        onShow={() => setActiveIndex(1)}
+        onShow={() => setActiveIndex(0)}
       ></FeedbackCard>
     </div>
   )
