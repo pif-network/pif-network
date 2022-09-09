@@ -1,14 +1,17 @@
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject } from 'rxjs';
 
-import { http } from '~/services'
-import { Mentor, User } from '~/lib/types/user'
+import { User } from '~/lib/types/user';
+import { ENDPOINT } from '~/shared/constant';
+import { APIResponse } from '~/lib/types/service';
+
+import http from '.';
 
 const localUser = JSON.parse(
-  (typeof window === 'object' && localStorage.getItem('user')) || '""',
-)
-const userSubject = new BehaviorSubject<User | null>(
-  localUser ? localUser : null,
-)
+  (typeof window === 'object' && localStorage.getItem('user')) || '""'
+);
+const userSubject = new BehaviorSubject<User<'Mentee' | 'Mentor'> | null>(
+  localUser ? localUser : null
+);
 
 /**
  * Next-ed user will automatically be placed in localStorage.
@@ -16,46 +19,48 @@ const userSubject = new BehaviorSubject<User | null>(
 userSubject.subscribe(
   u =>
     typeof window === 'object' &&
-    localStorage.setItem('user', JSON.stringify(u)),
-)
+    localStorage.setItem('user', JSON.stringify(u))
+);
 
-const setUser = (user: User | null) => {
-  userSubject.next(user)
-}
+const setUser = (user: User<'Mentee' | 'Mentor'> | null) => {
+  userSubject.next(user);
+};
 
 const updateProfile = async <T>(updateData: T): Promise<void> => {
-  const response = await http.put('/mentees/me', updateData)
-  const newUser = response.data
+  const response: APIResponse<User<'Mentee' | 'Mentor'>> = await http.put(
+    ENDPOINT.UPDATE_USER_PROFILE,
+    updateData
+  );
+  const newUser = response.data.data;
 
-  setUser(newUser)
-}
+  setUser(newUser);
+};
 
-const getMentorById = (id: string | string[] | undefined) => {
-  return http.get(`/mentors/${id}`)
-}
+const getMentorById = async (id: string | string[] | undefined) => {
+  const response: APIResponse<User<'Mentor'>> = await http.get(
+    `${ENDPOINT.GET_MENTOR_BY_ID}${id}`
+  );
 
-const getAllMentors = async (): Promise<Mentor[]> => {
-  const response = await http.get('/mentors')
-  const mentors = response.data
+  return response;
+};
 
-  return mentors
-}
+const getAllMentors = async () => {
+  const response: APIResponse<User<'Mentor'>[]> = await http.get(
+    ENDPOINT.GET_ALL_MENTOR
+  );
 
-// const bookMentorById = id => {
-//   return http.post('/requests', {
-//     mentor_id: id,
-//   })
-// }
+  return response;
+};
 
 const UserService = {
   get currentUser() {
-    return userSubject.value
+    return userSubject.value;
   },
   onUser: () => userSubject.asObservable(),
   setUser,
   updateProfile,
   getAllMentors,
   getMentorById,
-}
+};
 
-export default UserService
+export default UserService;

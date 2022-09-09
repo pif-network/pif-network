@@ -1,6 +1,17 @@
+import axios from 'axios'
+
 import AuthService from './AuthService'
 import TokenService from './TokenService'
 import UserService from './UserService'
-import http from './Interceptors'
+import setupInterceptorsTo from './Interceptors'
 
-export { AuthService, TokenService, UserService, http }
+  const instance = axios.create({
+    baseURL: '/api',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+
+export { AuthService, TokenService, UserService }
+export default setupInterceptorsTo(instance)

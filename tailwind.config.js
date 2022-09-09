@@ -1,10 +1,15 @@
-const plugin = require('tailwindcss/plugin')
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   mode: 'jit',
-  content: ['./pages/**/*.{jsx,tsx}', './components/**/*.{jsx,tsx}'],
+  content: [
+    './pages/**/*.{jsx,tsx}',
+    './components/**/*.{jsx,tsx}',
+    './features/**/*.{jsx,tsx}',
+  ],
   safeList: [
     {
-      pattern: /^(.*?)/
+      pattern: /^(.*?)/,
     },
   ],
   theme: {
@@ -26,7 +31,8 @@ module.exports = {
     },
     fontFamily: {
       lora: ['Lora', 'serif'],
-      manrope: ['Manrope', 'san-serif'],
+      manrope: ['Manrope', 'sans-serif'],
+      'bm-daniel': ['BMDaniel', 'sans-serif'],
     },
     fontSize: {
       caption: ['0.75rem', { lineHeight: '1rem' }],
@@ -66,6 +72,21 @@ module.exports = {
         800: '#25044E',
         900: '#120227',
       },
+      red: {
+        100: '#B36670',
+        200: '#9E3A46',
+        300: '#851C2A',
+      },
+      cyan: {
+        100: '#6BB8B3',
+        200: '#40A59F',
+        300: '#1AACA3',
+      },
+    },
+    ripple: {
+      ripple: theme => ({
+        colors: theme('colors'),
+      }),
     },
     extend: {
       lineHeight: {
@@ -100,9 +121,13 @@ module.exports = {
         'screen/4': 'calc(100vh / 4)',
         'screen/5': 'calc(100vh / 5)',
       },
+      scale: {
+        175: '1.75',
+      },
     },
   },
   plugins: [
+    // TODO: add type declaration for this, although it's not working..
     require('tailwindcss-ripple')(),
     // @ts-expect-error: Expression not callable, importing 'plugin'
     plugin(function ({ matchUtilities, addUtilities, addComponents, theme }) {
@@ -112,15 +137,19 @@ module.exports = {
             wordSpacing: value,
           }),
         },
-        { values: theme('wordSpacing') },
-      )
+        { values: theme('wordSpacing') }
+      );
 
       addUtilities({
         'text-mask': {
           background:
             'linear-gradient(1.71deg,#000000 -5.31%,rgba(28, 28, 28, 0.3559) 36.07%, rgba(87, 87, 87, 0.278144) 45.96%, rgba(255, 255, 255, 0) 61.23%)',
         },
-      })
+        'value-card--text-mask': {
+          background:
+            'linear-gradient(179.95deg, #170330 9.05%, rgba(23, 3, 48, 0.1) 48.73%, rgba(23, 3, 48, 0.410738) 48.73%, rgba(23, 3, 48, 0.1) 48.73%)',
+        },
+      });
 
       addComponents({
         '.card-mentor': {
@@ -132,7 +161,7 @@ module.exports = {
           justifySelf: 'center',
           transition: 'all 0.3s cubic- bezier(0.25, 0.45, 0.45, 0.95)',
         },
-      })
+      });
     }),
   ],
-}
+};

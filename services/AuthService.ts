@@ -1,83 +1,101 @@
-import { http, TokenService, UserService } from '~/services'
+import http, { TokenService, UserService } from '~/services';
 import {
-  ChangePassword,
-  EmailVerificationResponse,
-  Login,
-  Register,
-  ResetPassword,
-  VerifyEmail,
-} from '~/lib/types/service'
+  APIResponse,
+  ChangePasswordParams,
+  LogInParams,
+  RegisterParams,
+} from '~/lib/types/service';
+import { User } from '~/lib/types/user';
+import { ENDPOINT } from '~/shared/constant';
 
-// TODO: Check what is the required params from BE
-const register: Register = async (email, password, name = '') => {
-  const response = await http.post('/mentees', {
+const register = async ({ name, email, password, role }: RegisterParams) => {
+  const response: APIResponse<User<typeof role>> = await http.post(
+    ENDPOINT.REGISTER,
+    {
+      name,
+      email,
+      password,
+      role,
+    }
+  );
+
+  return response;
+};
+
+const logIn = async ({ email, password }: LogInParams) => {
+  const responseLogInRequest: APIResponse<User<'Mentor' | 'Mentee'>> =
+    await http.post(ENDPOINT.LOGIN, {
+      email,
+      password,
+    });
+
+  const token = {
+    /** Since this request succeeded... */
+    accessToken: responseLogInRequest.headers['Authorization'] as string,
+    refreshToken: responseLogInRequest.headers['Refresh-Token'] as string,
+  };
+
+  TokenService.setToken(token);
+
+  /** Set tokens for all up-coming request. */
+  http.defaults.headers.common['Authorization'] = `Bearer ${token.accessToken}`;
+  http.defaults.headers.common['Refresh-Token'] = token.refreshToken;
+
+  const responseUserRequest: APIResponse<User<'Mentee' | 'Mentor'>> =
+    await http.get(ENDPOINT.GET_CURRENT_USER);
+  const user = responseUserRequest.data.data;
+  UserService.setUser(user);
+
+  return user;
+};
+
+const logOut = async () => {
+  TokenService.setToken(null);
+  UserService.setUser(null);
+};
+
+const requestPasswordReset = async (email: string) => {
+  const response: APIResponse = await http.post(ENDPOINT.RESET_PASSWORD, {
     email,
-    name,
-    password,
-  })
+  });
 
-  return response
-}
+  return response;
+};
 
-const login: Login = async (email, password) => {
-  const requestAuthResponse = await http.post('/mentees/auth', {
-    email,
-    password,
-  })
-  const token = requestAuthResponse.data
-  TokenService.setToken(token)
-
-  const requestUserResponse = await http.get('/mentee/me')
-  const user = requestUserResponse.data
-  UserService.setUser(user)
-}
-
-const logout = () => {
-  TokenService.setToken(null)
-  UserService.setUser(null)
-}
-
-const requestPasswordReset: ResetPassword = async email => {
-  const response = await http.post('/mentees/auth/password_reset_request', {
-    email,
-  })
-
-  return response
-}
-
-// TODO: check if BE compare the two password
-const requestPasswordChange: ChangePassword = async (
+const requestPasswordChange = async ({
   password,
   passwordConfirmation,
-) => {
-  const response = await http.post('/mentees/auth/password_change', {
+}: ChangePasswordParams) => {
+  const response: APIResponse = await http.post(ENDPOINT.CHANGE_PASSWORD, {
     password: password,
     password2: passwordConfirmation,
-  })
+  });
 
-  return response
-}
+  return response;
+};
 
-const requestEmailVerification: VerifyEmail = async token => {
-  const response: EmailVerificationResponse = await http.get(
-    `/mentees/auth/email_confirmation/${token}`,
-  )
-  const status = response.status
-  const message = response.data.message
-  let hasVerifiedSuccess = false
+const requestEmailVerification = async (
+  token: string | string[] | undefined
+) => {
+  const response: APIResponse = await http.get(
+    `${ENDPOINT.VERIFY_EMAIL}${token}`
+  );
+  const status = response.status;
+  const message = response.data.message;
+  let hasVerifiedSuccess = false;
 
-  status === 400 ? (hasVerifiedSuccess = false) : true
+  status === 200 ? (hasVerifiedSuccess = true) : false;
 
-  return { hasVerifiedSuccess, message }
-}
+  return { hasVerifiedSuccess, message };
+};
 
 const AuthService = {
   register,
-  login,
-  logout,
+  logIn,
+  logOut,
   requestPasswordReset,
   requestPasswordChange,
   requestEmailVerification,
-}
+};
 
-export default AuthService
+export default AuthService;
