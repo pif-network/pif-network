@@ -7,6 +7,7 @@ import MenteeAvatar from '~/assets/feedback/feedback_avatar.png'
 interface feedbackCard {
   isActive: boolean
   onShow: () => void
+
 }
 
 const FeedbackCard = ({ isActive, onShow }: feedbackCard) => {
@@ -31,7 +32,7 @@ const FeedbackCard = ({ isActive, onShow }: feedbackCard) => {
                   my portfolio, as well as how to correctly communicate with
                   people.
                 </p>
-                <p className="text-gray-400 font-manrope font-regular text-semi-bold md:text-heading-sm sm:text-[8px] md:word-[0.8px] sm:word-[-0.3px] text-left absolute md:static">
+                <p className="text-gray-400 font-manrope font-regular text-semi-bold md:text-[24px] sm:text-[8px] md:word-[3px] sm:word-[-0.3px] text-left absolute md:static">
                   And something more that I don’t remember
                 </p>
               </div>
