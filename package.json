@@ -48,8 +48,9 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
+      "yarn lint",
       "yarn prettier --write"
     ]
-  }
+  },
+  "packageManager": "yarn@3.2.3"
 }
