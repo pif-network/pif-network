@@ -1,7 +1,6 @@
 import { Select as AntSelect, Tag as AntTag } from 'antd';
 import { useState } from 'react';
 import { Tag } from '../Tag';
-import s from './FilterSection.module.css';
 
 type TagColorPreset = 'gray' | 'primary' | 'red' | 'cyan';
 
@@ -91,7 +90,8 @@ const FilterSection = () => {
   };
   return (
     <div>
-      <div className="flex justify-between gap-4 ml-84 mr-84">
+      <div className='flex justify-center'>
+      <div className="flex justify-between gap-4">
         <div className="w-[300px]">
           <Select
             values={linhVuc}
@@ -104,7 +104,7 @@ const FilterSection = () => {
             {linhVuc.map(select => {
               const tagColor = randomTagColor();
               return (
-                <div key={select} className="inline-flex m-1.5">
+                <div key={select} className="inline-flex m-0.5">
                   <Tag
                     type="outlined"
                     color={tagColor}
@@ -149,6 +149,8 @@ const FilterSection = () => {
           </div>
         </div>
       </div>
+      </div>
+      
     </div>
   );
 };
