@@ -43,25 +43,15 @@ const Feedback = () => {
       
       <div className='md:w-[1068px] md:mx-[186px] sm:w-[314px] sm:mx-[30px] overflow-x-scroll no-scrollbar'>
       <div className="flex" 
-      style={{transform: `translateX(-${activeIndex * 100}%)`,}}
+      style={{transform: `translateX(-${activeIndex * 100}%)`, transitionDuration: "2s",}}
       >
         <div className="flex justify-center">
-          {FEEDBACKS.map(item=> {
-        //     <FeedbackCard onPrevious={()=> handlePrevious(item.id)}
-        //     onNext={()=> handeNext(item.id)}
-        //     mainFeedback={item.mainFeedback}
-        // subFeedback={item.subFeedback}
-        // name={item.name}
-        // job={item.job}
-        // avatar={item.avatar}
-        //     ></FeedbackCard>
-          })}
           <FeedbackCard
         onNext={() => setActiveIndex(1)}
         onPrevious={() => setActiveIndex(0)}
         mainFeedback="My gave me a lot of valuable advice, especially how to improve
         my portfolio, as well as how to correctly communicate with
-        people. 1"
+        people."
         subFeedback='And something more that I don’t remember'
         name='Nguyễn Mai Anh'
         job='Student, UEH.'
@@ -75,7 +65,7 @@ const Feedback = () => {
         onPrevious={() => setActiveIndex(0)}
         mainFeedback="My gave me a lot of valuable advice, especially how to improve
         my portfolio, as well as how to correctly communicate with
-        people. 2"
+        people."
         subFeedback='And something more that I don’t remember'
         name='Nguyễn Mai Anh'
         job='Student, UEH.'
@@ -89,7 +79,7 @@ const Feedback = () => {
         onPrevious={() => setActiveIndex(1)}
         mainFeedback="My gave me a lot of valuable advice, especially how to improve
         my portfolio, as well as how to correctly communicate with
-        people. 3"
+        people."
         subFeedback='And something more that I don’t remember'
         name='Nguyễn Mai Anh'
         job='Student, UEH.'
