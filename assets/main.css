@@ -38,6 +38,9 @@
 			rgba(23, 3, 48, 0.1) 48.73%
 		);
 	}
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	  }
 }
 
 .ant-select-multiple .ant-select-selection-placeholder {

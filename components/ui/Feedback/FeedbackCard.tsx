@@ -5,7 +5,6 @@ import LineLG from '~/assets/feedback/feedback_line-lg.png'
 
 
 interface feedbackCard {
-  isActive: boolean
   onPrevious: () => void
   onNext: () => void
   mainFeedback: string
@@ -15,10 +14,9 @@ interface feedbackCard {
   avatar: string
 }
 
-const FeedbackCard = ({ isActive, onPrevious, onNext,  mainFeedback, subFeedback, name, job, avatar }: feedbackCard) => {
+const FeedbackCard = ({onPrevious, onNext,  mainFeedback, subFeedback, name, job, avatar }: feedbackCard) => {
   return (
     <>
-      {isActive && (
         <div className="flex justify-center">
           <div className="relative bg-gray-50 justify-items-center overflow-hidden rounded-2xl md:h-[426px] md:w-[1068px] sm:w-[314px] sm:h-[126px]">
             <div>
@@ -72,7 +70,7 @@ const FeedbackCard = ({ isActive, onPrevious, onNext,  mainFeedback, subFeedback
                 <ChevronRight
                   colour="black"
                   className="transform rotate-180 absolute hidden md:inline-block md:left-[840px] md:top-[333px]"
-                  onClick={onNext}
+                  onClick={onPrevious}
                 ></ChevronRight>
                 <ChevronRight
                   colour="black"
@@ -88,13 +86,12 @@ const FeedbackCard = ({ isActive, onPrevious, onNext,  mainFeedback, subFeedback
                 <ChevronRight
                   colour="black"
                   className="absolute md:hidden sm:w-[6px] sm:left-[260px] sm:top-[90px]"
-                  onClick={onPrevious}
+                  onClick={onNext}
                 ></ChevronRight>
               </div>
             </div>
           </div>
         </div>
-      )}
     </>
   )
 }
