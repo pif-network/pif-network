@@ -2,23 +2,27 @@ import { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-
 import { AuthService } from '~/services';
 import { getErrorMessage } from '~/lib/types/service';
 import { Link, Input as FormikInput, Button } from '~/components/ui';
 import { INTERNAL_URI } from '~/shared/constant';
-
 import { FormikProvider, useFormik, Form, Field } from 'formik';
 import { object, string } from 'yup';
-
 import { Row, Col, Divider, Alert } from 'antd';
+import { useSession, signIn, signOut, getSession } from 'next-auth/react';
+import { GetServerSidePropsContext } from 'next';
+import { unstable_getServerSession } from "next-auth/next"
 
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { authOptions } from "~/pages/api/auth/[...nextauth]";
+
+
 
 const Login = () => {
+
   const [message, setMessage] = useState<string | undefined>('');
   const [shouldRegisterWithEmail, setShouldRegisterWithEmail] = useState(false);
   const router = useRouter();
+  const { data: session } = useSession();
 
   const validationSchema = object().shape({
     email: string().required('Hãy nhập Email').email('Email không hợp lệ'),
@@ -76,6 +80,7 @@ const Login = () => {
       <Head>
         <title>Welcome back!</title>
       </Head>
+      
 
       <article className="grid place-items-center xl:inline mx-2 md:mx-6 lg:mx-12 xl:mx-24 px-0 md:px-16 py-0 md:py-12">
         <Row className="" align="middle" justify="center">
@@ -116,15 +121,27 @@ const Login = () => {
 
               <div className="mb-8" />
 
+              { /* https://next-auth.js.org/v3/getting-started/client#specifying-a-callbackurl */}
               <div className="grid place-items-center">
                 <Button
                   content="Đăng nhập với Google"
                   fillType="outlined"
                   size="medium"
                   className="max-w-md w-full border-[1px] border-gray-600/50 text-[18px] md:text-sub-heading"
-                  onClick={() => signIn('google')}
+                  onClick={() => signIn('google', {callbackurl: `${window.location.origin}/`})}
                 />
               </div>
+
+              <div className="grid place-items-center">
+                <Button
+                  content="Đăng xuat"
+                  fillType="outlined"
+                  size="medium"
+                  className="max-w-md w-full border-[1px] border-gray-600/50 text-[18px] md:text-sub-heading"
+                  onClick={() => signOut()}
+                />
+              </div>
+
 
               <div className="mb-2" />
 
@@ -190,5 +207,29 @@ const Login = () => {
     </>
   );
 };
+
+
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await unstable_getServerSession(context.req, context.res, authOptions);
+
+  if(session) {
+    return { 
+      redirect: {
+        destination: '/',
+        permanent: false,
+      }
+    }
+  }
+
+  return { 
+    props: { 
+      session,
+    },
+  };
+  
+}
+
+
 
 export default Login;

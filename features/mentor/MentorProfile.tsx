@@ -14,6 +14,11 @@ import autoAnimate from '@formkit/auto-animate';
 
 import { CreateReview, ReviewCard } from './Review';
 
+import { useSession, getSession } from "next-auth/react"
+import { Popover } from 'antd';
+
+
+
 const socialLinkMapper = {
   facebook: {
     dataKey: 'fbUrl',
@@ -57,6 +62,7 @@ const PartialDivider: React.FC<{
 };
 
 export const MentorProfile: React.FC<{ data: Mentor }> = ({ data }) => {
+  const { data: session, status } = useSession()
   const [isCreatingReview, setIsCreatingReview] = useState(false);
   const parent = useRef(null);
   useEffect(() => {
@@ -96,7 +102,15 @@ export const MentorProfile: React.FC<{ data: Mentor }> = ({ data }) => {
     setIsCreatingReview(false);
   };
 
-  // Button dat lich hen: neu chua auth -> text tool tip xin dang nhap, auth -> redirect to <sth> (chua co)
+  const content = (
+    <div>
+      <p>Vui lòng đăng nhập để đặt lịch hẹn</p>
+    </div>
+  );
+
+  console.log("this is the status " + status);
+
+
   return (
     <div className="px-6 py-10 md:px-48 md:py-24 font-manrope">
       <div className="flex flex-col md:flex-row justify-center items-center">
@@ -109,12 +123,27 @@ export const MentorProfile: React.FC<{ data: Mentor }> = ({ data }) => {
               {data.name}
             </h1>
             
-            <Button
-              fillType="outlined"
-              size="medium"
-              className="hidden md:block"
-              content="Đặt lịch hẹn"
-            />
+            { session ? 
+              (
+                <Button
+                  fillType="outlined"
+                  size="medium"
+                  className="hidden md:block"
+                  content="Đặt lịch hẹn"
+                />
+              ) :
+              (
+                <Popover content={content}>
+                  <Button
+                    fillType="outlined"
+                    size="medium"
+                    className="hidden md:block"
+                    content="Đặt lịch hẹn"
+                  />
+                </Popover>
+              )
+            }
+            
           </div>
           <span className="text-body-lg text-center text-primary-900">
             {getWorkDescription()}
@@ -133,12 +162,8 @@ export const MentorProfile: React.FC<{ data: Mentor }> = ({ data }) => {
               {location}
             </div>
           </div>
-          <Button
-            fillType="filled"
-            size="medium"
-            className="block w-full md:hidden"
-            content="Đặt lịch hẹn"
-          />
+
+
         </div>
       </div>
       <div className="mb-10 md:mb-8 mt-12 md:mt-20 grid md:grid-cols-3 gap-x-8 gap-y-10 flex-col md:flex-row">
@@ -180,13 +205,17 @@ export const MentorProfile: React.FC<{ data: Mentor }> = ({ data }) => {
           <h1 className="text-heading-sm md:text-title-sm font-semi-bold font-lora">
             Đánh giá từ mentee ({commentCount})
           </h1>
-          <Button
-            fillType="outlined"
-            size="small"
-            content="Thêm review"
-            className="h-fit hidden md:block"
-            onClick={() => setIsCreatingReview(true)}
-          />
+          { 
+          session?
+            <Button
+              fillType="outlined"
+              size="small"
+              content="Thêm review"
+              className="h-fit hidden md:block"
+              onClick={() => setIsCreatingReview(true)}
+            /> 
+            : <span> </span>
+          }
           <PlusSquareOutlined
             className="block md:hidden text-body text-primary-900 cursor-pointer"
             onClick={() => setIsCreatingReview(true)}

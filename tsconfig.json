@@ -24,5 +24,7 @@
     "noUncheckedIndexedAccess": true
   },
   "include": ["process.d.ts", "next-env.d.ts", "next-auth.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"], 
+  
 }
+
