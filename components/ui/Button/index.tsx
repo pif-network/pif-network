@@ -7,6 +7,7 @@ import { Link } from '~/components/ui';
 interface GeneralButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   content: string;
   className?: string;
+  style?: any;
   size: 'medium' | 'small';
   fillType: 'outlined' | 'filled';
   rightIcon?: 'ChevronRight' | 'FlagLine';

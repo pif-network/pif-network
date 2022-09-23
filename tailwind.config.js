@@ -139,6 +139,20 @@ module.exports = {
         },
         { values: theme('wordSpacing') }
       );
+      // word-spacing for !Firefox
+      matchUtilities(
+        {
+          cword: value => ({
+            /*
+            * @see https://developer.mozilla.org/en-US/docs/Web/CSS/appearance
+            **/
+            '@supports (-webkit-appearance:push-button)' :{
+            wordSpacing: value,
+        }
+          }),
+        },
+        { values: theme('wordSpacing') }
+      );
 
       addUtilities({
         'text-mask': {

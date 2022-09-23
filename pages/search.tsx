@@ -41,7 +41,7 @@ const SearchPage = () => {
   }, [mentors]);
 
   return (
-    <div className="container mx-auto pt-32">
+    <div className="container mx-auto">
       <SectionTitle
         className="mb-4"
         content="Lựa chọn mentor phù hợp với bạn tại đây"
