@@ -99,7 +99,7 @@ const NavBar = () => {
               <NavLink href="/#faqs" content="FAQs" />
               <NavLink href="/user/create-account" content="Tham gia ngay" />
             </div>
-            <button className="flex justify-center items-center py-1 md:py-2 px-[12px] md:pl-[18px] md:pr-[14px] h-[34px] md:h-[42px] w-[100px] md:w-[204px] hover:-translate-y-[3px] ease-in-out duration-300 bg-primary-800 rounded-md">
+            <button className="flex justify-center items-center py-1 md:py-2 px-[12px] md:pl-[18px] md:pr-[14px] h-[34px] md:h-[42px] w-[100px] md:w-[204px] hover:-translate-y-[3px] ease-in-out duration-300 bg-primary-800 rounded-xl">
               <span className="cword-[-4px] font-lora font-semi-bold text-white text-body">
                 Tìm kiếm mentor
               </span>

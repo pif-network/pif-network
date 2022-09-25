@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import { Children, useContext, useRef } from 'react'
-import { SearchIcon } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/outline'
-import heroBorder from '../../../assets/landing/heroBorder.svg'
+import border from '../../../assets/landing/border.svg'
 import heroMobile from '../../../assets/landing/heroMobile.png'
 import heroMiddle from '../../../assets/landing/heroMiddle.png'
 import heroUp from '../../../assets/landing/heroUp.png'
@@ -17,6 +16,7 @@ import hero4 from '../../../assets/landing/hero4.png'
 import hero5 from '../../../assets/landing/hero5.png'
 import Button from '../../../components/ui/Button'
 import { RightOutlined } from '@ant-design/icons'
+import { Search } from '../svgs/Icons'
 const Hero = () => {
   return (
     <div className="flex sm:flex-col md:justify-center xl:justify-center 2xl:justify-center sm:pt-20 sm:pb-10 md:flex-row md:px-20 md:py-24 md:gap-12 lg:px-24 lg:gap-24  xl:py-32 xl:px-32  xl:gap-24 2xl:gap-24 2xl:px-32 md:overflow-auto">
@@ -34,31 +34,29 @@ const Hero = () => {
             <div>mà bạn</div>
             <div className="flex flex-row flex-wrap">
               đang{' '}
-              <span className="flex flex-row relative items-center ml-2 font-medium rounded">
+              <span className="flex flex-row relative items-center ml-2 lg:ml-4 font-medium rounded">
                 <div className="absolute h-full ">
-                  <Image src={heroBorder} />
+                  <Image src={border} />
                 </div>
 
                 <div className="relative font-lora font-medium italic word-[-6px] mx-1 ml-2 mb-2 before:absolute before:bg-black sm:before:h-[1px] md:before:h-[2px] before:left-0 before:right-0 sm:before:bottom-1 md:before:bottom-2">
                   tìm kiếm
                 </div>
-                <SearchIcon className="ml-1 w-8 h-8 mr-3 md:ml-1 md:w-8 md:h-8 lg:ml-2 lg:w-12 lg:h-12" />
+                <Search className="fill-gray-700 w-8 h-8 mr-1 mb-[6px] md:ml-1 md:w-8 md:h-8 lg:ml-2 lg:w-[38px] lg:h-[38px]" />
               </span>
             </div>
           </div>
         </div>
 
-        <div className="font-manrope leading-7 text-[14px] text-primary-900 ">
-          <div className="flex flex-col items-center justify-center md:items-start md:text-left md:mt-12 md:pl-0 md:pr-8 md:text-body lg:pr-24 lg:text-body-lg xl:pr-24 2xl:pr-24 sm:py-4 sm:px-12 sm:text-center  ">
-            <div>
+        <div className="font-manrope leading-5 text-[14px] text-primary-900 ">
+          <div className="flex flex-col items-center justify-center md:items-start md:text-left md:mt-12 md:pl-0 md:pr-8 md:text-body lg:pr-24 lg:text-body-lg xl:pr-24 2xl:pr-24 sm:py-4 sm:px-12 sm:text-center">
               Trò chuyện, chia sẻ, nâng cao kĩ năng chuyên môn, mở rộng hiểu
               biết và khám phá những insights mới lạ từ các mentor dày dặn kinh
               nghiệm của chúng tôi.
-            </div>
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row tlg-fh:absolute tlg-fh:bottom-[56px] mt-8 sm:gap-2 md:gap-5 sm:items-stretch md:items-start sm:mx-14 md:mx-0">
+        <div className="flex flex-col md:flex-row tlg-fh:absolute tlg-fh:bottom-[56px] mt-4 lg:mt-8 sm:gap-2 md:gap-5 sm:items-stretch md:items-start sm:mx-14 md:mx-0">
           <Button
             className="sm:hidden md:block cword-[-6px] tlg:text-[18px]"
             fillType="filled"

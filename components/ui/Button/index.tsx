@@ -46,8 +46,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       },
     };
 
-    const cn = `${styleByType[fillType][size]} ${className} rounded-xl`;
-
+    const cn = `${styleByType[fillType][size]} ${className} hover:-translate-y-[3px] ease-in duration-200 active:scale-[.9] rounded-xl`;
     if (!href) {
       return (
         <button className={cn} ref={ref} {...others}>
