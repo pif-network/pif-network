@@ -47,7 +47,7 @@ const HomePage = () => {
         <Benefits />
 
         <section className="my-8">
-          <div className="flex flex-col justify-center md:max-w-[525px] md:mx-auto lg:max-w-full lg:mx-auto">
+          <div className="flex flex-col justify-center md:max-w-[525px] md:mx-auto lg:max-w-[1323px] lg:mx-auto">
 
             <div className='mx-auto'>
             <SectionTitle content="Những mentors đầu ngành" className="mb-9" />

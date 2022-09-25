@@ -79,7 +79,7 @@ const NavBar = () => {
       <NavbarMobileMenu />
 
       <nav className="hidden md:inline-block w-full md:fixed mt-5 md:mt-7 z-20">
-        <div className="max-w-7xl flex justify-between items-center mx-8 xl:mx-auto">
+        <div className="max-w-7xl flex justify-between items-center mx-8 1hxl:mx-auto">
 
           <section>
             <img

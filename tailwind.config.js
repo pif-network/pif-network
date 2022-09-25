@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 const plugin = require('tailwindcss/plugin');
 
 module.exports = {
@@ -122,6 +123,12 @@ module.exports = {
       scale: {
         175: '1.75',
       },
+      screens: {
+  '1hxl': '1350px',
+  'tlg': {'min': '1024px', 'max': '1140px'},
+  'tlg-fh': {'min': '1024px', 'max': '1103px'},
+  'tlg-sh': {'min': '1104px', 'max': '1140px'},
+      }
     },
   },
   plugins: [

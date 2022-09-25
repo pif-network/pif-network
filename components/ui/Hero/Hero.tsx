@@ -28,18 +28,18 @@ const Hero = () => {
           <div>MENTORSHIP PROGRAMME</div>
         </div>
 
-        <div className="font-lora font-semi-bold word-[-0.3rem] text-title-sm text-primary-900 lg:word-[-1rem]  md:text-title-sm lg:text-title">
+        <div className="font-lora font-semi-bold word-[-10px] text-title-sm text-primary-900 lg:word-[-1rem]  md:text-title-sm lg:text-title">
           <div className="flex flex-col items-center md:items-start  ">
             <div>Sự giúp đỡ</div>
             <div>mà bạn</div>
             <div className="flex flex-row flex-wrap">
               đang{' '}
-              <span className="flex flex-row relative items-center ml-3 font-medium rounded">
+              <span className="flex flex-row relative items-center ml-2 font-medium rounded">
                 <div className="absolute h-full ">
                   <Image src={heroBorder} />
                 </div>
 
-                <div className="relative font-lora font-medium italic mx-1 ml-3 mb-2 before:absolute before:bg-black sm:before:h-[1px] md:before:h-[2px] before:left-0 before:right-0 sm:before:bottom-1 md:before:bottom-2">
+                <div className="relative font-lora font-medium italic word-[-6px] mx-1 ml-2 mb-2 before:absolute before:bg-black sm:before:h-[1px] md:before:h-[2px] before:left-0 before:right-0 sm:before:bottom-1 md:before:bottom-2">
                   tìm kiếm
                 </div>
                 <SearchIcon className="ml-1 w-8 h-8 mr-3 md:ml-1 md:w-8 md:h-8 lg:ml-2 lg:w-12 lg:h-12" />
@@ -58,16 +58,16 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="flex sm:flex-col md:flex-row mt-8 sm:gap-2 md:gap-5 sm:items-stretch md:items-start sm:mx-14 md:mx-0 md:mr-10">
+        <div className="flex flex-col md:flex-row tlg-fh:absolute tlg-fh:bottom-[56px] mt-8 sm:gap-2 md:gap-5 sm:items-stretch md:items-start sm:mx-14 md:mx-0">
           <Button
+            className="sm:hidden md:block cword-[-6px] tlg:text-[18px]"
             fillType="filled"
-            className="w-full sm:hidden md:block cword-[-6px]"
             size="medium"
             content="Đặt lịch hẹn ngay!"
             href="/"
           />
           <Button
-            className="w-full sm:hidden md:block"
+            className="sm:hidden md:block tlg:text-[18px]"
             fillType="outlined"
             size="medium"
             content="Về SheCodes"
@@ -75,8 +75,8 @@ const Hero = () => {
             rightIcon="ChevronRight"
           />
           <Button
-            fillType="filled"
             className="w-full sm:block md:hidden cword-[-6px]"
+            fillType="filled"
             size="medium"
             content="Đặt lịch hẹn ngay"
             href="/"
