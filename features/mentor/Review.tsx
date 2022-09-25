@@ -77,7 +77,7 @@ export const ReviewCard: React.FC = () => (
         <Avatar />
         <div className="ml-2">
           <div className="flex items-center gap-2">
-            <h2 className="text-body-md md:text-sub-heading text-primary-900 font-semi-bold font-lora">
+            <h2 className="text-body-md md:text-sub-heading text-primary-900 font-semi-bold font-lora word-[-6px]">
               Nguyễn Mai Anh
             </h2>
             <span className="text-[#D9D9D9]">●</span>

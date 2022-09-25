@@ -1,6 +1,6 @@
 import { get } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
-import { Button, RectangleAvatar, Tag } from '~/components/ui';
+import { Button, RectangleAvatar, SectionTitle, Tag } from '~/components/ui';
 import { LocationFill, MortarboardHatFill } from '~/components/ui/svgs/Icons';
 import { Mentor } from '~/lib/types/user';
 
@@ -97,14 +97,14 @@ export const MentorProfile: React.FC<{ data: Mentor }> = ({ data }) => {
   };
 
   return (
-    <div className="px-6 py-10 md:px-48 md:py-24 font-manrope">
+    <div className="max-w-5xl mx-6 mb-10 pt-24 lg:mx-28 1hxl:mx-auto md:mb-25 md:pt-28 font-manrope">
       <div className="flex flex-col md:flex-row justify-center items-center">
-        <div className="md:mr-16">
+        <div className="md:mr-[77px]">
           <RectangleAvatar src={data.avatarUrl} />
         </div>
         <div className="w-full flex flex-col items-center md:block">
           <div className="mt-4 md:my-0 flex flex-col md:flex-row items-center justify-between">
-            <h1 className="text-title-sm md:text-title text-primary-900 font-lora font-semi-bold mb-2">
+            <h1 className="max-w-[12ch] text-title-sm lg:text-[48px] text-primary-900 font-lora font-semi-bold word-[-16px] mb-3">
               {data.name}
             </h1>
             <Button
@@ -114,7 +114,7 @@ export const MentorProfile: React.FC<{ data: Mentor }> = ({ data }) => {
               content="Đặt lịch hẹn"
             />
           </div>
-          <span className="text-body-lg text-center text-primary-900">
+          <span className="text-heading-sm text-center text-primary-900">
             {getWorkDescription()}
           </span>
           <div className="flex mt-8 mb-6 gap-2">{socialLinkComponents}</div>
@@ -139,17 +139,15 @@ export const MentorProfile: React.FC<{ data: Mentor }> = ({ data }) => {
           />
         </div>
       </div>
-      <div className="mb-10 md:mb-8 mt-12 md:mt-20 grid md:grid-cols-3 gap-x-8 gap-y-10 flex-col md:flex-row">
+      <div className="mb-10 md:mb-8 mt-12 grid md:grid-cols-3 gap-x-8 gap-y-10 flex-col md:flex-row">
         <div className="md:col-span-2">
-          <PartialDivider />
-          <h1 className="mb-3 text-heading-sm md:text-title-sm font-semi-bold font-lora">
-            Giới thiệu chung
-          </h1>
+          <SectionTitle content='Giới thiệu chung' />
+          <div className='mb-4'/>
           <p className="text-body">{data.bio}</p>
         </div>
         <div className="md:col-span-1">
           <PartialDivider size="small" />
-          <h3 className="text-heading-sm font-semi-bold font-lora">
+          <h3 className="text-heading-sm font-semi-bold font-lora word-[-6px]">
             Phạm vi mentor
           </h3>
           <div className="mt-3 mb-10 md:mb-8 flex flex-wrap gap-2">
@@ -158,7 +156,7 @@ export const MentorProfile: React.FC<{ data: Mentor }> = ({ data }) => {
             <Tag color="primary">Mock Interview</Tag>
           </div>
           <PartialDivider size="small" />
-          <h3 className="text-heading-sm font-semi-bold font-lora">Lĩnh vực</h3>
+          <h3 className="text-heading-sm font-semi-bold font-lora word-[-6px]">Lĩnh vực</h3>
           <div className="mt-3 flex flex-wrap gap-2">
             <Tag type="filled" color="cyan">
               Web Development
@@ -172,17 +170,14 @@ export const MentorProfile: React.FC<{ data: Mentor }> = ({ data }) => {
           </div>
         </div>
       </div>
-      <PartialDivider />
       <div className="grid md:grid-cols-3 gap-y-3 md:gap-y-6">
         <div className="flex justify-between col-span-2 items-center">
-          <h1 className="text-heading-sm md:text-title-sm font-semi-bold font-lora">
-            Đánh giá từ mentee ({commentCount})
-          </h1>
+            <SectionTitle content={`Đánh giá từ mentee (${commentCount})`}/>
           <Button
             fillType="outlined"
             size="small"
             content="Thêm review"
-            className="h-fit hidden md:block"
+            className="h-fit hidden md:block mt-[18px]"
             onClick={() => setIsCreatingReview(true)}
           />
           <PlusSquareOutlined

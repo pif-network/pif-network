@@ -21,7 +21,7 @@ export const RectangleAvatar: React.FC<AvatarProps> = ({
   alt = 'Avatar',
   emptyState = emptyRectangleAvatar,
 }) => (
-  <div className="h-[22rem] min-w-[17rem] flex items-center justify-center bg-gray-50 rounded-3xl relative">
+  <div className="h-[22rem] min-w-[17rem] flex items-center justify-center bg-gray-50 rounded-[32px] overflow-hidden relative">
     {src ? <Image src={src} alt={alt} layout="fill" /> : emptyState}
   </div>
 );
