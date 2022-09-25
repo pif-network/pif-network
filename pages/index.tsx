@@ -46,10 +46,12 @@ const HomePage = () => {
         <Hero />
         <Benefits />
 
-        <section className="my-8 mx-6">
-          <div className="flex flex-col justify-center md:max-w-[525px] md:m-auto xl:max-w-[1112px] xl:m-auto">
+        <section className="my-8">
+          <div className="flex flex-col justify-center md:max-w-[525px] md:mx-auto lg:max-w-full lg:mx-auto">
+
+            <div className='mx-auto'>
             <SectionTitle content="Những mentors đầu ngành" className="mb-6" />
-            <div className="flex flex-col gap-4 items-center xl:flex-row xl:gap-2">
+            <div className="flex flex-col gap-4 items-center lg:flex-row lg:gap-2 xl:gap-2">
               {/* {mentors ? (
 							mentors.map(mentor => <MentorCard mentor={mentor} />) */}
               {RANDOM_MENTORS ? (
@@ -60,7 +62,9 @@ const HomePage = () => {
                 <Skeleton />
               )}
             </div>
-            <div className="self-center mt-10 md:self-end md:mt-24">
+            </div>
+
+            <div className="self-center mt-10 md:self-end md:mt-16 lg:mr-[53px]">
               <Button
                 content="Explore more"
                 fillType="outlined"

@@ -162,18 +162,6 @@ module.exports = {
             'linear-gradient(179.95deg, #170330 9.05%, rgba(23, 3, 48, 0.1) 48.73%, rgba(23, 3, 48, 0.410738) 48.73%, rgba(23, 3, 48, 0.1) 48.73%)',
         },
       });
-
-      addComponents({
-        '.card-mentor': {
-          maxWidth: '294px',
-          width: '100%',
-          height: '352px',
-
-          position: 'relative',
-          justifySelf: 'center',
-          transition: 'all 0.3s cubic- bezier(0.25, 0.45, 0.45, 0.95)',
-        },
-      });
     }),
   ],
 };

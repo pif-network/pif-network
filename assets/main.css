@@ -5,8 +5,7 @@
 @tailwind components;
 @layer components {
 	.card-mentor {
-		max-width: 294px;
-		width: 100%;
+		width: 271px;
 		height: 352px;
 
 		position: relative;
