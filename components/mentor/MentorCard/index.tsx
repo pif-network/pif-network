@@ -36,8 +36,8 @@ const MentorCard = ({ mentor }: { mentor: User<'Mentor'> }) => {
               <li className="flex">
                 <FlagLine colour="white" width="16" height="16" />
                 {mentor.scopes &&
-                  mentor.scopes.map(scope => (
-                    <span className="text-white/80 font-manrope font-regular text-body-md ml-2">
+                  mentor.scopes.map((scope,idx) => (
+                    <span key={idx} className="text-white/80 font-manrope font-regular text-body-md ml-2">
                       {scope}
                     </span>
                   ))}

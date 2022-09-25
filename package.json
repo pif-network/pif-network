@@ -47,8 +47,8 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "yarn lint",
-      "yarn prettier --write"
+      "yarn prettier --write",
+      "yarn lint"
     ]
   },
   "packageManager": "yarn@3.2.3"
