@@ -19,7 +19,7 @@ import Button from '../../../components/ui/Button'
 import { RightOutlined } from '@ant-design/icons'
 const Hero = () => {
   return (
-    <div className="flex sm:flex-col md:justify-center xl:justify-center 2xl:justify-center sm:pt-20 sm:pb-10 md:flex-row md:px-20 md:py-24 md:gap-12 lg:px-24 lg:gap-24  xl:py-32 xl:px-32  xl:gap-24 2xl:gap-24 2xl:px-32 md:overflow-auto md:bg-white sm:bg-gray-50">
+    <div className="flex sm:flex-col md:justify-center xl:justify-center 2xl:justify-center sm:pt-20 sm:pb-10 md:flex-row md:px-20 md:py-24 md:gap-12 lg:px-24 lg:gap-24  xl:py-32 xl:px-32  xl:gap-24 2xl:gap-24 2xl:px-32 md:overflow-auto">
       <div className="flex flex-col max-w-xl min-w-sm basis-full lg:basis-auto xl:basis-6/12 2xl:basis-6/12 order-2 md:order-1">
         <div className="flex basis-full md:basis-1/4 sm:flex-row sm:my-11 sm:gap-4 sm:font-lora sm:font-body-sm sm:items-center sm:justify-center md:hidden">
           <div className="flex sm:rounded sm:px-2 sm:py-1 sm:flex-col sm:items-center sm:italic sm:font-regular sm:bg-gray-100 sm:drop-shadow-xl sm:shadow-gray-700">
@@ -61,7 +61,7 @@ const Hero = () => {
         <div className="flex sm:flex-col md:flex-row mt-8 sm:gap-2 md:gap-5 sm:items-stretch md:items-start sm:mx-14 md:mx-0 md:mr-10">
           <Button
             fillType="filled"
-            className="w-full sm:hidden md:block"
+            className="w-full sm:hidden md:block cword-[-6px]"
             size="medium"
             content="Đặt lịch hẹn ngay!"
             href="/"
@@ -76,7 +76,7 @@ const Hero = () => {
           />
           <Button
             fillType="filled"
-            className="w-full sm:block md:hidden"
+            className="w-full sm:block md:hidden cword-[-6px]"
             size="medium"
             content="Đặt lịch hẹn ngay"
             href="/"

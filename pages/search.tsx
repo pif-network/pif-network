@@ -41,14 +41,16 @@ const SearchPage = () => {
   }, [mentors]);
 
   return (
-    <div className="container mx-auto">
+    <main className="container mx-auto pt-[121px]">
       <SectionTitle
         className="mb-4"
         content="Lựa chọn mentor phù hợp với bạn tại đây"
       />
-      <div>
-        <FilterSection></FilterSection>
-      </div>
+
+      <div className="mb-16" />
+
+      <FilterSection />
+
       <div id="container" className="flex flex-row flex-wrap gap-y-4 py-6">
         {mentors.map((mentor, idx) => (
           <div key={idx} className="basis-1/2 lg:basis-1/4 px-2">
@@ -99,7 +101,7 @@ const SearchPage = () => {
           </div>
         )}
       </div>
-    </div>
+    </main>
   );
 };
 export default SearchPage;

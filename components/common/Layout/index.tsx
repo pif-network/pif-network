@@ -1,19 +1,19 @@
-import { ReactNode } from 'react'
+import { ReactNode } from 'react';
 
-import { NavBar, Footer } from '~/components/common'
+import { NavBar, Footer } from '~/components/common';
 
 interface LayoutProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <NavBar />
-      <main className='pt-6'>{children}</main>
+      {children}
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

@@ -73,13 +73,13 @@ const CreateAccount = () => {
   });
 
   return (
-    <div className="bg-[#fafafa]">
+    <>
       <Head>
         <title>Registering to &#60;product_name&#62;</title>
       </Head>
 
       <article className="grid place-items-center xl:inline mx-2 md:mx-6 lg:mx-12 xl:mx-24 px-0 md:px-16 py-0 md:py-12">
-        <Row className="" align="middle" justify="center">
+        <Row className="mt-16" align="middle" justify="center">
           <Col
             className="max-w-2xl h-full mt-10 ml-12"
             xs={0}
@@ -242,7 +242,7 @@ const CreateAccount = () => {
           </Col>
         </Row>
       </article>
-    </div>
+    </>
   );
 };
 

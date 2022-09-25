@@ -25,9 +25,7 @@ module.exports = {
 
       xl: '1280px',
       // => @media (min-width: 1280px) { ... }
-
-      '2xl': '1536px',
-      // => @media (min-width: 1536px) { ... }
+      '2xl': '1536px', // => @media (min-width: 1536px) { ... }
     },
     fontFamily: {
       lora: ['Lora', 'serif'],
@@ -144,11 +142,11 @@ module.exports = {
         {
           cword: value => ({
             /*
-            * @see https://developer.mozilla.org/en-US/docs/Web/CSS/appearance
-            **/
-            '@supports (-webkit-appearance:push-button)' :{
-            wordSpacing: value,
-        }
+             * @see https://developer.mozilla.org/en-US/docs/Web/CSS/appearance
+             **/
+            '@supports (-webkit-appearance:push-button)': {
+              wordSpacing: value,
+            },
           }),
         },
         { values: theme('wordSpacing') }
