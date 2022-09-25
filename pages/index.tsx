@@ -50,7 +50,7 @@ const HomePage = () => {
           <div className="flex flex-col justify-center md:max-w-[525px] md:mx-auto lg:max-w-full lg:mx-auto">
 
             <div className='mx-auto'>
-            <SectionTitle content="Những mentors đầu ngành" className="mb-6" />
+            <SectionTitle content="Những mentors đầu ngành" className="mb-9" />
             <div className="flex flex-col gap-4 items-center lg:flex-row lg:gap-2 xl:gap-2">
               {/* {mentors ? (
 							mentors.map(mentor => <MentorCard mentor={mentor} />) */}

@@ -51,10 +51,10 @@ const Values = () => {
   return (
     <>
       <section className="hidden md:inline">
-        <div className="flex flex-col max-w-[525px] xl:grid xl:grid-cols-[525px_525px] xl:max-w-6xl xl:gap-x-2 m-auto justify-center">
+        <div className="flex flex-col max-w-[525px] lg:grid lg:grid-cols-[441px_441px] xl:grid-cols-[525px_525px] xl:max-w-6xl lg:gap-x-2 m-auto justify-center">
           <SectionTitle
             content="Cách chúng tôi hỗ trợ bạn"
-            className="col-span-2"
+            className="col-span-2 mb-[20px]"
           />
           {VALUES.map(item => (
             <ValueCard key={item.id} card={item} />

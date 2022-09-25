@@ -8,16 +8,14 @@ export interface Card {
 function ValueCard({ card }: { card: Card }) {
   return (
     <div
-      // className="rounded-xl relative sm:mt-4 overflow-hidden md:h-[298px] md:w-1/2 -mx-[4px]"
-      className="rounded-xl relative sm:mt-4 overflow-hidden h-[298px] max-w-[525px] "
+      className="rounded-xl relative sm:mt-4 overflow-hidden h-[250px] w-[440px] xl:h-[298px] xl:w-[525px] "
       style={{
         background: `url(${card.url}) no-repeat`,
         backgroundSize: 'cover',
-        width: '100%',
       }}
     >
       <div className="absolute top-0 right-0 left-0 bottom-0 value-card--text-mask">
-        <div className="absolute left-[36px] top-[29px] font-lora">
+        <div className="absolute left-[24px] top-[29px] font-lora">
           <h5 className="font-medium text-white text-heading pb-1 word-[-4px]">
             {card.title}
           </h5>
