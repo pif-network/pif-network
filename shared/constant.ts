@@ -73,14 +73,15 @@ export const ENDPOINT = {
 export const RANDOM_MENTORS: User<'Mentor'>[] = new Array(4).fill({
   id: 1,
   userId: 1,
+  avatar: '/default_avatar.png',
   email: 'giangpham.shecodes@gmail.com',
-  name: 'Giang Pham',
+  name: 'Uncle Ben',
   phone: '0123456789',
   school: 'FPT University',
-  exp: JSON.stringify({
-    job: 'Software Engineer',
+  exp: {
+    title: 'Software Engineer',
     workspace: 'Contemi Vietnam',
-  }),
+  },
   birthday: new Date(2000, 1, 1),
   role: 'Mentor',
   description:

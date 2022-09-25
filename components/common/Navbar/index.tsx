@@ -1,6 +1,6 @@
-import { MenuIcon } from '@heroicons/react/outline';
-import Link from 'next/link';
 import { HTMLAttributes, useState } from 'react';
+import Link from 'next/link';
+import { MenuIcon } from '@heroicons/react/outline';
 import { ChevronRight } from '~/components/ui/svgs/Icons';
 
 interface NavLinkProps extends HTMLAttributes<HTMLAnchorElement> {
@@ -37,12 +37,14 @@ const NavbarMobileMenu = () => {
     <nav className={`w-screen md:hidden fixed z-10 ${isMenuOpen ? 'backdrop-blur-md' : ''}`}>
 
       <div className='flex justify-between mx-5 mt-6'>
+        <Link href='/'>
         <img
           src="/images/logo.png"
           width={130}
           height={33}
-          alt="SheCodes Mentor"
+          alt="SheCodesVietnam Logo"
         />
+        </Link>
         <MenuIcon
           className={`h-5 w-5 ${isMenuOpen ? 'bg-white rounded-sm' : ''}`}
           onClick={() => {
@@ -82,12 +84,15 @@ const NavBar = () => {
         <div className="max-w-7xl flex justify-between items-center mx-8 1hxl:mx-auto">
 
           <section>
-            <img
-              src="/images/logo.png"
-              width={130}
-              height={33}
-              alt="SheCodes Mentor"
-            />
+        <Link href='/'>
+        <img
+          src="/images/logo.png"
+          alt="SheCodesVietnam Logo"
+          width={130}
+          height={33}
+                className="cursor-pointer"
+        />
+        </Link>
           </section>
 
           <section className="flex justify-center items-center gap-16 xl:gap-32">

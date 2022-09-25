@@ -7,11 +7,11 @@ const MentorCard = ({ mentor }: { mentor: User<'Mentor'> }) => {
   return (
     <Link href={`mentors/${mentor.id}`}>
       <div
-        className="w-[232px] h-[303px] xl:w-[272px] xl:h-[354px] shadow-2xl hover:scale-[1.03] transition-transform ease-in duration-200 rounded-xl overflow-hidden"
+        className="w-[232px] h-[303px] xl:w-[272px] xl:h-[354px] shadow-2xl hover:scale-[1.02] transition-transform ease-in rounded-xl overflow-hidden cursor-pointer"
         style={{ background: `url(${mentor.avatar}) no-repeat center` }}
       >
         <div className="w-full h-full text-mask">
-          <div className="pt-[211px] pl-[25px] xl:pt-[246px] xl:pl-[30px]">
+          <div className="pt-[186px] pl-[25px] xl:pt-[236px] xl:pl-[30px]">
 
             <h5 className="mb-0 text-white font-lora font-medium text-sub-heading">
               {mentor.name}
@@ -23,11 +23,11 @@ const MentorCard = ({ mentor }: { mentor: User<'Mentor'> }) => {
               </p>
             )}
 
-            <ul className="mb-4 flex flex-col gap-1">
+            <ul className="mb-8 xl:mb-5 flex flex-col gap-1">
               {mentor.exp && (
                 <li className="flex">
                   <PinLine colour="white" />
-                  <span className="text-white font-manrope font-regular text-body-md ml-2">
+                  <span className="text-white/80 font-manrope font-regular text-body-md ml-2">
                     {mentor.exp.workspace}
                   </span>
                 </li>
@@ -36,11 +36,11 @@ const MentorCard = ({ mentor }: { mentor: User<'Mentor'> }) => {
               <li className="flex">
                 <FlagLine colour="white" width="16" height="16" />
                 {mentor.scopes &&
-                  mentor.scopes.map(scope => {
-                    <span className="text-white font-manrope font-regular text-body-md ml-2">
+                  mentor.scopes.map(scope => (
+                    <span className="text-white/80 font-manrope font-regular text-body-md ml-2">
                       {scope}
-                    </span>;
-                  })}
+                    </span>
+                  ))}
               </li>
             </ul>
 
