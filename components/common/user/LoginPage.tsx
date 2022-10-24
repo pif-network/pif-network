@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import { AuthService } from '~/services';
+import { AuthService, UserService } from '~/services';
 import { getErrorMessage } from '~/lib/types/service';
 import { Link, Input as FormikInput, Button } from '~/components/ui';
 import { INTERNAL_URI } from '~/shared/constant';
@@ -34,20 +34,23 @@ const Login = () => {
       password: '',
     },
     validationSchema,
-    onSubmit: async (data, { setSubmitting }) => {
+    onSubmit: async ({ email, password }, { setSubmitting }) => {
+      console.log('Submitting..');
       try {
         setMessage('');
 
-        const user = await AuthService.logIn(data);
+        await AuthService.logIn(email, password);
+        const user = UserService.currentUser;
+        console.log(user);
 
-        if (!user?.birthday) {
-          router.push('/user/complete-profile');
-        }
-
-        const returnUrl = (router.query?.returnUrl as string) || '/';
-        router.push(returnUrl);
+        // if (!user?.birthday) router.push('/user/complete-profile');
+        // else {
+        //   const returnUrl = (router.query?.returnUrl as string) || '/';
+        //   router.push(returnUrl);
+        // }
       } catch (error) {
         const errorMessage = getErrorMessage(error);
+        console.log('error: ', errorMessage);
 
         switch (errorMessage) {
           case "Mentee's not found":
@@ -170,7 +173,7 @@ const Login = () => {
                             ? '!bg-primary-800/60'
                             : ''
                         } text-[19px] md:text-sub-heading`}
-                        disabled={formik.isValid && formik.dirty}
+                        disabled={!formik.isValid && !formik.dirty}
                       />
                     )}
                   </div>

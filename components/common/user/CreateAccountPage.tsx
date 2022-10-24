@@ -7,26 +7,22 @@ import { useRouter } from 'next/router';
 
 import { AuthService } from '~/services';
 import { getErrorMessage } from '~/lib/types/service';
-import { Link, Input as FormikInput, Button } from '~/components/ui';
+import { Button, Input as FormikInput, Link } from '~/components/ui';
 import { INTERNAL_URI } from '~/shared/constant';
 
 import { object, string } from 'yup';
 import { Field, Form, FormikProvider, useFormik } from 'formik';
 
-import { Row, Col, Alert, Divider } from 'antd';
+import { Alert, Col, Divider, Row } from 'antd';
 import { UserRole } from '~/lib/types/user';
 
 const CreateAccount = () => {
   const [message, setMessage] = useState('');
   const [shouldRegisterWithEmail, setShouldRegisterWithEmail] = useState(false);
-  const [role, setRole] = useState<UserRole>();
+  const [role, setRole] = useState<UserRole>('Mentor');
   const router = useRouter();
 
   const validationSchema = object().shape({
-    name: string()
-      .min(2, 'Tên không được ngắn hơn 2 ký tự.')
-      .max(40, 'Tên không được dài quá 40 ký tự.')
-      .required('Vui lòng nhập tên của bạn.'),
     email: string()
       .min(6, 'Email không được ngắn hơn 6 ký tự.')
       .max(50, 'Email không được dài quá 50 ký tự.')
@@ -40,17 +36,17 @@ const CreateAccount = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: '',
       email: '',
       password: '',
     },
     validationSchema,
-    onSubmit: async data => {
+    onSubmit: async ({ email, password }) => {
       if (role) {
         setMessage('');
         try {
-          await AuthService.register({ ...data, role });
-          router.push(INTERNAL_URI.COMPLETE_PROFILE);
+          const newUser = await AuthService.register(email, password, role);
+          console.log(newUser);
+          // router.push(INTERNAL_URI.COMPLETE_PROFILE);
         } catch (error) {
           const errorMessage = getErrorMessage(error);
           console.log(errorMessage);
@@ -191,12 +187,6 @@ const CreateAccount = () => {
                       />
                     )}
                     <Field
-                      name="name"
-                      type="name"
-                      placeholder="Nhập họ và tên của bạn"
-                      as={FormikInput}
-                    />
-                    <Field
                       name="email"
                       type="email"
                       placeholder="Nhập email của bạn"
@@ -219,12 +209,11 @@ const CreateAccount = () => {
                           type="submit"
                           fillType="filled"
                           size="medium"
-                          className={`w-full rounded-lg ${
-                            !(formik.isValid && formik.dirty)
+                          className={`w-full rounded-lg ${!(formik.isValid && formik.dirty)
                               ? '!bg-primary-800/60'
                               : ''
-                          } text-[19px] md:text-sub-heading`}
-                          disabled={formik.isValid && formik.dirty}
+                            } text-[19px] md:text-sub-heading`}
+                          // disabled={formik.isValid && formik.dirty}
                         />
                       )}
                     </div>

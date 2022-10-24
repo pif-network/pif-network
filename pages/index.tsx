@@ -15,7 +15,7 @@ import {
   FAQAccordionItem,
 } from '~/components/ui';
 import { MentorCard } from '~/components/mentor';
-import { FAQs, RANDOM_MENTORS } from '~/shared/constant';
+import { FAQs } from '~/shared/constant';
 
 const HomePage = () => {
   const [mentors, setMentors] = useState<User<'Mentor'>[]>();
@@ -27,6 +27,7 @@ const HomePage = () => {
         const { data } = responseAllMentorsRequest;
         const { data: mentors } = data;
         setMentors(mentors);
+        console.log(mentors)
       } catch (error) {
         const errorMessage = getErrorMessage(error);
         console.log(errorMessage);
@@ -50,18 +51,11 @@ const HomePage = () => {
           <div className="flex flex-col justify-center md:max-w-[525px] md:mx-auto lg:max-w-[1323px] lg:mx-auto">
 
             <div className='mx-auto'>
-            <SectionTitle content="Những mentors đầu ngành" className="mb-9" />
-            <div className="flex flex-col gap-4 items-center lg:flex-row lg:gap-2 xl:gap-2">
-              {/* {mentors ? (
-							mentors.map(mentor => <MentorCard mentor={mentor} />) */}
-              {RANDOM_MENTORS ? (
-                RANDOM_MENTORS.map((mentor, idx) => (
-                  <MentorCard key={idx} mentor={mentor} />
-                ))
-              ) : (
-                <Skeleton />
-              )}
-            </div>
+              <SectionTitle content="Những mentors đầu ngành" className="mb-9" />
+              <div className="flex flex-col gap-4 items-center lg:flex-row lg:gap-2 xl:gap-2">
+                 {mentors && (
+                mentors.map((mentor,idx) => <MentorCard key={idx} mentor={mentor} />)) }
+              </div>
             </div>
 
             <div className="self-center mt-10 md:self-end md:mt-16 lg:mr-[53px]">

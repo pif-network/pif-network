@@ -37,19 +37,11 @@ const updateProfile = async <T>(updateData: T): Promise<void> => {
 };
 
 const getMentorById = async (id: string | string[] | undefined) => {
-  const response: APIResponse<User<'Mentor'>> = await http.get(
-    `${ENDPOINT.GET_MENTOR_BY_ID}${id}`
-  );
-
-  return response;
+  return await http.get( `${ENDPOINT.GET_MENTOR_BY_ID}${id}`) as APIResponse<User<'Mentor'>> 
 };
 
 const getAllMentors = async () => {
-  const response: APIResponse<User<'Mentor'>[]> = await http.get(
-    ENDPOINT.GET_ALL_MENTOR
-  );
-
-  return response;
+   return await http.post( ENDPOINT.GET_ALL_MENTOR, {}) as APIResponse<User<'Mentor'>[]> 
 };
 
 const UserService = {

@@ -1,122 +1,129 @@
-import { useState } from 'react'
-import type { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
+import type {
+  AxiosError,
+  AxiosInstance
+} from "axios";
 
 import {
-  ErrorResponse,
+  ApiErrorResponse,
   APIResponse,
   getErrorMessage,
-} from '~/lib/types/service'
-import AuthService from './AuthService'
-import TokenService from './TokenService'
+  Token
+}                   from "~/lib/types/service";
+import AuthService  from "./AuthService";
+import TokenService from "./TokenService";
 
-interface RequestsThatRequireRefreshAccessTokenQueue
+interface RequestsRequireRefreshAccessTokenQueue
   extends Array<{
-    resolve: (token?: string) => void
+    resolve: (token: Token["accessToken"]) => void
     reject: (reason?: unknown) => void
-  }> {}
-
-let isRefreshing = false
-const setIsRefreshing = (newState:boolean)=>{
-	isRefreshing = newState
+  }> {
 }
+
+const resolveRequestsRequireRefreshAccessTokenQueue = (
+  token: Token["accessToken"],
+  queue: RequestsRequireRefreshAccessTokenQueue
+) => {
+  queue.forEach(p => {
+    p.resolve(token);
+  });
+
+  queue = [];
+};
+
+const declineRequestsRequireRefreshAccessTokenQueue = (
+  error: ApiErrorResponse,
+  queue: RequestsRequireRefreshAccessTokenQueue
+) => {
+  queue.forEach(p => {
+    p.reject(error);
+  });
+
+  queue = [];
+};
+
+let isRefreshing = false;
+const setIsRefreshing = (newState: boolean) => {
+  isRefreshing = newState;
+};
 
 const setupInterceptorsTo = (instance: AxiosInstance): AxiosInstance => {
   if (!instance.interceptors)
-    throw new Error(`Invalid axios instance: ${instance}`)
+    throw new Error(`Invalid axios instance: ${instance}`);
 
-  let queue: RequestsThatRequireRefreshAccessTokenQueue = []
-
-  const resolveQueue = (token?: string) => {
-    queue.forEach(p => {
-      p.resolve(token)
-    })
-
-    queue = []
-  }
-  const declineQueue = (error: ErrorResponse) => {
-    queue.forEach(p => {
-      p.reject(error)
-    })
-
-    queue = []
-  }
+  let queue: RequestsRequireRefreshAccessTokenQueue = [];
 
   const onResponse = (response: APIResponse): APIResponse => {
-    return response
-  }
+    return response;
+  };
 
   const onResponseError = async (
-    error: AxiosError<any, { _hasRetried: boolean }>,
+    errorResponse: AxiosError<any, { _hasRetried: boolean }>
   ): Promise<AxiosError | APIResponse> => {
-    const { config: originalRequestConfig, response } = error
+    console.log(errorResponse);
+    const { config: originalRequestConfig, response } = errorResponse;
+
+    if (
+      (response?.data?.message !== "jwt expired.") ||
+      !originalRequestConfig || // If there is no original request config, it's not an error we can handle.
+      originalRequestConfig?.data?._hasRetried
+    ) {
+      return Promise.reject(errorResponse);
+    }
 
     /**
-     * This function adds access token to the queued requests, mark them as retried, and retries them
+     * This function adds access token to the queued requests,
+     * mark them as retried, and retries them
      * @param token Newly refreshed access token.
      * @returns
      */
-    const authenticateQueuedRequests = (token: string | undefined) => {
-      let newConfig
-
-      if (token) {
-        newConfig = {
-          ...originalRequestConfig,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          data: {
-            _hasRetried: true,
-          },
-        }
-      }
-
-      return instance.request(newConfig || originalRequestConfig)
-    }
-
-    if (
-      (response && response.status !== 401) ||
-      originalRequestConfig.data?._hasRetried
-    ) {
-      return Promise.reject(error)
-    }
-
-    /** Queue all in-coming requests while refreshing */
-    if (isRefreshing) {
-      const requestsQueuing = new Promise(
-        (resolve: (token?: string) => void, reject) => {
-          queue.push({ resolve, reject })
+    const authenticateQueuedRequest = async (token: Token["accessToken"]) => {
+      const newConfig = {
+        ...originalRequestConfig,
+        headers: {
+          Authorization: token
         },
-      )
-      return authenticateQueuedRequests(await requestsQueuing)
-    }
+        data: {
+          _hasRetried: true
+        }
+      };
 
-    let newAccessToken
-    try {
-      setIsRefreshing(true)
-      newAccessToken = await TokenService.refreshAccessToken()
-    } catch (error) {
-      declineQueue(error as ErrorResponse)
-      const errorMessage = getErrorMessage(error)
+      return await instance.request(newConfig);
+    };
 
-      switch (errorMessage) {
-        case 'Token exprired!':
-          AuthService.logOut()
-          break
-        default:
-          break
+    // Queue current request if refreshing 
+    if (isRefreshing) {
+      try {
+        const requestQueuing = new Promise(
+          (resolve: (token: Token["accessToken"]) => void, reject) => {
+            queue.push({ resolve, reject });
+          }
+        );
+        return await authenticateQueuedRequest(await requestQueuing);
+      } catch (error) {
+        // Failed to refresh access token, reject all queued requests.
+        return Promise.reject(error);
       }
-
-      throw error
-    } finally {
-      setIsRefreshing(false)
     }
-    resolveQueue(newAccessToken)
 
-    return Promise.reject(error)
-  }
+    try {
+      setIsRefreshing(true);
+      const newAccessToken = await TokenService.refreshAccessToken();
+      resolveRequestsRequireRefreshAccessTokenQueue(newAccessToken, queue);
+      return await instance.request(originalRequestConfig);
+    } catch (error) {
+      declineRequestsRequireRefreshAccessTokenQueue(error as ApiErrorResponse, queue);
+      const errorMessage = getErrorMessage(error);
+      console.log(errorMessage);
+      await AuthService.logOut();
+      return Promise.reject(error);
+    } finally {
+      setIsRefreshing(false);
+    }
 
-  instance.interceptors.response.use(onResponse, onResponseError)
-  return instance
-}
+  };
 
-export default setupInterceptorsTo
+  instance.interceptors.response.use(onResponse, onResponseError);
+  return instance;
+};
+
+export default setupInterceptorsTo;

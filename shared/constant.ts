@@ -53,21 +53,21 @@ export const INTERNAL_URI = {
 } as const;
 
 export const ENDPOINT = {
-  REGISTER: '/register',
-  LOGIN: '/login',
+  REGISTER: '/users/register',
+  LOGIN: '/users/auth',
 
   VERIFY_EMAIL: '/account/verify-email/',
-  CHANGE_PASSWORD: '/account/change-password',
-  RESET_PASSWORD: '/account/reset-password',
+  CHANGE_PASSWORD: '/users/auth/change-password',
+  RESET_PASSWORD: '/users/auth/reset-password',
 
-  GET_CURRENT_USER: '/me',
+  GET_CURRENT_USER: '/users/me',
   UPDATE_USER_AVATAR: '/me',
   UPDATE_USER_PROFILE: '/me',
-  GET_ALL_MENTOR: '/mentors',
+  GET_ALL_MENTOR: '/mentors/search',
   GET_MENTOR_BY_ID: '/mentors/',
   SEARCH_MENTOR: '/search',
 
-  REFRESH_ACCESS_TOKEN: '/auth/refresh-token',
+  REFRESH_ACCESS_TOKEN: '/users/auth/refresh-token',
 } as const;
 
 export const RANDOM_MENTORS: User<'Mentor'>[] = new Array(4).fill({
