@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
+import { NextPage }   from "next";
 
 import { UserService } from '~/services';
 import { User } from '~/lib/types/user';
@@ -13,11 +14,11 @@ import {
   Button,
   SectionTitle,
   FAQAccordionItem,
-} from '~/components/ui';
+}                     from '~/components/ui';
 import { MentorCard } from '~/components/mentor';
-import { FAQs } from '~/shared/constant';
+import { FAQs }       from '~/shared/constant';
 
-const HomePage = () => {
+const HomePage:NextPage = () => {
   const [mentors, setMentors] = useState<User<'Mentor'>[]>();
 
   useEffect(() => {

@@ -51,16 +51,13 @@ const Link = forwardRef<HTMLAnchorElement, PropsWithChildren<Props>>(
 				locale={locale}
 				prefetch={prefetch}
 				passHref={passHref}
+        className={className}
+        ref={ref}
+        rel={'noreferrer'}
+        target={newTab ? '_blank' : undefined}
+        {...others}
 			>
-				<a
-					className={className}
-					ref={ref}
-					rel={'noreferrer'}
-					target={newTab ? '_blank' : undefined}
-					{...others}
-				>
-					{children}
-				</a>
+        {children}
 			</NextLink>
 		)
 	},
