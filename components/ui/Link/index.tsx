@@ -43,23 +43,23 @@ const Link = forwardRef<HTMLAnchorElement, PropsWithChildren<Props>>(
 		}
 
 		return (
-			<NextLink
-				href={href}
-				replace={replace}
-				scroll={scroll}
-				shallow={shallow}
-				locale={locale}
-				prefetch={prefetch}
-				passHref={passHref}
-        className={className}
-        ref={ref}
-        rel={'noreferrer'}
-        target={newTab ? '_blank' : undefined}
-        {...others}
-			>
+            <NextLink
+                href={href}
+                replace={replace}
+                scroll={scroll}
+                shallow={shallow}
+                locale={locale}
+                prefetch={prefetch}
+                passHref={passHref}
+                className={className}
+                ref={ref}
+                rel={'noreferrer'}
+                target={newTab ? '_blank' : undefined}
+                {...others}
+                legacyBehavior>
         {children}
 			</NextLink>
-		)
+        );
 	},
 )
 

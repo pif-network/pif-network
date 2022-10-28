@@ -5,7 +5,7 @@ import { FlagLine, PinLine } from '~/components/ui/svgs/Icons';
 
 const MentorCard = ({ mentor }: { mentor: User<'Mentor'> }) => {
   return (
-    <Link href={`mentors/${mentor.id}`}>
+    <Link href={`mentors/${mentor.id}`} legacyBehavior>
       <div
         className="w-[232px] h-[303px] xl:w-[272px] xl:h-[354px] shadow-2xl hover:scale-[1.02] transition-transform ease-in rounded-xl overflow-hidden cursor-pointer"
         style={{ background: `url(${mentor.avatar}) no-repeat center` }}
