@@ -1,9 +1,10 @@
-import { Avatar } from 'antd'
-import { ChevronRight } from '../svgs/Icons'
-import DoubleQuoteSm from '~/assets/feedback/feedback_double-quote-sm.png'
-import DoubleQuoteLg from '~/assets/feedback/feedback_double-quote-lg.png'
-import LineLG from '~/assets/feedback/feedback_line-lg.png'
-import MenteeAvatar from '~/assets/feedback/feedback_avatar.png'
+import Image from 'next/image';
+import { Avatar } from 'antd';
+import { ChevronRight } from '../svgs/Icons';
+import DoubleQuoteSm from '~/assets/feedback/feedback_double-quote-sm.png';
+import DoubleQuoteLg from '~/assets/feedback/feedback_double-quote-lg.png';
+import LineLG from '~/assets/feedback/feedback_line-lg.png';
+import MenteeAvatar from '~/assets/feedback/feedback_avatar.png';
 
 const Feedback = () => {
   return (
@@ -14,11 +15,11 @@ const Feedback = () => {
       <div className="flex justify-center">
         <div className="relative bg-gray-50 justify-items-center overflow-hidden rounded-2xl md:h-[426px] md:w-[1068px] sm:w-[314px] sm:h-[126px]">
           <div>
-            <img
+            <Image
               src={DoubleQuoteLg.src}
               className="absolute hidden md:inline-block md:top-[63px] md:left-[54px]"
             />
-            <img
+            <Image
               src={DoubleQuoteSm.src}
               className="absolute md:hidden sm:top-[19px] sm:left-[15px]"
             />
@@ -35,7 +36,7 @@ const Feedback = () => {
             </div>
           </div>
 
-          <img
+          <Image
             src={LineLG.src}
             className="absolute md:top-[287px] md:left-[88px] sm:top-[85px] sm:left-[26px]"
           />
@@ -84,7 +85,7 @@ const Feedback = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Feedback
+export default Feedback;

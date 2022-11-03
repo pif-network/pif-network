@@ -1,10 +1,11 @@
+import Image from 'next/image';
 const RequestSuccess = () => {
   return (
     <div className="min-h-screen-85 overflow-hidden flex">
       <div className="overflow-hidden w-screen my-3 bg-white">
         <div className="bg-primary md:h-48 sm:h-40 w-screen" />
         <div className="flex justify-center -mt-8">
-          <img
+          <Image
             src="/images/sample_profile.png"
             className="rounded-full -mt-20 w-56 md:w-56 sm:w-46"
             alt="Mentor profile picture"
@@ -22,12 +23,15 @@ const RequestSuccess = () => {
             <h5>(giờ Việt Nam)</h5>
           </div>
           <div className="text-2xl w-1/2 md:w-1/2 sm:w-full leading-8 pt-9 m-auto">
-            <h5>Vui lòng kiểm tra lại e-mail và calendar để xem thông tin chi tiết về lịch hẹn của bạn nhé!</h5>
+            <h5>
+              Vui lòng kiểm tra lại e-mail và calendar để xem thông tin chi tiết
+              về lịch hẹn của bạn nhé!
+            </h5>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RequestSuccess
+export default RequestSuccess;
