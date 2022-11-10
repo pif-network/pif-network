@@ -71,6 +71,7 @@ const VerifyEmail = () => {
                   src="/images/email-successfully-verified.svg"
                   width={604}
                   height={558}
+                  alt="Email successfully verified"
                 />
               </div>
             </div>

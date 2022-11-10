@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import Head from 'next/head'
+import Link from 'next/link';
+import Image from 'next/image';
+import Head from 'next/head';
 
-import { ArrowLeftOutlined } from '@ant-design/icons'
-import { Col, Row } from 'antd'
+import { ArrowLeftOutlined } from '@ant-design/icons';
+import { Col, Row } from 'antd';
 
 const ConfirmEmail = () => {
   return (
@@ -48,6 +48,7 @@ const ConfirmEmail = () => {
                   src="/images/check-your-mail.svg"
                   width={564}
                   height={621}
+                  alt="Check mail"
                 />
               </div>
             </div>
@@ -55,7 +56,7 @@ const ConfirmEmail = () => {
         </Row>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ConfirmEmail
+export default ConfirmEmail;
