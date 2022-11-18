@@ -89,6 +89,7 @@ const CreateAccount = () => {
               src="/images/create-new-account.svg"
               width={813}
               height={625}
+              alt="Create new account"
             />
           </Col>
 
@@ -209,10 +210,11 @@ const CreateAccount = () => {
                           type="submit"
                           fillType="filled"
                           size="medium"
-                          className={`w-full rounded-lg ${!(formik.isValid && formik.dirty)
+                          className={`w-full rounded-lg ${
+                            !(formik.isValid && formik.dirty)
                               ? '!bg-primary-800/60'
                               : ''
-                            } text-[19px] md:text-sub-heading`}
+                          } text-[19px] md:text-sub-heading`}
                           // disabled={formik.isValid && formik.dirty}
                         />
                       )}
