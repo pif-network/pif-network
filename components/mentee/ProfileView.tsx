@@ -81,7 +81,7 @@ const MenteeProfileView = ({
                       <li className="flex items-center">
                         <CalendarOutlined className="text-base text-primary w-8 h-8 bg-lightgray rounded-full" />
                         <span className="ml-4 text-base leading-5">
-                          {currentUser.birthday}
+                          {currentUser.birthday.toLocaleString()}
                         </span>
                       </li>
                     )}

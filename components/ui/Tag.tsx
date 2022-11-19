@@ -1,13 +1,14 @@
-import { CloseOutlined } from '@ant-design/icons'
+import { CloseOutlined } from '@ant-design/icons';
+import { HTMLAttributes } from 'react';
 
-type TagType = 'filled' | 'outlined'
-type TagColorPreset = 'gray' | 'primary' | 'red' | 'cyan'
+type TagType = 'filled' | 'outlined';
+type TagColorPreset = 'gray' | 'primary' | 'red' | 'cyan';
 
-interface TagProps {
-  color?: TagColorPreset
-  type?: TagType
-  deletable?: boolean
-  onDelete?: (e: React.MouseEvent<HTMLElement>) => void
+interface TagProps extends HTMLAttributes<HTMLElement> {
+  color?: TagColorPreset;
+  type?: TagType;
+  deletable?: boolean;
+  onDelete?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 const hoverPresetByType = {
@@ -24,19 +25,19 @@ const hoverPresetByType = {
     filled: 'hover:border-cyan-300 hover:bg-cyan-200',
   },
   gray: undefined,
-}
+};
 
 const deleteBgByType = {
   primary: 'bg-primary-300',
   red: 'bg-red-200',
   cyan: 'bg-cyan-200',
   gray: 'bg-gray-400',
-}
+};
 
 const defaultPresetByType = {
   outlined: 'text-gray-600 bg-white border-gray-400',
   filled: 'text-gray-50 bg-gray-400 border-gray-700',
-}
+};
 
 export const Tag: React.FC<TagProps> = ({
   children,
@@ -45,7 +46,7 @@ export const Tag: React.FC<TagProps> = ({
   deletable,
   onDelete,
 }) => {
-  const colorClasses = `${defaultPresetByType[type]} ${hoverPresetByType[color]?.[type]}`
+  const colorClasses = `${defaultPresetByType[type]} ${hoverPresetByType[color]?.[type]}`;
   return (
     <div
       className={`${colorClasses} border font-semi-bold font-manrope text-caption rounded-3xl px-2 py-1 inline-block relative group`}
@@ -60,5 +61,5 @@ export const Tag: React.FC<TagProps> = ({
         />
       )}
     </div>
-  )
-}
+  );
+};
