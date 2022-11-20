@@ -233,6 +233,7 @@ const CompleteProfile = () => {
               src="/images/complete-your-profile.svg"
               width={580}
               height={480}
+              alt="Complete Profile"
             />
           </Col>
         </Row>

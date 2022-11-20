@@ -95,6 +95,7 @@ const Login = () => {
               src="/images/create-new-account.svg"
               width={813}
               height={625}
+              alt="Create new account"
             />
           </Col>
 
