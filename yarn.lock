@@ -5067,6 +5067,7 @@ __metadata:
     rxjs: ^7.5.5
     styled-components: ^5.3.5
     stylelint-config-recommended: ^7.0.0
+    tailwind-merge: ^1.8.0
     tailwindcss: ^3.0.24
     tailwindcss-ripple: ^0.7.1
     typescript: ^4.6.3
@@ -5591,6 +5592,13 @@ __metadata:
     "@pkgr/utils": ^2.3.1
     tslib: ^2.4.0
   checksum: 83e054fe4494dab42114fc4ed36a11b85e18742d304ade3f40d3afb4ba4145d76183adba1f29e2c36e9a0a453b93a83e2387505f96a0efd901f562927a968c44
+  languageName: node
+  linkType: hard
+
+"tailwind-merge@npm:^1.8.0":
+  version: 1.8.0
+  resolution: "tailwind-merge@npm:1.8.0"
+  checksum: df7a5fe2219422ef9c68e331248ad360ba81da3b689256cd6c66ec7cb152669173c9099d829fb66d0ce524c0c24223f0448f354e7dac5da3c36b21b251ba2525
   languageName: node
   linkType: hard
 

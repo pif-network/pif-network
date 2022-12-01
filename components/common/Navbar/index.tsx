@@ -3,6 +3,7 @@ import { HTMLAttributes, useState } from 'react';
 import Link from 'next/link';
 import { MenuIcon } from '@heroicons/react/outline';
 import { ChevronRight } from '~/components/ui/svgs/Icons';
+import { Button } from "~/components/ui"
 
 interface NavLinkProps extends HTMLAttributes<HTMLAnchorElement> {
   href?: string;
@@ -127,12 +128,11 @@ const NavBar = () => {
               <NavLink href="/#faqs" content="FAQs" />
               <NavLink href="/user/create-account" content="Tham gia ngay" />
             </div>
-            <button className="flex justify-center items-center py-1 md:py-2 px-[12px] md:pl-[18px] md:pr-[14px] h-[34px] md:h-[42px] w-[100px] md:w-[204px] hover:-translate-y-[3px] ease-in-out duration-300 bg-primary-800 rounded-xl">
-              <span className="cword-[-4px] font-lora font-semi-bold text-white text-body">
-                Tìm kiếm mentor
-              </span>
-              <ChevronRight className="pt-[2px] pl-1 fill-white" />
-            </button>
+
+            <Button 
+              className='text-body py-1 md:py-2 px-[12px] md:pl-[18px] md:pr-[14px] h-[34px] md:h-[42px] w-[100px] md:w-[204px]'
+              content='Tìm kiếm mentor' size='medium' fillType='filled' href='/search' rightIcon={<ChevronRight className="pt-[2px] pl-1 fill-white" />} />
+
           </section>
         </div>
       </nav>
