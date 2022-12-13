@@ -18,6 +18,7 @@ const Website = ({
   const [isAuthorised, setIsAuthorised] = useState(false);
   const router = useRouter();
   const currentUrl = router.asPath;
+  const currentPath = currentUrl.split('?')[0] || ' ';
 
   const hideContentOnPageLoad = () => setIsAuthorised(false);
 
@@ -67,7 +68,11 @@ const Website = ({
 
       <SessionProvider session={session} refetchInterval={0}>
         <ScrollObserver>
-          <Layout>{isAuthorised && <Component {...pageProps} />}</Layout>
+          {currentPath === '/user/create-account' ? (
+            <Component {...pageProps} />
+          ) : (
+            <Layout>{isAuthorised && <Component {...pageProps} />}</Layout>
+          )}
         </ScrollObserver>
       </SessionProvider>
     </>

@@ -3,15 +3,15 @@ import React, { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
 import type { ExternalHrefProps } from '~/lib/types';
 import { ChevronRight, FlagLine } from '~/components/ui/svgs/Icons';
 import { Link } from '~/components/ui';
-import twMerge from "~/lib/utils/tw-merge"
+import twMerge from '~/lib/utils/tw-merge';
 
 interface GeneralButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  content: string;
+  content: ReactNode;
   className?: string;
   style?: any;
   size: 'medium' | 'small';
   fillType: 'outlined' | 'filled';
-  rightIcon?: ReactNode
+  rightIcon?: ReactNode;
 }
 
 type Props = GeneralButtonProps & ExternalHrefProps;
@@ -30,7 +30,8 @@ const Button = forwardRef<HTMLButtonElement, Props>(
     },
     ref
   ) => {
-    const baseStyle = 'hover:-translate-y-[3px] ease-in duration-200 active:scale-[.9] rounded-xl'
+    const baseStyle =
+      'hover:-translate-y-[3px] ease-in duration-200 active:scale-[.9] rounded-xl';
 
     const styleByType = {
       filled: {
@@ -49,7 +50,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       },
     };
 
-    const cn = twMerge(styleByType[fillType][size], baseStyle, className)
+    const cn = twMerge(styleByType[fillType][size], baseStyle, className);
 
     if (!href) {
       return (
@@ -86,7 +87,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
               <FlagLine colour={`${styleByType[fillType]['iconFill']}`} />
             )}
             {/* Others */}
-            {typeof rightIcon !== "string" && rightIcon}
+            {typeof rightIcon !== 'string' && rightIcon}
           </span>
         </button>
       </Link>

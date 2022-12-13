@@ -47,6 +47,10 @@
 	border-color: #170330 !important;
 }
 
+.ant-divider-horizontal.ant-divider-with-text{
+  border-top-color: rgba(0, 0, 0, 0.42);
+}
+
 body {
   @apply bg-[#F7F7F7]
 }
