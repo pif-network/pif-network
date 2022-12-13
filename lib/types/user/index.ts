@@ -1,4 +1,7 @@
-export type UserRole = 'Mentor' | 'Mentee';
+import { USER_ROLE } from '~/shared/constant';
+import type { valueof } from '../';
+
+export type UserRole = valueof<typeof USER_ROLE>;
 
 interface BaseMentee {}
 interface BaseMentor {

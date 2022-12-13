@@ -98,3 +98,8 @@ export const RANDOM_MENTORS: User<'Mentor'>[] = new Array(4).fill({
   fields: ['IT'],
   offers: ['Định hướng nghề nghiệp'],
 });
+
+export const USER_ROLE = {
+  MENTOR: 'Mentor',
+  MENTEE: 'Mentee',
+} as const;
