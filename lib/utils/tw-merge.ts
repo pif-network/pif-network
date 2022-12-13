@@ -1,11 +1,11 @@
 import { extendTailwindMerge } from 'tailwind-merge';
-const config = require("~/tailwind.config.js")
+const config = require('~/tailwind.config.js');
 
 const customTwMerge = extendTailwindMerge({
   classGroups: {
-    'font-size': [{ text: Object.keys(config.theme.colors) }],
+    'font-size': [{ text: Object.keys(config.theme.fontSize) }],
     'font-weight': [{ font: Object.keys(config.theme.fontWeight) }],
-    color: [{ color: ['text-white'] }],
+    color: [{ color: Object.keys(config.theme.colors) }],
   },
 });
 
