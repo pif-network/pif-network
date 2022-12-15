@@ -19,11 +19,15 @@ const Feedback = () => {
               src={DoubleQuoteLg.src}
               className="absolute hidden md:inline-block md:top-[63px] md:left-[54px]"
               alt="Double QuoteLg"
+              width={50}
+              height={5}
             />
             <Image
               src={DoubleQuoteSm.src}
               className="absolute md:hidden sm:top-[19px] sm:left-[15px]"
               alt="DoubleQuoteSm"
+              width={15}
+              height={5}
             />
 
             <div className="grid items-center justify-center absolute md:top-[83px] md:left-[121px] md:w-[830px] sm:top-[24px] sm:left-[36px]">
@@ -40,8 +44,17 @@ const Feedback = () => {
 
           <Image
             src={LineLG.src}
-            className="absolute md:top-[287px] md:left-[88px] sm:top-[85px] sm:left-[26px]"
+            className="absolute sm:hidden md:inline-block md:top-[287px] md:left-[88px] sm:top-[85px] sm:left-[26px] "
             alt="Line LG"
+            width={900}
+            height={5}
+          />
+          <Image
+            src={LineLG.src}
+            className="absolute md:hidden md:top-[287px] md:left-[88px] sm:top-[85px] sm:left-[26px]"
+            alt="Line LG"
+            width={270}
+            height={5}
           />
 
           <div className="flex flex-row justify-between">

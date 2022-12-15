@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import { NextPage }   from "next";
+import { NextPage } from 'next';
 
 import { UserService } from '~/services';
 import { User } from '~/lib/types/user';
@@ -14,11 +14,11 @@ import {
   Button,
   SectionTitle,
   FAQAccordionItem,
-}                     from '~/components/ui';
+} from '~/components/ui';
 import { MentorCard } from '~/components/mentor';
-import { FAQs }       from '~/shared/constant';
+import { FAQs } from '~/shared/constant';
 
-const HomePage:NextPage = () => {
+const HomePage: NextPage = () => {
   const [mentors, setMentors] = useState<User<'Mentor'>[]>();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const HomePage:NextPage = () => {
         const { data } = responseAllMentorsRequest;
         const { data: mentors } = data;
         setMentors(mentors);
-        console.log(mentors)
+        console.log(mentors);
       } catch (error) {
         const errorMessage = getErrorMessage(error);
         console.log(errorMessage);
@@ -50,12 +50,16 @@ const HomePage:NextPage = () => {
 
         <section className="my-8">
           <div className="flex flex-col justify-center md:max-w-[525px] md:mx-auto lg:max-w-[1323px] lg:mx-auto">
-
-            <div className='mx-auto'>
-              <SectionTitle content="Những mentors đầu ngành" className="mb-9" />
+            <div className="mx-auto">
+              <SectionTitle
+                content="Những mentors đầu ngành"
+                className="mb-9"
+              />
               <div className="flex flex-col gap-4 items-center lg:flex-row lg:gap-2 xl:gap-2">
-                 {mentors && (
-                mentors.map((mentor,idx) => <MentorCard key={idx} mentor={mentor} />)) }
+                {mentors &&
+                  mentors.map((mentor, idx) => (
+                    <MentorCard key={idx} mentor={mentor} />
+                  ))}
               </div>
             </div>
 
@@ -73,9 +77,9 @@ const HomePage:NextPage = () => {
 
         <Values />
 
-        {/* <div className="mt-16 md:mt-32" />
+        <div className="mt-16 md:mt-32" />
 
-         <Feedback /> */}
+        <Feedback />
 
         <div className="mt-16 md:mt-32" />
 
