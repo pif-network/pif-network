@@ -41,7 +41,7 @@ const Feedback = () => {
   }, [index, people]);
 
   useEffect(() => {
-    let slider = setInterval(() => {
+    const slider = setInterval(() => {
       setIndex(index + 1);
     }, 5000);
     return () => {
