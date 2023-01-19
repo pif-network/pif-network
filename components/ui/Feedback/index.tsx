@@ -122,10 +122,12 @@ const Feedback = () => {
                     <div>
                       <Avatar
                         src={image}
+                        size={64}
                         className="absolute hidden md:inline-block md:top-[306px] md:left-[121px] md:w-[64px] md:h-[64px]"
                       ></Avatar>
                       <Avatar
                         src={image}
+                        size={19}
                         className="absolute md:hidden sm:top-[91px] sm:left-[34px] sm:w-[19px] sm:h-[19px]"
                       ></Avatar>
 
