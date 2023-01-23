@@ -25,3 +25,44 @@
 .nextSlide {
   transform: translateX(100%);
 }
+
+.avatar {
+  position: absolute;
+  display: none;
+}
+
+@media (min-width: 375px) {
+  .avatar.sm {
+    top: 91px;
+    left: 34px;
+    width: 19px;
+    height: 19px;
+    display: inline-block;
+  }
+
+  .avatar.md {
+    display: none;
+  }
+
+  .margin_bottom_default {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .avatar.md {
+    top: 306px;
+    left: 121px;
+    width: 64px;
+    height: 64px;
+    display: inline-block;
+  }
+
+  .avatar.sm {
+    display: none;
+  }
+
+  .margin_bottom_default {
+    margin-bottom: 1em;
+  }
+}

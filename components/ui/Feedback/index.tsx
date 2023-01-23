@@ -94,10 +94,14 @@ const Feedback = () => {
                     />
 
                     <div className="grid items-center justify-center absolute md:top-[83px] md:left-[121px] md:w-[830px] sm:top-[24px] sm:left-[36px]">
-                      <p className="text-black font-lora font-semi-bold md:text-[32px] md:leading-10 md:word-[-8px] sm:word-[-3px] sm:text-[10px] text-left">
+                      <p
+                        className={`text-black font-lora font-semi-bold md:text-[32px] md:leading-10 md:word-[-8px] sm:word-[-3px] sm:text-[10px] text-left ${style.margin_bottom_default}`}
+                      >
                         {quote}
                       </p>
-                      <p className="text-gray-400 font-manrope font-regular text-semi-bold md:text-heading-sm sm:text-[8px] md:word-[0.8px] sm:word-[-0.3px] text-left">
+                      <p
+                        className={`text-gray-400 font-manrope font-regular text-semi-bold md:text-heading-sm sm:text-[8px] md:word-[0.8px] sm:word-[-0.3px] text-left`}
+                      >
                         {description}
                       </p>
                     </div>
@@ -123,12 +127,12 @@ const Feedback = () => {
                       <Avatar
                         src={image}
                         size={64}
-                        className="absolute hidden md:inline-block md:top-[306px] md:left-[121px] md:w-[64px] md:h-[64px]"
+                        className={`${style.avatar} ${style.md}`}
                       ></Avatar>
                       <Avatar
                         src={image}
                         size={19}
-                        className="absolute md:hidden sm:top-[91px] sm:left-[34px] sm:w-[19px] sm:h-[19px]"
+                        className={`${style.avatar} ${style.sm}`}
                       ></Avatar>
 
                       <div className="absolute md:top-[316px] md:left-[195px] sm:top-[92px] sm:left-[55px]">
