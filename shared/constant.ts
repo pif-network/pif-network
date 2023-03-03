@@ -37,7 +37,8 @@ export const FAQs = [
   },
 ];
 
-export const INTERNAL_URI = {
+export const INTERNAL_PATH = {
+  PLACEHOLDER: '',
   HOME: '/',
   LOGIN: '/login',
   SEARCH: '/search',
@@ -48,24 +49,29 @@ export const INTERNAL_URI = {
   CHANGE_PASSWORD: '/user/change-password',
   SUCCESSFULLY_REGISTERED: '/user/successfully-registered',
   VERIFY_EMAIL: '/user/verify-email',
+  SETTINGS: '/user/settings',
 
   MENTOR_PROFILE: (id: string) => `/mentors/${id}` as const,
 } as const;
+
+export const PRIVATE_PATH: string[] = [INTERNAL_PATH.SETTINGS];
 
 export const ENDPOINT = {
   REGISTER: '/users/register',
   LOGIN: '/users/auth',
 
-  VERIFY_EMAIL: '/account/verify-email/',
+  VERIFY_EMAIL: '/users/auth/verify-email/',
   CHANGE_PASSWORD: '/users/auth/change-password',
   RESET_PASSWORD: '/users/auth/reset-password',
 
   GET_CURRENT_USER: '/users/me',
   UPDATE_USER_AVATAR: '/me',
-  UPDATE_USER_PROFILE: '/me',
+  UPDATE_USER_PROFILE: 'users/me',
   GET_ALL_MENTOR: '/mentors/search',
-  GET_MENTOR_BY_ID: '/mentors/',
+  GET_USER_BY_ID: '/users/',
   SEARCH_MENTOR: '/search',
+  GET_ALL_REVIEWS: '/mentors/reviews/',
+  POST_REVIEW: '/reviews/',
 
   REFRESH_ACCESS_TOKEN: '/users/auth/refresh-token',
 } as const;
@@ -98,3 +104,67 @@ export const RANDOM_MENTORS: User<'Mentor'>[] = new Array(4).fill({
   fields: ['IT'],
   offers: ['Định hướng nghề nghiệp'],
 });
+
+export const USER_ROLE = {
+  MENTOR: 'Mentor',
+  MENTEE: 'Mentee',
+} as const;
+
+export const NO_LAYOUT_PATH = [
+  INTERNAL_PATH.REGISTER,
+  INTERNAL_PATH.LOGIN,
+  INTERNAL_PATH.COMPLETE_PROFILE,
+  INTERNAL_PATH.SETTINGS,
+  INTERNAL_PATH.FORGOT_PASSWORD,
+  INTERNAL_PATH.CHANGE_PASSWORD,
+];
+
+export const FIELD_METADATA = {
+  DESIGN: {
+    displayName: 'Design',
+    tagColour: 'purple',
+  },
+  SOFTWARE_DEVELOPMENT: {
+    displayName: 'Software Development',
+    tagColour: 'cyan',
+  },
+  DATA_SCIENCE: {
+    displayName: 'Data Science',
+    tagColour: 'prussian',
+  },
+  PRODUCT: {
+    displayName: 'Product Management',
+    tagColour: 'red',
+  },
+  FINANCE: {
+    displayName: 'Finance',
+    tagColour: 'red',
+  },
+  MARKETING: {
+    displayName: 'Marketing',
+    tagColour: 'red',
+  },
+  HR: {
+    displayName: 'HR',
+    tagColour: 'red',
+  },
+} as const;
+
+export const OFFER_METADATA = {
+  CAREER_ORIENTATION: {
+    displayName: 'Career Orientation',
+    tagColour: 'purple',
+  },
+  JOB_FINDING: {
+    displayName: 'Job-finding',
+    tagColour: 'red',
+  },
+  INTERVIEW_PREP: {
+    displayName: 'Interview Preparation',
+    tagColour: 'prussian',
+  },
+  RESUME_REVIEW: {
+    displayName: 'Resume review',
+    tagColour: 'cyan',
+  },
+} as const;

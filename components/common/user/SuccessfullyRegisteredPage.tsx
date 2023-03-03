@@ -1,61 +1,26 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import Head from 'next/head'
+import Head from 'next/head';
 
-import { ArrowLeftOutlined } from '@ant-design/icons'
-import { Col, Row } from 'antd'
+import { SendingMailLine } from '~/components/ui/svgs/Icons';
 
 const ConfirmEmail = () => {
   return (
     <>
       <Head>
-        <title>Confirm Email</title>
+        <title>❤️ Cảm ơn bạn đã đăng ký!</title>
       </Head>
 
-      <div className="min-h-screen/85 md:bg-lightgray bg-white px-0 md:px-16 py-0 md:py-12">
-        <Row>
-          <Col
-            className="bg-white md:bg-primary flex h-screen-85 justify-center items-center rounded-xl w-3/5"
-            xs={24}
-            sm={18}
-          >
-            <div className="w-2/3">
-              <h1 className="text-black md:text-white text-4xl mb-6">
-                Xác nhận email của bạn
-              </h1>
-              <p className="text-black md:text-white text-xl mb-3">
-                Vui lòng kiểm tra email và làm theo hướng dẫn để xác thực tài
-                khoản.
-              </p>
-              <p className="text-black md:text-white">
-                Nếu không nhận được email, hãy kiểm tra hòm thư rác hoặc spam
-              </p>
-              <div className="flex justify-center items-center text-black md:text-white mt-10 mb-4">
-                <ArrowLeftOutlined style={{ marginRight: '6px' }} />
-                <Link href="/user/create-account">Quay lại đăng ký</Link>
-              </div>
-            </div>
-          </Col>
-          <Col
-            className="bg-white h-screen justify-center hidden md:flex"
-            xs={0}
-            sm={6}
-          >
-            <div className="relative">
-              <div className="flex justify-center translate-y-1/2 -translate-x-1/2">
-                <Image
-                  priority
-                  src="/images/check-your-mail.svg"
-                  width={564}
-                  height={621}
-                />
-              </div>
-            </div>
-          </Col>
-        </Row>
-      </div>
-    </>
-  )
-}
+      <main className="flex h-screen max-w-max mx-auto px-4 md:ml-32 lg:mx-auto">
+        <section className="h-screen w-full max-w-max md:min-w-[537px] flex flex-col justify-center items-center">
+          {/* <div className="min-w-[375px]" /> */}
+          <SendingMailLine className="w-40 h-20" />
 
-export default ConfirmEmail
+          <h2 className="-ml-[2px] text-center font-lora word-[-0.23rem] text-sub-heading md:text-heading text-black font-regular">
+            Email xác nhận đã được gửi đi.
+          </h2>
+        </section>
+      </main>
+    </>
+  );
+};
+
+export default ConfirmEmail;

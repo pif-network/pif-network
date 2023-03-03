@@ -1,16 +1,17 @@
-import ValueCard from './ValueCard'
-import type { Card } from './ValueCard'
+import Image from 'next/image';
+import ValueCard from './ValueCard';
+import type { Card } from './ValueCard';
 
-import { SectionTitle } from '~/components/ui'
+import { SectionTitle } from '~/components/ui';
 
-import valueImg1 from '~/assets/value-card/value-card-1.png'
-import valueImg2 from '~/assets/value-card/value-card-2.png'
-import valueImg3 from '~/assets/value-card/value-card-3.png'
-import valueImg4 from '~/assets/value-card/value-card-4.png'
-import valueImgMobile1 from '~/assets/value-card/value-mobile-1.png'
-import valueImgMobile2 from '~/assets/value-card/value-mobile-2.png'
-import valueImgMobile3 from '~/assets/value-card/value-mobile-3.png'
-import valueImgMobile4 from '~/assets/value-card/value-mobile-4.png'
+import valueImg1 from '~/assets/value-card/value-card-1.png';
+import valueImg2 from '~/assets/value-card/value-card-2.png';
+import valueImg3 from '~/assets/value-card/value-card-3.png';
+import valueImg4 from '~/assets/value-card/value-card-4.png';
+import valueImgMobile1 from '~/assets/value-card/value-mobile-1.png';
+import valueImgMobile2 from '~/assets/value-card/value-mobile-2.png';
+import valueImgMobile3 from '~/assets/value-card/value-mobile-3.png';
+import valueImgMobile4 from '~/assets/value-card/value-mobile-4.png';
 
 const VALUES = [
   {
@@ -18,34 +19,34 @@ const VALUES = [
     title: 'Mở rộng kết nối',
     content:
       'Kết nối 1-1 với nhiều mentor có kinh nghiệm  và background phù hợp với nhu cầu của bạn',
-    url: `${valueImg1.src}`,
-    urlMobile: `${valueImgMobile2.src}`,
+    image: valueImg1,
+    imageMobile: valueImgMobile2,
   },
   {
     id: 2,
     title: 'Tư vấn lộ trình',
     content:
       'Nhận được tư vấn về lộ trình và cách thức phát triển cơ hội nghề nghiệp trong lĩnh vực công nghệ',
-    url: `${valueImg2.src}`,
-    urlMobile: `${valueImgMobile1.src}`,
+    image: valueImg2,
+    imageMobile: valueImgMobile1,
   },
   {
     id: 3,
     title: 'Review CV/ Resume',
     content:
       'Được hỗ trợ review CV/ Resume cũng như phỏng vấn thử bởi những mentor dày dặn kinh nghiệm',
-    url: `${valueImg3.src}`,
-    urlMobile: `${valueImgMobile3.src}`,
+    image: valueImg3,
+    imageMobile: valueImgMobile3,
   },
   {
     id: 4,
     title: 'Chia sẻ kiến thức',
     content:
       'Cùng nhau chia sẻ về phương pháp tự học, rèn luyện kỹ năng và kiến thức trong lĩnh vực mong muốn',
-    url: `${valueImg4.src}`,
-    urlMobile: `${valueImgMobile4.src}`,
+    image: valueImg4,
+    imageMobile: valueImgMobile4,
   },
-] as Card[]
+] as Card[];
 
 const Values = () => {
   return (
@@ -64,13 +65,12 @@ const Values = () => {
 
       <section className="inline md:hidden">
         <div className="relative w-full h-full md:hidden">
-          <div
-            className="w-full h-[880px] relative left-0 right-0"
-            style={{
-              background: `url(${VALUES[1]?.urlMobile}) no-repeat`,
-              backgroundSize: 'cover',
-            }}
-          >
+          <div className="w-full right-0 z-20 relative">
+            <Image
+              className="object-cover"
+              src={VALUES[1]!.imageMobile!}
+              alt="Value Card"
+            />
             <div className="absolute font-lora bottom-[70px] left-[30px] w-[197px]">
               <h5 className="font-semi-bold text-white text-heading pb-1 word-[-8px]">
                 {VALUES[1]?.title}
@@ -80,14 +80,13 @@ const Values = () => {
               </p>
             </div>
           </div>
-          <div
-            className="w-full relative -mt-[180px] h-[880px] -z-10"
-            style={{
-              background: `url(${VALUES[0]?.urlMobile}) no-repeat`,
-              backgroundSize: 'cover',
-            }}
-          >
-            <div className="absolute font-lora top-[200px] right-[30px] w-[212px]">
+          <div className="w-full relative -mt-[13%] z-10">
+            <Image
+              className="object-cover"
+              src={VALUES[0]!.imageMobile!}
+              alt="Value Card"
+            />
+            <div className="absolute font-lora top-[100px] right-[30px] w-[212px]">
               <h5 className="font-semi-bold text-primary-900 text-heading pb-1 word-[-8px]">
                 {VALUES[0]?.title}
               </h5>
@@ -96,13 +95,12 @@ const Values = () => {
               </p>
             </div>
           </div>
-          <div
-            className="w-full -mt-[80px] right-0 h-[880px] -z-20 relative"
-            style={{
-              background: `url(${VALUES[2]?.urlMobile}) no-repeat`,
-              backgroundSize: 'cover',
-            }}
-          >
+          <div className="w-full -mt-[13%] right-0 z-20 relative">
+            <Image
+              className="object-cover"
+              src={VALUES[2]!.imageMobile!}
+              alt="Value Card"
+            />
             <div className="absolute font-lora bottom-[90px] right-[30px] w-[212px]">
               <h5 className="text-right font-semi-bold text-primary-900 text-heading pb-1 word-[-8px]">
                 Đánh giá CV
@@ -112,13 +110,12 @@ const Values = () => {
               </p>
             </div>
           </div>
-          <div
-            className="w-full relative -mt-[80px] right-0 h-[880px] -z-30"
-            style={{
-              background: `url(${VALUES[3]?.urlMobile}) no-repeat`,
-              backgroundSize: 'cover',
-            }}
-          >
+          <div className="w-full relative -mt-[13%] right-0 z-10">
+            <Image
+              className="object-cover"
+              src={VALUES[3]!.imageMobile!}
+              alt="Value Card"
+            />
             <div className="absolute font-lora top-[50px] left-[30px] w-[230px]">
               <h5 className="font-semi-bold text-white text-heading pb-1 word-[-8px]">
                 {VALUES[3]?.title}
@@ -131,6 +128,6 @@ const Values = () => {
         </div>
       </section>
     </>
-  )
-}
-export default Values
+  );
+};
+export default Values;

@@ -1,11 +1,5 @@
-import {
-  AxiosError,
-  AxiosResponse
-} from "axios";
-import {
-  User,
-  UserRole
-} from "~/lib/types/user";
+import { AxiosError, AxiosResponse } from 'axios';
+import { User, UserRole } from '~/lib/types/user';
 
 export interface Token {
   accessToken: string;
@@ -13,7 +7,9 @@ export interface Token {
 }
 
 export interface IRegister {
-  (email: string, password: string, role: UserRole): Promise<APIResponse<User<UserRole>>>;
+  (email: string, password: string, role: UserRole): Promise<
+    APIResponse<User<UserRole>>
+  >;
 }
 
 export interface ILogIn {
@@ -28,7 +24,11 @@ export interface VerifyEmail {
 }
 
 export interface IChangePassword {
-  (currentPassword: string, newPassword: string, newPasswordConfirmation: string): Promise<APIResponse>;
+  (
+    currentPassword: string,
+    newPassword: string,
+    newPasswordConfirmation: string
+  ): Promise<APIResponse>;
 }
 
 /**
@@ -39,27 +39,30 @@ export interface APIResponse<T = null>
     isError: boolean;
     data: T;
     message: string;
-  }> {
-}
+    total?: number;
+  }> {}
 
 export interface ApiErrorResponse
-  extends Omit<AxiosError<APIResponse>, "response"> {
+  extends Omit<AxiosError<APIResponse>, 'response'> {
   response: APIResponse;
 }
 
 const hasMessageError = (error: unknown): error is ApiErrorResponse => {
   return (
-    typeof error === "object" &&
+    typeof error === 'object' &&
     error !== null &&
-    "message" in error &&
-    typeof (error as Record<string, unknown>).message === "string"
+    'message' in error &&
+    typeof (error as Record<string, unknown>).message === 'string'
   );
 };
 
 export const getErrorMessage = (error: unknown): string => {
   if (hasMessageError(error)) {
-    return error.response.data.message;
+    return (
+      (error.response && error.response.data.message) ||
+      'Something went wrong, please try again later.'
+    );
   }
 
-  return "Unknown error. Please try again later.";
+  return 'Something went wrong, please try again later.';
 };

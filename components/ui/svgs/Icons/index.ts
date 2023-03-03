@@ -16,3 +16,5 @@ export { default as MortarboardHatFill } from './MortarboardHatFill';
 export { default as PinLine } from './PinLine';
 export { default as Search } from './Search';
 export { default as GoogleFill } from './GoogleFill';
+export { default as Home } from './Home';
+export { default as SendingMailLine } from './SendingMailLine';

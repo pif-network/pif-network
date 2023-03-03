@@ -1,31 +1,63 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import { AuthService, UserService } from '~/services';
+import { AuthService, TokenService, UserService } from '~/services';
 import { getErrorMessage } from '~/lib/types/service';
-import { Link, Input as FormikInput, Button } from '~/components/ui';
-import { INTERNAL_URI } from '~/shared/constant';
+import { Link, Input as FormikInput, Button, Divider } from '~/components/ui';
+import { GoogleFill } from '~/components/ui/svgs/Icons';
+import { INTERNAL_PATH } from '~/shared/constant';
+import { BrandIdentifierLayoutSlot } from './components';
 
 import { FormikProvider, useFormik, Form, Field } from 'formik';
 import { object, string } from 'yup';
-
-import { Row, Col, Divider, Alert } from 'antd';
-
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { Alert } from 'antd';
 
 const Login = () => {
-  const [message, setMessage] = useState<string | undefined>('');
-  const [shouldRegisterWithEmail, setShouldRegisterWithEmail] = useState(false);
   const router = useRouter();
+  const { status, id, at, rt } = router.query;
+
+  const checkIfRegisterWithGoogleSuccessfully = async (id: string) => {
+    try {
+      const user = await UserService.getUserById(id);
+
+      UserService.setUser(user.data.data);
+
+      const token = {
+        accessToken: at as string,
+        refreshToken: rt as string,
+      };
+
+      TokenService.setToken(token);
+
+      router.push(INTERNAL_PATH.HOME);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const [errorMessage, setErrorMessage] = useState<string | undefined>('');
+
+  useEffect(() => {
+    if (typeof id === 'string') {
+      checkIfRegisterWithGoogleSuccessfully(id);
+      window.history.pushState(null, '', location.href.split('?')[0]);
+    } else if (typeof status === 'string') {
+      setErrorMessage('Email has not been registered.');
+      window.history.pushState(null, '', location.href.split('?')[0]);
+    }
+  }, [id, status]);
 
   const validationSchema = object().shape({
-    email: string().required('Hãy nhập Email').email('Email không hợp lệ'),
+    email: string()
+      .min(6, 'Email không được ngắn hơn 6 ký tự.')
+      .max(50, 'Email không được dài quá 50 ký tự.')
+      .email('Địa chỉ email không hợp lệ.')
+      .required('Vui lòng nhập địa chỉ email.'),
     password: string()
-      .required('Hãy nhập mật khẩu')
-      .min(6, 'Mật khẩu phải có ít nhất 6 kí tự')
-      .max(128, 'Mật khẩu không được vượt quá 128 kí tự'),
+      .min(6, 'Password không được ngắn hơn 6 ký tự.')
+      .max(128, 'Password không được dài quá 128 ký tự.')
+      .required('Vui lòng nhập mật khẩu.'),
   });
 
   const formik = useFormik({
@@ -37,13 +69,14 @@ const Login = () => {
     onSubmit: async ({ email, password }, { setSubmitting }) => {
       console.log('Submitting..');
       try {
-        setMessage('');
+        setErrorMessage('');
 
         await AuthService.logIn(email, password);
         const user = UserService.currentUser;
         console.log(user);
 
-        // if (!user?.birthday) router.push('/user/complete-profile');
+        console.log(router.query.returnUrl);
+        // if (!user?.location) router.push('/user/complete-profile');
         // else {
         //   const returnUrl = (router.query?.returnUrl as string) || '/';
         //   router.push(returnUrl);
@@ -54,19 +87,19 @@ const Login = () => {
 
         switch (errorMessage) {
           case "Mentee's not found":
-            setMessage('Email không tồn tại');
+            setErrorMessage('Email không tồn tại');
             break;
           case "Mentee has's not confirm their email.":
-            setMessage('Kiểm tra email của bạn và xác nhận tài khoản');
+            setErrorMessage('Kiểm tra email của bạn và xác nhận tài khoản');
             break;
           case 'Wrong password.':
-            setMessage('Mật khẩu không đúng');
+            setErrorMessage('Mật khẩu không đúng');
             break;
           case undefined:
-            setMessage('Đã có lỗi xảy ra. Vui lòng thử lại.');
+            setErrorMessage('Đã có lỗi xảy ra. Vui lòng thử lại.');
             break;
           default:
-            setMessage(errorMessage);
+            setErrorMessage(errorMessage);
         }
       } finally {
         setSubmitting(false);
@@ -77,119 +110,79 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>Welcome back!</title>
+        <title>Đăng nhập</title>
       </Head>
 
-      <article className="grid place-items-center xl:inline mx-2 md:mx-6 lg:mx-12 xl:mx-24 px-0 md:px-16 py-0 md:py-12">
-        <Row className="" align="middle" justify="center">
-          <Col
-            className="max-w-2xl h-full mt-10 ml-12"
-            xs={0}
-            sm={0}
-            md={0}
-            lg={0}
-            xl={12}
-          >
-            <Image
-              priority
-              src="/images/create-new-account.svg"
-              width={813}
-              height={625}
-            />
-          </Col>
+      <BrandIdentifierLayoutSlot>
+        {/* Page title */}
+        <h1 className="-ml-[2px] text-left font-lora word-[-0.23rem] text-sub-heading md:text-heading">
+          <span className="text-black font-regular">Đăng nhập</span>
+        </h1>
 
-          {/* Right */}
-          <Col className="" lg={24} xl={10}>
-            <section
-              className="md:max-w-lg m-1 md:m-8 py-12 px-8 md:px-16 bg-white rounded-xl"
-              style={{
-                boxShadow: '1.47608px 3.42451px 33.0643px rgba(0, 0, 0, 0.1)',
-              }}
-            >
-              {/* Page title */}
-              <h1 className="text-center font-lora word-[-0.23rem] text-sub-heading md:text-heading text-primary-900 font-semi-bold">
-                Đăng nhập vào <br /> &#60;product_name&#62;
-              </h1>
+        <div className="-mb-2" />
 
-              <div className="mb-5" />
+        <div className="mt-3 mb-4 text-left font-manrope font-regular text-body-sm">
+          Chưa có tài khoản?{' '}
+          <span className="text-primary-800">
+            <Link href={INTERNAL_PATH.REGISTER}>Đăng ký.</Link>
+          </span>
+        </div>
 
-              <h3 className="text-center text-black font-manrope word-[0rem] text-body">
-                Chào mừng bạn quay trở lại!
-              </h3>
+        <div className="min-w-[375px]" />
 
-              <div className="mb-8" />
+        <div className="mb-4" />
 
-              <div className="grid place-items-center">
+        <FormikProvider value={formik}>
+          <Form className="max-w-sm flex flex-col">
+            {errorMessage && (
+              <Alert
+                className="mt-2 mb-6 font-manrope"
+                message={errorMessage}
+                type="error"
+                showIcon
+              />
+            )}
+            <Field name="email" type="email" as={FormikInput} />
+            <Field name="password" type="password" as={FormikInput} />
+            <div className="mt-8 flex items-center justify-center">
+              {formik.isSubmitting ? (
+                <div className=" flex justify-center items-center">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black" />
+                </div>
+              ) : (
                 <Button
-                  content="Đăng nhập với Google"
-                  fillType="outlined"
+                  className={`w-full h-[46px] flex items-center justify-center rounded-lg ${
+                    !(formik.isValid && formik.dirty)
+                      ? 'bg-primary-800/40 border-primary-800/60'
+                      : ''
+                  } text-[19px] md:text-sub-heading`}
+                  type="submit"
+                  fillType="filled"
                   size="medium"
-                  className="max-w-md w-full border-[1px] border-gray-600/50 text-[18px] md:text-sub-heading"
-                  onClick={() => signIn()}
+                  content="Đăng nhập"
+                  // disabled={formik.isValid && formik.dirty}
                 />
-              </div>
+              )}
+            </div>
 
-              <div className="mb-2" />
+            <Divider>Hoặc đăng nhập với</Divider>
 
-              <Divider plain>HOẶC</Divider>
-
-              <div className="mb-2" />
-
-              <FormikProvider value={formik}>
-                <Form className="max-w-md">
-                  {message && (
-                    <Alert
-                      className="mt-2 mb-6 font-manrope"
-                      message={message}
-                      type="error"
-                      showIcon
-                    />
-                  )}
-                  <Field
-                    name="email"
-                    type="email"
-                    placeholder="Nhập email của bạn"
-                    as={FormikInput}
-                  />
-                  <Field
-                    name="password"
-                    type="password"
-                    placeholder="Nhập mật khẩu của bạn"
-                    as={FormikInput}
-                  />
-                  <div className="mt-8 flex items-center justify-center">
-                    {formik.isSubmitting ? (
-                      <div className=" flex justify-center items-center">
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black" />
-                      </div>
-                    ) : (
-                      <Button
-                        content="Đăng nhập"
-                        type="submit"
-                        fillType="filled"
-                        size="medium"
-                        className={`w-full rounded-lg ${
-                          !(formik.isValid && formik.dirty)
-                            ? '!bg-primary-800/60'
-                            : ''
-                        } text-[19px] md:text-sub-heading`}
-                        disabled={!formik.isValid && !formik.dirty}
-                      />
-                    )}
-                  </div>
-                </Form>
-              </FormikProvider>
-
-              <div className="mt-4 mb-4 text-center font-manrope font-regular text-body-sm">
-                Chưa có tài khoản?{' '}
-                <span>
-                  <Link href={INTERNAL_URI.REGISTER}>Đăng ký.</Link>
-                </span>
-              </div>
-            </section>
-          </Col>
-        </Row>
-      </article>
+            <Button
+              className="max-w-md w-full h-[42px] flex items-center justify-center border-[1px] border-gray-600/50 text-[18px] md:text-sub-heading rounded-lg"
+              external
+              href="http://localhost:8080/api/auth/google?action=login"
+              type="button"
+              fillType="outlined"
+              size="medium"
+              content={
+                <>
+                  <GoogleFill className="pr-2" /> Google
+                </>
+              }
+            />
+          </Form>
+        </FormikProvider>
+      </BrandIdentifierLayoutSlot>
     </>
   );
 };

@@ -1,0 +1,27 @@
+.ant-select-selector, .ant-input {
+  @apply !h-[42px] !rounded-lg
+}
+
+.ant-input-password  .ant-input {
+  @apply !h-[32px] !rounded-lg
+}
+
+textarea.ant-input {
+  @apply !h-auto
+}
+
+.ant-select-selection-placeholder, .ant-select-selection-item, .ant-select-selection-search-input {
+  @apply !pt-1
+}
+
+.ant-select-selection-overflow-item .ant-select-selection-item, .ant-select-selection-placeholder {
+  @apply !pt-0
+}
+
+.ant-select-selector {
+  @apply !border-gray-400
+}
+
+.ant-modal-content {
+  @apply rounded-lg !shadow-none text-center
+}

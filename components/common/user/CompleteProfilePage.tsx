@@ -1,242 +1,304 @@
-import { useState } from 'react';
+import { RefObject, useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
+import Head from 'next/head';
 import Image from 'next/image';
 
 import { UserService } from '~/services';
 import { getErrorMessage } from '~/lib/types/service';
-import { User } from '~/lib/types/user';
-import { Input as FormikInput } from '~/components/ui';
+import { User, UserRole } from '~/lib/types/user';
+import { ChevronRight, Home } from '~/components/ui/svgs/Icons';
+import { INTERNAL_PATH, USER_ROLE } from '~/shared/constant';
+import {
+  Input as FormikInput,
+  Select as FormikSelect,
+  Button,
+} from '~/components/ui';
 
-import { Field, FieldArray, Form, FormikProvider, useFormik } from 'formik';
-import { object, string, array } from 'yup';
-
-import { ArrowLeftOutlined, DeleteOutlined } from '@ant-design/icons';
-import { Col, Row, Tooltip, Button, Input } from 'antd';
-import Head from 'next/head';
+import { Field, Form, FormikHelpers, FormikProvider, useFormik } from 'formik';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { object, string } from 'yup';
+import { Alert, Modal } from 'antd';
+import { ArrowLeftIcon, CheckCircleIcon } from '@heroicons/react/outline';
+import {
+  Step0InputPack,
+  Step1InputPack,
+  Step2InputPack,
+  MentorInputPack,
+} from './components';
 
 const CompleteProfile = () => {
   const router = useRouter();
-  const [message, setMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [currentFillingStep, setCurrentFillingStep] = useState(0);
+  const [
+    isProfileSuccessfullyUpdatedModalOpen,
+    setIsProfileSuccessfullyUpdatedModalOpen,
+  ] = useState(false);
+
+  const currentUserRole = UserService.currentUser?.role;
+  const MAX_FILLING_STEPS = currentUserRole === USER_ROLE.MENTOR ? 3 : 2;
+
+  const STEP_FIELD_MAP: { [key: number]: string[] } = {
+    0: ['name', 'gender'],
+    1: ['schoolName', 'major', 'title', 'workplace'],
+    2: ['location', 'github', 'linkedin'],
+  };
+
+  if (currentUserRole === USER_ROLE.MENTOR) {
+    STEP_FIELD_MAP[2] = ['fields', 'offers', 'bookingUrl'];
+    STEP_FIELD_MAP[3] = ['location', 'github', 'linkedin'];
+  } else STEP_FIELD_MAP[2] = ['location', 'github', 'linkedin'];
 
   const validationSchema = object().shape({
-    dateOfBirth: string().required('Vui lòng nhập ngày sinh'),
-    phone: string()
-      .min(10, 'Số điện thoại bao gồm 10 ký số')
-      .max(10, 'Số điện thoại bao gồm 10 ký số')
-      .required('Vui lòng nhập số điện thoại'),
-    school: array().of(
-      object().shape({
-        name: string().max(50, 'Tên trường học không được dài quá 50 ký tự'),
-        major: string().max(50, 'Tên ngành học không được dài quá 50 ký tự'),
-      })
-    ),
-    exp: array().of(
-      object().shape({
-        name: string().max(50, 'Tên công ty không được dài quá 50 ký tự'),
-        position: string().max(50, 'Tên công việc không được dài quá 50 ký tự'),
-      })
-    ),
+    name: string().required(),
+    gender: string().required(),
+    description: string().required(),
+    schoolName: string()
+      .max(50, 'Tên trường học không được dài quá 50 ký tự')
+      .required(),
+    major: string()
+      .max(50, 'Tên ngành học không được dài quá 50 ký tự')
+      .required(),
+    title: string()
+      .max(50, 'Tên công ty không được dài quá 50 ký tự')
+      .required(),
+    workplace: string()
+      .max(50, 'Tên công việc không được dài quá 50 ký tự')
+      .required(),
+    location: string().required(),
+    github: string(),
+    linkedin: string(),
   });
 
+  const formInitialValuesWithoutMentorFields = {
+    name: '',
+    gender: '',
+    description: '',
+    schoolName: '',
+    major: '',
+    title: '',
+    workplace: '',
+    location: '',
+    github: '',
+    linkedin: '',
+  };
+
+  const formInitialValues =
+    currentUserRole === USER_ROLE.MENTOR
+      ? {
+          ...formInitialValuesWithoutMentorFields,
+          fields: [],
+          offers: [],
+          bookingUrl: '',
+        }
+      : formInitialValuesWithoutMentorFields;
+
   const formik = useFormik({
-    initialValues: {
-      dateOfBirth: '',
-      phone: '',
-      school: [
-        {
-          name: '',
-          major: '',
-        },
-      ],
-      exp: [
-        {
-          name: '',
-          position: '',
-        },
-      ],
-    },
+    initialValues: formInitialValues,
+    enableReinitialize: true,
     validationSchema,
     onSubmit: async values => {
       try {
-        setMessage('');
+        setErrorMessage('');
         await UserService.updateProfile(values);
 
-        router.push('/');
+        setIsProfileSuccessfullyUpdatedModalOpen(true);
       } catch (error) {
         const errorMessage = getErrorMessage(error);
-        setMessage(errorMessage);
+        setErrorMessage(errorMessage);
       }
     },
   });
 
+  const shouldDisableButtonNextStep = () => {
+    const { errors, touched } = formik;
+
+    return (
+      STEP_FIELD_MAP[currentFillingStep]?.some(field =>
+        Object.keys(errors).includes(field)
+      ) ||
+      !STEP_FIELD_MAP[currentFillingStep]?.some(field =>
+        Object.keys(touched).includes(field)
+      )
+    );
+  };
+
+  const formRef = useAutoAnimate({});
+
   return (
     <>
       <Head>
-        <title>Complete Profile</title>
+        <title>Hoàn thành hồ sơ của bạn tại PIF Network</title>
       </Head>
 
-      <div className="min-h-screen/85 md:bg-lightgray bg-white px-0 md:px-16 py-0 md:py-12">
-        <Row>
-          <Col
-            className="bg-white flex min-h-screen/75 justify-center items-start"
-            sm={12}
-          >
-            <div className="flex flex-col justify-center items-center mt-4 w-9/12">
-              <h1 className="pt-6 pb-6 text-4xl font-medium leading-12 tracking-wide">
-                Hoàn thành profile để mentor hiểu rõ hơn về bạn!
-              </h1>
-              <div>
-                <FormikProvider value={formik}>
-                  <Form>
-                    {message && (
-                      <div className="mt-4 text-red-500 flex items-center justify-center">
-                        {message}
-                      </div>
-                    )}
-                    <div style={{ display: 'grid', rowGap: '1rem' }}>
-                      <Field
-                        name="dateOfBirth"
-                        type="date"
-                        placeholder="Ngày, tháng, năm sinh"
-                        as={FormikInput}
-                      />
-                      <Field
-                        name="phone"
-                        type="tel"
-                        placeholder="Số điện thoại"
-                        as={FormikInput}
-                      />
-                      <FieldArray
-                        name="school"
-                        render={arrayHelpers => (
-                          <div>
-                            {formik.values.school.map((_, index) => (
-                              <div key={index} style={{ marginBottom: '1rem' }}>
-                                <Input.Group compact>
-                                  <Field
-                                    name={`school[${index}].name`}
-                                    style={{
-                                      width: '43.5%',
-                                      marginRight: '1rem',
-                                    }}
-                                    placeholder="Trường học"
-                                    as={FormikInput}
-                                  />
-                                  <Field
-                                    name={`school[${index}].name`}
-                                    style={{
-                                      width: '43.5%',
-                                      marginRight: '1rem',
-                                    }}
-                                    placeholder="Chuyên ngành"
-                                    as={FormikInput}
-                                  />
-                                  <Tooltip title="Xóa trường học này">
-                                    <Button
-                                      icon={<DeleteOutlined />}
-                                      style={{ border: 'none', boxShadow: '0' }}
-                                      onClick={() => arrayHelpers.remove(index)}
-                                    />
-                                  </Tooltip>
-                                </Input.Group>
-                              </div>
-                            ))}
-                            <button
-                              className="rounded bg-white hover:text-violet focus:text-violet underline"
-                              onClick={() =>
-                                arrayHelpers.push({ name: '', major: '' })
-                              }
-                            >
-                              Thêm trường học
-                            </button>
-                          </div>
-                        )}
-                      />
-                      <FieldArray
-                        name="exp"
-                        render={arrayHelpers => (
-                          <div>
-                            {formik.values.exp.map((value, index) => (
-                              <div key={index} style={{ marginBottom: '1rem' }}>
-                                <Input.Group compact>
-                                  <Field
-                                    name={`exp[${index}].name`}
-                                    style={{
-                                      width: '43.5%',
-                                      marginRight: '1rem',
-                                    }}
-                                    placeholder="Công ty"
-                                    as={FormikInput}
-                                  />
-                                  <Field
-                                    name={`exp[${index}].position`}
-                                    style={{
-                                      width: '43.5%',
-                                      marginRight: '1rem',
-                                    }}
-                                    placeholder="Vị trí"
-                                    as={FormikInput}
-                                  />
-                                  <Tooltip title="Xóa công việc này">
-                                    <Button
-                                      style={{ border: 'none', boxShadow: '0' }}
-                                      icon={<DeleteOutlined />}
-                                      onClick={() => arrayHelpers.remove(index)}
-                                    />
-                                  </Tooltip>
-                                </Input.Group>
-                              </div>
-                            ))}
-                            <button
-                              className="rounded bg-white hover:text-violet focus:text-violet underline"
-                              onClick={() =>
-                                arrayHelpers.push({ name: '', position: '' })
-                              }
-                            >
-                              Thêm kinh nghiệm
-                            </button>
-                          </div>
-                        )}
-                      />
-                    </div>
-                    <div className="mt-8 flex items-center justify-center">
-                      <button
-                        className="py-3 px-4 md:w-28 w-full rounded bg-primary text-white hover:bg-violet focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50"
-                        type="submit"
-                      >
-                        {formik.isSubmitting ? (
-                          <div className="flex justify-center items-center">
-                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                          </div>
-                        ) : (
-                          <>Hoàn thành</>
-                        )}
-                      </button>
-                    </div>
-                  </Form>
-                </FormikProvider>
-              </div>
-              <div className="flex items-center pt-4 pb-4">
-                <ArrowLeftOutlined style={{ marginRight: '6px' }} />
-                <Link href="#">Quay lại trang chủ</Link>
-              </div>
+      {!isProfileSuccessfullyUpdatedModalOpen && (
+        <main className="flex h-screen max-w-max mx-auto md:ml-32 lg:mx-auto">
+          <section className="h-screen md:min-w-[537px] max-w-xl md:pr-48 xl:pr-64 mx-4 flex flex-col justify-center rounded-[36px] md:border-r">
+            <div className="mt-3 mb-2 text-left font-manrope font-regular text-body-sm">
+              👋 Chào mừng bạn.
             </div>
-          </Col>
-          <Col
-            className="bg-gradient-to-b from-primary via-primary to-lightviolet hidden md:flex min-h-screen/75 justify-center items-center "
-            xs={0}
-            sm={12}
-          >
-            <Image
-              priority
-              src="/images/complete-your-profile.svg"
-              width={580}
-              height={480}
-            />
-          </Col>
-        </Row>
-      </div>
+
+            <h1 className="text-left font-lora word-[-0.23rem] text-black text-sub-heading md:text-heading-md">
+              <span className="font-regular">Để chúng tôi hiểu thêm</span>{' '}
+              <span className="inline-block font-regular">
+                một chút về bạn nhé?
+              </span>
+              <span className="font-light text-caption">*</span>
+            </h1>
+
+            <div className="mb-4" />
+
+            <FormikProvider value={formik}>
+              <Form
+                ref={formRef as RefObject<HTMLFormElement>}
+                className="max-w-sm flex flex-col"
+              >
+                {errorMessage && (
+                  <Alert
+                    className="mt-2 mb-6 font-manrope"
+                    message={errorMessage}
+                    type="error"
+                    showIcon
+                  />
+                )}
+
+                {currentFillingStep === 0 && (
+                  <Step0InputPack setFieldValue={formik.setFieldValue} />
+                )}
+
+                {currentFillingStep === 1 && <Step1InputPack />}
+
+                {currentFillingStep === 2 &&
+                  currentUserRole === USER_ROLE.MENTOR && (
+                    <MentorInputPack setFieldValue={formik.setFieldValue} />
+                  )}
+
+                {currentFillingStep === MAX_FILLING_STEPS && <Step2InputPack />}
+              </Form>
+            </FormikProvider>
+
+            <div className="mb-6" />
+
+            {/* To minimise distraction, guiding text will only appear once. */}
+            {currentFillingStep === 0 ? (
+              <>
+                <h4 className="text-left text-gray-400 font-manrope word-[0rem] text-caption">
+                  [*] Những thông tin bạn cung cấp ngay sau đây, mặc dù không
+                  tất yếu, nhưng sẽ vô cùng hữu ích cho mentors của bạn sau này.
+                </h4>
+                <div className="mb-8" />
+              </>
+            ) : (
+              <div className="mb-4" />
+            )}
+
+            <div className="w-full flex gap-4">
+              <Button
+                className="h-[42px] rounded-lg border-gray-400 text-heading-sm"
+                fillType="outlined"
+                size="medium"
+                content={
+                  currentFillingStep === 0 ? (
+                    ''
+                  ) : (
+                    <ArrowLeftIcon width={24} height={24} />
+                  )
+                }
+                onClick={() => {
+                  if (currentFillingStep === 0) return;
+                  else setCurrentFillingStep(currentFillingStep - 1);
+                }}
+              />
+              {formik.isSubmitting ? (
+                <div className="w-full flex justify-center items-center">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black" />
+                </div>
+              ) : (
+                <Button
+                  className="w-full h-[42px] rounded-lg text-heading-sm disabled:bg-primary-800/40 disabled:border-primary-800/40"
+                  type="submit"
+                  fillType="filled"
+                  size="medium"
+                  content="Tiếp tục"
+                  onClick={async () => {
+                    if (currentFillingStep < MAX_FILLING_STEPS)
+                      setCurrentFillingStep(currentFillingStep + 1);
+                    else await formik.submitForm();
+                  }}
+                  disabled={shouldDisableButtonNextStep()}
+                />
+              )}
+            </div>
+          </section>
+
+          <section className="hidden md:flex justify-center items-center">
+            <div
+              className="delay-[3500] animate-fall group flex relative items-center py-[20px] -left-[89px] bg-[#F7F7F7]
+            hover:-translate-y-3 transition-transform ease-in-out duration-300"
+            >
+              <Image
+                src="/images/logo.png"
+                width={130}
+                height={33}
+                alt="SheCodesVietnam Logo"
+              />
+              <h2 className="ml-3 pb-2 font-manrope font-light md:text-body-lg xl:text-heading">
+                Bridge to knowledge
+              </h2>
+            </div>
+          </section>
+        </main>
+      )}
+
+      <Modal
+        width={900}
+        open={isProfileSuccessfullyUpdatedModalOpen}
+        centered
+        mask={false}
+        closable={false}
+        footer={null}
+      >
+        <div className="flex flex-col justify-center items-center">
+          <div className="mb-7" />
+
+          <CheckCircleIcon className="animate-appear w-40 h-20 lg:w-50 lg:h-24 stroke-[#04942b]" />
+
+          <div className="mb-7" />
+
+          <div className="animate-appear-long flex flex-col justify-center items-center">
+            <h1 className="-ml-[2px] font-lora font-semi-bold word-[-0.5rem] text-sub-heading md:text-heading text-black">
+              Cập nhật thông tin thành công!
+            </h1>
+
+            <div className="mb-3" />
+
+            <h4 className="text-black font-manrope word-[0rem] text-body-md lg:text-heading-sm">
+              Note: Bạn luôn có thể thay đổi thông tin cá nhân ở{' '}
+              <span className="inline-block">phần Cài đặt.</span>
+            </h4>
+
+            <div className="mb-8" />
+
+            <div className="w-[250px] flex gap-4">
+              <Button
+                className="h-[36px] w-min px-5 rounded-lg border-gray-400"
+                href={INTERNAL_PATH.HOME}
+                fillType="outlined"
+                size="medium"
+                content={<Home className="w-4 h-4" />}
+              />
+              <Button
+                className="w-full h-[36px] px-2 rounded-lg text-[14px]"
+                href={INTERNAL_PATH.SEARCH}
+                fillType="filled"
+                size="medium"
+                content="Tìm kiếm mentor"
+                rightIcon={<ChevronRight className="pl-1 fill-white" />}
+              />
+            </div>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };

@@ -7,4 +7,17 @@ module.exports = {
       },
     ];
   },
+  images: {
+    formats: ['image/avif'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.pinimg.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
+    ],
+  },
 };

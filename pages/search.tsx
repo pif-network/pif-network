@@ -1,14 +1,18 @@
-import { Card, Skeleton } from 'antd';
 import { useEffect, useState } from 'react';
 import { MentorCard } from '~/components/mentor';
 import { FilterSection, SectionTitle } from '~/components/ui';
-import { RANDOM_MENTORS } from '~/shared/constant';
+import { Fields, Offers, User } from '~/lib/types/user';
+import { UserService } from '~/services';
 
 const SearchPage = () => {
-  const rawMentors: typeof RANDOM_MENTORS = [];
-  const [mentors, setMentor] = useState(rawMentors);
-
+  const [mentors, setMentors] = useState<User<'Mentor'>[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [shouldStopObserving, setShouldStopObserving] = useState(false);
+  const [page, setPage] = useState(0);
+  const [filteringOption, setFilteringOption] = useState<{
+    fields: Fields[];
+    offers: Offers[];
+  }>({ fields: [] as Fields[], offers: [] as Offers[] });
 
   const observer = new IntersectionObserver(
     entries => {
@@ -19,10 +23,20 @@ const SearchPage = () => {
         setIsLoading(true);
 
         // After loaded data => isLoading = false
-        setTimeout(() => {
-          setIsLoading(false);
-          setMentor([...mentors, ...RANDOM_MENTORS]);
+        setTimeout(async () => {
+          setPage(page + 1);
+          const response = await UserService.getMentors({
+            itemsPerPage: 4,
+            page: page + 1,
+            ...filteringOption,
+          });
+          const newMentors = response.data.data;
+          if (newMentors.length !== 0) {
+            setMentors([...mentors, ...newMentors]);
+          } else setShouldStopObserving(true);
+
           observer.unobserve(lastCard.target);
+          setIsLoading(false);
         }, 1000);
       }
     },
@@ -31,17 +45,38 @@ const SearchPage = () => {
     }
   );
 
+  const fetchMentorsAfterFiltered = async () => {
+    setPage(1);
+    setShouldStopObserving(false);
+
+    const response = await UserService.getMentors({
+      itemsPerPage: 4,
+      page: 1,
+      ...filteringOption,
+    });
+    const newMentors = response.data.data;
+    console.log(newMentors);
+    console.log(filteringOption);
+    console.log(page);
+
+    setMentors(newMentors);
+  };
+
   useEffect(() => {
-    if (mentors.length < 24) {
+    fetchMentorsAfterFiltered();
+  }, [filteringOption]);
+
+  useEffect(() => {
+    if (mentors.length < 24 && !shouldStopObserving) {
       const container = document.getElementById('container');
       const cards = container!.children;
       const lastCard = cards[cards.length - 1];
-      observer.observe(lastCard!);
+      lastCard && observer.observe(lastCard!);
     }
-  }, [mentors]);
+  }, [mentors, shouldStopObserving, filteringOption]);
 
   return (
-    <main className="container mx-auto pt-[121px]">
+    <main className="container min-h-screen mx-auto px-12 pt-[121px]">
       <SectionTitle
         className="mb-4"
         content="Lựa chọn mentor phù hợp với bạn tại đây"
@@ -49,7 +84,7 @@ const SearchPage = () => {
 
       <div className="mb-16" />
 
-      <FilterSection />
+      <FilterSection setFilteringOptions={setFilteringOption} />
 
       <div id="container" className="flex flex-row flex-wrap gap-y-4 py-6">
         {mentors.map((mentor, idx) => (

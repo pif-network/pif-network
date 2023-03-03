@@ -1,26 +1,22 @@
-import type {
-  AxiosError,
-  AxiosInstance
-} from "axios";
+import type { AxiosError, AxiosInstance } from 'axios';
 
 import {
   ApiErrorResponse,
   APIResponse,
   getErrorMessage,
-  Token
-}                   from "~/lib/types/service";
-import AuthService  from "./AuthService";
-import TokenService from "./TokenService";
+  Token,
+} from '~/lib/types/service';
+import AuthService from './AuthService';
+import TokenService from './TokenService';
 
 interface RequestsRequireRefreshAccessTokenQueue
   extends Array<{
-    resolve: (token: Token["accessToken"]) => void
-    reject: (reason?: unknown) => void
-  }> {
-}
+    resolve: (token: Token['accessToken']) => void;
+    reject: (reason?: unknown) => void;
+  }> {}
 
 const resolveRequestsRequireRefreshAccessTokenQueue = (
-  token: Token["accessToken"],
+  token: Token['accessToken'],
   queue: RequestsRequireRefreshAccessTokenQueue
 ) => {
   queue.forEach(p => {
@@ -50,7 +46,7 @@ const setupInterceptorsTo = (instance: AxiosInstance): AxiosInstance => {
   if (!instance.interceptors)
     throw new Error(`Invalid axios instance: ${instance}`);
 
-  let queue: RequestsRequireRefreshAccessTokenQueue = [];
+  const queue: RequestsRequireRefreshAccessTokenQueue = [];
 
   const onResponse = (response: APIResponse): APIResponse => {
     return response;
@@ -63,7 +59,8 @@ const setupInterceptorsTo = (instance: AxiosInstance): AxiosInstance => {
     const { config: originalRequestConfig, response } = errorResponse;
 
     if (
-      (response?.data?.message !== "jwt expired.") ||
+      !response || // Service unavailable.
+      response?.data?.message !== 'jwt expired.' ||
       !originalRequestConfig || // If there is no original request config, it's not an error we can handle.
       originalRequestConfig?.data?._hasRetried
     ) {
@@ -76,25 +73,25 @@ const setupInterceptorsTo = (instance: AxiosInstance): AxiosInstance => {
      * @param token Newly refreshed access token.
      * @returns
      */
-    const authenticateQueuedRequest = async (token: Token["accessToken"]) => {
+    const authenticateQueuedRequest = async (token: Token['accessToken']) => {
       const newConfig = {
         ...originalRequestConfig,
         headers: {
-          Authorization: token
+          Authorization: token,
         },
         data: {
-          _hasRetried: true
-        }
+          _hasRetried: true,
+        },
       };
 
       return await instance.request(newConfig);
     };
 
-    // Queue current request if refreshing 
+    // Queue current request if refreshing
     if (isRefreshing) {
       try {
         const requestQueuing = new Promise(
-          (resolve: (token: Token["accessToken"]) => void, reject) => {
+          (resolve: (token: Token['accessToken']) => void, reject) => {
             queue.push({ resolve, reject });
           }
         );
@@ -111,7 +108,10 @@ const setupInterceptorsTo = (instance: AxiosInstance): AxiosInstance => {
       resolveRequestsRequireRefreshAccessTokenQueue(newAccessToken, queue);
       return await instance.request(originalRequestConfig);
     } catch (error) {
-      declineRequestsRequireRefreshAccessTokenQueue(error as ApiErrorResponse, queue);
+      declineRequestsRequireRefreshAccessTokenQueue(
+        error as ApiErrorResponse,
+        queue
+      );
       const errorMessage = getErrorMessage(error);
       console.log(errorMessage);
       await AuthService.logOut();
@@ -119,7 +119,6 @@ const setupInterceptorsTo = (instance: AxiosInstance): AxiosInstance => {
     } finally {
       setIsRefreshing(false);
     }
-
   };
 
   instance.interceptors.response.use(onResponse, onResponseError);

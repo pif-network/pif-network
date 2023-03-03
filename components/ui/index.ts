@@ -16,3 +16,5 @@ export { default as Benefits } from './Benefits';
 export { default as Values } from './Values';
 export { default as Feedback } from './Feedback';
 export { default as FAQAccordionItem } from './FAQAccordionItem';
+export { default as Divider } from './Divider';
+export { default as Select } from './Select';
