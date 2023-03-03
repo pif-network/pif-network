@@ -23,10 +23,10 @@ const VerifyEmail = () => {
     if (!isReady) return;
 
     const VerifyEmailFromUrlToken = async () => {
-      const { hasVerifiedSuccess, message } =
-        await AuthService.requestEmailVerification(query.token);
+      const response = await AuthService.requestEmailVerification(query.token);
+      const { isError, message } = response.data;
 
-      setVerifyState({ hasVerifiedSuccess, message });
+      setVerifyState({ hasVerifiedSuccess: isError, message });
     };
 
     VerifyEmailFromUrlToken();

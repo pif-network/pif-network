@@ -1,119 +1,73 @@
-import { Select as AntSelect, Tag as AntTag } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Select } from 'antd';
+import { Fields, Offers } from '~/lib/types/user';
+import { FIELD_METADATA, OFFER_METADATA } from '~/shared/constant';
 import { Tag } from '../Tag';
-import s from './FilterSection.module.css';
 
-type TagColorPreset = 'gray' | 'primary' | 'red' | 'cyan';
-
-interface GeneralSelectProps {
-  placeholder: string;
-  options: Array<string>;
-  values: Array<string>;
-  handleSelect: (value: string) => void;
-  handleDeselect: (value: string) => void;
+interface Props {
+  setFilteringOptions: (...args: any) => any;
 }
 
-const { Option } = AntSelect;
+const FilterSection = ({ setFilteringOptions }: Props) => {
+  const [fields, setFields] = useState<Fields[]>([]);
+  const [offers, setOffers] = useState<Offers[]>([]);
 
-const FilterSection = () => {
-  const [phamVi, setPhamVi] = useState<string[]>([]);
-  const handleSelectPhamVi = (value: string) => {
-    setPhamVi([...phamVi, value]);
+  const handleOfferSelection = (value: Offers) => {
+    setOffers([...offers, value]);
   };
-  const handleDeselectPhamVi = (value: string) => {
-    setPhamVi(phamVi.filter(select => select !== value));
-  };
-
-  const [linhVuc, setLinhVuc] = useState<string[]>([]);
-  const handleSelectLinhVuc = (value: string) => {
-    setLinhVuc([...linhVuc, value]);
-  };
-  const handleDeselectLinhVuc = (value: string) => {
-    setLinhVuc(linhVuc.filter(select => select !== value));
+  const handleOfferDeselection = (value: Offers) => {
+    setOffers(offers.filter(select => select !== value));
   };
 
-  const randomTagColor = (): TagColorPreset => {
-    const colorID = Math.floor(Math.random() * 3);
-    let tagColors: TagColorPreset = 'primary';
-    if (colorID === 1) {
-      tagColors = 'red';
-      return tagColors;
-    } else if (colorID === 2) {
-      tagColors = 'cyan';
-      return tagColors;
-    }
-    return tagColors;
+  const handleFieldSelection = (value: Fields) => {
+    setFields([...fields, value]);
   };
-  const tagRender = () => {
-    const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
-      event.preventDefault();
-      event.stopPropagation();
-    };
-    return (
-      <AntTag
-        onMouseDown={onPreventMouseDown}
-        style={{ marginRight: 3 }}
-      ></AntTag>
-    );
+  const handleFieldDeletion = (value: Fields) => {
+    setFields(fields.filter(select => select !== value));
   };
 
-  const Select = ({
-    placeholder,
-    options,
-    values,
-    handleSelect,
-    handleDeselect,
-  }: GeneralSelectProps) => {
-    return (
-      <div>
-        <AntSelect
-          mode="tags"
-          style={{ width: '300px', color: 'black' }}
-          showArrow
-          placeholder={placeholder}
-          maxTagCount={0}
-          value={values}
-          maxTagPlaceholder={placeholder}
-          onSelect={handleSelect}
-          onDeselect={handleDeselect}
-          className="mb-3"
-        >
-          {options.map((option, i) => {
-            return (
-              <Option value={option} key={i}>
-                {option}
-              </Option>
-            );
-          })}
-        </AntSelect>
-      </div>
-    );
-  };
+  useEffect(() => {
+    setFilteringOptions({ fields, offers });
+  }, [fields, offers]);
+
   return (
     <div>
-      <div className="flex justify-between gap-4 ml-84 mr-84">
+      <div className="flex justify-start gap-4">
         <div className="w-[300px]">
           <Select
-            values={linhVuc}
-            handleSelect={handleSelectLinhVuc}
-            handleDeselect={handleDeselectLinhVuc}
-            placeholder="Lĩnh vực"
-            options={['Product', 'HR', 'SWE', 'Data']}
-          ></Select>
-          <div>
-            {linhVuc.map(select => {
-              const tagColor = randomTagColor();
+            value={fields}
+            className="w-full"
+            showSearch
+            placeholder="Ấn vào đây"
+            optionFilterProp="label"
+            filterOption={(input, option) =>
+              (option?.value ?? '')
+                .toString()
+                .toLowerCase()
+                .includes(input.toLowerCase())
+            }
+            options={Object.entries(FIELD_METADATA).map(([key, data]) => ({
+              value: key,
+              label: data.displayName,
+            }))}
+            onSelect={handleFieldSelection}
+            onDeselect={handleFieldDeletion}
+            mode="tags"
+            maxTagCount={0}
+          />
+          <div className="mt-3">
+            {fields.map(field => {
               return (
-                <div key={select} className="inline-flex m-1.5">
+                <div key={field} className="inline-flex m-1.5">
                   <Tag
                     type="outlined"
-                    color={tagColor}
+                    color={FIELD_METADATA[field]['tagColour']}
                     deletable
                     onDelete={() => {
-                      handleDeselectLinhVuc(select);
+                      handleFieldDeletion(field);
                     }}
                   >
-                    {select}
+                    {FIELD_METADATA[field]['displayName']}
                   </Tag>
                 </div>
               );
@@ -122,26 +76,39 @@ const FilterSection = () => {
         </div>
         <div className="w-[300px]">
           <Select
-            values={phamVi}
-            handleSelect={handleSelectPhamVi}
-            handleDeselect={handleDeselectPhamVi}
-            placeholder="Phạm vi mentor"
-            options={['Phỏng vấn thử', 'Viết resume', 'Tư vấn nghề nghiệp']}
-          ></Select>
-          <div>
-            {phamVi.map(select => {
-              const tagColor = randomTagColor();
+            value={offers}
+            className="w-full"
+            showSearch
+            placeholder="Ấn vào đây"
+            optionFilterProp="label"
+            filterOption={(input, option) =>
+              (option?.value ?? '')
+                .toString()
+                .toLowerCase()
+                .includes(input.toLowerCase())
+            }
+            options={Object.entries(OFFER_METADATA).map(([key, data]) => ({
+              value: key,
+              label: data.displayName,
+            }))}
+            onSelect={handleOfferSelection}
+            onDeselect={handleOfferDeselection}
+            mode="tags"
+            maxTagCount={0}
+          />
+          <div className="mt-3">
+            {offers.map(offer => {
               return (
-                <div key={select} className="inline-flex m-0.5">
+                <div key={offer} className="inline-flex m-0.5">
                   <Tag
                     type="filled"
-                    color={tagColor}
+                    color={OFFER_METADATA[offer]['tagColour']}
                     deletable
                     onDelete={() => {
-                      handleDeselectPhamVi(select);
+                      handleOfferDeselection(offer);
                     }}
                   >
-                    {select}
+                    {OFFER_METADATA[offer]['displayName']}
                   </Tag>
                 </div>
               );

@@ -17,6 +17,7 @@ import hero5 from '../../../assets/landing/hero5.png';
 import Button from '../../../components/ui/Button';
 import { RightOutlined } from '@ant-design/icons';
 import { Search } from '../svgs/Icons';
+import { INTERNAL_PATH } from '~/shared/constant';
 const Hero = () => {
   return (
     <div className="flex sm:flex-col md:justify-center xl:justify-center 2xl:justify-center sm:pt-20 sm:pb-10 md:flex-row md:px-20 md:py-24 md:gap-12 lg:px-24 lg:gap-24  xl:py-32 xl:px-32  xl:gap-24 2xl:gap-24 2xl:px-32 md:overflow-auto">
@@ -28,8 +29,8 @@ const Hero = () => {
           <div>MENTORSHIP PROGRAMME</div>
         </div>
 
-        <div className="font-lora font-semi-bold word-[-10px] text-title-sm text-primary-900 lg:word-[-1rem]  md:text-title-sm lg:text-title">
-          <div className="flex flex-col items-center md:items-start  ">
+        <div className="font-lora font-semi-bold word-[-10px] text-title-sm text-primary-900 lg:word-[-1rem] md:text-title-sm lg:text-title">
+          <div className="flex flex-col items-center md:items-start lg:mt-4">
             <div>Sự giúp đỡ</div>
             <div>mà bạn</div>
             <div className="flex flex-row flex-wrap">
@@ -49,7 +50,7 @@ const Hero = () => {
         </div>
 
         <div className="font-manrope leading-5 text-[14px] text-primary-900 ">
-          <div className="flex flex-col items-center justify-center md:items-start md:text-left md:mt-12 md:pl-0 md:pr-8 md:text-body lg:pr-24 lg:text-body-lg xl:pr-24 2xl:pr-24 sm:py-4 sm:px-12 sm:text-center">
+          <div className="flex flex-col items-center justify-center md:items-start md:text-left md:mt-6 md:pl-0 md:pr-8 md:text-body lg:pr-24 lg:text-body-lg xl:pr-24 2xl:pr-24 sm:py-4 sm:px-12 sm:text-center">
             Trò chuyện, chia sẻ, nâng cao kĩ năng chuyên môn, mở rộng hiểu biết
             và khám phá những insights mới lạ từ các mentor dày dặn kinh nghiệm
             của chúng tôi.
@@ -62,7 +63,7 @@ const Hero = () => {
             fillType="filled"
             size="medium"
             content="Đặt lịch hẹn ngay!"
-            href="/"
+            href={INTERNAL_PATH.SEARCH}
           />
           <Button
             className="sm:hidden md:block tlg:text-[18px]"
@@ -77,7 +78,7 @@ const Hero = () => {
             fillType="filled"
             size="medium"
             content="Đặt lịch hẹn ngay"
-            href="/"
+            href={INTERNAL_PATH.SEARCH}
             rightIcon="ChevronRight"
           />
           <Button
@@ -85,7 +86,7 @@ const Hero = () => {
             fillType="outlined"
             size="medium"
             content="Đăng nhập"
-            href="/"
+            href={INTERNAL_PATH.LOGIN}
           />
         </div>
         {/* <div className="flex sm:flex-col"> */}

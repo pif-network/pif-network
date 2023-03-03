@@ -1,9 +1,14 @@
+import { HTMLAttributes, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { HTMLAttributes, useState } from 'react';
 import Link from 'next/link';
-import { MenuIcon } from '@heroicons/react/outline';
+
 import { ChevronRight } from '~/components/ui/svgs/Icons';
-import { Button } from "~/components/ui"
+import { Button } from '~/components/ui';
+import { INTERNAL_PATH, USER_ROLE } from '~/shared/constant';
+
+import { MenuIcon } from '@heroicons/react/outline';
+import { AuthService, UserService } from '~/services';
+import { useRouter } from 'next/router';
 
 interface NavLinkProps extends HTMLAttributes<HTMLAnchorElement> {
   href?: string;
@@ -25,7 +30,7 @@ const NavLink = ({ content, mobile, ...others }: NavLinkProps) => {
 
   return (
     <a
-      className="hover:cursor-pointer font-manrope font-medium text-black hover:text-primary-400 ease-in-out duration-200"
+      className="hover:cursor-pointer font-manrope font-light text-black hover:text-primary-400 ease-in-out duration-200"
       {...others}
     >
       {content}
@@ -33,7 +38,11 @@ const NavLink = ({ content, mobile, ...others }: NavLinkProps) => {
   );
 };
 
-const NavbarMobileMenu = () => {
+const NavbarMobileMenu = ({
+  hasAutheticated,
+}: {
+  hasAutheticated: boolean;
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleOnClickNavLink = () => {
@@ -60,7 +69,7 @@ const NavbarMobileMenu = () => {
           className={`h-5 w-5 ${isMenuOpen ? 'bg-white rounded-sm' : ''}`}
           onClick={() => {
             setIsMenuOpen(!isMenuOpen);
-            const body = document.body;
+            const { body } = document;
             !isMenuOpen
               ? body.classList.add('no-scroll')
               : body.classList.remove('no-scroll');
@@ -73,21 +82,42 @@ const NavbarMobileMenu = () => {
           !isMenuOpen ? 'hidden' : ''
         }`}
       >
-        <NavLink
-          mobile
-          href="/#faqs"
-          content="FAQs"
-          onClick={handleOnClickNavLink}
-        />
-        <Link href="/search" legacyBehavior>
-          <NavLink
-            mobile
-            content="Tìm kiếm mentor"
-            onClick={handleOnClickNavLink}
-          />
-        </Link>
+        {hasAutheticated ? (
+          <>
+            <NavLink
+              mobile
+              href={INTERNAL_PATH.SETTINGS}
+              content="Cài đặt"
+              onClick={handleOnClickNavLink}
+            />
+            <NavLink
+              mobile
+              content="Đăng xuất"
+              onClick={() => {
+                AuthService.logOut();
+              }}
+            />
+          </>
+        ) : (
+          <>
+            <NavLink
+              mobile
+              href="/#faqs"
+              content="FAQs"
+              onClick={handleOnClickNavLink}
+            />
+            <NavLink
+              mobile
+              href={INTERNAL_PATH.SEARCH}
+              content="Tìm kiếm mentor"
+              onClick={handleOnClickNavLink}
+            />
+          </>
+        )}
+
         <div className="mt-2" />
-        <Link href="/user/create-account" legacyBehavior>
+
+        <Link href={INTERNAL_PATH.REGISTER} legacyBehavior>
           <button className="flex justify-center items-center py-2 md:py-2 px-[12px] md:pl-[18px] md:pr-[14px] h-[54px] md:h-[42px] w-[303px] md:w-[204px] hover:-translate-y-[3px] ease-in-out duration-300 bg-primary-800 rounded-md">
             <span className="cword-[-4px] font-lora font-semi-bold text-white text-heading">
               Tham gia ngay
@@ -101,9 +131,17 @@ const NavbarMobileMenu = () => {
 };
 
 const NavBar = () => {
+  const [hasAutheticated, setHasAuthenticated] = useState(false);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    UserService.currentUser?.name && setHasAuthenticated(true);
+  }, []);
+
   return (
     <>
-      <NavbarMobileMenu />
+      <NavbarMobileMenu hasAutheticated={hasAutheticated} />
 
       <nav className="hidden md:inline-block w-full md:fixed mt-5 md:mt-7 z-20">
         <div className="max-w-7xl flex justify-between items-center mx-8 1hxl:mx-auto">
@@ -121,18 +159,40 @@ const NavBar = () => {
 
           <section className="flex justify-center items-center gap-16 xl:gap-32">
             <div className="hidden md:flex justify-center items-center gap-4 py-[9px] px-[42px] bg-white/20 hover:bg-white/30 transition-colors ease-in-out duration-300 backdrop-blur-sm rounded-[32px] font-manrope font-regular text-body">
-              <NavLink
-                href="/user/create-account?role=mentor"
-                content="Trở thành mentor"
-              />
-              <NavLink href="/#faqs" content="FAQs" />
-              <NavLink href="/user/create-account" content="Tham gia ngay" />
+              {hasAutheticated ? (
+                <>
+                  <NavLink href={INTERNAL_PATH.SETTINGS} content="Cài đặt" />
+                  <NavLink
+                    content="Đăng xuất"
+                    onClick={() => {
+                      AuthService.logOut();
+                      router.push(INTERNAL_PATH.HOME);
+                    }}
+                  />
+                </>
+              ) : (
+                <>
+                  <NavLink
+                    href={`${INTERNAL_PATH.REGISTER}?role=${USER_ROLE.MENTOR}`}
+                    content="Trở thành mentor"
+                  />
+                  <NavLink href="/#faqs" content="FAQs" />
+                  <NavLink
+                    href={INTERNAL_PATH.REGISTER}
+                    content="Tham gia ngay"
+                  />
+                </>
+              )}
             </div>
 
-            <Button 
-              className='text-body py-1 md:py-2 px-[12px] md:pl-[18px] md:pr-[14px] h-[34px] md:h-[42px] w-[100px] md:w-[204px]'
-              content='Tìm kiếm mentor' size='medium' fillType='filled' href='/search' rightIcon={<ChevronRight className="pt-[2px] pl-1 fill-white" />} />
-
+            <Button
+              className="text-body py-1 md:py-2 px-[12px] md:pl-[18px] md:pr-[14px] h-[34px] md:h-[42px] w-[100px] md:w-[204px]"
+              content="Tìm kiếm mentor"
+              size="medium"
+              fillType="filled"
+              href="/search"
+              rightIcon={<ChevronRight className="pt-[2px] pl-1 fill-white" />}
+            />
           </section>
         </div>
       </nav>

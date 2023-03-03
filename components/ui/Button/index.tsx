@@ -1,9 +1,9 @@
 import React, { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
 
 import type { ExternalHrefProps } from '~/lib/types';
+import twMerge from '~/lib/utils/tw-merge';
 import { ChevronRight, FlagLine } from '~/components/ui/svgs/Icons';
 import { Link } from '~/components/ui';
-import twMerge from '~/lib/utils/tw-merge';
 
 interface GeneralButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   content: ReactNode;
@@ -31,7 +31,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
     ref
   ) => {
     const baseStyle =
-      'hover:-translate-y-[3px] ease-in duration-200 active:scale-[.9] rounded-xl';
+      'flex items-center justify-center hover:-translate-y-[3px] ease-out duration-200 active:scale-[.97] rounded-xl';
 
     const styleByType = {
       filled: {
@@ -57,6 +57,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         <button className={cn} ref={ref} {...others}>
           <span className="inline-flex">
             {content}
+            {/* Default `rightIcon` support */}
             {rightIcon === 'ChevronRight' && (
               <ChevronRight
                 className="pt-[2px] pl-1 fill-white"
@@ -66,6 +67,8 @@ const Button = forwardRef<HTMLButtonElement, Props>(
             {rightIcon === 'FlagLine' && (
               <FlagLine colour={`${styleByType[fillType]['iconFill']}`} />
             )}
+            {/* Others */}
+            {typeof rightIcon !== 'string' && rightIcon}
           </span>
         </button>
       );

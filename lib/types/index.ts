@@ -1,6 +1,6 @@
 import { LinkProps } from 'next/link';
 
-import { INTERNAL_URI } from '~/shared/constant';
+import { INTERNAL_PATH } from '~/shared/constant';
 
 export type valueof<T> = T[keyof T];
 
@@ -12,10 +12,10 @@ type InferReturnTypeAsValueForMethod<U> = {
     : never;
 };
 
-type InternalUriObject = InferReturnTypeAsValueForMethod<typeof INTERNAL_URI>;
+type InternalPathObject = InferReturnTypeAsValueForMethod<typeof INTERNAL_PATH>;
 
-export type InternalUri = valueof<InternalUriObject>;
+export type InternalPath = valueof<InternalPathObject>;
 
 export type ExternalHrefProps =
   | { external: true; href: LinkProps['href'] }
-  | { external?: false; href?: InternalUri };
+  | { external?: false; href?: InternalPath };

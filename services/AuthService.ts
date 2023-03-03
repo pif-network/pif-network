@@ -1,51 +1,38 @@
-import http, {
-  TokenService,
-  UserService
-}                   from "~/services";
+import http, { TokenService, UserService } from '~/services';
 import {
   APIResponse,
   IChangePassword,
   ILogIn,
-  IRegister
-}                   from "~/lib/types/service";
-import { User }     from "~/lib/types/user";
-import { ENDPOINT } from "~/shared/constant";
+  IRegister,
+} from '~/lib/types/service';
+import { User } from '~/lib/types/user';
+import { ENDPOINT } from '~/shared/constant';
+import axios from 'axios';
 
 const register: IRegister = async (email, password, role) => {
   return (await http.post(ENDPOINT.REGISTER, {
     email,
     password,
-    role
+    role,
   })) as APIResponse<User<typeof role>>;
 };
 
 const logIn: ILogIn = async (email, password) => {
-  const responseLogInRequest: APIResponse<User<"Mentor" | "Mentee">> =
+  const responseLogInRequest: APIResponse<User<'Mentor' | 'Mentee'>> =
     await http.post(ENDPOINT.LOGIN, {
       email,
-      password
+      password,
     });
 
   const token = {
     /** Since this request succeeded... */
-    accessToken: responseLogInRequest.headers["authorization"] as string,
-    refreshToken: responseLogInRequest.headers["refresh-token"] as string
+    accessToken: responseLogInRequest.headers['authorization'] as string,
+    refreshToken: responseLogInRequest.headers['refresh-token'] as string,
   };
 
   TokenService.setToken(token);
 
-  /** Set tokens for all up-coming request. */
-  const newConfig = {
-    headers: {
-      Authorization: token.accessToken,
-      "Refresh-Token": token.refreshToken
-    }
-  };
-
-  // http.defaults.headers.common["Authorization"] = token.accessToken;
-  // http.defaults.headers.common["Refresh-Token"] = token.refreshToken;
-
-  const responseUserRequest: APIResponse<User<"Mentee" | "Mentor">> =
+  const responseUserRequest: APIResponse<User<'Mentee' | 'Mentor'>> =
     await http.get(ENDPOINT.GET_CURRENT_USER);
 
   const user = responseUserRequest.data.data;
@@ -58,10 +45,11 @@ const logOut = () => {
 };
 
 const requestPasswordReset = async (email: string) => {
-  return await http.post(
-    ENDPOINT.RESET_PASSWORD,
-    { email }
-  ) as APIResponse;
+  return (await http.post(ENDPOINT.RESET_PASSWORD, { email })) as APIResponse;
+};
+
+const verifyResetPasswordReqquest = async (token: string) => {
+  return (await http.get(`${ENDPOINT.RESET_PASSWORD}/${token}`)) as APIResponse;
 };
 
 const requestPasswordChange: IChangePassword = async (
@@ -76,29 +64,20 @@ const requestPasswordChange: IChangePassword = async (
   //   passwordConfirmation
   // });
   return await http({
-    method: "POST",
+    method: 'POST',
     url: ENDPOINT.CHANGE_PASSWORD,
     data: {
       currentPassword,
       newPassword,
-      newPasswordConfirmation
-    }
+      newPasswordConfirmation,
+    },
   });
 };
 
 const requestEmailVerification = async (
   token: string | string[] | undefined
 ) => {
-  const response: APIResponse = await http.get(
-    `${ENDPOINT.VERIFY_EMAIL}${token}`
-  );
-  const status = response.status;
-  const message = response.data.message;
-  let hasVerifiedSuccess = false;
-
-  status === 200 ? (hasVerifiedSuccess = true) : false;
-
-  return { hasVerifiedSuccess, message };
+  return (await http.get(`${ENDPOINT.VERIFY_EMAIL}${token}`)) as APIResponse;
 };
 
 const AuthService = {
@@ -106,8 +85,9 @@ const AuthService = {
   logIn,
   logOut,
   requestPasswordReset,
+  verifyResetPasswordReqquest,
   requestPasswordChange,
-  requestEmailVerification
+  requestEmailVerification,
 };
 
 export default AuthService;

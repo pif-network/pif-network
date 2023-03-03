@@ -1,49 +1,38 @@
-import { Input } from 'antd';
+import { InformationCircleIcon } from '@heroicons/react/outline';
+import { Input, Tooltip } from 'antd';
 import { ErrorMessage, useField } from 'formik';
 
 const FormikInput = ({
   name,
   type,
+  label,
+  tooltipText,
   ...props
 }: {
   name: string;
   type?: string;
+  label?: string;
+  tooltipText?: string;
 }) => {
   const [field, meta] = useField(name);
-  const isPasswordInput = type === 'password';
 
-  const cn = `h-12 mb-2 border-b-[1px] rounded-lg`;
+  const baseCn = 'h-[42px] rounded-lg border-gray-400';
 
   return (
     <>
-      {isPasswordInput ? (
-        <>
-          <label className="inline-block pb-2 font-lora font-semi-bold">
-            {name.charAt(0).toUpperCase() + name.slice(1)}
-          </label>
-          <Input.Password
-            className={cn}
-            status={meta.error ? 'error' : ''}
-            {...field}
-            {...props}
-          />
-        </>
+      <InputLabel name={label ? label : name} tooltipText={tooltipText} />
+
+      {type === 'password' ? (
+        <Input.Password className={baseCn} {...field} {...props} />
+      ) : type === 'text-area' ? (
+        <Input.TextArea className="border-gray-400" {...field} {...props} />
       ) : (
-        <>
-          <label className="inline-block pb-2 font-lora font-semi-bold">
-            {name.charAt(0).toUpperCase() + name.slice(1)}
-          </label>
-          <Input
-            className={cn}
-            status={meta.error ? 'error' : ''}
-            {...field}
-            {...props}
-          />
-        </>
+        <Input className={baseCn} {...field} {...props} />
       )}
-      <ErrorMessage name={field.name} component="div">
+
+      <ErrorMessage name={name} component="div">
         {message => (
-          <div className="ml-4 mb-2 text-red-300 font-manrope text-[10px]">
+          <div className="ml-4 mt-2 -mb-1 text-red-300 font-manrope text-[10px]">
             {message}
           </div>
         )}
@@ -51,5 +40,27 @@ const FormikInput = ({
     </>
   );
 };
+
+export const InputLabel = ({
+  name,
+  tooltipText,
+}: {
+  name: string;
+  tooltipText?: string;
+}) => (
+  <div className="flex gap-2 items-center">
+    <label className="inline-block mt-4 pb-2 font-manrope font-semi-bold text-body-sm">
+      {name.charAt(0).toUpperCase() + name.slice(1)}
+    </label>
+    {tooltipText && (
+      <Tooltip
+        placement="right"
+        title={<span className="font-manrope text-caption">{tooltipText}</span>}
+      >
+        <InformationCircleIcon className="w-5 h-5 mt-[9px] stroke-gray-600 stroke-1" />
+      </Tooltip>
+    )}
+  </div>
+);
 
 export default FormikInput;

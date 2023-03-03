@@ -7,11 +7,11 @@ import setupInterceptorsTo from './Interceptors';
 
 const instance = axios.create({
   baseURL: 'http://localhost:8080/api',
-  headers: {
-    common: {
-      'Refresh-Token': 'B' + TokenService.currentToken?.refreshToken,
-    }
-  }
+});
+
+TokenService.onCurrentToken.subscribe(token => {
+  instance.defaults.headers.common['authorization'] = token?.accessToken;
+  instance.defaults.headers.common['refresh-token'] = token?.refreshToken;
 });
 
 export { AuthService, TokenService, UserService };
