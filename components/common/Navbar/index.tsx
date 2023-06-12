@@ -1,3 +1,5 @@
+'use client';
+
 import { HTMLAttributes, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,7 +10,9 @@ import { INTERNAL_PATH, USER_ROLE } from '~/shared/constant';
 
 import { MenuIcon } from '@heroicons/react/outline';
 import { AuthService, UserService } from '~/services';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
+import { UserButton } from '@clerk/nextjs';
+import { SignedIn } from '@clerk/clerk-react';
 
 interface NavLinkProps extends HTMLAttributes<HTMLAnchorElement> {
   href?: string;
@@ -159,30 +163,33 @@ const NavBar = () => {
 
           <section className="flex justify-center items-center gap-16 xl:gap-32">
             <div className="hidden md:flex justify-center items-center gap-4 py-[9px] px-[42px] bg-white/20 hover:bg-white/30 transition-colors ease-in-out duration-300 backdrop-blur-sm rounded-[32px] font-manrope font-regular text-body">
-              {hasAutheticated ? (
-                <>
-                  <NavLink href={INTERNAL_PATH.SETTINGS} content="Cài đặt" />
-                  <NavLink
-                    content="Đăng xuất"
-                    onClick={() => {
-                      AuthService.logOut();
-                      router.push(INTERNAL_PATH.HOME);
-                    }}
-                  />
-                </>
-              ) : (
-                <>
-                  <NavLink
-                    href={`${INTERNAL_PATH.REGISTER}?role=${USER_ROLE.MENTOR}`}
-                    content="Trở thành mentor"
-                  />
-                  <NavLink href="/#faqs" content="FAQs" />
-                  <NavLink
-                    href={INTERNAL_PATH.REGISTER}
-                    content="Tham gia ngay"
-                  />
-                </>
-              )}
+              {/* {hasAutheticated ? ( */}
+              {/*   <> */}
+              {/*     <NavLink href={INTERNAL_PATH.SETTINGS} content="Cài đặt" /> */}
+              {/*     <NavLink */}
+              {/*       content="Đăng xuất" */}
+              {/*       onClick={() => { */}
+              {/*         AuthService.logOut(); */}
+              {/*         router.push(INTERNAL_PATH.HOME); */}
+              {/*       }} */}
+              {/*     /> */}
+              {/*   </> */}
+              {/* ) : ( */}
+              {/*   <> */}
+              {/*     <NavLink */}
+              {/*       href={`${INTERNAL_PATH.REGISTER}?role=${USER_ROLE.MENTOR}`} */}
+              {/*       content="Trở thành mentor" */}
+              {/*     /> */}
+              {/*     <NavLink href="/#faqs" content="FAQs" /> */}
+              {/*     <NavLink */}
+              {/*       href={INTERNAL_PATH.REGISTER} */}
+              {/*       content="Tham gia ngay" */}
+              {/*     /> */}
+              {/*   </> */}
+              {/* )} */}
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
             </div>
 
             <Button

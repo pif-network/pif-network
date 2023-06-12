@@ -1,8 +1,5 @@
-import 'antd/dist/antd.css';
-import '../assets/style/main.css';
-
-import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
+import { Footer, NavBar } from '~/components/common';
 
 export default function RootLayout({
   children,
@@ -10,11 +7,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body>{children}</body>
-      </html>
-    </ClerkProvider>
+    <>
+      <NavBar />
+      {children}
+      <Footer />
+    </>
   );
 }
 

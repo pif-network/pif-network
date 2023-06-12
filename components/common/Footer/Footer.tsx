@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 import {
@@ -19,9 +21,7 @@ const Footer = () => {
         <div className="flex relative justify-between pl-4 pt-5 pb-3 sm:pl-5 md:pt-0 md:pb-0 md:justify-start md:pl-0 md:m-auto">
           <div className="text-gray-400 text-body-sm md:text-body">
             <Link href="/" className="block md:pb-2 hover:text-white">
-              
-                Điều khoản sử dụng
-              
+              Điều khoản sử dụng
             </Link>
             <Link href="/" className="hover:text-white">
               Liên hệ
@@ -41,28 +41,22 @@ const Footer = () => {
           <div className="text-gray-400 md:pl-8">
             <div className="md:flex md:pl-2">
               <Link href="/">
-
                 <LinkedinLine
                   className="absolute top-7 right-[4.6rem] w-[35px] h-[35px] sm:top-6 sm:right-20 sm:w-[42px] sm:h-[42px] md:static md:w-[48px] md:h-[48px]"
                   colour="#999999"
                 />
-
               </Link>
               <Link href="/">
-
                 <InstagramLine
                   className="absolute top-3 right-9 w-[35px] h-[35px] sm:top-2 sm:w-[42px] sm:h-[42px] md:static md:w-[48px] md:h-[48px]"
                   colour="#999999"
                 />
-
               </Link>
               <Link href="/">
-
                 <FacebookFill
                   className="absolute top-14 right-10 w-[28px] h-[28px] sm:w-[35px] sm:h-[35px] md:static md:sef-center md:w-[40px] md:h-[40px]"
                   colour="#999999"
                 />
-
               </Link>
             </div>
             <div className="hidden pt-8 text-center text-body-md md:block">
