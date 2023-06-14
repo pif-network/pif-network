@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/navigation';
 
@@ -278,7 +278,13 @@ const VerifyEmailCode = ({ su }: { su: ReturnType<typeof useSignUp> }) => {
 
         <FormikProvider value={formik}>
           <Form>
-            <Field name="code" as={FormikInput} />
+            <Field
+              name="code"
+              as={FormikInput}
+              onChange={(event: FormEvent<HTMLInputElement>) => {
+                formik.setFieldValue('code', event.currentTarget.value.trim());
+              }}
+            />
 
             <div className="mb-8" />
 
