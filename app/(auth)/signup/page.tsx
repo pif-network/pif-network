@@ -75,6 +75,10 @@ const CreateAccount = () => {
         await signUp.create({
           emailAddress: email,
           password,
+          unsafeMetadata: {
+            role,
+          },
+          redirectUrl: '/',
         });
 
         await signUp.prepareEmailAddressVerification({
