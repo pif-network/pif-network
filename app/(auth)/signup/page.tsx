@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/navigation';
 
@@ -22,7 +22,7 @@ import {
   RoleChoosingPopover,
 } from '~/components/common/user/components';
 
-import { object, string } from 'yup';
+import { number, object, string } from 'yup';
 import { Field, Form, FormikProvider, useFormik } from 'formik';
 import { Alert } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
@@ -32,22 +32,21 @@ import type { OAuthStrategy } from '@clerk/types';
 const CreateAccount = () => {
   const [role, setRole] = useState<UserRole | undefined>(undefined);
   const [message, setMessage] = useState('');
-  const { signUp, setActive, isLoaded } = useSignUp();
+  const su = useSignUp();
+  const { signUp, setActive, isLoaded } = su;
 
   const signUpWith = (strategy: OAuthStrategy) => {
     return signUp!.authenticateWithRedirect({
       strategy,
       redirectUrl: '/sso-callback',
-      redirectUrlComplete: '/',
+      redirectUrlComplete: INTERNAL_PATH.COMPLETE_PROFILE,
     });
   };
 
   const router = useRouter();
 
-  const [
-    isSuccessfullyRegisteredModalOpen,
-    setIsSuccessfullyRegisteredModalOpen,
-  ] = useState(false);
+  const [isPendingEmailCodeVerification, setIsPendingEmailCodeVerification] =
+    useState(false);
 
   const validationSchema = object().shape({
     email: string()
@@ -76,13 +75,17 @@ const CreateAccount = () => {
         await signUp.create({
           emailAddress: email,
           password,
+          unsafeMetadata: {
+            role,
+          },
+          redirectUrl: INTERNAL_PATH.COMPLETE_PROFILE,
         });
 
         await signUp.prepareEmailAddressVerification({
           strategy: 'email_code',
         });
 
-        setIsSuccessfullyRegisteredModalOpen(true);
+        setIsPendingEmailCodeVerification(true);
       } catch (error: any) {
         console.error(JSON.stringify(error, null, 2));
       }
@@ -93,13 +96,13 @@ const CreateAccount = () => {
     <>
       <Head>
         <title>
-          {isSuccessfullyRegisteredModalOpen
+          {isPendingEmailCodeVerification
             ? '❤️ Cảm ơn bạn đã đăng ký!'
             : 'Đăng ký'}
         </title>
       </Head>
 
-      {!isSuccessfullyRegisteredModalOpen && (
+      {!isPendingEmailCodeVerification && (
         <BrandIdentifierLayoutSlot>
           <h1 className="-ml-[2px] text-left font-lora word-[-0.23rem] text-sub-heading md:text-heading text-black font-regular">
             Chào mừng bạn.
@@ -220,32 +223,72 @@ const CreateAccount = () => {
         </BrandIdentifierLayoutSlot>
       )}
 
-      <Modal
-        width={900}
-        open={isSuccessfullyRegisteredModalOpen}
-        centered
-        mask={false}
-        closable={false}
-        footer={null}
-      >
-        <div className="flex flex-col justify-center items-center">
-          <div className="mb-7" />
+      {isPendingEmailCodeVerification && <VerifyEmailCode su={su} />}
+    </>
+  );
+};
 
-          <SendingMailLine className="animate-appear w-40 h-20 lg:w-50 lg:h-24 -translate-x-6" />
+export default CreateAccount;
 
-          <div className="mb-10" />
+const VerifyEmailCode = ({ su }: { su: ReturnType<typeof useSignUp> }) => {
+  const formik = useFormik({
+    initialValues: {
+      code: '',
+    },
+    validationSchema: object().shape({
+      code: number().required(),
+    }),
+    onSubmit: async ({ code }) => {
+      if (!su.isLoaded) {
+        return;
+      }
 
-          <div className="animate-appear-long flex flex-col justify-center items-center">
-            <h1 className="-ml-[2px] font-lora font-semi-bold word-[-0.5rem] text-sub-heading md:text-heading text-black">
-              Email xác nhận đã được gửi đi!
-            </h1>
+      try {
+        const completeSignUp = await su.signUp.attemptEmailAddressVerification({
+          code,
+        });
 
-            <div className="mb-3" />
+        if (completeSignUp.status === 'complete') {
+          console.log(completeSignUp);
+          await su.setActive({ session: completeSignUp.createdSessionId });
+        }
 
-            <h4 className="text-black font-manrope word-[0rem] text-body-md lg:text-heading-sm">
-              Vui lòng kiểm tra email, và làm theo hướng dẫn để{' '}
-              <span className="inline-block">xác nhận tài khoản.</span>
-            </h4>
+        if (completeSignUp.status !== 'complete') {
+          console.log(JSON.stringify(completeSignUp, null, 2));
+        }
+      } catch (error: any) {
+        console.error(JSON.stringify(error, null, 2));
+      }
+    },
+  });
+
+  return (
+    <div className="h-screen flex flex-col justify-center items-center">
+      <div className="mb-7" />
+
+      <SendingMailLine className="animate-appear w-40 h-20 lg:w-50 lg:h-24 -translate-x-6" />
+
+      <div className="mb-10" />
+
+      <div className="animate-appear-long flex flex-col justify-center items-center">
+        <h1 className="-ml-[2px] font-lora font-semi-bold word-[-0.5rem] text-sub-heading md:text-heading text-black">
+          Email xác nhận đã được gửi đi!
+        </h1>
+
+        <h4 className="text-black font-manrope word-[0rem] text-body-md lg:text-heading-sm">
+          Vui lòng kiểm tra email, và làm theo hướng dẫn để{' '}
+          <span className="inline-block">xác nhận tài khoản.</span>
+        </h4>
+
+        <FormikProvider value={formik}>
+          <Form>
+            <Field
+              name="code"
+              as={FormikInput}
+              onChange={(event: FormEvent<HTMLInputElement>) => {
+                formik.setFieldValue('code', event.currentTarget.value.trim());
+              }}
+            />
 
             <div className="mb-8" />
 
@@ -259,18 +302,16 @@ const CreateAccount = () => {
               />
               <Button
                 className="w-full h-[36px] px-2 rounded-lg text-[14px]"
-                href={INTERNAL_PATH.SEARCH}
+                type="submit"
                 fillType="filled"
                 size="medium"
-                content="Tìm kiếm mentor"
+                content="Xác nhận"
                 rightIcon={<ChevronRight className="pl-1 fill-white" />}
               />
             </div>
-          </div>
-        </div>
-      </Modal>
-    </>
+          </Form>
+        </FormikProvider>
+      </div>
+    </div>
   );
 };
-
-export default CreateAccount;
