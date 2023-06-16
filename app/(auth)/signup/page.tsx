@@ -30,7 +30,6 @@ import { useSignUp } from '@clerk/nextjs';
 import type { OAuthStrategy } from '@clerk/types';
 
 const CreateAccount = () => {
-  const [role, setRole] = useState<UserRole | undefined>(undefined);
   const [message, setMessage] = useState('');
   const su = useSignUp();
   const { signUp, setActive, isLoaded } = su;
@@ -75,9 +74,6 @@ const CreateAccount = () => {
         await signUp.create({
           emailAddress: email,
           password,
-          unsafeMetadata: {
-            role,
-          },
           redirectUrl: INTERNAL_PATH.COMPLETE_PROFILE,
         });
 
@@ -141,85 +137,63 @@ const CreateAccount = () => {
 
           <div className="mb-6 md:mb-8" />
 
-          <div className="flex justify-start space-x-4">
-            <RoleChoosingPopover
-              userType={USER_ROLE.MENTEE}
-              onClick={() => setRole(USER_ROLE.MENTEE)}
-              disabled={role ? role !== USER_ROLE.MENTEE : undefined}
-            />
-            <RoleChoosingPopover
-              userType={USER_ROLE.MENTOR}
-              onClick={() => setRole(USER_ROLE.MENTOR)}
-              disabled={role ? role !== USER_ROLE.MENTOR : undefined}
-            />
-          </div>
+          <FormikProvider value={formik}>
+            <Form className="max-w-sm flex flex-col">
+              {message && (
+                <Alert
+                  className="my-4 font-manrope"
+                  message={message}
+                  type="error"
+                  showIcon
+                />
+              )}
 
-          <div className="mb-4" />
+              <Field name="email" type="email" as={FormikInput} />
+              <Field name="password" type="password" as={FormikInput} />
 
-          {role && (
-            <>
-              <FormikProvider value={formik}>
-                <Form className="max-w-sm flex flex-col">
-                  {message && (
-                    <Alert
-                      className="my-4 font-manrope"
-                      message={message}
-                      type="error"
-                      showIcon
-                    />
-                  )}
+              <div className="mb-2" />
 
-                  <Field name="email" type="email" as={FormikInput} />
-                  <Field name="password" type="password" as={FormikInput} />
+              <div className="self-end font-manrope text-black text-caption">
+                <Link href={INTERNAL_PATH.FORGOT_PASSWORD}>Quên mật khẩu?</Link>
+              </div>
 
-                  <div className="mb-2" />
-
-                  <div className="self-end font-manrope text-black text-caption">
-                    <Link href={INTERNAL_PATH.FORGOT_PASSWORD}>
-                      Quên mật khẩu?
-                    </Link>
+              <div className="mt-8 flex items-center justify-center">
+                {formik.isSubmitting ? (
+                  <div className=" flex justify-center items-center">
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black" />
                   </div>
-
-                  <div className="mt-8 flex items-center justify-center">
-                    {formik.isSubmitting ? (
-                      <div className=" flex justify-center items-center">
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black" />
-                      </div>
-                    ) : (
-                      <Button
-                        className={`w-full h-[46px] flex items-center justify-center rounded-lg ${
-                          !(formik.isValid && formik.dirty)
-                            ? 'bg-primary-800/40 border-primary-800/60'
-                            : ''
-                        } text-[19px] md:text-sub-heading`}
-                        type="submit"
-                        fillType="filled"
-                        size="medium"
-                        content="Đăng ký"
-                      />
-                    )}
-                  </div>
-
-                  <Divider>Hoặc đăng ký với</Divider>
-
+                ) : (
                   <Button
-                    className="max-w-md w-full h-[42px] flex items-center justify-center border-[1px] border-gray-600/50
-                  text-[18px] md:text-sub-heading rounded-lg"
-                    type="button"
-                    fillType="outlined"
+                    className={`w-full h-[46px] flex items-center justify-center rounded-lg ${
+                      !(formik.isValid && formik.dirty)
+                        ? 'bg-primary-800/40 border-primary-800/60'
+                        : ''
+                    } text-[19px] md:text-sub-heading`}
+                    type="submit"
+                    fillType="filled"
                     size="medium"
-                    content={
-                      <>
-                        <GoogleFill className="pr-2" /> Google
-                      </>
-                    }
-                    disabled={!role}
-                    onClick={() => signUpWith('oauth_google')}
+                    content="Đăng ký"
                   />
-                </Form>
-              </FormikProvider>
-            </>
-          )}
+                )}
+              </div>
+
+              <Divider>Hoặc đăng ký với</Divider>
+
+              <Button
+                className="max-w-md w-full h-[42px] flex items-center justify-center border-[1px] border-gray-600/50
+                  text-[18px] md:text-sub-heading rounded-lg"
+                type="button"
+                fillType="outlined"
+                size="medium"
+                content={
+                  <>
+                    <GoogleFill className="pr-2" /> Google
+                  </>
+                }
+                onClick={() => signUpWith('oauth_google')}
+              />
+            </Form>
+          </FormikProvider>
         </BrandIdentifierLayoutSlot>
       )}
 
