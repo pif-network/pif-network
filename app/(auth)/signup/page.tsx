@@ -39,7 +39,7 @@ const CreateAccount = () => {
     return signUp!.authenticateWithRedirect({
       strategy,
       redirectUrl: '/sso-callback',
-      redirectUrlComplete: '/',
+      redirectUrlComplete: INTERNAL_PATH.COMPLETE_PROFILE,
     });
   };
 
@@ -78,7 +78,7 @@ const CreateAccount = () => {
           unsafeMetadata: {
             role,
           },
-          redirectUrl: '/',
+          redirectUrl: INTERNAL_PATH.COMPLETE_PROFILE,
         });
 
         await signUp.prepareEmailAddressVerification({
