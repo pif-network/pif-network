@@ -20,6 +20,7 @@ import {
   Step1InputPack,
   Step2InputPack,
   MentorInputPack,
+  RoleChoosingPopover,
 } from '~/components/common/user/components';
 
 import { Field, Form, FormikHelpers, FormikProvider, useFormik } from 'formik';
@@ -31,7 +32,7 @@ import { ArrowLeftIcon, CheckCircleIcon } from '@heroicons/react/outline';
 const CompleteProfile = () => {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState('');
-  const [currentFillingStep, setCurrentFillingStep] = useState(0);
+  const [currentFillingStep, setCurrentFillingStep] = useState(-1);
   const [
     isProfileSuccessfullyUpdatedModalOpen,
     setIsProfileSuccessfullyUpdatedModalOpen,
@@ -41,6 +42,7 @@ const CompleteProfile = () => {
   const MAX_FILLING_STEPS = currentUserRole === USER_ROLE.MENTOR ? 3 : 2;
 
   const STEP_FIELD_MAP: { [key: number]: string[] } = {
+    '-1': ['role'],
     0: ['name', 'gender'],
     1: ['schoolName', 'major', 'title', 'workplace'],
     2: ['location', 'github', 'linkedin'],
@@ -52,6 +54,7 @@ const CompleteProfile = () => {
   } else STEP_FIELD_MAP[2] = ['location', 'github', 'linkedin'];
 
   const validationSchema = object().shape({
+    role: string().required(),
     name: string().required(),
     gender: string().required(),
     description: string().required(),
@@ -73,6 +76,7 @@ const CompleteProfile = () => {
   });
 
   const formInitialValuesWithoutMentorFields = {
+    role: '',
     name: '',
     gender: '',
     description: '',
@@ -113,7 +117,21 @@ const CompleteProfile = () => {
   });
 
   const shouldDisableButtonNextStep = () => {
-    const { errors, touched } = formik;
+    const { errors, touched, values } = formik;
+
+    const currentStepHasError = STEP_FIELD_MAP[currentFillingStep]?.some(
+      field => Object.keys(errors).includes(field)
+    );
+    const currentStepIsTouched = STEP_FIELD_MAP[currentFillingStep]?.some(
+      field => Object.keys(touched).includes(field)
+    );
+
+    console.log('v', values);
+    console.log('e', errors);
+    console.log('t', touched);
+    console.log('currentStepHasError', currentStepHasError);
+    console.log('currentStepIsTouched', currentStepIsTouched);
+    console.log('--- ---');
 
     return (
       STEP_FIELD_MAP[currentFillingStep]?.some(field =>
@@ -162,6 +180,35 @@ const CompleteProfile = () => {
                     type="error"
                     showIcon
                   />
+                )}
+
+                {currentFillingStep === -1 && (
+                  <div className="flex justify-start space-x-4">
+                    <RoleChoosingPopover
+                      userType={USER_ROLE.MENTEE}
+                      onClick={async () => {
+                        await formik.setFieldValue('role', USER_ROLE.MENTEE);
+                        await formik.setTouched({ role: true });
+                      }}
+                      disabled={
+                        formik.values.role
+                          ? formik.values.role !== USER_ROLE.MENTEE
+                          : undefined
+                      }
+                    />
+                    <RoleChoosingPopover
+                      userType={USER_ROLE.MENTOR}
+                      onClick={async () => {
+                        await formik.setFieldValue('role', USER_ROLE.MENTOR);
+                        await formik.setTouched({ role: true });
+                      }}
+                      disabled={
+                        formik.values.role
+                          ? formik.values.role !== USER_ROLE.MENTOR
+                          : undefined
+                      }
+                    />
+                  </div>
                 )}
 
                 {currentFillingStep === 0 && (

@@ -52,6 +52,7 @@ export const RoleChoosingPopover = ({
               ? 'border-black/50 text-black/60 scale-95'
               : 'bg-primary-300 text-white border-primary-300 scale-105 shadow-2xl'
           }`}
+        type="button"
         onClick={onClick}
       >
         {userType}
