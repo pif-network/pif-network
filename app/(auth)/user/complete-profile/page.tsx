@@ -106,7 +106,6 @@ const CompleteProfile = () => {
     onSubmit: async values => {
       try {
         setErrorMessage('');
-        await UserService.updateProfile(values);
 
         setIsProfileSuccessfullyUpdatedModalOpen(true);
       } catch (error) {
