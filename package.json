@@ -51,7 +51,6 @@
       "eslint --fix"
     ]
   },
-  "packageManager": "yarn@3.2.3",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
