@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/navigation';
 
-import { AuthService, TokenService, UserService } from '~/services';
 import { getErrorMessage } from '~/lib/types/service';
 import { Link, Input as FormikInput, Button, Divider } from '~/components/ui';
 import { GoogleFill } from '~/components/ui/svgs/Icons';
