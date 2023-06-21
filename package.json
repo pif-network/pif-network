@@ -10,7 +10,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@clerk/nextjs": "^4.21.3",
-    "@formkit/auto-animate": "^1.0.0-beta.1",
+    "@formkit/auto-animate": "0.7.0",
     "@heroicons/react": "^1.0.6",
     "antd": "4.24.10",
     "drizzle-orm": "^0.26.5",

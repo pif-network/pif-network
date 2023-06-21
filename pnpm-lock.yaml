@@ -12,8 +12,8 @@ dependencies:
     specifier: ^4.21.3
     version: 4.21.3(next@13.4.6)(react-dom@18.2.0)(react@18.2.0)
   '@formkit/auto-animate':
-    specifier: ^1.0.0-beta.1
-    version: 1.0.0-beta.1(react@18.2.0)
+    specifier: 0.7.0
+    version: 0.7.0
   '@heroicons/react':
     specifier: ^1.0.6
     version: 1.0.6(react@18.2.0)
@@ -392,18 +392,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@formkit/auto-animate@1.0.0-beta.1(react@18.2.0):
-    resolution: {integrity: sha512-I3OWOBaPZKSJL4bsooXI8kC3q7bcgibD2oML0P/Lir6MnbvUe/0/7EH8br024juvM/Ulm9C9xGx9CJUQYrOWSA==}
-    peerDependencies:
-      react: ^16.8.0
-      vue: ^3.0.0
-    peerDependenciesMeta:
-      react:
-        optional: true
-      vue:
-        optional: true
-    dependencies:
-      react: 18.2.0
+  /@formkit/auto-animate@0.7.0:
+    resolution: {integrity: sha512-RczHUr0AhRPssREoNdRjLfk2b/id9/DFnbIq18QM8L7E4zNV3XH+WO480EZ46BQHDEsv76YPJ0JbG2Y2i3GfXw==}
     dev: false
 
   /@heroicons/react@1.0.6(react@18.2.0):
