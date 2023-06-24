@@ -48,8 +48,8 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "yarn prettier --write",
-      "eslint --fix"
+      "pnpm prettier --write",
+      "eslint --fix-dry-run"
     ]
   },
   "config": {
