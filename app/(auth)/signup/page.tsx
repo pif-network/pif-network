@@ -4,11 +4,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/navigation';
 
-import axios from 'axios';
-
-import { AuthService, TokenService, UserService } from '~/services';
 import { getErrorMessage } from '~/lib/types/service';
-import { UserRole } from '~/lib/types/user';
 import { INTERNAL_PATH, USER_ROLE } from '~/shared/constant';
 import { Button, Input as FormikInput, Link, Divider } from '~/components/ui';
 import {

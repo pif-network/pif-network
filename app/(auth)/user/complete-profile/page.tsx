@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import Head from 'next/head';
 import Image from 'next/image';
 
-import { UserService } from '~/services';
 import { getErrorMessage } from '~/lib/types/service';
 import { User, UserRole } from '~/lib/types/user';
 import { ChevronRight, Home } from '~/components/ui/svgs/Icons';
@@ -38,7 +37,8 @@ const CompleteProfile = () => {
     setIsProfileSuccessfullyUpdatedModalOpen,
   ] = useState(false);
 
-  const currentUserRole = UserService.currentUser?.role;
+  // TODO: Well, fix this.
+  const currentUserRole = 'Mentor';
   const MAX_FILLING_STEPS = currentUserRole === USER_ROLE.MENTOR ? 3 : 2;
 
   const STEP_FIELD_MAP: { [key: number]: string[] } = {

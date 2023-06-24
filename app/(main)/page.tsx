@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { NextPage } from 'next';
 
-import { UserService } from '~/services';
 import { User } from '~/lib/types/user';
 import { getErrorMessage } from '~/lib/types/service';
 import {
@@ -22,25 +21,6 @@ import { FAQs } from '~/shared/constant';
 
 const HomePage: NextPage = () => {
   const [mentors, setMentors] = useState<User<'Mentor'>[]>();
-
-  useEffect(() => {
-    const getAllMentors = async () => {
-      try {
-        const responseAllMentorsRequest = await UserService.getMentors({
-          itemsPerPage: 4,
-        });
-        const { data } = responseAllMentorsRequest;
-        const { data: mentors } = data;
-        setMentors(mentors);
-        console.log(mentors);
-      } catch (error) {
-        const errorMessage = getErrorMessage(error);
-        console.log(errorMessage);
-      }
-    };
-
-    getAllMentors();
-  }, []);
 
   return (
     <>
