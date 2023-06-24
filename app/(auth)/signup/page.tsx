@@ -6,22 +6,23 @@ import { useRouter } from 'next/navigation';
 
 import { getErrorMessage } from '~/lib/types/service';
 import { INTERNAL_PATH, USER_ROLE } from '~/shared/constant';
-import { Button, Input as FormikInput, Link, Divider } from '~/components/ui';
+import {
+  Button,
+  Input as FormikInput,
+  Link,
+  Divider,
+  BrandIdentifier,
+} from '~/components/ui';
 import {
   ChevronRight,
   GoogleFill,
   Home,
   SendingMailLine,
 } from '~/components/ui/svgs/Icons';
-import {
-  BrandIdentifierLayoutSlot,
-  RoleChoosingPopover,
-} from '~/components/common/user/components';
 
 import { number, object, string } from 'yup';
 import { Field, Form, FormikProvider, useFormik } from 'formik';
 import { Alert } from 'antd';
-import Modal from 'antd/lib/modal/Modal';
 import { useSignUp } from '@clerk/nextjs';
 import type { OAuthStrategy } from '@clerk/types';
 
@@ -95,7 +96,7 @@ const CreateAccount = () => {
       </Head>
 
       {!isPendingEmailCodeVerification && (
-        <BrandIdentifierLayoutSlot>
+        <BrandIdentifier>
           <h1 className="-ml-[2px] text-left font-lora word-[-0.23rem] text-sub-heading md:text-heading text-black font-regular">
             Chào mừng bạn.
           </h1>
@@ -190,7 +191,7 @@ const CreateAccount = () => {
               />
             </Form>
           </FormikProvider>
-        </BrandIdentifierLayoutSlot>
+        </BrandIdentifier>
       )}
 
       {isPendingEmailCodeVerification && <VerifyEmailCode su={su} />}
