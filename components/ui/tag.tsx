@@ -4,7 +4,7 @@ import customTwMerge from '~/lib/utils/tw-merge';
 import { FIELD_METADATA } from '~/shared/constant';
 
 export type TagColour =
-  typeof FIELD_METADATA[keyof typeof FIELD_METADATA]['tagColour'];
+  (typeof FIELD_METADATA)[keyof typeof FIELD_METADATA]['tagColour'];
 type TagType = 'filled' | 'outlined';
 
 interface TagProps extends HTMLAttributes<HTMLElement> {
