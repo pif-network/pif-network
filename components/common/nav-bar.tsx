@@ -3,16 +3,15 @@
 import { HTMLAttributes, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { ChevronRight } from '~/components/ui/svgs/Icons';
 import { Button } from '~/components/ui';
-import { INTERNAL_PATH, USER_ROLE } from '~/shared/constant';
+import { INTERNAL_PATH } from '~/shared/constant';
 
 import { MenuIcon } from '@heroicons/react/outline';
-import { AuthService, UserService } from '~/services';
-import { useRouter } from 'next/navigation';
 import { UserButton } from '@clerk/nextjs';
-import { SignedIn } from '@clerk/clerk-react';
+import { SignedIn } from '@clerk/nextjs';
 
 interface NavLinkProps extends HTMLAttributes<HTMLAnchorElement> {
   href?: string;
@@ -97,9 +96,7 @@ const NavbarMobileMenu = ({
             <NavLink
               mobile
               content="Đăng xuất"
-              onClick={() => {
-                AuthService.logOut();
-              }}
+              // onClick={() => {}}
             />
           </>
         ) : (
@@ -139,9 +136,8 @@ const NavBar = () => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    UserService.currentUser?.name && setHasAuthenticated(true);
-  }, []);
+  // useEffect(() => {
+  // }, []);
 
   return (
     <>
@@ -163,30 +159,6 @@ const NavBar = () => {
 
           <section className="flex justify-center items-center gap-16 xl:gap-32">
             <div className="hidden md:flex justify-center items-center gap-4 py-[9px] px-[42px] bg-white/20 hover:bg-white/30 transition-colors ease-in-out duration-300 backdrop-blur-sm rounded-[32px] font-manrope font-regular text-body">
-              {/* {hasAutheticated ? ( */}
-              {/*   <> */}
-              {/*     <NavLink href={INTERNAL_PATH.SETTINGS} content="Cài đặt" /> */}
-              {/*     <NavLink */}
-              {/*       content="Đăng xuất" */}
-              {/*       onClick={() => { */}
-              {/*         AuthService.logOut(); */}
-              {/*         router.push(INTERNAL_PATH.HOME); */}
-              {/*       }} */}
-              {/*     /> */}
-              {/*   </> */}
-              {/* ) : ( */}
-              {/*   <> */}
-              {/*     <NavLink */}
-              {/*       href={`${INTERNAL_PATH.REGISTER}?role=${USER_ROLE.MENTOR}`} */}
-              {/*       content="Trở thành mentor" */}
-              {/*     /> */}
-              {/*     <NavLink href="/#faqs" content="FAQs" /> */}
-              {/*     <NavLink */}
-              {/*       href={INTERNAL_PATH.REGISTER} */}
-              {/*       content="Tham gia ngay" */}
-              {/*     /> */}
-              {/*   </> */}
-              {/* )} */}
               <SignedIn>
                 <UserButton />
               </SignedIn>
