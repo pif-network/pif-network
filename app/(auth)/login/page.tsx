@@ -5,10 +5,15 @@ import Head from 'next/head';
 import { useRouter } from 'next/navigation';
 
 import { getErrorMessage } from '~/lib/types/service';
-import { Link, Input as FormikInput, Button, Divider } from '~/components/ui';
+import {
+  Link,
+  Input as FormikInput,
+  Button,
+  Divider,
+  BrandIdentifier,
+} from '~/components/ui';
 import { GoogleFill } from '~/components/ui/svgs/Icons';
 import { INTERNAL_PATH } from '~/shared/constant';
-import { BrandIdentifierLayoutSlot } from '~/components/common/user/components';
 
 import { FormikProvider, useFormik, Form, Field } from 'formik';
 import { object, string } from 'yup';
@@ -82,7 +87,7 @@ const Login = () => {
         <title>Đăng nhập</title>
       </Head>
 
-      <BrandIdentifierLayoutSlot>
+      <BrandIdentifier>
         {/* Page title */}
         <h1 className="-ml-[2px] text-left font-lora word-[-0.23rem] text-sub-heading md:text-heading">
           <span className="text-black font-regular">Đăng nhập</span>
@@ -150,7 +155,7 @@ const Login = () => {
             />
           </Form>
         </FormikProvider>
-      </BrandIdentifierLayoutSlot>
+      </BrandIdentifier>
     </>
   );
 };

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Select } from 'antd';
 import { Fields, Offers } from '~/lib/types/user';
 import { FIELD_METADATA, OFFER_METADATA } from '~/shared/constant';
-import { Tag } from '../Tag';
+import { Tag } from '~/components/ui';
 
 interface Props {
   setFilteringOptions: (...args: any) => any;

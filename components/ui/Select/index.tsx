@@ -1,6 +1,7 @@
 import { Select, SelectProps } from 'antd';
 import { ErrorMessage, useField } from 'formik';
 import { InputLabel } from '../Input';
+import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, PromiseLikeOfReactNode } from 'react';
 
 interface Props extends SelectProps {
   tooltipText?: string;
@@ -37,7 +38,7 @@ const FormikSelect = ({
         {...props}
       />
       <ErrorMessage name={field.name} component="div">
-        {message => (
+        {(message: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined) => (
           <div className="ml-4 mt-2 -mb-1 text-red-300 font-manrope text-[10px]">
             {message}
           </div>

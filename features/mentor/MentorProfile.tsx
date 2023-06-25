@@ -5,7 +5,6 @@ import { LocationFill, MortarboardHatFill } from '~/components/ui/svgs/Icons';
 import { User } from '~/lib/types/user';
 import { FIELD_METADATA, OFFER_METADATA } from '~/shared/constant';
 
-import { get } from 'lodash';
 import {
   FacebookFilled,
   GithubFilled,
@@ -15,7 +14,6 @@ import {
 import autoAnimate from '@formkit/auto-animate';
 
 import { CreateReview, Review, ReviewCard } from './Review';
-import { UserService } from '~/services';
 
 const socialLinkMapper = {
   facebook: {
@@ -73,7 +71,8 @@ export const MentorProfile: React.FC<{
 
   const socialLinkComponents = [];
   for (const [_, mapper] of Object.entries(socialLinkMapper)) {
-    const socialUrl = get(data, mapper.dataKey);
+    // const socialUrl = get(data, mapper.dataKey);
+    const socialUrl = null;
     if (socialUrl) {
       socialLinkComponents.push(
         <SquareSocialLink
@@ -96,7 +95,7 @@ export const MentorProfile: React.FC<{
 
   const onClickAddReviewHandler = () => {
     // TODO: Add error indicator.
-    if (!UserService.currentUser) return;
+    // if (!UserService.currentUser) return;
 
     setIsCreatingReview(true);
   };

@@ -1,91 +1,10 @@
 import { UserRole } from '~/lib/types/user';
 import { FIELD_METADATA, OFFER_METADATA, USER_ROLE } from '~/shared/constant';
-
-import { Popover } from 'antd';
-import { ReactNode } from 'react';
-import Image from 'next/image';
-import { Field, FormikHelpers } from 'formik';
 import FormikInput from '~/components/ui/Input';
 import FormikSelect from '~/components/ui/Select';
 
-interface RoleChoosingPopoverProps {
-  userType: UserRole;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  disabled: boolean | undefined;
-}
-
-const MentorPopoverContent = () => (
-  <div>
-    Trở thành mentor ngay để đồng hành cùng các bạn trẻ yêu mến lập trình trên
-    khắp cả nước.
-  </div>
-);
-const MenteePopoverContent = () => (
-  <div>
-    Trở thành mentee ngay để nhận được sự hỗ trợ, đồng hành từ các mentors của{' '}
-    <br />
-    SheCodes trên con đường dấn thân vào ngành công nghệ của bạn.
-  </div>
-);
-
-const RoleChoosingPopoverContent = (role: UserRole) =>
-  role === USER_ROLE.MENTOR ? (
-    <MentorPopoverContent />
-  ) : (
-    <MenteePopoverContent />
-  );
-
-export const RoleChoosingPopover = ({
-  userType,
-  onClick,
-  disabled,
-}: RoleChoosingPopoverProps) => {
-  return (
-    <Popover placement="bottom" content={RoleChoosingPopoverContent(userType)}>
-      <button
-        className={`px-6 py-3 transition ease-in-out duration-600 box-border border-[1px] border-black/75 hover:border-primary-100
-          hover:bg-primary-100 rounded-sm hover:text-white font-lora font-semi-bold text-[18px]
-          ${
-            disabled === undefined
-              ? ''
-              : disabled
-              ? 'border-black/50 text-black/60 scale-95'
-              : 'bg-primary-300 text-white border-primary-300 scale-105 shadow-2xl'
-          }`}
-        type="button"
-        onClick={onClick}
-      >
-        {userType}
-      </button>
-    </Popover>
-  );
-};
-
-export const BrandIdentifierLayoutSlot = ({
-  children,
-}: {
-  children: ReactNode;
-}) => (
-  <main className="flex h-screen max-w-max mx-auto px-4 md:ml-32 lg:mx-auto">
-    <section className="h-screen w-full max-w-max md:min-w-[537px] md:pr-48 xl:pr-64 flex flex-col justify-center rounded-[36px] md:border-r">
-      {children}
-    </section>
-
-    <section className="hidden md:flex justify-center items-center">
-      <div className="delay-[3500] animate-fall group flex relative items-center py-[20px] -left-[73px] bg-[#F7F7F7] hover:-translate-y-3 transition-transform ease-in-out duration-300">
-        <Image
-          src="/images/logo.png"
-          width={130}
-          height={33}
-          alt="SheCodesVietnam Logo"
-        />
-        <h2 className="ml-3 pb-2 font-manrope font-light md:text-body-lg xl:text-heading">
-          Bridge to knowledge
-        </h2>
-      </div>
-    </section>
-  </main>
-);
+import { Popover } from 'antd';
+import { Field, FormikHelpers } from 'formik';
 
 type EmptyRecord = Record<string, never>;
 

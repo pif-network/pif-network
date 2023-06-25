@@ -13,13 +13,13 @@ import {
   Input as FormikInput,
   Select as FormikSelect,
   Button,
+  RoleChoosingPopover,
 } from '~/components/ui';
 import {
   Step0InputPack,
   Step1InputPack,
   Step2InputPack,
   MentorInputPack,
-  RoleChoosingPopover,
 } from '~/components/common/user/components';
 
 import { Field, Form, FormikHelpers, FormikProvider, useFormik } from 'formik';
@@ -142,7 +142,7 @@ const CompleteProfile = () => {
     );
   };
 
-  const formRef = useAutoAnimate({});
+  const [formRef, _] = useAutoAnimate({});
 
   return (
     <>
@@ -168,10 +168,7 @@ const CompleteProfile = () => {
             <div className="mb-4" />
 
             <FormikProvider value={formik}>
-              <Form
-                ref={formRef as RefObject<HTMLFormElement>}
-                className="max-w-sm flex flex-col"
-              >
+              <Form ref={formRef} className="max-w-sm flex flex-col">
                 {errorMessage && (
                   <Alert
                     className="mt-2 mb-6 font-manrope"
