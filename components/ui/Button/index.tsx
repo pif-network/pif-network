@@ -5,7 +5,7 @@ import twMerge from '~/lib/utils/tw-merge';
 import { ChevronRight, FlagLine } from '~/components/ui/svgs/Icons';
 import { Link } from '~/components/ui';
 
-interface GeneralButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface GeneralButtonProps {
   content: ReactNode;
   className?: string;
   style?: any;
@@ -14,7 +14,9 @@ interface GeneralButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   rightIcon?: ReactNode;
 }
 
-type Props = GeneralButtonProps & ExternalHrefProps;
+type Props = GeneralButtonProps &
+  ExternalHrefProps &
+  ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = forwardRef<HTMLButtonElement, Props>(
   (
