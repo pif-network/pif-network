@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { MentorProfile } from '~/features/mentor/MentorProfile';
 import { Review } from '~/features/mentor/Review';
 import { User } from '~/lib/types/user';
-import { UserService } from '~/services';
 
 const MentorProfilePage: React.FC<{
   data: User<'Mentor'>;
@@ -24,13 +23,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   let mentorReviews;
 
   try {
-    const responseMentorInfo = await UserService.getUserById(context.query.id);
-    mentorInfo = responseMentorInfo.data.data;
+    // const responseMentorInfo = await UserService.getUserById(context.query.id);
+    // mentorInfo = responseMentorInfo.data.data;
 
-    const responseMentorReviews = await UserService.getAllReviewsByMentorId(
-      mentorInfo.id
-    );
-    mentorReviews = responseMentorReviews.data.data;
+    // const responseMentorReviews = await UserService.getAllReviewsByMentorId(
+    //   mentorInfo.id
+    // );
+    // mentorReviews = responseMentorReviews.data.data;
   } catch (error) {
     console.log(error);
   }

@@ -13,13 +13,13 @@ import {
   Input as FormikInput,
   Select as FormikSelect,
   Button,
+  RoleChoosingPopover,
 } from '~/components/ui';
 import {
   Step0InputPack,
   Step1InputPack,
   Step2InputPack,
   MentorInputPack,
-  RoleChoosingPopover,
 } from '~/components/common/user/components';
 
 import { Field, Form, FormikHelpers, FormikProvider, useFormik } from 'formik';

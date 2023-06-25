@@ -1,6 +1,7 @@
 import { InformationCircleIcon } from '@heroicons/react/outline';
 import { Input, Tooltip } from 'antd';
 import { ErrorMessage, useField } from 'formik';
+import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, PromiseLikeOfReactNode } from 'react';
 
 const FormikInput = ({
   name,
@@ -31,7 +32,7 @@ const FormikInput = ({
       )}
 
       <ErrorMessage name={name} component="div">
-        {message => (
+        {(message: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined) => (
           <div className="ml-4 mt-2 -mb-1 text-red-300 font-manrope text-[10px]">
             {message}
           </div>
