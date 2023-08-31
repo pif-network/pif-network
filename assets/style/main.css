@@ -8,36 +8,46 @@
 
 @tailwind utilities;
 @layer utilities {
-	.text-mask {
-		background: linear-gradient(
-			1.71deg,
-			#000000 -5.31%,
-			rgba(28, 28, 28, 0.3559) 36.07%,
-			rgba(87, 87, 87, 0.278144) 45.96%,
-			rgba(255, 255, 255, 0) 61.23%
-		);
-	}
-	.value-card--text-mask {
-		background: linear-gradient(
-			179.95deg,
-			#170330 9.05%,
-			rgba(23, 3, 48, 0.1) 48.73%,
-			rgba(23, 3, 48, 0.410738) 48.73%,
-			rgba(23, 3, 48, 0.1) 48.73%
-		);
-	}
+  .text-mask {
+    background: linear-gradient(
+      1.71deg,
+      #000000 -5.31%,
+      rgba(28, 28, 28, 0.3559) 36.07%,
+      rgba(87, 87, 87, 0.278144) 45.96%,
+      rgba(255, 255, 255, 0) 61.23%
+    );
+  }
+  .value-card--text-mask {
+    background: linear-gradient(
+      179.95deg,
+      #170330 9.05%,
+      rgba(23, 3, 48, 0.1) 48.73%,
+      rgba(23, 3, 48, 0.410738) 48.73%,
+      rgba(23, 3, 48, 0.1) 48.73%
+    );
+  }
 
   .no-scroll {
     overflow: hidden !important;
-   scrollbar-gutter: stable;
+    scrollbar-gutter: stable;
   }
 }
 
 body {
-  @apply bg-[#F7F7F7]
+  @apply bg-[#F7F7F7];
 }
 
-
 a:hover {
-  @apply text-primary-300
+  @apply text-primary-300;
+}
+
+/* FINDME: Only God knows where this was added. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
