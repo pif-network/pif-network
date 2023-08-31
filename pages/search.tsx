@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { MentorCard } from '~/components/mentor';
 import { FilterSection, SectionTitle } from '~/components/ui';
 import { Fields, Offers, User } from '~/lib/types/user';
-import { UserService } from '~/services';
+
+const UserService = {} as any;
 
 const SearchPage = () => {
   const [mentors, setMentors] = useState<User<'Mentor'>[]>([]);
