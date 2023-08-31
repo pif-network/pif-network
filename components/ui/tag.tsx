@@ -1,6 +1,6 @@
 import { CloseOutlined } from '@ant-design/icons';
 import { HTMLAttributes } from 'react';
-import customTwMerge from '~/lib/utils/tw-merge';
+import { twMerge } from '~/lib/utils';
 import { FIELD_METADATA } from '~/shared/constant';
 
 export type TagColour =
@@ -55,7 +55,7 @@ export const Tag: React.FC<TagProps> = ({
   onDelete,
 }) => {
   // const colorClasses = `${} ${} `;
-  const colorClasses = customTwMerge(
+  const colorClasses = twMerge(
     defaultPresetByType[type],
     hoverPresetByType[colour][type],
     'transition-colors ease-out duration-300'

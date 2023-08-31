@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
 
 import type { ExternalHrefProps } from '~/lib/types';
-import twMerge from '~/lib/utils/tw-merge';
+import { twMerge } from '~/lib/utils';
 import { ChevronRight, FlagLine } from '~/components/ui/svgs/Icons';
 import { Link } from '~/components/ui';
 
