@@ -1,6 +1,6 @@
-/** @type {import('tailwindcss').Config} */
 const plugin = require('tailwindcss/plugin');
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   mode: 'jit',
   content: [
@@ -8,11 +8,6 @@ module.exports = {
     './app/**/*.{jsx,tsx}',
     './components/**/*.{jsx,tsx}',
     './features/**/*.{jsx,tsx}',
-  ],
-  safeList: [
-    {
-      pattern: /^(.*?)/,
-    },
   ],
   theme: {
     screens: {
@@ -162,7 +157,6 @@ module.exports = {
   plugins: [
     // TODO: add type declaration for this, although it's not working..
     require('tailwindcss-ripple')(),
-    // @ts-expect-error: Expression not callable, importing 'plugin'
     plugin(function ({ matchUtilities, addUtilities, addComponents, theme }) {
       matchUtilities(
         {
