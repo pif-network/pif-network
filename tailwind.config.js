@@ -33,6 +33,7 @@ module.exports = {
       caption: ['0.75rem', { lineHeight: '1rem' }],
       'body-sm': ['0.8125rem', { lineHeight: '1.125rem' }],
       'body-md': ['0.875rem', { lineHeight: '1.1875rem' }],
+      button: ['0.875rem', { lineHeight: '1.1875rem' }],
       body: ['1rem', { lineHeight: '1.375rem' }],
       'body-lg': ['1.3125rem', { lineHeight: '1.8125rem' }],
       'sub-heading': ['1.3125rem', { lineHeight: '1.6875rem' }],

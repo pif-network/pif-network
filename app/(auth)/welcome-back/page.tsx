@@ -125,34 +125,29 @@ const Login = () => {
                 </div>
               ) : (
                 <Button
-                  className={`w-full h-[46px] flex items-center justify-center rounded-lg ${
+                  className={`w-full ${
                     !(formik.isValid && formik.dirty)
                       ? 'bg-primary-800/40 border-primary-800/60'
                       : ''
-                  } text-[19px] md:text-sub-heading`}
+                  } text-[19px]`}
                   type="submit"
-                  fillType="filled"
-                  size="medium"
-                  content="Đăng nhập"
                   // disabled={formik.isValid && formik.dirty}
-                />
+                >
+                  <h4>Đăng nhập</h4>
+                </Button>
               )}
             </div>
 
             <Divider>Hoặc đăng nhập với</Divider>
 
             <Button
-              className="max-w-md w-full h-[42px] flex items-center justify-center border-[1px] border-gray-600/50 text-[18px] md:text-sub-heading rounded-lg"
+              className="max-w-md w-full border-gray-600/50 text-[18px]"
+              variant="outline"
               type="button"
-              fillType="outlined"
-              size="medium"
-              content={
-                <>
-                  <GoogleFill className="pr-2" /> Google
-                </>
-              }
               onClick={() => signInWith('oauth_google')}
-            />
+            >
+              <GoogleFill className="pr-2" /> <span>Google</span>
+            </Button>
           </Form>
         </FormikProvider>
       </BrandIdentifier>
