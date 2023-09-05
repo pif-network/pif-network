@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import { Button } from '~/components/ui';
 import { ChevronRight } from '~/components/ui/svgs/Icons';
 
 const Hero = () => {
@@ -38,7 +39,7 @@ const Hero = () => {
 
           <div className="-mb-10" />
 
-          <h3 className="font-manrope text-body text-center w-[525px]">
+          <h3 className="font-manrope text-body text-center w-[475px]">
             Trò chuyện, chia sẻ, nâng cao kĩ năng chuyên môn, mở rộng hiểu biết
             và khám phá những insights mới lạ từ các mentor dày dặn kinh nghiệm
             của chúng tôi.
@@ -46,12 +47,10 @@ const Hero = () => {
 
           <div className="mb-10" />
 
-          <button className="h-[46px] bg-primary-900 my-[6px] pl-9 pr-7 rounded-xl flex items-center">
-            <h4 className="font-lora text-[14px] text-white word-[-3px]">
-              Đăng nhập
-            </h4>
-            <ChevronRight className="pt-[2px] pl-1 fill-white" />
-          </button>
+          <Button size="default-with-icon">
+            <h4>Đăng nhập</h4>
+            <ChevronRight className="pl-1 fill-white" />
+          </Button>
         </div>
       </div>
     </section>

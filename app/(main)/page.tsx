@@ -18,6 +18,7 @@ import {
 } from '~/components/ui';
 import { MentorCard } from '~/components/mentor';
 import { FAQs } from '~/shared/constant';
+import { ChevronRight } from '~/components/ui/svgs/Icons';
 
 const HomePage: NextPage = () => {
   const [mentors, setMentors] = useState<User<'Mentor'>[]>();
@@ -48,13 +49,17 @@ const HomePage: NextPage = () => {
             </div>
 
             <div className="self-center mt-10 md:self-end md:mt-16 lg:mr-[53px]">
-              <Button
+              <Button variant="outline" size="default-with-icon">
+                <h4>Explore more</h4>
+                <ChevronRight className="pl-1 fill-primary-900" />
+              </Button>
+              {/* <Button
                 content="Explore more"
                 fillType="outlined"
                 size="medium"
                 href="/search"
                 rightIcon="ChevronRight"
-              />
+              /> */}
             </div>
           </div>
         </section>

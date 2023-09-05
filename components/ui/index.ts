@@ -1,4 +1,4 @@
-export { default as Button } from './Button';
+export * from './button';
 export { default as Checkbox } from './Checkbox';
 export { default as Input } from './Input';
 export { default as Link } from './Link';

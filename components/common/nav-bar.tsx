@@ -145,7 +145,10 @@ const NavBar = () => {
     <>
       {/* <NavbarMobileMenu hasAutheticated={hasAutheticated} /> */}
 
-      <nav className="hidden md:inline-block w-full md:fixed mt-3 md:mt-4 z-20">
+      <nav
+        className="hidden md:inline-block w-full md:fixed py-3 md:py-2 z-20
+      bg-white/20 hover:bg-white/25 transition-colors ease-in-out duration-300 backdrop-blur-sm"
+      >
         <div className="max-w-7xl flex justify-between items-center mx-16 1hxl:mx-auto">
           <section className="flex flex-row items-end">
             <Link href="/" legacyBehavior>
@@ -171,7 +174,7 @@ const NavBar = () => {
           </section>
 
           <section className="flex justify-center items-center">
-            <div
+            {/* <div
               className="hidden md:flex justify-center items-center gap-4
               py-[9px] px-[42px] bg-white/20 hover:bg-white/30 transition-colors
               ease-in-out duration-300 backdrop-blur-sm rounded-[32px] font-manrope
@@ -180,28 +183,18 @@ const NavBar = () => {
               <SignedIn>
                 <UserButton />
               </SignedIn>
-            </div>
+            </div> */}
 
-            <button
-              className="h-[46px] bg-white border border-primary-900 py-[6px] px-7
-              rounded-xl flex items-center"
-            >
-              <h4 className="font-lora text-[14px] text-black word-[-3px]">
-                Đăng ký
-              </h4>
-            </button>
+            <Button variant="outline">
+              <h4>Đăng ký</h4>
+            </Button>
 
             <div className="mr-2" />
 
-            <button
-              className="h-[46px] bg-primary-900 pl-9 pr-7 rounded-xl
-              flex items-center"
-            >
-              <h4 className="font-lora text-[14px] text-white word-[-3px]">
-                Đăng nhập
-              </h4>
-              <ChevronRight className="pt-[2px] pl-1 fill-white" />
-            </button>
+            <Button size="default-with-icon">
+              <h4>Đăng nhập</h4>
+              <ChevronRight className="pl-1 fill-white" />
+            </Button>
           </section>
         </div>
       </nav>
