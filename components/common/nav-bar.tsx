@@ -12,6 +12,7 @@ import { INTERNAL_PATH } from '~/shared/constant';
 import { MenuIcon } from '@heroicons/react/outline';
 import { UserButton } from '@clerk/nextjs';
 import { SignedIn } from '@clerk/nextjs';
+import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 
 interface NavLinkProps {
   children: React.ReactNode;
@@ -22,12 +23,13 @@ interface NavLinkProps {
 const NavLink = ({ children, href, mobile, ...others }: NavLinkProps) => {
   if (mobile) {
     return (
-      <a
+      <Link
         className="font-manrope font-bold text-primary-900 text-title-sm"
+        href={href}
         {...others}
       >
         {children}
-      </a>
+      </Link>
     );
   }
 
@@ -43,96 +45,6 @@ const NavLink = ({ children, href, mobile, ...others }: NavLinkProps) => {
   );
 };
 
-// const NavbarMobileMenu = ({
-//   hasAutheticated,
-// }: {
-//   hasAutheticated: boolean;
-// }) => {
-//   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-//   const handleOnClickNavLink = () => {
-//     setIsMenuOpen(false);
-//     document.body.classList.remove('no-scroll');
-//   };
-
-//   return (
-//     <nav
-//       className={`w-screen md:hidden fixed z-10 ${
-//         isMenuOpen ? 'backdrop-blur-md' : ''
-//       }`}
-//     >
-//       <div className="flex justify-between mx-5 mt-6">
-//         <Link href="/" legacyBehavior>
-//           <Image
-//             src="/images/logo.png"
-//             width={130}
-//             height={33}
-//             alt="SheCodesVietnam Logo"
-//           />
-//         </Link>
-//         <MenuIcon
-//           className={`h-5 w-5 ${isMenuOpen ? 'bg-white rounded-sm' : ''}`}
-//           onClick={() => {
-//             setIsMenuOpen(!isMenuOpen);
-//             const { body } = document;
-//             !isMenuOpen
-//               ? body.classList.add('no-scroll')
-//               : body.classList.remove('no-scroll');
-//           }}
-//         />
-//       </div>
-
-//       <div
-//         className={`h-screen flex flex-col justify-center items-center gap-3 pl-4 ${
-//           !isMenuOpen ? 'hidden' : ''
-//         }`}
-//       >
-//         {hasAutheticated ? (
-//           <>
-//             <NavLink
-//               mobile
-//               href={INTERNAL_PATH.SETTINGS}
-//               content="Cài đặt"
-//               onClick={handleOnClickNavLink}
-//             />
-//             <NavLink
-//               mobile
-//               content="Đăng xuất"
-//               // onClick={() => {}}
-//             />
-//           </>
-//         ) : (
-//           <>
-//             <NavLink
-//               mobile
-//               href="/#faqs"
-//               content="FAQs"
-//               onClick={handleOnClickNavLink}
-//             />
-//             <NavLink
-//               mobile
-//               href={INTERNAL_PATH.SEARCH}
-//               content="Tìm kiếm mentor"
-//               onClick={handleOnClickNavLink}
-//             />
-//           </>
-//         )}
-
-//         <div className="mt-2" />
-
-//         <Link href={INTERNAL_PATH.REGISTER} legacyBehavior>
-//           <button className="flex justify-center items-center py-2 md:py-2 px-[12px] md:pl-[18px] md:pr-[14px] h-[54px] md:h-[42px] w-[303px] md:w-[204px] hover:-translate-y-[3px] ease-in-out duration-300 bg-primary-800 rounded-md">
-//             <span className="cword-[-4px] font-lora font-semi-bold text-white text-heading">
-//               Tham gia ngay
-//             </span>
-//             <ChevronRight className="pt-[2px] pl-1 fill-white" />
-//           </button>
-//         </Link>
-//       </div>
-//     </nav>
-//   );
-// };
-
 const NavBar = () => {
   const [hasAutheticated, setHasAuthenticated] = useState(false);
 
@@ -142,63 +54,53 @@ const NavBar = () => {
   // }, []);
 
   return (
-    <>
-      {/* <NavbarMobileMenu hasAutheticated={hasAutheticated} /> */}
+    <header
+      className="w-full max-w-7xl fixed flex justify-between items-center
+      py-2 px-3 md:px-16 1hxl:mx-auto z-20 bg-white"
+    >
+      <section className="flex flex-row items-end">
+        <Link href="/">
+          {/* <Image */}
+          {/*   src="/images/logo.png" */}
+          {/*   alt="SheCodesVietnam Logo" */}
+          {/*   width={130} */}
+          {/*   height={33} */}
+          {/*   className="cursor-pointer" */}
+          {/* /> */}
+          <h1
+            className="font-lora text-[16px] md:text-[24px] leading-[initial]
+            tracking-tight md:tracking-normal"
+          >
+            PIF Network
+          </h1>
+        </Link>
 
-      <nav
-        className="hidden md:inline-block w-full md:fixed py-3 md:py-2 z-20
-      bg-white/20 hover:bg-white/25 transition-colors ease-in-out duration-300 backdrop-blur-sm"
-      >
-        <div className="max-w-7xl flex justify-between items-center mx-16 1hxl:mx-auto">
-          <section className="flex flex-row items-end">
-            <Link href="/" legacyBehavior>
-              {/* <Image */}
-              {/*   src="/images/logo.png" */}
-              {/*   alt="SheCodesVietnam Logo" */}
-              {/*   width={130} */}
-              {/*   height={33} */}
-              {/*   className="cursor-pointer" */}
-              {/* /> */}
-              <h1 className="font-lora text-heading-md">PIF Network</h1>
-            </Link>
+        <div className="mr-8" />
 
-            <div className="mr-8" />
+        <nav className="hidden md:flex flex-row">
+          <NavLink href="/#">Cảm hứng</NavLink>
+          <div className="mr-6" />
+          <NavLink href="/#">FAQs</NavLink>
+          <div className="mr-6" />
+          <NavLink href="/#">Blog</NavLink>
+        </nav>
+      </section>
 
-            <div className="flex flex-row">
-              <NavLink href="/#">Cảm hứng</NavLink>
-              <div className="mr-6" />
-              <NavLink href="/#">FAQs</NavLink>
-              <div className="mr-6" />
-              <NavLink href="/#">Blog</NavLink>
-            </div>
-          </section>
+      <HamburgerMenuIcon className="md:hidden w-5 h-5" />
 
-          <section className="flex justify-center items-center">
-            {/* <div
-              className="hidden md:flex justify-center items-center gap-4
-              py-[9px] px-[42px] bg-white/20 hover:bg-white/30 transition-colors
-              ease-in-out duration-300 backdrop-blur-sm rounded-[32px] font-manrope
-              font-regular text-body"
-            >
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
-            </div> */}
+      <nav className="hidden md:flex justify-center items-center">
+        <Button variant="outline">
+          <h4>Đăng ký</h4>
+        </Button>
 
-            <Button variant="outline">
-              <h4>Đăng ký</h4>
-            </Button>
+        <div className="mr-2" />
 
-            <div className="mr-2" />
-
-            <Button size="default-with-icon">
-              <h4>Đăng nhập</h4>
-              <ChevronRight className="pl-1 fill-white" />
-            </Button>
-          </section>
-        </div>
+        <Button size="default-with-icon">
+          <h4>Đăng nhập</h4>
+          <ChevronRight className="pl-1 fill-white" />
+        </Button>
       </nav>
-    </>
+    </header>
   );
 };
 
