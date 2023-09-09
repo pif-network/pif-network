@@ -36,7 +36,7 @@ const NavLink = ({ children, href, mobile, ...others }: NavLinkProps) => {
   return (
     <Link
       className="hover:cursor-pointer font-manrope font-semi-bold text-[#303030]
-      text-[16px] hover:text-primary-400 ease-in-out duration-200"
+        text-[16px] hover:text-primary-400 ease-in-out duration-200"
       href={href}
       {...others}
     >
@@ -56,7 +56,7 @@ const NavBar = () => {
   return (
     <header
       className="w-full max-w-7xl fixed flex justify-between items-center
-      py-2 px-3 md:px-16 1hxl:mx-auto z-20 bg-white"
+        py-4 md:py-2 px-5 md:px-16 1hxl:mx-auto z-20 bg-white"
     >
       <section className="flex flex-row items-end">
         <Link href="/">
@@ -68,8 +68,8 @@ const NavBar = () => {
           {/*   className="cursor-pointer" */}
           {/* /> */}
           <h1
-            className="font-lora text-[16px] md:text-[24px] leading-[initial]
-            tracking-tight md:tracking-normal"
+            className="font-lora text-[18px] md:text-[24px] leading-[initial]
+              tracking-tight md:tracking-normal"
           >
             PIF Network
           </h1>
