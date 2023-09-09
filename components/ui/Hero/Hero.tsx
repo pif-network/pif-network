@@ -5,7 +5,7 @@ import { ChevronRight } from '~/components/ui/svgs/Icons';
 
 const Hero = () => {
   return (
-    <section className="h-screen">
+    <section className="h-screen/85 md:h-screen">
       <div className="h-full flex flex-col items-center">
         <div className="flex-1 items-center flex flex-col justify-center">
           <div className="mb-6 md:mb-12" />
@@ -15,7 +15,7 @@ const Hero = () => {
           <div className="mb-8" />
 
           <div
-            className="font-lora text-primary-900 font-medium text-[32px]
+            className="font-lora text-primary-900 font-medium text-[42px]
               md:text-[54px] flex flex-col items-center"
           >
             <h1 className="italic">Những insights</h1>
@@ -32,7 +32,7 @@ const Hero = () => {
               alt="squig"
               width={264}
               height={36}
-              className="relative opacity-10 scale-75 md:scale-100 top-[-95px]
+              className="relative opacity-10 scale-75 md:scale-100 top-[-116px]
                 md:top-[-146px]"
             />
             <Image
@@ -40,7 +40,7 @@ const Hero = () => {
               alt="sweat"
               width={46}
               height={78}
-              className="relative scale-75 md:scale-100 top-[-164px] left-[118px]
+              className="relative scale-75 md:scale-100 top-[-194px] left-[152px]
                 md:top-[-230px] md:left-[198px]"
             />
           </div>
