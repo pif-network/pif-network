@@ -56,7 +56,7 @@ const NavBar = () => {
   return (
     <header
       className="w-full max-w-7xl fixed flex justify-between items-center
-        py-4 md:py-2 px-5 md:px-16 1hxl:mx-auto z-20 bg-white"
+        py-4 md:py-2 px-5 md:px-12 1hxl:mx-auto z-20 bg-white"
     >
       <section className="flex flex-row items-end">
         <Link href="/">
