@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { NextPage } from 'next';
+import Image from 'next/image';
 
 import { User } from '~/lib/types/user';
 import { getErrorMessage } from '~/lib/types/service';
@@ -19,6 +20,7 @@ import {
 import { MentorCard } from '~/components/mentor';
 import { FAQs } from '~/shared/constant';
 import { ChevronRight } from '~/components/ui/svgs/Icons';
+import img from '~/public/joy.png';
 
 const HomePage: NextPage = () => {
   const [mentors, setMentors] = useState<User<'Mentor'>[]>();
@@ -31,9 +33,31 @@ const HomePage: NextPage = () => {
 
       <div>
         <Hero />
+
+        <section className="mx-1">
+          <Image
+            src={img}
+            alt="Joy at PIF."
+            // width={330}
+            // height={230}
+            sizes="100vw"
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
+            // className="mx-1"
+          />
+
+          <div className="mb-8" />
+
+          <h1 className="font-manrope font-semi-bold text-black text-[14px] text-center">
+            PIF Connect đang mở.
+          </h1>
+        </section>
+
         <Benefits />
 
-        <section className="my-8">
+        {/* <section className="my-8">
           <div className="flex flex-col justify-center md:max-w-[525px] md:mx-auto lg:max-w-[1323px] lg:mx-auto">
             <div className="mx-auto">
               <SectionTitle
@@ -53,18 +77,11 @@ const HomePage: NextPage = () => {
                 <h4>Explore more</h4>
                 <ChevronRight className="pl-1 fill-primary-900" />
               </Button>
-              {/* <Button
-                content="Explore more"
-                fillType="outlined"
-                size="medium"
-                href="/search"
-                rightIcon="ChevronRight"
-              /> */}
             </div>
           </div>
-        </section>
+        </section> */}
 
-        <Values />
+        {/* <Values /> */}
 
         {/* <div className="mt-16 md:mt-32" />
 
