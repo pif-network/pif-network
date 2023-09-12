@@ -18,7 +18,7 @@ const Hero = () => {
             className="font-lora text-primary-900 font-medium text-[42px]
               md:text-[54px] flex flex-col items-center"
           >
-            <h1 className="italic">Những insights</h1>
+            <h1 className="text-[46px] italic">Những insights</h1>
             <div
               className="word-[-8px] leading-none md:leading-14 flex flex-col
                 items-center md:-mt-[2px]"
@@ -32,7 +32,7 @@ const Hero = () => {
               alt="squig"
               width={264}
               height={36}
-              className="relative opacity-10 scale-75 md:scale-100 top-[-116px]
+              className="relative opacity-10 scale-75 md:scale-100 top-[-115px]
                 md:top-[-146px]"
             />
             <Image
@@ -40,8 +40,8 @@ const Hero = () => {
               alt="sweat"
               width={46}
               height={78}
-              className="relative scale-75 md:scale-100 top-[-194px] left-[152px]
-                md:top-[-230px] md:left-[198px]"
+              className="relative scale-75 md:scale-100 top-[-196px] left-[164px]
+                md:top-[-224px] md:left-[168px]"
             />
           </div>
 
@@ -52,16 +52,21 @@ const Hero = () => {
               max-w-[364px] md:max-w-[475px] mx-2"
           >
             Trò chuyện, chia sẻ, nâng cao kĩ năng chuyên môn, mở rộng hiểu biết
-            và khám phá những insights mới lạ từ các mentor dày dặn kinh nghiệm
+            và khám phá những insights mới lạ từ các mentors dày dặn kinh nghiệm
             của chúng tôi.
           </h3>
 
           <div className="mb-10" />
 
-          <Button size="default-with-icon">
-            <h4>Đăng nhập</h4>
-            <ChevronRight className="pl-1 fill-white" />
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline">
+              <h4 className="font-medium">Cảm hứng</h4>
+            </Button>
+            <Button size="default-with-icon">
+              <h4>Trải nghiệm</h4>
+              <ChevronRight className="pl-1 fill-white" />
+            </Button>
+          </div>
         </div>
       </div>
     </section>
