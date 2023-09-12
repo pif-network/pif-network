@@ -31,6 +31,10 @@
     overflow: hidden !important;
     scrollbar-gutter: stable;
   }
+
+  .flex-centre {
+    @apply flex items-center justify-center;
+  }
 }
 
 body {

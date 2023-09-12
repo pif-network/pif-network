@@ -191,6 +191,9 @@ module.exports = {
           background:
             'linear-gradient(179.95deg, #170330 9.05%, rgba(23, 3, 48, 0.1) 48.73%, rgba(23, 3, 48, 0.410738) 48.73%, rgba(23, 3, 48, 0.1) 48.73%)',
         },
+        '.flex-centre': {
+          ' @apply flex items-center justify-center ': {},
+        },
       });
     }),
   ],
