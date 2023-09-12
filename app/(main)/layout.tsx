@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Footer, NavBar } from '~/components/common';
+import { ScrollObserver } from '~/lib/scroll';
 
 export default function RootLayout({
   children,
@@ -9,7 +10,7 @@ export default function RootLayout({
   return (
     <>
       <NavBar />
-      {children}
+      <ScrollObserver>{children}</ScrollObserver>
       <Footer />
     </>
   );
