@@ -32,7 +32,7 @@ const HomePage: NextPage = () => {
         <title>Homepage</title>
       </Head>
 
-      <div>
+      <main className="overflow-hidden">
         <Hero />
 
         <section className="mx-4">
@@ -126,7 +126,7 @@ const HomePage: NextPage = () => {
 
         {/* Space to footer */}
         <div className="mb-4" />
-      </div>
+      </main>
     </>
   );
 };
