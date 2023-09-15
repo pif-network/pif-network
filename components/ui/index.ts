@@ -7,6 +7,7 @@ export { default as SectionTitle } from './SectionTitle';
 export * from './tag';
 export * from './Avatar';
 export { default as BrandIdentifier } from './brand-identifier';
+export { default as BrandExplained } from './brand-explained';
 export { default as RoleChoosingPopover } from './role-choosing-popover';
 
 export { default as Theme } from './Theme';

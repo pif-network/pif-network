@@ -45,7 +45,7 @@ const Benefits = () => {
         ${
           shouldTransform
             ? 'bg-primary-900 text-gray-50'
-            : 'text-primary-900 border border-primary-900'
+            : 'text-primary-900 border border-primary-900/50'
         }`}
     >
       <div

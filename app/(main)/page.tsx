@@ -16,11 +16,12 @@ import {
   Button,
   SectionTitle,
   FAQAccordionItem,
+  BrandExplained,
 } from '~/components/ui';
 import { MentorCard } from '~/components/mentor';
 import { FAQs } from '~/shared/constant';
 import { ChevronRight } from '~/components/ui/svgs/Icons';
-import img from '~/public/joy.png';
+import joy from '~/public/joy.png';
 
 const HomePage: NextPage = () => {
   const [mentors, setMentors] = useState<User<'Mentor'>[]>();
@@ -34,28 +35,32 @@ const HomePage: NextPage = () => {
       <div>
         <Hero />
 
-        <section className="mx-1">
+        <section className="mx-4">
           <Image
-            src={img}
+            src={joy}
             alt="Joy at PIF."
-            // width={330}
-            // height={230}
             sizes="100vw"
             style={{
               width: '100%',
               height: 'auto',
             }}
-            // className="mx-1"
           />
+        </section>
 
-          <div className="mb-8" />
+        <div className="mb-24" />
 
-          <h1 className="font-manrope font-semi-bold text-black text-[14px] text-center">
-            PIF Connect đang mở.
+        <section className="">
+          <h1
+            className="font-lora font-bold text-[24px] text-center text-primary-900
+              border-y border-gray-700/50 p-5"
+          >
+            Introducing PIF Network
           </h1>
         </section>
 
-        <Benefits />
+        <div className="mb-24" />
+
+        <BrandExplained />
 
         {/* <section className="my-8">
           <div className="flex flex-col justify-center md:max-w-[525px] md:mx-auto lg:max-w-[1323px] lg:mx-auto">
