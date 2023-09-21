@@ -239,39 +239,37 @@ const CompleteProfile = () => {
 
             <div className="w-full flex gap-4">
               <Button
-                className="h-[42px] rounded-lg border-gray-400 text-heading-sm"
-                fillType="outlined"
-                size="medium"
-                content={
-                  currentFillingStep === 0 ? (
-                    ''
-                  ) : (
-                    <ArrowLeftIcon width={24} height={24} />
-                  )
-                }
+                className="h-[42px] border-primary-900/60"
+                variant="outline"
                 onClick={() => {
                   if (currentFillingStep === 0) return;
                   else setCurrentFillingStep(currentFillingStep - 1);
                 }}
-              />
+              >
+                {currentFillingStep === 0 ? (
+                  ''
+                ) : (
+                  <ArrowLeftIcon width={24} height={24} />
+                )}
+              </Button>
               {formik.isSubmitting ? (
                 <div className="w-full flex justify-center items-center">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black" />
                 </div>
               ) : (
                 <Button
-                  className="w-full h-[42px] rounded-lg text-heading-sm disabled:bg-primary-800/40 disabled:border-primary-800/40"
+                  // className="w-full h-[42px] rounded-lg text-heading-sm disabled:bg-primary-800/40 disabled:border-primary-800/40"
+                  className="w-full h-[42px] text-[16px]"
                   type="submit"
-                  fillType="filled"
-                  size="medium"
-                  content="Tiếp tục"
                   onClick={async () => {
                     if (currentFillingStep < MAX_FILLING_STEPS)
                       setCurrentFillingStep(currentFillingStep + 1);
                     else await formik.submitForm();
                   }}
                   disabled={shouldDisableButtonNextStep()}
-                />
+                >
+                  Tiếp tục
+                </Button>
               )}
             </div>
           </section>
@@ -326,20 +324,20 @@ const CompleteProfile = () => {
 
             <div className="w-[250px] flex gap-4">
               <Button
-                className="h-[36px] w-min px-5 rounded-lg border-gray-400"
-                href={INTERNAL_PATH.HOME}
-                fillType="outlined"
-                size="medium"
-                content={<Home className="w-4 h-4" />}
-              />
+                // href={INTERNAL_PATH.HOME}
+                className="border-primary-900/60"
+                type="button"
+                variant="outline"
+              >
+                <Home className="w-4 h-4" />
+              </Button>
               <Button
+                // href={INTERNAL_PATH.SEARCH}
                 className="w-full h-[36px] px-2 rounded-lg text-[14px]"
-                href={INTERNAL_PATH.SEARCH}
-                fillType="filled"
-                size="medium"
-                content="Tìm kiếm mentor"
-                rightIcon={<ChevronRight className="pl-1 fill-white" />}
-              />
+              >
+                Tìm kiếm mentor
+                <ChevronRight className="pl-1 fill-white" />
+              </Button>
             </div>
           </div>
         </div>

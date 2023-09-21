@@ -161,34 +161,29 @@ const CreateAccount = () => {
                   </div>
                 ) : (
                   <Button
-                    className={`w-full h-[46px] flex items-center justify-center rounded-lg ${
+                    className={`w-full ${
                       !(formik.isValid && formik.dirty)
                         ? 'bg-primary-800/40 border-primary-800/60'
                         : ''
-                    } text-[19px] md:text-sub-heading`}
+                    } text-[19px]`}
                     type="submit"
-                    fillType="filled"
-                    size="medium"
-                    content="Đăng ký"
-                  />
+                    // disabled={formik.isValid && formik.dirty}
+                  >
+                    <h4>Đăng nhập</h4>
+                  </Button>
                 )}
               </div>
 
               <Divider>Hoặc đăng ký với</Divider>
 
               <Button
-                className="max-w-md w-full h-[42px] flex items-center justify-center border-[1px] border-gray-600/50
-                  text-[18px] md:text-sub-heading rounded-lg"
+                className="max-w-md w-full border-gray-600/50 text-[18px]"
+                variant="outline"
                 type="button"
-                fillType="outlined"
-                size="medium"
-                content={
-                  <>
-                    <GoogleFill className="pr-2" /> Google
-                  </>
-                }
                 onClick={() => signUpWith('oauth_google')}
-              />
+              >
+                <GoogleFill className="pr-2" /> <span>Google</span>
+              </Button>
             </Form>
           </FormikProvider>
         </BrandIdentifier>
@@ -265,20 +260,14 @@ const VerifyEmailCode = ({ su }: { su: ReturnType<typeof useSignUp> }) => {
 
             <div className="w-[250px] flex gap-4">
               <Button
-                className="h-[36px] w-min px-5 rounded-lg border-gray-400"
-                href={INTERNAL_PATH.HOME}
-                fillType="outlined"
-                size="medium"
-                content={<Home className="w-4 h-4" />}
-              />
-              <Button
-                className="w-full h-[36px] px-2 rounded-lg text-[14px]"
-                type="submit"
-                fillType="filled"
-                size="medium"
-                content="Xác nhận"
-                rightIcon={<ChevronRight className="pl-1 fill-white" />}
-              />
+                // href={INTERNAL_PATH.HOME}
+                className="border-primary-900/60"
+                type="button"
+                variant="outline"
+              >
+                <Home className="w-4 h-4" />
+              </Button>
+              <Button type="submit">Xác nhận</Button>
             </div>
           </Form>
         </FormikProvider>

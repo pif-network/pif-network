@@ -114,12 +114,9 @@ export const MentorProfile: React.FC<{
               {data.name}
             </h1>
 
-            <Button
-              fillType="outlined"
-              size="medium"
-              className="hidden md:block h-[42px] py-0 rounded-lg border-gray-400 hover:border-primary-800 font-regular text-heading-sm hover:text-primary-800"
-              content="Đặt lịch hẹn"
-            />
+            <Button className="hidden md:block h-[42px] py-0 rounded-lg border-gray-400 hover:border-primary-800 font-regular text-heading-sm hover:text-primary-800">
+              Đặt lịch hẹn
+            </Button>
           </div>
 
           <span className="text-heading-sm text-center text-primary-900">
@@ -144,12 +141,11 @@ export const MentorProfile: React.FC<{
 
           <Button
             className="block w-full md:hidden"
-            external
-            href={data.bookingUrl || ''}
-            fillType="filled"
-            size="medium"
-            content="Đặt lịch hẹn"
-          />
+            // external
+            // href={data.bookingUrl || ''}
+          >
+            Đặt lịch hẹn
+          </Button>
         </div>
       </div>
 
