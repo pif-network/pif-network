@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { MentorCard } from '~/components/mentor';
 import { FilterSection, SectionTitle } from '~/components/ui';
@@ -14,37 +16,6 @@ const SearchPage = () => {
     fields: Fields[];
     offers: Offers[];
   }>({ fields: [] as Fields[], offers: [] as Offers[] });
-
-  const observer = new IntersectionObserver(
-    entries => {
-      // When last card is on 100% screen
-      const lastCard = entries[0]!;
-      if (lastCard.isIntersecting) {
-        // waiting for 1s to load data => isLoading = true
-        setIsLoading(true);
-
-        // After loaded data => isLoading = false
-        setTimeout(async () => {
-          setPage(page + 1);
-          const response = await UserService.getMentors({
-            itemsPerPage: 4,
-            page: page + 1,
-            ...filteringOption,
-          });
-          const newMentors = response.data.data;
-          if (newMentors.length !== 0) {
-            setMentors([...mentors, ...newMentors]);
-          } else setShouldStopObserving(true);
-
-          observer.unobserve(lastCard.target);
-          setIsLoading(false);
-        }, 1000);
-      }
-    },
-    {
-      threshold: 1,
-    }
-  );
 
   const fetchMentorsAfterFiltered = async () => {
     setPage(1);
@@ -68,6 +39,37 @@ const SearchPage = () => {
   }, [filteringOption]);
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        // When last card is on 100% screen
+        const lastCard = entries[0]!;
+        if (lastCard.isIntersecting) {
+          // waiting for 1s to load data => isLoading = true
+          setIsLoading(true);
+
+          // After loaded data => isLoading = false
+          setTimeout(async () => {
+            setPage(page + 1);
+            const response = await UserService.getMentors({
+              itemsPerPage: 4,
+              page: page + 1,
+              ...filteringOption,
+            });
+            const newMentors = response.data.data;
+            if (newMentors.length !== 0) {
+              setMentors([...mentors, ...newMentors]);
+            } else setShouldStopObserving(true);
+
+            observer.unobserve(lastCard.target);
+            setIsLoading(false);
+          }, 1000);
+        }
+      },
+      {
+        threshold: 1,
+      }
+    );
+
     if (mentors.length < 24 && !shouldStopObserving) {
       const container = document.getElementById('container');
       const cards = container!.children;
