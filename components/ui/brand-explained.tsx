@@ -22,11 +22,13 @@ const BrandExplained = () => {
         <Image
           src={talk}
           alt="Talking at PIF."
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           style={{
-            // width: '100%',
+            width: '100%',
             height: 'auto',
           }}
+          width={300}
+          height={400}
         />
 
         <motion.div className="mr-4" style={{ y: txtTransformX }}>
