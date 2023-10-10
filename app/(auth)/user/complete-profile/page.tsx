@@ -27,6 +27,7 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { object, string } from 'yup';
 import { Alert, Modal } from 'antd';
 import { ArrowLeftIcon, CheckCircleIcon } from '@heroicons/react/outline';
+import { TooltipProvider } from '@radix-ui/react-tooltip';
 
 const CompleteProfile = () => {
   const router = useRouter();
@@ -165,7 +166,7 @@ const CompleteProfile = () => {
               <span className="font-light text-caption">*</span>
             </h1>
 
-            <div className="mb-4" />
+            <div className="mb-6" />
 
             <FormikProvider value={formik}>
               <Form ref={formRef} className="max-w-sm flex flex-col">
@@ -179,32 +180,48 @@ const CompleteProfile = () => {
                 )}
 
                 {currentFillingStep === -1 && (
-                  <div className="flex justify-start space-x-4">
-                    <RoleChoosingPopover
-                      userType={USER_ROLE.MENTEE}
-                      onClick={async () => {
-                        await formik.setFieldValue('role', USER_ROLE.MENTEE);
-                        await formik.setTouched({ role: true });
-                      }}
-                      disabled={
-                        formik.values.role
-                          ? formik.values.role !== USER_ROLE.MENTEE
-                          : undefined
-                      }
-                    />
-                    <RoleChoosingPopover
-                      userType={USER_ROLE.MENTOR}
-                      onClick={async () => {
-                        await formik.setFieldValue('role', USER_ROLE.MENTOR);
-                        await formik.setTouched({ role: true });
-                      }}
-                      disabled={
-                        formik.values.role
-                          ? formik.values.role !== USER_ROLE.MENTOR
-                          : undefined
-                      }
-                    />
-                  </div>
+                  <section className="flex flex-col">
+                    <h4 className="text-left text-black font-manrope word-[0rem] text-body-md md:text-body">
+                      Vui lòng lựa chọn vị trí của bạn.
+                    </h4>
+
+                    <div className="mb-4" />
+
+                    <div className="flex justify-start gap-4">
+                      <TooltipProvider>
+                        <RoleChoosingPopover
+                          userType={USER_ROLE.MENTEE}
+                          onClick={async () => {
+                            await formik.setFieldValue(
+                              'role',
+                              USER_ROLE.MENTEE
+                            );
+                            await formik.setTouched({ role: true });
+                          }}
+                          disabled={
+                            formik.values.role
+                              ? formik.values.role !== USER_ROLE.MENTEE
+                              : undefined
+                          }
+                        />
+                        <RoleChoosingPopover
+                          userType={USER_ROLE.MENTOR}
+                          onClick={async () => {
+                            await formik.setFieldValue(
+                              'role',
+                              USER_ROLE.MENTOR
+                            );
+                            await formik.setTouched({ role: true });
+                          }}
+                          disabled={
+                            formik.values.role
+                              ? formik.values.role !== USER_ROLE.MENTOR
+                              : undefined
+                          }
+                        />
+                      </TooltipProvider>
+                    </div>
+                  </section>
                 )}
 
                 {currentFillingStep === 0 && (
