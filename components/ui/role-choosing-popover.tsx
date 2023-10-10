@@ -1,16 +1,16 @@
 import { UserRole } from '~/lib/types/user';
 import { USER_ROLE } from '~/shared/constant';
 
-import { Popover } from 'antd';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from '~/components/ui/tooltip';
 
+import { useFormikContext } from 'formik';
+
 interface RoleChoosingPopoverProps {
   userType: UserRole;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   disabled: boolean | undefined;
 }
 
@@ -26,7 +26,14 @@ const RoleChoosingPopoverContent = {
   [USER_ROLE.MENTEE]: MenteePopoverContent,
 };
 
-export default ({ userType, onClick, disabled }: RoleChoosingPopoverProps) => {
+export default ({ userType, disabled }: RoleChoosingPopoverProps) => {
+  const formik = useFormikContext();
+
+  const handleOnClick = async () => {
+    formik.setFieldValue('role', userType);
+    await formik.setTouched({ role: true });
+  };
+
   return (
     <Tooltip delayDuration={400}>
       <TooltipTrigger asChild>
@@ -41,7 +48,7 @@ export default ({ userType, onClick, disabled }: RoleChoosingPopoverProps) => {
               : 'bg-primary-300 text-white border-primary-300 scale-105 shadow-2xl'
           }`}
           type="button"
-          onClick={onClick}
+          onClick={handleOnClick}
         >
           {userType}
         </button>

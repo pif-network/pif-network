@@ -194,13 +194,6 @@ const CompleteProfile = () => {
                       <TooltipProvider>
                         <RoleChoosingPopover
                           userType={USER_ROLE.MENTEE}
-                          onClick={async () => {
-                            await formik.setFieldValue(
-                              'role',
-                              USER_ROLE.MENTEE
-                            );
-                            await formik.setTouched({ role: true });
-                          }}
                           disabled={
                             formik.values.role
                               ? formik.values.role !== USER_ROLE.MENTEE
@@ -209,13 +202,6 @@ const CompleteProfile = () => {
                         />
                         <RoleChoosingPopover
                           userType={USER_ROLE.MENTOR}
-                          onClick={async () => {
-                            await formik.setFieldValue(
-                              'role',
-                              USER_ROLE.MENTOR
-                            );
-                            await formik.setTouched({ role: true });
-                          }}
                           disabled={
                             formik.values.role
                               ? formik.values.role !== USER_ROLE.MENTOR
