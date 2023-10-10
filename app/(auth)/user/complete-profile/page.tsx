@@ -20,7 +20,7 @@ import {
   Step1InputPack,
   Step2InputPack,
   MentorInputPack,
-} from '~/components/common/user/components';
+} from './components';
 
 import { Field, Form, FormikHelpers, FormikProvider, useFormik } from 'formik';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
