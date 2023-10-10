@@ -28,7 +28,7 @@ const RoleChoosingPopoverContent = {
 
 export default ({ userType, onClick, disabled }: RoleChoosingPopoverProps) => {
   return (
-    <Tooltip>
+    <Tooltip delayDuration={400}>
       <TooltipTrigger asChild>
         <button
           className={`px-6 py-3 transition ease-in-out duration-600 box-border border-[1px] border-black/75 hover:border-primary-100
