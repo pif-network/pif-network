@@ -77,7 +77,7 @@ const CompleteProfile = () => {
   });
 
   const formInitialValuesWithoutMentorFields = {
-    role: '',
+    role: 'Mentee',
     name: '',
     gender: '',
     description: '',
@@ -103,6 +103,9 @@ const CompleteProfile = () => {
   const formik = useFormik({
     initialValues: formInitialValues,
     enableReinitialize: true,
+    initialTouched: {
+      role: true,
+    },
     validationSchema,
     onSubmit: async values => {
       try {
