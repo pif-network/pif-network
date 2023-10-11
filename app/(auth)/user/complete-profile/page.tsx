@@ -192,22 +192,8 @@ const CompleteProfile = () => {
 
                     <div className="flex justify-start gap-4">
                       <TooltipProvider>
-                        <RoleChoosingPopover
-                          userType={USER_ROLE.MENTEE}
-                          disabled={
-                            formik.values.role
-                              ? formik.values.role !== USER_ROLE.MENTEE
-                              : undefined
-                          }
-                        />
-                        <RoleChoosingPopover
-                          userType={USER_ROLE.MENTOR}
-                          disabled={
-                            formik.values.role
-                              ? formik.values.role !== USER_ROLE.MENTOR
-                              : undefined
-                          }
-                        />
+                        <RoleChoosingPopover userType={USER_ROLE.MENTEE} />
+                        <RoleChoosingPopover userType={USER_ROLE.MENTOR} />
                       </TooltipProvider>
                     </div>
                   </section>
