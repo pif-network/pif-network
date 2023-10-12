@@ -20,6 +20,7 @@ import {
   Step1InputPack,
   Step2InputPack,
   MentorInputPack,
+  RoleChoosingInputPack,
 } from './components';
 
 import { Field, Form, FormikHelpers, FormikProvider, useFormik } from 'formik';
@@ -182,22 +183,7 @@ const CompleteProfile = () => {
                   />
                 )}
 
-                {currentFillingStep === -1 && (
-                  <section className="flex flex-col">
-                    <h4 className="text-left text-black font-manrope word-[0rem] text-body-md md:text-body">
-                      Vui lòng lựa chọn vị trí của bạn.
-                    </h4>
-
-                    <div className="mb-4" />
-
-                    <div className="flex justify-start gap-4">
-                      <TooltipProvider>
-                        <RoleChoosingPopover userType={USER_ROLE.MENTEE} />
-                        <RoleChoosingPopover userType={USER_ROLE.MENTOR} />
-                      </TooltipProvider>
-                    </div>
-                  </section>
-                )}
+                {currentFillingStep === -1 && <RoleChoosingInputPack />}
 
                 {currentFillingStep === 0 && (
                   <Step0InputPack setFieldValue={formik.setFieldValue} />
