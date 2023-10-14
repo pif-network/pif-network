@@ -2,11 +2,47 @@ import { UserRole } from '~/lib/types/user';
 import { FIELD_METADATA, OFFER_METADATA, USER_ROLE } from '~/shared/constant';
 import FormikInput from '~/components/ui/Input';
 import FormikSelect from '~/components/ui/Select';
+import { TooltipProvider } from '~/components/ui/tooltip';
+import { RoleChoosingPopover } from '~/components/ui';
 
 import { Popover } from 'antd';
-import { Field, FormikHelpers } from 'formik';
+import { Field, FormikHelpers, useFormikContext } from 'formik';
 
 type EmptyRecord = Record<string, never>;
+
+export const RoleChoosingInputPack = () => {
+  const RoleDescription = {
+    [USER_ROLE.MENTEE]: `Hòa mình vào một cộng đồng, kết nối để khám phá nhiều hơn về bản thân
+        cũng như thế giới xung quanh; mở rộng tầm nhìn, trải nghiệm, kỹ năng, và kiến thức;
+        trở thành người tự tin, có định hướng và khả năng thích ứng với sự thay đổi.`,
+    [USER_ROLE.MENTOR]: `Trở thành người truyền cảm hứng, người hướng dẫn, người đồng hành,
+        cung cấp sự giúp đỡ, truyền nhiệt huyết, dùng thời gian và lòng tốt của bản thân để
+        in lại một dấu vết vào cuộc đời của người khác.`,
+  };
+
+  const {
+    values: { role },
+  } = useFormikContext<{ role: UserRole }>();
+
+  const roleDescription = RoleDescription[role];
+
+  return (
+    <section className="flex flex-col gap-8">
+      <h4 className="text-left text-black font-manrope word-[0rem] text-body-sm md:text-[14px]">
+        Vui lòng lựa chọn vị trí của bạn.
+      </h4>
+
+      <div className="flex justify-start gap-4">
+        <TooltipProvider>
+          <RoleChoosingPopover userType={USER_ROLE.MENTEE} />
+          <RoleChoosingPopover userType={USER_ROLE.MENTOR} />
+        </TooltipProvider>
+      </div>
+
+      <h2 className="italic text-body">{roleDescription}</h2>
+    </section>
+  );
+};
 
 export const Step0InputPack = ({
   setFieldValue,

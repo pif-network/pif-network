@@ -20,13 +20,15 @@ import {
   Step1InputPack,
   Step2InputPack,
   MentorInputPack,
-} from '~/components/common/user/components';
+  RoleChoosingInputPack,
+} from './components';
 
 import { Field, Form, FormikHelpers, FormikProvider, useFormik } from 'formik';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { object, string } from 'yup';
 import { Alert, Modal } from 'antd';
 import { ArrowLeftIcon, CheckCircleIcon } from '@heroicons/react/outline';
+import { TooltipProvider } from '@radix-ui/react-tooltip';
 
 const CompleteProfile = () => {
   const router = useRouter();
@@ -76,7 +78,7 @@ const CompleteProfile = () => {
   });
 
   const formInitialValuesWithoutMentorFields = {
-    role: '',
+    role: 'Mentee',
     name: '',
     gender: '',
     description: '',
@@ -102,6 +104,9 @@ const CompleteProfile = () => {
   const formik = useFormik({
     initialValues: formInitialValues,
     enableReinitialize: true,
+    initialTouched: {
+      role: true,
+    },
     validationSchema,
     onSubmit: async values => {
       try {
@@ -165,7 +170,7 @@ const CompleteProfile = () => {
               <span className="font-light text-caption">*</span>
             </h1>
 
-            <div className="mb-4" />
+            <div className="mb-6" />
 
             <FormikProvider value={formik}>
               <Form ref={formRef} className="max-w-sm flex flex-col">
@@ -178,34 +183,7 @@ const CompleteProfile = () => {
                   />
                 )}
 
-                {currentFillingStep === -1 && (
-                  <div className="flex justify-start space-x-4">
-                    <RoleChoosingPopover
-                      userType={USER_ROLE.MENTEE}
-                      onClick={async () => {
-                        await formik.setFieldValue('role', USER_ROLE.MENTEE);
-                        await formik.setTouched({ role: true });
-                      }}
-                      disabled={
-                        formik.values.role
-                          ? formik.values.role !== USER_ROLE.MENTEE
-                          : undefined
-                      }
-                    />
-                    <RoleChoosingPopover
-                      userType={USER_ROLE.MENTOR}
-                      onClick={async () => {
-                        await formik.setFieldValue('role', USER_ROLE.MENTOR);
-                        await formik.setTouched({ role: true });
-                      }}
-                      disabled={
-                        formik.values.role
-                          ? formik.values.role !== USER_ROLE.MENTOR
-                          : undefined
-                      }
-                    />
-                  </div>
-                )}
+                {currentFillingStep === -1 && <RoleChoosingInputPack />}
 
                 {currentFillingStep === 0 && (
                   <Step0InputPack setFieldValue={formik.setFieldValue} />
