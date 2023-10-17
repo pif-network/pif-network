@@ -1,11 +1,9 @@
 import { UserRole } from '~/lib/types/user';
 import { FIELD_METADATA, OFFER_METADATA, USER_ROLE } from '~/shared/constant';
-import FormikInput from '~/components/ui/Input';
 import FormikSelect from '~/components/ui/Select';
 import { TooltipProvider } from '~/components/ui/tooltip';
-import { RoleChoosingPopover } from '~/components/ui';
+import { FormikInput, RoleChoosingPopover } from '~/components/ui';
 
-import { Popover } from 'antd';
 import { Field, FormikHelpers, useFormikContext } from 'formik';
 
 type EmptyRecord = Record<string, never>;
@@ -67,13 +65,7 @@ export const Step0InputPack = ({
       onChange={(value: string) => setFieldValue('gender', value)}
       as={FormikSelect}
     />
-    <Field
-      name="description"
-      type="text-area"
-      rows={4}
-      autoSize={{ minRows: 4, maxRows: 7 }}
-      as={FormikInput}
-    />
+    <Field name="description" type="text-area" as={FormikInput} />
   </>
 );
 
