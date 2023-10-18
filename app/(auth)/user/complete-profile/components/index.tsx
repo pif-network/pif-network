@@ -45,24 +45,9 @@ export const Step0InputPack = ({
   setFieldValue: FormikHelpers<EmptyRecord>['setFieldValue'];
 }) => (
   <>
-    <Field name="name" as={FormikInput} />
-    <Field
-      className="border-gray-400"
-      name="gender"
-      options={[
-        {
-          value: 'male',
-          label: 'Male',
-        },
-        {
-          value: 'female',
-          label: 'Female',
-        },
-      ]}
-      onChange={(value: string) => setFieldValue('gender', value)}
-      as={FormikSelect}
-    />
-    <Field name="description" type="text-area" as={FormikInput} />
+    <FormikInput name="name" />
+    <FormikSelect name="gender" />
+    <FormikInput name="description" type="text-area" />
   </>
 );
 
