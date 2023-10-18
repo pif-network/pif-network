@@ -1,7 +1,6 @@
 import { UserRole } from '~/lib/types/user';
 import { FIELD_METADATA, OFFER_METADATA, USER_ROLE } from '~/shared/constant';
 import FormikSelect from '~/components/ui/Select';
-import { TooltipProvider } from '~/components/ui/tooltip';
 import { FormikInput, RoleChoosingPopover } from '~/components/ui';
 
 import { Field, FormikHelpers, useFormikContext } from 'formik';
@@ -31,10 +30,8 @@ export const RoleChoosingInputPack = () => {
       </h4>
 
       <div className="flex justify-start gap-4">
-        <TooltipProvider>
-          <RoleChoosingPopover userType={USER_ROLE.MENTEE} />
-          <RoleChoosingPopover userType={USER_ROLE.MENTOR} />
-        </TooltipProvider>
+        <RoleChoosingPopover userType={USER_ROLE.MENTEE} />
+        <RoleChoosingPopover userType={USER_ROLE.MENTOR} />
       </div>
 
       <h2 className="italic text-body">{roleDescription}</h2>

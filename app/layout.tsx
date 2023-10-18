@@ -4,6 +4,8 @@ import '../assets/style/main.css';
 import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 
+import { TooltipProvider } from '~/components/ui/tooltip';
+
 export default function RootLayout({
   children,
 }: {
@@ -11,9 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body>{children}</body>
-      </html>
+      <TooltipProvider>
+        <html lang="en">
+          <body>{children}</body>
+        </html>
+      </TooltipProvider>
     </ClerkProvider>
   );
 }
