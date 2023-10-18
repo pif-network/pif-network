@@ -1,6 +1,12 @@
 import { twMerge } from '~/lib/utils';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '~/components/ui/tooltip';
 
 import { forwardRef } from 'react';
+import { InformationCircleIcon } from '@heroicons/react/outline';
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
@@ -52,14 +58,14 @@ const InputLabel = ({
     <label className="inline-block mt-4 pb-2 font-manrope font-semi-bold text-body-sm">
       {name.charAt(0).toUpperCase() + name.slice(1)}
     </label>
-    {/* {tooltipText && ( */}
-    {/* <Tooltip */}
-    {/*   placement="right" */}
-    {/*   title={<span className="font-manrope text-caption">{tooltipText}</span>} */}
-    {/* > */}
-    {/*   <InformationCircleIcon className="w-5 h-5 mt-[9px] stroke-gray-600 stroke-1" /> */}
-    {/* </Tooltip> */}
-    {/* )} */}
+    {tooltipText && (
+      <Tooltip delayDuration={400}>
+        <TooltipTrigger asChild>
+          <InformationCircleIcon className="w-5 h-5 mt-[9px] stroke-gray-600 stroke-1" />
+        </TooltipTrigger>
+        <TooltipContent>{tooltipText}</TooltipContent>
+      </Tooltip>
+    )}
   </div>
 );
 
