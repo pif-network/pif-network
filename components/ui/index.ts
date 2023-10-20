@@ -1,6 +1,7 @@
 export * from './button';
 export { default as Checkbox } from './Checkbox';
-export { default as Input } from './Input';
+export * from './Input';
+export * from './Formik';
 export { default as Link } from './Link';
 export { default as FilterSection } from './FilterSection';
 export { default as SectionTitle } from './SectionTitle';
@@ -20,4 +21,5 @@ export { default as Values } from './Values';
 export { default as Feedback } from './Feedback';
 export { default as FAQAccordionItem } from './faq-accordion-item';
 export { default as Divider } from './Divider';
-export { default as Select } from './Select';
+export * from './Select';
+export * from './select';

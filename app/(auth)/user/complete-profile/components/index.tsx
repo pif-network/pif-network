@@ -1,11 +1,8 @@
 import { UserRole } from '~/lib/types/user';
 import { FIELD_METADATA, OFFER_METADATA, USER_ROLE } from '~/shared/constant';
-import FormikInput from '~/components/ui/Input';
 import FormikSelect from '~/components/ui/Select';
-import { TooltipProvider } from '~/components/ui/tooltip';
-import { RoleChoosingPopover } from '~/components/ui';
+import { FormikInput, RoleChoosingPopover } from '~/components/ui';
 
-import { Popover } from 'antd';
 import { Field, FormikHelpers, useFormikContext } from 'formik';
 
 type EmptyRecord = Record<string, never>;
@@ -33,10 +30,8 @@ export const RoleChoosingInputPack = () => {
       </h4>
 
       <div className="flex justify-start gap-4">
-        <TooltipProvider>
-          <RoleChoosingPopover userType={USER_ROLE.MENTEE} />
-          <RoleChoosingPopover userType={USER_ROLE.MENTOR} />
-        </TooltipProvider>
+        <RoleChoosingPopover userType={USER_ROLE.MENTEE} />
+        <RoleChoosingPopover userType={USER_ROLE.MENTOR} />
       </div>
 
       <h2 className="italic text-body">{roleDescription}</h2>
@@ -50,30 +45,9 @@ export const Step0InputPack = ({
   setFieldValue: FormikHelpers<EmptyRecord>['setFieldValue'];
 }) => (
   <>
-    <Field name="name" as={FormikInput} />
-    <Field
-      className="border-gray-400"
-      name="gender"
-      options={[
-        {
-          value: 'male',
-          label: 'Male',
-        },
-        {
-          value: 'female',
-          label: 'Female',
-        },
-      ]}
-      onChange={(value: string) => setFieldValue('gender', value)}
-      as={FormikSelect}
-    />
-    <Field
-      name="description"
-      type="text-area"
-      rows={4}
-      autoSize={{ minRows: 4, maxRows: 7 }}
-      as={FormikInput}
-    />
+    <FormikInput name="name" />
+    <FormikSelect name="gender" />
+    <FormikInput name="description" type="text-area" />
   </>
 );
 
