@@ -4,6 +4,26 @@ import FormikSelect from '~/components/ui/Select';
 import { FormikInput, RoleChoosingPopover } from '~/components/ui';
 
 import { Field, FormikHelpers, useFormikContext } from 'formik';
+import * as z from 'zod';
+
+export const formSchema = z.object({
+  role: z.enum([USER_ROLE.MENTEE, USER_ROLE.MENTOR]),
+  name: z.string().min(2).max(50),
+  gender: z.enum(['men', 'women', 'other']),
+  description: z.string().min(2).max(500),
+  schoolName: z.string().min(2).max(50),
+  major: z.string().min(2).max(50),
+  title: z.string().min(2).max(50),
+  workplace: z.string().min(2).max(50),
+  location: z.string().min(2).max(50),
+  github: z.string().min(2).max(50),
+  linkedin: z.string().min(2).max(50),
+  fields: z.array(z.string()),
+  offers: z.array(z.string()),
+  bookingUrl: z.string().min(2).max(50),
+});
+
+export type FormSchema = z.infer<typeof formSchema>;
 
 type EmptyRecord = Record<string, never>;
 
