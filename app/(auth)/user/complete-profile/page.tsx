@@ -26,9 +26,12 @@ import {
 import { Field, Form, FormikHelpers, FormikProvider, useFormik } from 'formik';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { object, string } from 'yup';
+import * as z from 'zod';
 import { Alert, Modal } from 'antd';
 import { ArrowLeftIcon, CheckCircleIcon } from '@heroicons/react/outline';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 
 const CompleteProfile = () => {
   const router = useRouter();
@@ -54,6 +57,23 @@ const CompleteProfile = () => {
     STEP_FIELD_MAP[2] = ['fields', 'offers', 'bookingUrl'];
     STEP_FIELD_MAP[3] = ['location', 'github', 'linkedin'];
   } else STEP_FIELD_MAP[2] = ['location', 'github', 'linkedin'];
+
+  const formSchema = z.object({
+    role: z.enum([USER_ROLE.MENTEE, USER_ROLE.MENTOR]),
+    name: z.string().min(2).max(50),
+    gender: z.enum(['men', 'women', 'other']),
+    description: z.string().min(2).max(500),
+    schoolName: z.string().min(2).max(50),
+    major: z.string().min(2).max(50),
+    title: z.string().min(2).max(50),
+    workplace: z.string().min(2).max(50),
+    location: z.string().min(2).max(50),
+    github: z.string().min(2).max(50),
+    linkedin: z.string().min(2).max(50),
+    fields: z.array(z.string()),
+    offers: z.array(z.string()),
+    bookingUrl: z.string().min(2).max(50),
+  });
 
   const validationSchema = object().shape({
     role: string().required(),
@@ -100,6 +120,21 @@ const CompleteProfile = () => {
           bookingUrl: '',
         }
       : formInitialValuesWithoutMentorFields;
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+  });
+
+  const onSubmit = () => {
+    try {
+      setErrorMessage('');
+
+      setIsProfileSuccessfullyUpdatedModalOpen(true);
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      setErrorMessage(errorMessage);
+    }
+  };
 
   const formik = useFormik({
     initialValues: formInitialValues,
