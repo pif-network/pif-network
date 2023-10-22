@@ -4,6 +4,7 @@ import FormikSelect from '~/components/ui/Select';
 import { FormikInput, RoleChoosingPopover } from '~/components/ui';
 
 import { Field, FormikHelpers, useFormikContext } from 'formik';
+import { useFormContext } from 'react-hook-form';
 import * as z from 'zod';
 
 export const formSchema = z.object({
@@ -37,9 +38,9 @@ export const RoleChoosingInputPack = () => {
         in lại một dấu vết vào cuộc đời của người khác.`,
   };
 
-  const {
-    values: { role },
-  } = useFormikContext<{ role: UserRole }>();
+  const form = useFormContext<FormSchema>();
+
+  const role = form.getValues('role');
 
   const roleDescription = RoleDescription[role];
 

@@ -2,6 +2,7 @@ export * from './button';
 export { default as Checkbox } from './Checkbox';
 export * from './Input';
 export * from './Formik';
+export * from './form';
 export { default as Link } from './Link';
 export { default as FilterSection } from './FilterSection';
 export { default as SectionTitle } from './SectionTitle';

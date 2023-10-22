@@ -14,6 +14,7 @@ import {
   Select as FormikSelect,
   Button,
   RoleChoosingPopover,
+  Form,
 } from '~/components/ui';
 import {
   Step0InputPack,
@@ -21,9 +22,10 @@ import {
   Step2InputPack,
   MentorInputPack,
   RoleChoosingInputPack,
+  formSchema,
 } from './components';
 
-import { Field, Form, FormikHelpers, FormikProvider, useFormik } from 'formik';
+import { Field, FormikHelpers, FormikProvider, useFormik } from 'formik';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { object, string } from 'yup';
 import * as z from 'zod';
@@ -190,8 +192,12 @@ const CompleteProfile = () => {
 
             <div className="mb-6" />
 
-            <FormikProvider value={formik}>
-              <Form ref={formRef} className="max-w-sm flex flex-col">
+            <Form {...form}>
+              <form
+                ref={formRef}
+                className="max-w-sm flex flex-col"
+                onSubmit={form.handleSubmit(onSubmit)}
+              >
                 {errorMessage && (
                   <Alert
                     className="mt-2 mb-6 font-manrope"
@@ -215,8 +221,8 @@ const CompleteProfile = () => {
                   )}
 
                 {currentFillingStep === MAX_FILLING_STEPS && <Step2InputPack />}
-              </Form>
-            </FormikProvider>
+              </form>
+            </Form>
 
             <div className="mb-6" />
 
