@@ -7,6 +7,8 @@ import { Field, FormikHelpers, useFormikContext } from 'formik';
 import { useFormContext } from 'react-hook-form';
 import * as z from 'zod';
 
+export * from './step-0-pack';
+
 export const formSchema = z.object({
   role: z.enum([USER_ROLE.MENTEE, USER_ROLE.MENTOR]),
   name: z.string().min(2).max(50),
@@ -59,18 +61,6 @@ export const RoleChoosingInputPack = () => {
     </section>
   );
 };
-
-export const Step0InputPack = ({
-  setFieldValue,
-}: {
-  setFieldValue: FormikHelpers<EmptyRecord>['setFieldValue'];
-}) => (
-  <>
-    <FormikInput name="name" />
-    <FormikSelect name="gender" />
-    <FormikInput name="description" type="text-area" />
-  </>
-);
 
 export const Step1InputPack = () => (
   <>

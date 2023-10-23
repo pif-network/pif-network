@@ -15,6 +15,13 @@ import {
   Button,
   RoleChoosingPopover,
   Form,
+  FormField,
+  Input,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
 } from '~/components/ui';
 import {
   Step0InputPack,
@@ -85,7 +92,7 @@ const CompleteProfile = () => {
   const formInitialValuesWithoutMentorFields = {
     role: 'Mentee',
     name: '',
-    gender: '',
+    gender: 'men',
     description: '',
     schoolName: '',
     major: '',
@@ -94,7 +101,7 @@ const CompleteProfile = () => {
     location: '',
     github: '',
     linkedin: '',
-  };
+  } as const;
 
   const formInitialValues =
     currentUserRole === USER_ROLE.MENTOR
@@ -108,7 +115,10 @@ const CompleteProfile = () => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: formInitialValues,
+    mode: 'onChange',
   });
+  const watch = form.watch();
 
   const onSubmit = () => {
     try {
@@ -142,6 +152,12 @@ const CompleteProfile = () => {
 
   const shouldDisableButtonNextStep = () => {
     const { errors, touched, values } = formik;
+    const {
+      formState: { touchedFields },
+    } = form;
+
+    console.log('touchedFields', touchedFields);
+    console.log('watch', watch);
 
     const currentStepHasError = STEP_FIELD_MAP[currentFillingStep]?.some(
       field => Object.keys(errors).includes(field)
@@ -150,11 +166,11 @@ const CompleteProfile = () => {
       field => Object.keys(touched).includes(field)
     );
 
-    console.log('v', values);
-    console.log('e', errors);
-    console.log('t', touched);
-    console.log('currentStepHasError', currentStepHasError);
-    console.log('currentStepIsTouched', currentStepIsTouched);
+    // console.log('v', values);
+    // console.log('e', errors);
+    // console.log('t', touched);
+    // console.log('currentStepHasError', currentStepHasError);
+    // console.log('currentStepIsTouched', currentStepIsTouched);
     console.log('--- ---');
 
     return (
@@ -209,9 +225,7 @@ const CompleteProfile = () => {
 
                 {currentFillingStep === -1 && <RoleChoosingInputPack />}
 
-                {currentFillingStep === 0 && (
-                  <Step0InputPack setFieldValue={formik.setFieldValue} />
-                )}
+                {currentFillingStep === 0 && <Step0InputPack />}
 
                 {currentFillingStep === 1 && <Step1InputPack />}
 
