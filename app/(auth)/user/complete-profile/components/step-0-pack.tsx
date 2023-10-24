@@ -1,4 +1,3 @@
-import { Control } from 'react-hook-form';
 import {
   FormControl,
   FormDescription,
@@ -7,7 +6,13 @@ import {
   FormMessage,
   Input,
   InputLabel,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '~/components/ui';
+import { GENDER_OPTION } from '~/shared/constant';
 
 export const Step0InputPack = () => (
   <>
@@ -22,6 +27,36 @@ export const Step0InputPack = () => (
               <Input placeholder="edmondw" {...field} />
             </FormControl>
             <FormMessage />
+          </FormItem>
+        );
+      }}
+    />
+    <FormField
+      name="gender"
+      render={({ field }) => {
+        console.log(field);
+        return (
+          <FormItem defaultValue={field.value}>
+            <InputLabel name={field.name} />
+            <Select
+              onValueChange={v => {
+                field.onChange(v); // <- Send value to RHF.
+                field.onBlur(); // Make the field touched.
+              }}
+            >
+              <FormControl>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select your gender" />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent>
+                {Object.values(GENDER_OPTION).map(option => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.displayText}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </FormItem>
         );
       }}
