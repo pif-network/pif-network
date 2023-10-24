@@ -151,36 +151,24 @@ const CompleteProfile = () => {
   });
 
   const shouldDisableButtonNextStep = () => {
-    const { errors, touched, values } = formik;
     const {
-      formState: { touchedFields },
+      formState: { touchedFields, errors },
     } = form;
 
     console.log('touchedFields', touchedFields);
+    console.log('errors', errors);
     console.log('watch', watch);
 
     const currentStepHasError = STEP_FIELD_MAP[currentFillingStep]?.some(
       field => Object.keys(errors).includes(field)
     );
-    const currentStepIsTouched = STEP_FIELD_MAP[currentFillingStep]?.some(
-      field => Object.keys(touched).includes(field)
+    const currentStepAllTouched = STEP_FIELD_MAP[currentFillingStep]?.every(
+      field => Object.keys(touchedFields).includes(field)
     );
 
-    // console.log('v', values);
-    // console.log('e', errors);
-    // console.log('t', touched);
-    // console.log('currentStepHasError', currentStepHasError);
-    // console.log('currentStepIsTouched', currentStepIsTouched);
     console.log('--- ---');
 
-    return (
-      STEP_FIELD_MAP[currentFillingStep]?.some(field =>
-        Object.keys(errors).includes(field)
-      ) ||
-      !STEP_FIELD_MAP[currentFillingStep]?.some(field =>
-        Object.keys(touched).includes(field)
-      )
-    );
+    return currentStepHasError || !currentStepAllTouched;
   };
 
   const [formRef, _] = useAutoAnimate({});
