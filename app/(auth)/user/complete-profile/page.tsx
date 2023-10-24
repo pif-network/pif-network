@@ -92,7 +92,7 @@ const CompleteProfile = () => {
   const formInitialValuesWithoutMentorFields = {
     role: 'Mentee',
     name: '',
-    gender: 'men',
+    gender: 'male',
     description: '',
     schoolName: '',
     major: '',

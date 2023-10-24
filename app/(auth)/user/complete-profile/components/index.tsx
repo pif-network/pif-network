@@ -1,5 +1,10 @@
 import { UserRole } from '~/lib/types/user';
-import { FIELD_METADATA, OFFER_METADATA, USER_ROLE } from '~/shared/constant';
+import {
+  FIELD_METADATA,
+  GENDER_OPTION,
+  OFFER_METADATA,
+  USER_ROLE,
+} from '~/shared/constant';
 import FormikSelect from '~/components/ui/Select';
 import { FormikInput, RoleChoosingPopover } from '~/components/ui';
 
@@ -12,7 +17,11 @@ export * from './step-0-pack';
 export const formSchema = z.object({
   role: z.enum([USER_ROLE.MENTEE, USER_ROLE.MENTOR]),
   name: z.string().min(2).max(50),
-  gender: z.enum(['men', 'women', 'other']),
+  gender: z.enum([
+    GENDER_OPTION.MALE.value,
+    GENDER_OPTION.FEMALE.value,
+    GENDER_OPTION.OTHER.value,
+  ]),
   description: z.string().min(2).max(500),
   schoolName: z.string().min(2).max(50),
   major: z.string().min(2).max(50),

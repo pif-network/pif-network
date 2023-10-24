@@ -168,3 +168,18 @@ export const OFFER_METADATA = {
     tagColour: 'cyan',
   },
 } as const;
+
+export const GENDER_OPTION = {
+  MALE: {
+    value: 'male',
+    displayText: 'Male',
+  },
+  FEMALE: {
+    value: 'female',
+    displayText: 'Female',
+  },
+  OTHER: {
+    value: 'other',
+    displayText: 'Other',
+  },
+} as const;
