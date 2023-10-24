@@ -17,14 +17,13 @@ import { GENDER_OPTION } from '~/shared/constant';
 export const Step0InputPack = () => (
   <>
     <FormField
-      // control={form.control}
       name="name"
       render={({ field }) => {
         return (
           <FormItem>
-            <InputLabel name={field.name} tooltipText="Full" />
+            <InputLabel name={field.name} />
             <FormControl>
-              <Input placeholder="edmondw" {...field} />
+              <Input className="w-full" placeholder="edmondw" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

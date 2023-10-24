@@ -95,11 +95,7 @@ export const Step1InputPack = () => (
   </>
 );
 
-export const MentorInputPack = ({
-  setFieldValue,
-}: {
-  setFieldValue: FormikHelpers<EmptyRecord>['setFieldValue'];
-}) => (
+export const MentorInputPack = () => (
   <>
     <Field
       className="border-gray-400"
@@ -110,7 +106,7 @@ export const MentorInputPack = ({
       }))}
       mode="multiple"
       maxTagCount="responsive"
-      onChange={(value: string) => setFieldValue('fields', value)}
+      // onChange={(value: string) => setFieldValue('fields', value)}
       as={FormikSelect}
     />
     <Field
@@ -122,7 +118,7 @@ export const MentorInputPack = ({
       }))}
       mode="multiple"
       maxTagCount="responsive"
-      onChange={(value: string) => setFieldValue('offers', value)}
+      // onChange={(value: string) => setFieldValue('offers', value)}
       as={FormikSelect}
     />
     <Field name="bookingUrl" label="Booking url" as={FormikInput} />

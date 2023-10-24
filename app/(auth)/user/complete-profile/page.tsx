@@ -1,6 +1,6 @@
 'use client';
 
-import { RefObject, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -9,20 +9,7 @@ import { getErrorMessage } from '~/lib/types/service';
 import { User, UserRole } from '~/lib/types/user';
 import { ChevronRight, Home } from '~/components/ui/svgs/Icons';
 import { INTERNAL_PATH, USER_ROLE } from '~/shared/constant';
-import {
-  Input as FormikInput,
-  Select as FormikSelect,
-  Button,
-  RoleChoosingPopover,
-  Form,
-  FormField,
-  Input,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormDescription,
-  FormMessage,
-} from '~/components/ui';
+import { Button, Form } from '~/components/ui';
 import {
   Step0InputPack,
   Step1InputPack,
@@ -32,13 +19,10 @@ import {
   formSchema,
 } from './components';
 
-import { Field, FormikHelpers, FormikProvider, useFormik } from 'formik';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { object, string } from 'yup';
 import * as z from 'zod';
 import { Alert, Modal } from 'antd';
 import { ArrowLeftIcon, CheckCircleIcon } from '@heroicons/react/outline';
-import { TooltipProvider } from '@radix-ui/react-tooltip';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
@@ -66,28 +50,6 @@ const CompleteProfile = () => {
     STEP_FIELD_MAP[2] = ['fields', 'offers', 'bookingUrl'];
     STEP_FIELD_MAP[3] = ['location', 'github', 'linkedin'];
   } else STEP_FIELD_MAP[2] = ['location', 'github', 'linkedin'];
-
-  const validationSchema = object().shape({
-    role: string().required(),
-    name: string().required(),
-    gender: string().required(),
-    description: string().required(),
-    schoolName: string()
-      .max(50, 'Tên trường học không được dài quá 50 ký tự')
-      .required(),
-    major: string()
-      .max(50, 'Tên ngành học không được dài quá 50 ký tự')
-      .required(),
-    title: string()
-      .max(50, 'Tên công ty không được dài quá 50 ký tự')
-      .required(),
-    workplace: string()
-      .max(50, 'Tên công việc không được dài quá 50 ký tự')
-      .required(),
-    location: string().required(),
-    github: string(),
-    linkedin: string(),
-  });
 
   const formInitialValuesWithoutMentorFields = {
     role: 'Mentee',
@@ -130,25 +92,6 @@ const CompleteProfile = () => {
       setErrorMessage(errorMessage);
     }
   };
-
-  const formik = useFormik({
-    initialValues: formInitialValues,
-    enableReinitialize: true,
-    initialTouched: {
-      role: true,
-    },
-    validationSchema,
-    onSubmit: async values => {
-      try {
-        setErrorMessage('');
-
-        setIsProfileSuccessfullyUpdatedModalOpen(true);
-      } catch (error) {
-        const errorMessage = getErrorMessage(error);
-        setErrorMessage(errorMessage);
-      }
-    },
-  });
 
   const shouldDisableButtonNextStep = () => {
     const {
@@ -218,9 +161,7 @@ const CompleteProfile = () => {
                 {currentFillingStep === 1 && <Step1InputPack />}
 
                 {currentFillingStep === 2 &&
-                  currentUserRole === USER_ROLE.MENTOR && (
-                    <MentorInputPack setFieldValue={formik.setFieldValue} />
-                  )}
+                  currentUserRole === USER_ROLE.MENTOR && <MentorInputPack />}
 
                 {currentFillingStep === MAX_FILLING_STEPS && <Step2InputPack />}
               </form>
@@ -256,7 +197,7 @@ const CompleteProfile = () => {
                   <ArrowLeftIcon width={24} height={24} />
                 )}
               </Button>
-              {formik.isSubmitting ? (
+              {form.formState.isSubmitting ? (
                 <div className="w-full flex justify-center items-center">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black" />
                 </div>
@@ -265,11 +206,11 @@ const CompleteProfile = () => {
                   // className="w-full h-[42px] rounded-lg text-heading-sm disabled:bg-primary-800/40 disabled:border-primary-800/40"
                   className="w-full h-[42px] text-[16px]"
                   type="submit"
-                  onClick={async () => {
-                    if (currentFillingStep < MAX_FILLING_STEPS)
-                      setCurrentFillingStep(currentFillingStep + 1);
-                    else await formik.submitForm();
-                  }}
+                  // onClick={async () => {
+                  //   if (currentFillingStep < MAX_FILLING_STEPS)
+                  //     setCurrentFillingStep(currentFillingStep + 1);
+                  //   else await formik.submitForm();
+                  // }}
                   disabled={shouldDisableButtonNextStep()}
                 >
                   Tiếp tục
