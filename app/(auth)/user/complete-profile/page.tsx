@@ -206,11 +206,11 @@ const CompleteProfile = () => {
                   // className="w-full h-[42px] rounded-lg text-heading-sm disabled:bg-primary-800/40 disabled:border-primary-800/40"
                   className="w-full h-[42px] text-[16px]"
                   type="submit"
-                  // onClick={async () => {
-                  //   if (currentFillingStep < MAX_FILLING_STEPS)
-                  //     setCurrentFillingStep(currentFillingStep + 1);
-                  //   else await formik.submitForm();
-                  // }}
+                  onClick={async () => {
+                    if (currentFillingStep < MAX_FILLING_STEPS)
+                      setCurrentFillingStep(currentFillingStep + 1);
+                    // else await formik.submitForm();
+                  }}
                   disabled={shouldDisableButtonNextStep()}
                 >
                   Tiếp tục

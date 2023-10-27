@@ -13,6 +13,7 @@ import { useFormContext } from 'react-hook-form';
 import * as z from 'zod';
 
 export * from './step-0-pack';
+export * from './step-1-pack';
 
 export const formSchema = z.object({
   role: z.enum([USER_ROLE.MENTEE, USER_ROLE.MENTOR]),
@@ -70,30 +71,6 @@ export const RoleChoosingInputPack = () => {
     </section>
   );
 };
-
-export const Step1InputPack = () => (
-  <>
-    <Field
-      name="schoolName"
-      label="Tên trường học"
-      tooltipText="Mentor có thể là tiền bối của bạn đấy!"
-      as={FormikInput}
-    />
-    <Field name="major" label="Chuyên ngành" as={FormikInput} />
-    <Field
-      name="title"
-      label="Công việc hiện tại"
-      placeholder="Sinh viên, Software engineer, etc."
-      as={FormikInput}
-    />
-    <Field
-      name="workplace"
-      label="Nơi làm việc"
-      placeholder="PIF Network, etc."
-      as={FormikInput}
-    />
-  </>
-);
 
 export const MentorInputPack = () => (
   <>
