@@ -33,7 +33,6 @@ export const Step0InputPack = () => (
     <FormField
       name="gender"
       render={({ field }) => {
-        console.log(field);
         return (
           <FormItem defaultValue={field.value}>
             <InputLabel name={field.name} />
@@ -60,7 +59,5 @@ export const Step0InputPack = () => (
         );
       }}
     />
-    {/* <FormikSelect name="gender" /> */}
-    {/* <FormikInput name="description" type="text-area" /> */}
   </>
 );

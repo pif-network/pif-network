@@ -36,10 +36,12 @@ const CompleteProfile = () => {
   ] = useState(false);
 
   // TODO: Well, fix this.
-  const currentUserRole = 'Mentor';
-  const MAX_FILLING_STEPS = currentUserRole === USER_ROLE.MENTOR ? 3 : 2;
+  const MAX_FILLING_STEPS = {
+    [USER_ROLE.MENTEE]: 2,
+    [USER_ROLE.MENTOR]: 3,
+  };
 
-  const formInitialValuesWithoutMentorFields = {
+  const formInitialValues = {
     role: 'Mentee',
     name: '',
     gender: 'male',
@@ -51,17 +53,10 @@ const CompleteProfile = () => {
     location: '',
     github: '',
     linkedin: '',
+    fields: [] as string[],
+    offers: [] as string[],
+    bookingUrl: '',
   } as const;
-
-  const formInitialValues =
-    currentUserRole === USER_ROLE.MENTOR
-      ? {
-          ...formInitialValuesWithoutMentorFields,
-          fields: [],
-          offers: [],
-          bookingUrl: '',
-        }
-      : formInitialValuesWithoutMentorFields;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -89,9 +84,8 @@ const CompleteProfile = () => {
   };
 
   if (watch.role === USER_ROLE.MENTOR) {
-    STEP_FIELD_MAP[2] = ['fields', 'offers', 'bookingUrl'];
-    STEP_FIELD_MAP[3] = ['location', 'github', 'linkedin'];
-  } else STEP_FIELD_MAP[2] = ['location', 'github', 'linkedin'];
+    STEP_FIELD_MAP[3] = ['fields', 'offers', 'bookingUrl'];
+  }
 
   const shouldDisableButtonNextStep = () => {
     const {
@@ -160,10 +154,10 @@ const CompleteProfile = () => {
 
                 {currentFillingStep === 1 && <Step1InputPack />}
 
-                {currentFillingStep === 2 &&
-                  watch.role === USER_ROLE.MENTOR && <MentorInputPack />}
-
                 {currentFillingStep === 2 && <Step2InputPack />}
+
+                {currentFillingStep === 3 &&
+                  watch.role === USER_ROLE.MENTOR && <MentorInputPack />}
               </form>
             </Form>
 
@@ -207,7 +201,7 @@ const CompleteProfile = () => {
                   className="w-full h-[42px] text-[16px]"
                   type="submit"
                   onClick={async () => {
-                    if (currentFillingStep < MAX_FILLING_STEPS)
+                    if (currentFillingStep < MAX_FILLING_STEPS[watch.role])
                       setCurrentFillingStep(currentFillingStep + 1);
                     // else await formik.submitForm();
                   }}

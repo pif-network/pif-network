@@ -15,6 +15,7 @@ import * as z from 'zod';
 export * from './step-0-pack';
 export * from './step-1-pack';
 export * from './step-2-pack';
+export * from './mentor-step-3-pack';
 
 export const formSchema = z.object({
   role: z.enum([USER_ROLE.MENTEE, USER_ROLE.MENTOR]),
@@ -72,33 +73,3 @@ export const RoleChoosingInputPack = () => {
     </section>
   );
 };
-
-export const MentorInputPack = () => (
-  <>
-    <Field
-      className="border-gray-400"
-      name="fields"
-      options={Object.entries(FIELD_METADATA).map(([key, data]) => ({
-        value: key,
-        label: data.displayName,
-      }))}
-      mode="multiple"
-      maxTagCount="responsive"
-      // onChange={(value: string) => setFieldValue('fields', value)}
-      as={FormikSelect}
-    />
-    <Field
-      className="border-gray-400"
-      name="offers"
-      options={Object.entries(OFFER_METADATA).map(([key, data]) => ({
-        value: key,
-        label: data.displayName,
-      }))}
-      mode="multiple"
-      maxTagCount="responsive"
-      // onChange={(value: string) => setFieldValue('offers', value)}
-      as={FormikSelect}
-    />
-    <Field name="bookingUrl" label="Booking url" as={FormikInput} />
-  </>
-);
