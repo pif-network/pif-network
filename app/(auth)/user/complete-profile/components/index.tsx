@@ -14,6 +14,7 @@ import * as z from 'zod';
 
 export * from './step-0-pack';
 export * from './step-1-pack';
+export * from './step-2-pack';
 
 export const formSchema = z.object({
   role: z.enum([USER_ROLE.MENTEE, USER_ROLE.MENTOR]),
@@ -99,28 +100,5 @@ export const MentorInputPack = () => (
       as={FormikSelect}
     />
     <Field name="bookingUrl" label="Booking url" as={FormikInput} />
-  </>
-);
-
-export const Step2InputPack = () => (
-  <>
-    <Field
-      name="location"
-      label="Thành phố của bạn"
-      tooltipText="Thêm sự kết nối, thêm chủ đề để trò chuyên, vẹn cả đôi bên!"
-      as={FormikInput}
-    />
-    <Field
-      name="github"
-      label="GitHub"
-      placeholder="https://github.com/shecodesvietnam"
-      as={FormikInput}
-    />
-    <Field
-      name="linkedin"
-      label="LinkedIn"
-      placeholder="https://linkedin.com/company/shecodesvietnam"
-      as={FormikInput}
-    />
   </>
 );

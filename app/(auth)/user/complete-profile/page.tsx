@@ -39,18 +39,6 @@ const CompleteProfile = () => {
   const currentUserRole = 'Mentor';
   const MAX_FILLING_STEPS = currentUserRole === USER_ROLE.MENTOR ? 3 : 2;
 
-  const STEP_FIELD_MAP: { [key: number]: string[] } = {
-    '-1': ['role'],
-    0: ['name', 'gender'],
-    1: ['schoolName', 'major', 'title', 'workplace'],
-    2: ['location', 'github', 'linkedin'],
-  };
-
-  if (currentUserRole === USER_ROLE.MENTOR) {
-    STEP_FIELD_MAP[2] = ['fields', 'offers', 'bookingUrl'];
-    STEP_FIELD_MAP[3] = ['location', 'github', 'linkedin'];
-  } else STEP_FIELD_MAP[2] = ['location', 'github', 'linkedin'];
-
   const formInitialValuesWithoutMentorFields = {
     role: 'Mentee',
     name: '',
@@ -92,6 +80,18 @@ const CompleteProfile = () => {
       setErrorMessage(errorMessage);
     }
   };
+
+  const STEP_FIELD_MAP: { [key: number]: string[] } = {
+    '-1': ['role'],
+    0: ['name', 'gender'],
+    1: ['schoolName', 'major', 'title', 'workplace'],
+    2: ['location', 'github', 'linkedin'],
+  };
+
+  if (watch.role === USER_ROLE.MENTOR) {
+    STEP_FIELD_MAP[2] = ['fields', 'offers', 'bookingUrl'];
+    STEP_FIELD_MAP[3] = ['location', 'github', 'linkedin'];
+  } else STEP_FIELD_MAP[2] = ['location', 'github', 'linkedin'];
 
   const shouldDisableButtonNextStep = () => {
     const {
@@ -161,9 +161,9 @@ const CompleteProfile = () => {
                 {currentFillingStep === 1 && <Step1InputPack />}
 
                 {currentFillingStep === 2 &&
-                  currentUserRole === USER_ROLE.MENTOR && <MentorInputPack />}
+                  watch.role === USER_ROLE.MENTOR && <MentorInputPack />}
 
-                {currentFillingStep === MAX_FILLING_STEPS && <Step2InputPack />}
+                {currentFillingStep === 2 && <Step2InputPack />}
               </form>
             </Form>
 
