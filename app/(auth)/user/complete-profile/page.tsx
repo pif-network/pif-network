@@ -203,7 +203,7 @@ const CompleteProfile = () => {
                   onClick={async () => {
                     if (currentFillingStep < MAX_FILLING_STEPS[watch.role])
                       setCurrentFillingStep(currentFillingStep + 1);
-                    // else await formik.submitForm();
+                    else await form.handleSubmit(onSubmit)();
                   }}
                   disabled={shouldDisableButtonNextStep()}
                 >
