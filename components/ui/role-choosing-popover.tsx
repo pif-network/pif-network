@@ -7,7 +7,9 @@ import {
   TooltipTrigger,
 } from '~/components/ui/tooltip';
 
-import { useFormikContext } from 'formik';
+import { Control, useFormContext, useWatch } from 'react-hook-form';
+import { FormSchema } from '~/app/(auth)/user/complete-profile/components';
+import { useState } from 'react';
 
 interface RoleChoosingPopoverProps {
   userType: UserRole;
@@ -26,13 +28,18 @@ const RoleChoosingPopoverContent = {
 };
 
 export default ({ userType }: RoleChoosingPopoverProps) => {
-  const formik = useFormikContext<{ role: string }>();
+  const form = useFormContext<FormSchema>();
+  const role = useWatch({
+    // <- This triggers re-renders.
+    name: 'role',
+  });
 
-  const shouldShrink = formik.values.role !== userType;
+  const shouldShrink = role !== userType;
 
   const handleOnClick = async () => {
-    formik.setFieldValue('role', userType);
-    await formik.setTouched({ role: true });
+    form.setValue('role', userType, {
+      shouldTouch: true,
+    });
   };
 
   return (

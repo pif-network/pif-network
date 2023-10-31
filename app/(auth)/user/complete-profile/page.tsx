@@ -1,6 +1,6 @@
 'use client';
 
-import { RefObject, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -9,26 +9,22 @@ import { getErrorMessage } from '~/lib/types/service';
 import { User, UserRole } from '~/lib/types/user';
 import { ChevronRight, Home } from '~/components/ui/svgs/Icons';
 import { INTERNAL_PATH, USER_ROLE } from '~/shared/constant';
-import {
-  Input as FormikInput,
-  Select as FormikSelect,
-  Button,
-  RoleChoosingPopover,
-} from '~/components/ui';
+import { Button, Form } from '~/components/ui';
 import {
   Step0InputPack,
   Step1InputPack,
   Step2InputPack,
   MentorInputPack,
   RoleChoosingInputPack,
+  formSchema,
 } from './components';
 
-import { Field, Form, FormikHelpers, FormikProvider, useFormik } from 'formik';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { object, string } from 'yup';
+import * as z from 'zod';
 import { Alert, Modal } from 'antd';
 import { ArrowLeftIcon, CheckCircleIcon } from '@heroicons/react/outline';
-import { TooltipProvider } from '@radix-ui/react-tooltip';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 
 const CompleteProfile = () => {
   const router = useRouter();
@@ -40,47 +36,15 @@ const CompleteProfile = () => {
   ] = useState(false);
 
   // TODO: Well, fix this.
-  const currentUserRole = 'Mentor';
-  const MAX_FILLING_STEPS = currentUserRole === USER_ROLE.MENTOR ? 3 : 2;
-
-  const STEP_FIELD_MAP: { [key: number]: string[] } = {
-    '-1': ['role'],
-    0: ['name', 'gender'],
-    1: ['schoolName', 'major', 'title', 'workplace'],
-    2: ['location', 'github', 'linkedin'],
+  const MAX_FILLING_STEPS = {
+    [USER_ROLE.MENTEE]: 2,
+    [USER_ROLE.MENTOR]: 3,
   };
 
-  if (currentUserRole === USER_ROLE.MENTOR) {
-    STEP_FIELD_MAP[2] = ['fields', 'offers', 'bookingUrl'];
-    STEP_FIELD_MAP[3] = ['location', 'github', 'linkedin'];
-  } else STEP_FIELD_MAP[2] = ['location', 'github', 'linkedin'];
-
-  const validationSchema = object().shape({
-    role: string().required(),
-    name: string().required(),
-    gender: string().required(),
-    description: string().required(),
-    schoolName: string()
-      .max(50, 'Tên trường học không được dài quá 50 ký tự')
-      .required(),
-    major: string()
-      .max(50, 'Tên ngành học không được dài quá 50 ký tự')
-      .required(),
-    title: string()
-      .max(50, 'Tên công ty không được dài quá 50 ký tự')
-      .required(),
-    workplace: string()
-      .max(50, 'Tên công việc không được dài quá 50 ký tự')
-      .required(),
-    location: string().required(),
-    github: string(),
-    linkedin: string(),
-  });
-
-  const formInitialValuesWithoutMentorFields = {
+  const formInitialValues = {
     role: 'Mentee',
     name: '',
-    gender: '',
+    gender: 'male',
     description: '',
     schoolName: '',
     major: '',
@@ -89,62 +53,59 @@ const CompleteProfile = () => {
     location: '',
     github: '',
     linkedin: '',
+    fields: [] as string[],
+    offers: [] as string[],
+    bookingUrl: '',
+  } as const;
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: formInitialValues,
+    mode: 'onChange',
+  });
+  const watch = form.watch();
+
+  const onSubmit = () => {
+    try {
+      setErrorMessage('');
+
+      setIsProfileSuccessfullyUpdatedModalOpen(true);
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      setErrorMessage(errorMessage);
+    }
   };
 
-  const formInitialValues =
-    currentUserRole === USER_ROLE.MENTOR
-      ? {
-          ...formInitialValuesWithoutMentorFields,
-          fields: [],
-          offers: [],
-          bookingUrl: '',
-        }
-      : formInitialValuesWithoutMentorFields;
+  const STEP_FIELD_MAP: { [key: number]: string[] } = {
+    '-1': ['role'],
+    0: ['name', 'gender'],
+    1: ['schoolName', 'major', 'title', 'workplace'],
+    2: ['location', 'github', 'linkedin'],
+  };
 
-  const formik = useFormik({
-    initialValues: formInitialValues,
-    enableReinitialize: true,
-    initialTouched: {
-      role: true,
-    },
-    validationSchema,
-    onSubmit: async values => {
-      try {
-        setErrorMessage('');
-
-        setIsProfileSuccessfullyUpdatedModalOpen(true);
-      } catch (error) {
-        const errorMessage = getErrorMessage(error);
-        setErrorMessage(errorMessage);
-      }
-    },
-  });
+  if (watch.role === USER_ROLE.MENTOR) {
+    STEP_FIELD_MAP[3] = ['fields', 'offers', 'bookingUrl'];
+  }
 
   const shouldDisableButtonNextStep = () => {
-    const { errors, touched, values } = formik;
+    const {
+      formState: { touchedFields, errors },
+    } = form;
+
+    console.log('touchedFields', touchedFields);
+    console.log('errors', errors);
+    console.log('watch', watch);
 
     const currentStepHasError = STEP_FIELD_MAP[currentFillingStep]?.some(
       field => Object.keys(errors).includes(field)
     );
-    const currentStepIsTouched = STEP_FIELD_MAP[currentFillingStep]?.some(
-      field => Object.keys(touched).includes(field)
+    const currentStepAllTouched = STEP_FIELD_MAP[currentFillingStep]?.every(
+      field => Object.keys(touchedFields).includes(field)
     );
 
-    console.log('v', values);
-    console.log('e', errors);
-    console.log('t', touched);
-    console.log('currentStepHasError', currentStepHasError);
-    console.log('currentStepIsTouched', currentStepIsTouched);
     console.log('--- ---');
 
-    return (
-      STEP_FIELD_MAP[currentFillingStep]?.some(field =>
-        Object.keys(errors).includes(field)
-      ) ||
-      !STEP_FIELD_MAP[currentFillingStep]?.some(field =>
-        Object.keys(touched).includes(field)
-      )
-    );
+    return currentStepHasError || !currentStepAllTouched;
   };
 
   const [formRef, _] = useAutoAnimate({});
@@ -172,8 +133,12 @@ const CompleteProfile = () => {
 
             <div className="mb-6" />
 
-            <FormikProvider value={formik}>
-              <Form ref={formRef} className="max-w-sm flex flex-col">
+            <Form {...form}>
+              <form
+                ref={formRef}
+                className="max-w-sm flex flex-col"
+                onSubmit={form.handleSubmit(onSubmit)}
+              >
                 {errorMessage && (
                   <Alert
                     className="mt-2 mb-6 font-manrope"
@@ -185,20 +150,16 @@ const CompleteProfile = () => {
 
                 {currentFillingStep === -1 && <RoleChoosingInputPack />}
 
-                {currentFillingStep === 0 && (
-                  <Step0InputPack setFieldValue={formik.setFieldValue} />
-                )}
+                {currentFillingStep === 0 && <Step0InputPack />}
 
                 {currentFillingStep === 1 && <Step1InputPack />}
 
-                {currentFillingStep === 2 &&
-                  currentUserRole === USER_ROLE.MENTOR && (
-                    <MentorInputPack setFieldValue={formik.setFieldValue} />
-                  )}
+                {currentFillingStep === 2 && <Step2InputPack />}
 
-                {currentFillingStep === MAX_FILLING_STEPS && <Step2InputPack />}
-              </Form>
-            </FormikProvider>
+                {currentFillingStep === 3 &&
+                  watch.role === USER_ROLE.MENTOR && <MentorInputPack />}
+              </form>
+            </Form>
 
             <div className="mb-6" />
 
@@ -230,7 +191,7 @@ const CompleteProfile = () => {
                   <ArrowLeftIcon width={24} height={24} />
                 )}
               </Button>
-              {formik.isSubmitting ? (
+              {form.formState.isSubmitting ? (
                 <div className="w-full flex justify-center items-center">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black" />
                 </div>
@@ -240,9 +201,9 @@ const CompleteProfile = () => {
                   className="w-full h-[42px] text-[16px]"
                   type="submit"
                   onClick={async () => {
-                    if (currentFillingStep < MAX_FILLING_STEPS)
+                    if (currentFillingStep < MAX_FILLING_STEPS[watch.role])
                       setCurrentFillingStep(currentFillingStep + 1);
-                    else await formik.submitForm();
+                    else await form.handleSubmit(onSubmit)();
                   }}
                   disabled={shouldDisableButtonNextStep()}
                 >

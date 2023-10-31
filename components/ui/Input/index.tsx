@@ -13,7 +13,6 @@ export interface InputProps
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
-    console.log('InputProps', props);
     return (
       <input
         className={twMerge(
