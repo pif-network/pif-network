@@ -16,7 +16,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <input
         className={twMerge(
-          'h-[42px] px-2 rounded-lg border border-gray-400 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black',
+          'h-10 px-2 rounded-lg border border-gray-400 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black',
           className
         )}
         type={type}

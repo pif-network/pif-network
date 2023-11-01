@@ -48,7 +48,7 @@ export const Step0InputPack = () => (
               }}
             >
               <FormControl>
-                <SelectTrigger>
+                <SelectTrigger className="h-10 text-button border-gray-400">
                   <SelectValue placeholder="Select your gender" />
                 </SelectTrigger>
               </FormControl>
