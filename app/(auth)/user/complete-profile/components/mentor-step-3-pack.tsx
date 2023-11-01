@@ -53,7 +53,11 @@ export const MentorInputPack = () => {
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
-                    <Button variant="outline" role="combobox">
+                    <Button
+                      variant="outline"
+                      role="combobox"
+                      className="flex h-10 w-full items-center justify-between font-regular rounded-md border border-gray-400 bg-transparent px-3 py-2 shadow-sm ring-offset-white focus:outline-none focus:ring-1 focus:ring-black disabled:cursor-not-allowed disabled:opacity-50"
+                    >
                       <span>
                         {computePlaceholderText(field.name, field.value)}
                       </span>
@@ -96,7 +100,11 @@ export const MentorInputPack = () => {
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
-                    <Button variant="outline" role="combobox">
+                    <Button
+                      variant="outline"
+                      role="combobox"
+                      className="flex h-10 w-full items-center justify-between font-regular rounded-md border border-gray-400 bg-transparent px-3 py-2 shadow-sm ring-offset-white focus:outline-none focus:ring-1 focus:ring-black disabled:cursor-not-allowed disabled:opacity-50"
+                    >
                       <span>
                         {computePlaceholderText(field.name, field.value)}
                       </span>
