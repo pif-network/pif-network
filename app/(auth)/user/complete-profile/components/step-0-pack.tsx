@@ -23,7 +23,15 @@ export const Step0InputPack = () => (
           <FormItem>
             <InputLabel name={field.name} />
             <FormControl>
-              <Input className="w-full" placeholder="edmondw" {...field} />
+              <Input
+                className="w-full"
+                placeholder="edmondw"
+                {...field}
+                onChange={e => {
+                  field.onChange(e);
+                  field.onBlur();
+                }}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>

@@ -6,6 +6,7 @@ import {
   Input,
   InputLabel,
 } from '~/components/ui';
+import { FormInput } from '.';
 
 export const Step1InputPack = () => (
   <>
@@ -19,7 +20,12 @@ export const Step1InputPack = () => (
               tooltipText="Mentor có thể là tiền bối của bạn đấy!"
             />
             <FormControl>
-              <Input className="w-full" placeholder="NEU" {...field} />
+              <FormInput
+                className="w-full"
+                placeholder="NEU"
+                formTriggerBlur={field.onBlur}
+                {...field}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -33,7 +39,12 @@ export const Step1InputPack = () => (
           <FormItem>
             <InputLabel name="Chuyên ngành" />
             <FormControl>
-              <Input className="w-full" placeholder="CS" {...field} />
+              <FormInput
+                className="w-full"
+                placeholder="CS"
+                formTriggerBlur={field.onBlur}
+                {...field}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -47,9 +58,10 @@ export const Step1InputPack = () => (
           <FormItem>
             <InputLabel name="Công việc hiện tại" />
             <FormControl>
-              <Input
+              <FormInput
                 className="w-full"
                 placeholder="Sinh viên, Software engineer, etc."
+                formTriggerBlur={field.onBlur}
                 {...field}
               />
             </FormControl>
@@ -65,9 +77,10 @@ export const Step1InputPack = () => (
           <FormItem>
             <InputLabel name="Nơi làm việc" />
             <FormControl>
-              <Input
+              <FormInput
                 className="w-full"
                 placeholder="PIF Network, etc."
+                formTriggerBlur={field.onBlur}
                 {...field}
               />
             </FormControl>
