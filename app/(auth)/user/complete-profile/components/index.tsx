@@ -1,3 +1,5 @@
+import { forwardRef } from 'react';
+
 import { UserRole } from '~/lib/types/user';
 import {
   FIELD_METADATA,
@@ -6,7 +8,8 @@ import {
   USER_ROLE,
 } from '~/shared/constant';
 import FormikSelect from '~/components/ui/Select';
-import { FormikInput, RoleChoosingPopover } from '~/components/ui';
+import { FormikInput, Input, RoleChoosingPopover } from '~/components/ui';
+import { twMerge } from '~/lib/utils';
 
 import { Field, FormikHelpers, useFormikContext } from 'formik';
 import { useFormContext } from 'react-hook-form';
@@ -73,3 +76,24 @@ export const RoleChoosingInputPack = () => {
     </section>
   );
 };
+
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  formTriggerBlur: () => void;
+}
+
+export const FormInput = forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, formTriggerBlur, ...props }, ref) => {
+    return (
+      <Input
+        className={className}
+        ref={ref}
+        {...props}
+        onChange={e => {
+          props.onChange?.(e);
+          formTriggerBlur();
+        }}
+      />
+    );
+  }
+);
+FormInput.displayName = 'Input';
