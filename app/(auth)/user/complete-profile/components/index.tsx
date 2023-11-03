@@ -1,17 +1,8 @@
 import { forwardRef } from 'react';
 
-import { UserRole } from '~/lib/types/user';
-import {
-  FIELD_METADATA,
-  GENDER_OPTION,
-  OFFER_METADATA,
-  USER_ROLE,
-} from '~/shared/constant';
-import FormikSelect from '~/components/ui/Select';
-import { FormikInput, Input, RoleChoosingPopover } from '~/components/ui';
-import { twMerge } from '~/lib/utils';
+import { GENDER_OPTION, USER_ROLE } from '~/shared/constant';
+import { Input, RoleChoosingPopover } from '~/components/ui';
 
-import { Field, FormikHelpers, useFormikContext } from 'formik';
 import { useFormContext } from 'react-hook-form';
 import * as z from 'zod';
 
@@ -42,8 +33,6 @@ export const formSchema = z.object({
 });
 
 export type FormSchema = z.infer<typeof formSchema>;
-
-type EmptyRecord = Record<string, never>;
 
 export const RoleChoosingInputPack = () => {
   const RoleDescription = {
