@@ -105,6 +105,8 @@ const CompleteProfile = () => {
 
     console.log('--- ---');
 
+    if (currentFillingStep === -1) return false;
+
     return currentStepHasError || !currentStepAllTouched;
   };
 
