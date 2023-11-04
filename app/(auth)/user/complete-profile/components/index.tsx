@@ -1,14 +1,8 @@
-import { UserRole } from '~/lib/types/user';
-import {
-  FIELD_METADATA,
-  GENDER_OPTION,
-  OFFER_METADATA,
-  USER_ROLE,
-} from '~/shared/constant';
-import FormikSelect from '~/components/ui/Select';
-import { FormikInput, RoleChoosingPopover } from '~/components/ui';
+import { forwardRef } from 'react';
 
-import { Field, FormikHelpers, useFormikContext } from 'formik';
+import { GENDER_OPTION, USER_ROLE } from '~/shared/constant';
+import { Input, RoleChoosingPopover } from '~/components/ui';
+
 import { useFormContext } from 'react-hook-form';
 import * as z from 'zod';
 
@@ -39,8 +33,6 @@ export const formSchema = z.object({
 });
 
 export type FormSchema = z.infer<typeof formSchema>;
-
-type EmptyRecord = Record<string, never>;
 
 export const RoleChoosingInputPack = () => {
   const RoleDescription = {
@@ -73,3 +65,24 @@ export const RoleChoosingInputPack = () => {
     </section>
   );
 };
+
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  formTriggerBlur: () => void;
+}
+
+export const FormInput = forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, formTriggerBlur, ...props }, ref) => {
+    return (
+      <Input
+        className={className}
+        ref={ref}
+        {...props}
+        onChange={e => {
+          props.onChange?.(e);
+          formTriggerBlur();
+        }}
+      />
+    );
+  }
+);
+FormInput.displayName = 'FormInput';

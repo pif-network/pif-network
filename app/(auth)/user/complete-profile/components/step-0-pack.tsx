@@ -4,7 +4,6 @@ import {
   FormField,
   FormItem,
   FormMessage,
-  Input,
   InputLabel,
   Select,
   SelectContent,
@@ -12,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui';
+import { FormInput } from '.';
 import { GENDER_OPTION } from '~/shared/constant';
 
 export const Step0InputPack = () => (
@@ -23,7 +23,12 @@ export const Step0InputPack = () => (
           <FormItem>
             <InputLabel name={field.name} />
             <FormControl>
-              <Input className="w-full" placeholder="edmondw" {...field} />
+              <FormInput
+                className="w-full"
+                placeholder="edmondw"
+                formTriggerBlur={field.onBlur}
+                {...field}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>

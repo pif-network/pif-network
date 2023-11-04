@@ -3,9 +3,9 @@ import {
   FormField,
   FormItem,
   FormMessage,
-  Input,
   InputLabel,
 } from '~/components/ui';
+import { FormInput } from '.';
 
 export const Step2InputPack = () => (
   <>
@@ -19,9 +19,10 @@ export const Step2InputPack = () => (
               tooltipText="Thêm sự kết nối, thêm chủ đề để trò chuyên, vẹn cả đôi bên!"
             />
             <FormControl>
-              <Input
+              <FormInput
                 className="w-full"
                 placeholder="Hà Nội, Hồ Chí Minh, etc."
+                formTriggerBlur={field.onBlur}
                 {...field}
               />
             </FormControl>
@@ -37,9 +38,10 @@ export const Step2InputPack = () => (
           <FormItem>
             <InputLabel name="GitHub URL" />
             <FormControl>
-              <Input
+              <FormInput
                 className="w-full"
                 placeholder="https://github.com/pif-network/pif-network"
+                formTriggerBlur={field.onBlur}
                 {...field}
               />
             </FormControl>
@@ -55,9 +57,10 @@ export const Step2InputPack = () => (
           <FormItem>
             <InputLabel name="LinkedIn URL" />
             <FormControl>
-              <Input
+              <FormInput
                 className="w-full"
                 placeholder="https://linkedin.com/company/shecodesvietnam"
+                formTriggerBlur={field.onBlur}
                 {...field}
               />
             </FormControl>

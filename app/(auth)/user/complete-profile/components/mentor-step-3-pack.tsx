@@ -9,12 +9,12 @@ import {
   FormField,
   FormItem,
   FormMessage,
-  Input,
   InputLabel,
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '~/components/ui';
+import { FormInput } from '.';
 import { FIELD_METADATA, OFFER_METADATA } from '~/shared/constant';
 
 import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons';
@@ -130,7 +130,6 @@ export const MentorInputPack = () => {
           );
         }}
       />
-
       <FormField
         name="bookingUrl"
         render={({ field }) => {
@@ -138,9 +137,10 @@ export const MentorInputPack = () => {
             <FormItem>
               <InputLabel name="Booking URL" />
               <FormControl>
-                <Input
+                <FormInput
                   className="w-full"
                   placeholder="https://calendly.com"
+                  formTriggerBlur={field.onBlur}
                   {...field}
                 />
               </FormControl>
