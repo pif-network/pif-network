@@ -22,7 +22,8 @@ import {
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import * as z from 'zod';
 import { Alert, Modal } from 'antd';
-import { ArrowLeftIcon, CheckCircleIcon } from '@heroicons/react/outline';
+import { CheckCircleIcon } from '@heroicons/react/outline';
+import { ArrowLeftIcon } from '@radix-ui/react-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
@@ -180,17 +181,18 @@ const CompleteProfile = () => {
 
             <div className="w-full flex gap-4">
               <Button
-                className="h-[42px] border-primary-900/60"
+                className="group h-[42px] border-primary-900/60"
                 variant="outline"
                 onClick={() => {
-                  if (currentFillingStep === 0) return;
+                  if (currentFillingStep === -1) return;
                   else setCurrentFillingStep(currentFillingStep - 1);
                 }}
+                disabled={currentFillingStep === -1}
               >
-                {currentFillingStep === 0 ? (
-                  ''
+                {currentFillingStep === -1 ? (
+                  <ArrowLeftIcon className="w-5 h-5 text-gray-600" />
                 ) : (
-                  <ArrowLeftIcon width={24} height={24} />
+                  <ArrowLeftIcon className="w-5 h-5 text-gray-600 transition group-hover:-translate-x-[2px] group-hover:text-gray-700" />
                 )}
               </Button>
               {form.formState.isSubmitting ? (
