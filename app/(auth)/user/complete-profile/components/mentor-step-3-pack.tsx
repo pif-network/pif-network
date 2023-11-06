@@ -21,10 +21,10 @@ import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons';
 import { useFieldArray } from 'react-hook-form';
 
 export const MentorInputPack = () => {
-  const { append: appendFields } = useFieldArray({
+  const { append: appendFields, remove: removeFields } = useFieldArray({
     name: 'fields',
   });
-  const { append: appendOffers } = useFieldArray({
+  const { append: appendOffers, remove: removeOffers } = useFieldArray({
     name: 'offers',
   });
 
@@ -94,13 +94,22 @@ export const MentorInputPack = () => {
                         <CommandItem
                           key={key}
                           value={key}
+                          className="justify-between"
                           onSelect={() => {
-                            appendFields(key.toLowerCase());
-                            field.onBlur(); // Make the field touched.
+                            if (field.value.includes(key.toLowerCase())) {
+                              removeFields(
+                                field.value.indexOf(key.toLowerCase())
+                              );
+                            } else {
+                              appendFields(key.toLowerCase());
+                              field.onBlur(); // Make the field touched.
+                            }
                           }}
                         >
                           {f.displayName}
-                          <CheckIcon className="h-4 w-4" />
+                          {field.value.includes(key.toLowerCase()) && (
+                            <CheckIcon className="h-4 w-4" />
+                          )}
                         </CommandItem>
                       ))}
                     </CommandGroup>
@@ -141,13 +150,22 @@ export const MentorInputPack = () => {
                         <CommandItem
                           key={key}
                           value={key}
+                          className="justify-between"
                           onSelect={() => {
-                            appendOffers(key.toLowerCase());
-                            field.onBlur(); // Make the field touched.
+                            if (field.value.includes(key.toLowerCase())) {
+                              removeOffers(
+                                field.value.indexOf(key.toLowerCase())
+                              );
+                            } else {
+                              appendOffers(key.toLowerCase());
+                              field.onBlur(); // Make the field touched.
+                            }
                           }}
                         >
                           {f.displayName}
-                          <CheckIcon className="h-4 w-4" />
+                          {field.value.includes(key.toLowerCase()) && (
+                            <CheckIcon className="h-4 w-4" />
+                          )}
                         </CommandItem>
                       ))}
                     </CommandGroup>
