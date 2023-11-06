@@ -33,9 +33,29 @@ export const MentorInputPack = () => {
 
     if (fields.length === 0) placeholderText = `Select your ${name}`;
     else if (fields.length === 1) {
-      placeholderText = fields[0]!;
+      if (name === 'fields')
+        placeholderText =
+          FIELD_METADATA[
+            fields[0]!.toUpperCase() as keyof typeof FIELD_METADATA
+          ].displayName;
+      else
+        placeholderText =
+          OFFER_METADATA[
+            fields[0]!.toUpperCase() as keyof typeof OFFER_METADATA
+          ].displayName;
     } else if (fields.length === 2) {
-      placeholderText = fields.join(', ');
+      placeholderText = fields
+        .map(field => {
+          if (name === 'fields')
+            return FIELD_METADATA[
+              field.toUpperCase() as keyof typeof FIELD_METADATA
+            ].displayName;
+          else
+            return OFFER_METADATA[
+              field.toUpperCase() as keyof typeof OFFER_METADATA
+            ].displayName;
+        })
+        .join(', ');
     } else if (fields.length > 2) {
       placeholderText = `${fields.length} items selected`;
     }
