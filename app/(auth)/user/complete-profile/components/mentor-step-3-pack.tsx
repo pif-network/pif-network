@@ -21,10 +21,10 @@ import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons';
 import { useFieldArray } from 'react-hook-form';
 
 export const MentorInputPack = () => {
-  const { append: appendFields } = useFieldArray({
+  const { append: appendFields, remove: removeFields } = useFieldArray({
     name: 'fields',
   });
-  const { append: appendOffers } = useFieldArray({
+  const { append: appendOffers, remove: removeOffers } = useFieldArray({
     name: 'offers',
   });
 
@@ -33,9 +33,29 @@ export const MentorInputPack = () => {
 
     if (fields.length === 0) placeholderText = `Select your ${name}`;
     else if (fields.length === 1) {
-      placeholderText = fields[0]!;
+      if (name === 'fields')
+        placeholderText =
+          FIELD_METADATA[
+            fields[0]!.toUpperCase() as keyof typeof FIELD_METADATA
+          ].displayName;
+      else
+        placeholderText =
+          OFFER_METADATA[
+            fields[0]!.toUpperCase() as keyof typeof OFFER_METADATA
+          ].displayName;
     } else if (fields.length === 2) {
-      placeholderText = fields.join(', ');
+      placeholderText = fields
+        .map(field => {
+          if (name === 'fields')
+            return FIELD_METADATA[
+              field.toUpperCase() as keyof typeof FIELD_METADATA
+            ].displayName;
+          else
+            return OFFER_METADATA[
+              field.toUpperCase() as keyof typeof OFFER_METADATA
+            ].displayName;
+        })
+        .join(', ');
     } else if (fields.length > 2) {
       placeholderText = `${fields.length} items selected`;
     }
@@ -53,7 +73,11 @@ export const MentorInputPack = () => {
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
-                    <Button variant="outline" role="combobox">
+                    <Button
+                      variant="outline"
+                      role="combobox"
+                      className="flex h-10 w-full items-center justify-between font-regular rounded-md border border-gray-400 bg-transparent px-3 py-2 shadow-sm ring-offset-white focus:outline-none focus:ring-1 focus:ring-black disabled:cursor-not-allowed disabled:opacity-50"
+                    >
                       <span>
                         {computePlaceholderText(field.name, field.value)}
                       </span>
@@ -70,13 +94,22 @@ export const MentorInputPack = () => {
                         <CommandItem
                           key={key}
                           value={key}
+                          className="justify-between"
                           onSelect={() => {
-                            appendFields(key.toLowerCase());
-                            field.onBlur(); // Make the field touched.
+                            if (field.value.includes(key.toLowerCase())) {
+                              removeFields(
+                                field.value.indexOf(key.toLowerCase())
+                              );
+                            } else {
+                              appendFields(key.toLowerCase());
+                              field.onBlur(); // Make the field touched.
+                            }
                           }}
                         >
                           {f.displayName}
-                          <CheckIcon className="h-4 w-4" />
+                          {field.value.includes(key.toLowerCase()) && (
+                            <CheckIcon className="h-4 w-4" />
+                          )}
                         </CommandItem>
                       ))}
                     </CommandGroup>
@@ -96,7 +129,11 @@ export const MentorInputPack = () => {
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
-                    <Button variant="outline" role="combobox">
+                    <Button
+                      variant="outline"
+                      role="combobox"
+                      className="flex h-10 w-full items-center justify-between font-regular rounded-md border border-gray-400 bg-transparent px-3 py-2 shadow-sm ring-offset-white focus:outline-none focus:ring-1 focus:ring-black disabled:cursor-not-allowed disabled:opacity-50"
+                    >
                       <span>
                         {computePlaceholderText(field.name, field.value)}
                       </span>
@@ -113,13 +150,22 @@ export const MentorInputPack = () => {
                         <CommandItem
                           key={key}
                           value={key}
+                          className="justify-between"
                           onSelect={() => {
-                            appendOffers(key.toLowerCase());
-                            field.onBlur(); // Make the field touched.
+                            if (field.value.includes(key.toLowerCase())) {
+                              removeOffers(
+                                field.value.indexOf(key.toLowerCase())
+                              );
+                            } else {
+                              appendOffers(key.toLowerCase());
+                              field.onBlur(); // Make the field touched.
+                            }
                           }}
                         >
                           {f.displayName}
-                          <CheckIcon className="h-4 w-4" />
+                          {field.value.includes(key.toLowerCase()) && (
+                            <CheckIcon className="h-4 w-4" />
+                          )}
                         </CommandItem>
                       ))}
                     </CommandGroup>

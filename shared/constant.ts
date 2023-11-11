@@ -156,7 +156,7 @@ export const OFFER_METADATA = {
     tagColour: 'purple',
   },
   JOB_FINDING: {
-    displayName: 'Job-finding',
+    displayName: 'Job Finding',
     tagColour: 'red',
   },
   INTERVIEW_PREP: {
@@ -164,7 +164,7 @@ export const OFFER_METADATA = {
     tagColour: 'prussian',
   },
   RESUME_REVIEW: {
-    displayName: 'Resume review',
+    displayName: 'Resume Review',
     tagColour: 'cyan',
   },
 } as const;
