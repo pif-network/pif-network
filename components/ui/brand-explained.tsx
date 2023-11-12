@@ -6,8 +6,42 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 import talk from '~/public/talk.png';
+import {
+  SnapTileBackground,
+  SnapTile,
+  SnapTileWrapper,
+  SnapTileContent,
+} from './snap-tile';
 
 const BrandExplained = () => {
+  return (
+    <SnapTileWrapper numberOfTiles={3}>
+      <SnapTileBackground>Hi</SnapTileBackground>
+      <SnapTileContent>
+        <SnapTile
+          currentTile={0}
+          render={progress => {
+            return <span>Foo {progress}</span>;
+          }}
+        />
+        <SnapTile
+          currentTile={1}
+          render={progress => {
+            return <span>Fo {progress}</span>;
+          }}
+        />
+        <SnapTile
+          currentTile={2}
+          render={progress => {
+            return <span>F {progress}</span>;
+          }}
+        />
+      </SnapTileContent>
+    </SnapTileWrapper>
+  );
+};
+
+const BrandExplainedd = () => {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,

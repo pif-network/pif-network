@@ -9,7 +9,7 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <ScrollObserver>{children}</ScrollObserver>
       <Footer />
     </>
