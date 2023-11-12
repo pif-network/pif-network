@@ -38,7 +38,13 @@ export const SnapTileWrapper = ({
 
   return (
     <SnapTileContext.Provider value={{ numberOfTiles, progress: currentTile }}>
-      <div ref={containerRef} className="relative bg-gray-600">
+      <div
+        ref={containerRef}
+        className="relative bg-gray-600"
+        style={{
+          height: numberOfTiles * 100 + 'vh',
+        }}
+      >
         {children}
       </div>
     </SnapTileContext.Provider>
