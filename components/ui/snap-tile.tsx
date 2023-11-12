@@ -64,17 +64,17 @@ export const SnapTileContent = ({
 };
 
 interface SnapTileProps {
-  currentTile: number;
+  tileNumber: number;
   render: (progress: number) => React.ReactNode;
 }
 
-export const SnapTile = ({ currentTile, render }: SnapTileProps) => {
+export const SnapTile = ({ tileNumber, render }: SnapTileProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { numberOfTiles, progress } = useContext(SnapTileContext);
-  const currentTileProgress = Math.max(0, progress - currentTile);
+  const currentTileProgress = Math.max(0, progress - tileNumber);
 
   let opacity = Math.min(1, Math.max(0, currentTileProgress * 4));
-  if (currentTileProgress > 0.85 && currentTile < numberOfTiles - 1) {
+  if (currentTileProgress > 0.85 && tileNumber < numberOfTiles - 1) {
     opacity = Math.max(0, (1 - currentTileProgress) * 4);
   }
 

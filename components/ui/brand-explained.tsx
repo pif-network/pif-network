@@ -19,19 +19,19 @@ const BrandExplained = () => {
       <SnapTileBackground>Hi</SnapTileBackground>
       <SnapTileContent>
         <SnapTile
-          currentTile={0}
+          tileNumber={0}
           render={progress => {
             return <span>Foo {progress}</span>;
           }}
         />
         <SnapTile
-          currentTile={1}
+          tileNumber={1}
           render={progress => {
             return <span>Fo {progress}</span>;
           }}
         />
         <SnapTile
-          currentTile={2}
+          tileNumber={2}
           render={progress => {
             return <span>F {progress}</span>;
           }}
