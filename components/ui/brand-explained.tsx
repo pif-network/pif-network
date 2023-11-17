@@ -24,7 +24,7 @@ const BrandValueContainer = ({ children }: { children: React.ReactNode }) => {
 const BrandValueBackground = () => {
   return (
     <div className="sticky top-0 grid grid-cols-1 lg:grid-cols-2 w-full min-h-screen">
-      <div className="bg-primary-900 h-[30vh] lg:h-auto" />
+      <div className="m-2 bg-primary-900 h-[30vh] lg:h-auto rounded-lg" />
       <div className="bg-white h-[70vh] lg:min-h-screen" />
     </div>
   );
@@ -37,7 +37,7 @@ const BrandValueDescription = ({
   children: React.ReactNode;
   currentTileProgress: number;
 }) => {
-  let translateY = Math.max(0, 50 - currentTileProgress * 3 * 15);
+  let translateY = Math.max(0, 50 - currentTileProgress * 50);
   if (currentTileProgress > 0.85) {
     translateY = Math.max(-50, -(currentTileProgress - 0.85) * 2 * 50);
   }
@@ -61,7 +61,7 @@ const BrandValueIllustration = ({
   children: React.ReactNode;
   currentTileProgress: number;
 }) => {
-  let translateY = Math.max(-50, -(currentTileProgress - 0.5) * 2 * 50);
+  let translateY = Math.max(-50, -(currentTileProgress - 0.5) * 50);
 
   return (
     <div
@@ -127,6 +127,20 @@ const BrandExplained = () => {
                     <span className="inline-block">trò chuyện.</span>
                   </h2>
                 </BrandValueDescription>
+                <BrandValueIllustration currentTileProgress={progress}>
+                  <Image
+                    className="max-w-sm"
+                    src={talk}
+                    alt="Talking at PIF."
+                    sizes="(max-width: 500px) 100vw, 50vw"
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                    }}
+                    width={300}
+                    height={400}
+                  />
+                </BrandValueIllustration>
               </BrandValueContainer>
             );
           }}
@@ -142,6 +156,20 @@ const BrandExplained = () => {
                     <span className="inline-block">trò chuyện.</span>
                   </h2>
                 </BrandValueDescription>
+                <BrandValueIllustration currentTileProgress={progress}>
+                  <Image
+                    className="max-w-sm"
+                    src={talk}
+                    alt="Talking at PIF."
+                    sizes="(max-width: 500px) 100vw, 50vw"
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                    }}
+                    width={300}
+                    height={400}
+                  />
+                </BrandValueIllustration>
               </BrandValueContainer>
             );
           }}
