@@ -61,7 +61,7 @@ const BrandValueIllustration = ({
   children: React.ReactNode;
   currentTileProgress: number;
 }) => {
-  let translateY = Math.max(-50, -(currentTileProgress - 0.5) * 50);
+  const translateY = Math.max(-50, -(currentTileProgress - 0.5) * 50);
 
   return (
     <div
