@@ -1,9 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef } from 'react';
-
-import { motion, useScroll, useTransform } from 'framer-motion';
 
 import talk from '~/public/talk.png';
 import {
@@ -11,7 +8,7 @@ import {
   SnapTile,
   SnapTileWrapper,
   SnapTileContent,
-} from './snap-tile';
+} from '~/components/ui/snap-tile';
 
 const BrandValueContainer = ({ children }: { children: React.ReactNode }) => {
   return (
