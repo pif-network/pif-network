@@ -32,7 +32,7 @@ const HomePage: NextPage = () => {
         <title>Homepage</title>
       </Head>
 
-      <main className="overflow-hidden">
+      <main>
         <Hero />
 
         <section className="mx-4">
