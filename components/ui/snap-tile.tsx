@@ -1,6 +1,6 @@
 import { createContext, useContext, useRef } from 'react';
 
-import { ScrollContext } from '~/lib/scroll/scrollObserver';
+import { PositionContext } from '~/lib/contexts';
 
 interface Value {
   numberOfTiles: number;
@@ -19,7 +19,7 @@ export const SnapTileWrapper = ({
   children: React.ReactNode;
   numberOfTiles: number;
 }) => {
-  const { scrollY } = useContext(ScrollContext);
+  const { scrollY } = useContext(PositionContext);
   const containerRef = useRef<HTMLDivElement>(null);
   let currentTile = 0;
 

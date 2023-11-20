@@ -1,6 +1,6 @@
 'use client';
 
-import { HTMLAttributes, useEffect, useState } from 'react';
+import { HTMLAttributes, useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 import { ChevronRight } from '~/components/ui/svgs/Icons';
 import { Button } from '~/components/ui';
 import { INTERNAL_PATH } from '~/shared/constant';
+import { twMerge } from '~/lib/utils';
+import { PositionContext } from '~/lib/contexts';
 
 import { MenuIcon } from '@heroicons/react/outline';
 import { UserButton } from '@clerk/nextjs';
@@ -47,6 +49,7 @@ const NavLink = ({ children, href, mobile, ...others }: NavLinkProps) => {
 
 const NavBar = () => {
   const [hasAutheticated, setHasAuthenticated] = useState(false);
+  const { navBar } = useContext(PositionContext);
 
   const router = useRouter();
 
@@ -55,8 +58,10 @@ const NavBar = () => {
 
   return (
     <header
-      className="w-full max-w-7xl fixed flex justify-between items-center
-        py-4 md:py-2 px-5 md:px-12 1hxl:mx-auto z-20 bg-white"
+      className={twMerge(
+        'w-full max-w-7xl fixed flex justify-between items-center py-4 md:py-2 px-5 md:px-12 1hxl:mx-auto z-20 bg-white',
+        navBar.shouldHide && 'hidden'
+      )}
     >
       <section className="flex flex-row items-end">
         <Link href="/">
