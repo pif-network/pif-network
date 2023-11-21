@@ -8,16 +8,25 @@ import {
   useState,
 } from 'react';
 
-interface ScrollValue {
+export const ScrollDirection = {
+  UP: 'UP',
+  DOWN: 'DOWN',
+} as const;
+
+type TScrollDirection = (typeof ScrollDirection)[keyof typeof ScrollDirection];
+
+interface Value {
   scrollY: number;
+  scrollDirection: TScrollDirection;
   navBar: {
     shouldHide: boolean;
     setShouldHide?: (value: boolean) => void;
   };
 }
 
-export const PositionContext = createContext<ScrollValue>({
+export const PositionContext = createContext<Value>({
   scrollY: 0,
+  scrollDirection: ScrollDirection.DOWN,
   navBar: {
     shouldHide: false,
   },
@@ -26,10 +35,19 @@ export const PositionContext = createContext<ScrollValue>({
 export const PositionObserver = ({ children }: { children: ReactNode }) => {
   const [scrollY, setScrollY] = useState(0);
   const [shouldHideNavBar, setShouldHideNavBar] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState<TScrollDirection>(
+    ScrollDirection.DOWN
+  );
 
   const handleScroll = useCallback(() => {
+    if (window.scrollY > scrollY) {
+      setScrollDirection(ScrollDirection.DOWN);
+    } else {
+      setScrollDirection(ScrollDirection.UP);
+    }
+
     setScrollY(window.scrollY);
-  }, []);
+  }, [scrollY]);
 
   useEffect(() => {
     document.addEventListener('scroll', handleScroll, { passive: true });
@@ -43,9 +61,12 @@ export const PositionObserver = ({ children }: { children: ReactNode }) => {
     <PositionContext.Provider
       value={{
         scrollY,
+        scrollDirection,
         navBar: {
           shouldHide: shouldHideNavBar,
-          setShouldHide: setShouldHideNavBar,
+          setShouldHide: v => {
+            setShouldHideNavBar(v);
+          },
         },
       }}
     >
