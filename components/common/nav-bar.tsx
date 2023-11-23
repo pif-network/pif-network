@@ -58,10 +58,11 @@ const NavBar = () => {
 
   return (
     <header
-      className={twMerge(
-        'w-full max-w-7xl fixed flex justify-between items-center py-4 md:py-2 px-5 md:px-12 1hxl:mx-auto z-20 bg-white',
-        navBar.shouldHide && 'hidden'
-      )}
+      className="w-full max-w-7xl fixed flex justify-between items-center py-4 md:py-2 px-5 md:px-12 1hxl:mx-auto z-20 bg-white"
+      style={{
+        transform: navBar.shouldHide ? 'translateY(-100%)' : 'translateY(0)',
+        transition: 'transform 150ms ease-in-out',
+      }}
     >
       <section className="flex flex-row items-end">
         <Link href="/">
