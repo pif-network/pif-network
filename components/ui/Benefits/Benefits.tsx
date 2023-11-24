@@ -1,6 +1,6 @@
 import { useContext, useRef } from 'react';
 
-import { ScrollContext } from '~/lib/scroll/scrollObserver';
+import { PositionContext } from '~/lib/contexts';
 
 const textSectionOpacity = (progress: number, blockNumber: number) => {
   const currentProgress = progress - blockNumber;
@@ -10,7 +10,7 @@ const textSectionOpacity = (progress: number, blockNumber: number) => {
 };
 
 const Benefits = () => {
-  const { scrollY } = useContext(ScrollContext);
+  const { scrollY } = useContext(PositionContext);
   const ref = useRef<HTMLDivElement>(null);
 
   const numberOfBlocks = 3;

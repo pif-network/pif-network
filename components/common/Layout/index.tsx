@@ -1,17 +1,17 @@
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
 
-import {NavBar, Footer} from '~/components/common';
-import {ScrollObserver} from '~/lib/scroll';
+import { NavBar, Footer } from '~/components/common';
+import { PositionObserver } from '~/lib/contexts';
 
 interface LayoutProps {
   children: ReactNode;
 }
 
-const Layout = ({children}: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <NavBar />
-      <ScrollObserver>{children}</ScrollObserver>
+      <PositionObserver>{children}</PositionObserver>
       <Footer />
     </>
   );

@@ -1,6 +1,6 @@
-import { createContext, useContext, useRef } from 'react';
+import { createContext, useContext, useEffect, useRef } from 'react';
 
-import { ScrollContext } from '~/lib/scroll/scrollObserver';
+import { PositionContext, ScrollDirection } from '~/lib/contexts';
 
 interface Value {
   numberOfTiles: number;
@@ -19,7 +19,8 @@ export const SnapTileWrapper = ({
   children: React.ReactNode;
   numberOfTiles: number;
 }) => {
-  const { scrollY } = useContext(ScrollContext);
+  const { scrollY, scrollDirection } = useContext(PositionContext);
+  const { navBar } = useContext(PositionContext);
   const containerRef = useRef<HTMLDivElement>(null);
   let currentTile = 0;
 
@@ -35,6 +36,24 @@ export const SnapTileWrapper = ({
 
     currentTile = percentScrolled * numberOfTiles;
   }
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const { clientHeight, offsetTop } = containerRef.current;
+
+      const scrollDownAndTouchTopEdge =
+        scrollDirection === ScrollDirection.DOWN &&
+        Math.abs(scrollY - offsetTop) < 90;
+      const scrollInside =
+        scrollY > offsetTop && scrollY < offsetTop + clientHeight;
+
+      if (scrollDownAndTouchTopEdge || scrollInside) {
+        navBar.setShouldHide?.(true);
+      } else {
+        navBar.setShouldHide?.(false);
+      }
+    }
+  });
 
   return (
     <SnapTileContext.Provider value={{ numberOfTiles, progress: currentTile }}>
