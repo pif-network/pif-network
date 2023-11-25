@@ -39,7 +39,7 @@ export const PositionObserver = ({ children }: { children: ReactNode }) => {
     ScrollDirection.DOWN
   );
 
-  const handleScroll = useCallback(() => {
+  const handleScroll = () => {
     if (window.scrollY > scrollY) {
       setScrollDirection(ScrollDirection.DOWN);
     } else {
@@ -47,7 +47,7 @@ export const PositionObserver = ({ children }: { children: ReactNode }) => {
     }
 
     setScrollY(window.scrollY);
-  }, [scrollY]);
+  };
 
   useEffect(() => {
     document.addEventListener('scroll', handleScroll, { passive: true });
@@ -55,7 +55,7 @@ export const PositionObserver = ({ children }: { children: ReactNode }) => {
     return () => {
       document.removeEventListener('scroll', handleScroll);
     };
-  }, [handleScroll]);
+  }, []);
 
   return (
     <PositionContext.Provider
