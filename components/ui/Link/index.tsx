@@ -1,67 +1,67 @@
-import { forwardRef, PropsWithChildren } from 'react'
-import NextLink, { LinkProps } from 'next/link'
+import { forwardRef, PropsWithChildren } from 'react';
+import NextLink, { LinkProps } from 'next/link';
 
-import type { ExternalHrefProps } from '~/lib/types'
+import type { ExternalHrefProps } from '~/lib/types';
 
 type Props = {
-	className?: string
-	newTab?: boolean
+  className?: string;
+  newTab?: boolean;
 } & ExternalHrefProps &
-	LinkProps
+  LinkProps;
 
 const Link = forwardRef<HTMLAnchorElement, PropsWithChildren<Props>>(
-	(
-		{
-			className,
-			newTab,
-			external,
-			href,
-			passHref,
-			prefetch,
-			replace,
-			scroll,
-			shallow,
-			locale,
-			children,
-			...others
-		},
-		ref,
-	) => {
-		if (external) {
-			return (
-				<a
-					className={className}
-					href={href as string}
-					ref={ref}
-					rel={'noreferrer'}
-					target={newTab ? '_blank' : undefined}
-					{...others}
-				>
-					{children}
-				</a>
-			)
-		}
+  (
+    {
+      className,
+      newTab,
+      external,
+      href,
+      passHref,
+      prefetch,
+      replace,
+      scroll,
+      shallow,
+      locale,
+      children,
+      ...others
+    },
+    ref
+  ) => {
+    if (external) {
+      console.log('className', className);
+      return (
+        <a
+          className={className}
+          href={href as string}
+          ref={ref}
+          rel={'noreferrer'}
+          target={newTab ? '_blank' : undefined}
+          {...others}
+        >
+          {children}
+        </a>
+      );
+    }
 
-		return (
-            <NextLink
-                href={href}
-                replace={replace}
-                scroll={scroll}
-                shallow={shallow}
-                locale={locale}
-                prefetch={prefetch}
-                passHref={passHref}
-                className={className}
-                ref={ref}
-                rel={'noreferrer'}
-                target={newTab ? '_blank' : undefined}
-                {...others}
-                legacyBehavior>
+    return (
+      <NextLink
+        href={href}
+        replace={replace}
+        scroll={scroll}
+        shallow={shallow}
+        locale={locale}
+        prefetch={prefetch}
+        passHref={passHref}
+        className={className}
+        ref={ref}
+        rel={'noreferrer'}
+        target={newTab ? '_blank' : undefined}
+        {...others}
+      >
         {children}
-			</NextLink>
-        );
-	},
-)
+      </NextLink>
+    );
+  }
+);
 
-export default Link
-
+export default Link;

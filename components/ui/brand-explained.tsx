@@ -9,6 +9,8 @@ import {
   SnapTileWrapper,
   SnapTileContent,
 } from '~/components/ui/snap-tile';
+import { Link } from '~/components/ui';
+import { ArrowRightIcon } from '@radix-ui/react-icons';
 
 const BrandValueContainer = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -21,7 +23,7 @@ const BrandValueContainer = ({ children }: { children: React.ReactNode }) => {
 const BrandValueBackground = () => {
   return (
     <div className="sticky top-0 grid grid-cols-1 lg:grid-cols-2 w-full min-h-screen">
-      <div className="m-2 bg-primary-900 h-[30vh] lg:h-auto rounded-lg" />
+      <div className="m-2 bg-primary-900 h-[30vh] lg:h-auto rounded-2xl" />
       <div className="bg-white h-[70vh] lg:min-h-screen" />
     </div>
   );
@@ -41,7 +43,7 @@ const BrandValueDescription = ({
 
   return (
     <div
-      className="h-[30vh] lg:h-auto flex-centre flex-col text-heading"
+      className="h-[30vh] lg:h-auto flex-centre flex-col text-heading gap-2"
       style={{
         transform: `translateY(${translateY}px)`,
       }}
@@ -91,9 +93,18 @@ const BrandExplained = () => {
                     Giá trị của sự trò chuyện.
                   </h3>
                   <p className="text-white text-[13px] font-manrope w-2/3 text-center leading-[initial]">
-                    Không phải ai sinh ra bẩm sinh là một mentor, cũng không
-                    phải sinh ra đều là mentee hợp cách.
+                    Lúc ban đầu, không phải tất cả seniors đều là mentor giỏi,
+                    và cũng không phải tất cả mentees đều là những người biết
+                    lắng nghe.
                   </p>
+                  <div className="mb-2" />
+                  <Link
+                    href="/"
+                    className="font-manrope font-regular italic text-gray-200 hover:text-white text-body-sm h flex-centre gap-1"
+                  >
+                    <ArrowRightIcon />
+                    Our culture
+                  </Link>
                 </BrandValueDescription>
                 <BrandValueIllustration currentTileProgress={progress}>
                   <Image
