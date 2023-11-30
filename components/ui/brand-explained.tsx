@@ -176,10 +176,26 @@ const BrandExplained = () => {
             return (
               <BrandValueContainer>
                 <BrandValueDescription currentTileProgress={progress}>
-                  <h2 className="font-lora font-bold text-white text-center text-[18px] w-[300px]">
-                    Giá trị của sự{' '}
-                    <span className="inline-block">trò chuyện.</span>
+                  <h2 className="-mt-10 font-lora font-bold text-white text-center text-[18px] w-[300px]">
+                    Your comfort area
                   </h2>
+                  <p className="text-white text-[13px] font-manrope w-3/4 text-center leading-[initial]">
+                    Toàn bộ{' '}
+                    <span className="inline-block font-bold">PIF Network</span>,
+                    đặc biệt là{' '}
+                    <span className="inline-block font-bold">PIF Connect</span>{' '}
+                    là responsive sandbox của bạn. Viết blog, phỏng vấn thử,
+                    interships, và thậm chí là cơ hội việc làm, tất cả đều đang
+                    cách bạn một lần click chuột và nhiều lần nỗ lực.
+                  </p>
+                  <div className="mb-2" />
+                  <Link
+                    href="/"
+                    className="font-manrope font-regular italic text-gray-200 hover:text-white text-body-sm h flex-centre gap-1"
+                  >
+                    <ArrowRightIcon />
+                    Start now!
+                  </Link>
                 </BrandValueDescription>
                 <BrandValueIllustration currentTileProgress={progress}>
                   <Image
