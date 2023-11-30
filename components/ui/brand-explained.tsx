@@ -90,7 +90,7 @@ const BrandExplained = () => {
               <BrandValueContainer>
                 <BrandValueDescription currentTileProgress={progress}>
                   <h3 className="font-lora font-bold text-white text-center text-[18px] w-[300px]">
-                    Giá trị của sự trò chuyện.
+                    Giá trị của sự trò chuyện
                   </h3>
                   <p className="text-white text-[13px] font-manrope w-2/3 text-center leading-[initial]">
                     Lúc ban đầu, không phải tất cả seniors đều là mentor giỏi,
@@ -131,9 +131,26 @@ const BrandExplained = () => {
               <BrandValueContainer>
                 <BrandValueDescription currentTileProgress={progress}>
                   <h2 className="font-lora font-bold text-white text-center text-[18px] w-[300px]">
-                    Giá trị của sự{' '}
-                    <span className="inline-block">trò chuyện.</span>
+                    &ldquo;Certified journey&rdquo;
                   </h2>
+                  <p className="text-white text-[13px] font-manrope w-3/4 text-center leading-[initial]">
+                    Trò chuyện cực kỳ có ích để chia sẻ và kết nối, nhưng đôi
+                    khi thứ thực sự hữu dụng với bạn sẽ phải chi tiết hơn như
+                    thế.{' '}
+                    <span className="inline-block font-bold">PIF Connect</span>,{' '}
+                    <span className="inline-block font-bold">PIF Dev Day</span>,
+                    và <span className="inline-block font-bold">PIF Blog</span>{' '}
+                    của chúng tôi là những công cụ hữu dụng nhất cho hành trình
+                    của bạn.
+                  </p>
+                  <div className="mb-2" />
+                  <Link
+                    href="/"
+                    className="font-manrope font-regular italic text-gray-200 hover:text-white text-body-sm h flex-centre gap-1"
+                  >
+                    <ArrowRightIcon />
+                    Our ecosystem
+                  </Link>
                 </BrandValueDescription>
                 <BrandValueIllustration currentTileProgress={progress}>
                   <Image
