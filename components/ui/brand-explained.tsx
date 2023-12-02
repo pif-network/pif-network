@@ -9,6 +9,8 @@ import {
   SnapTileWrapper,
   SnapTileContent,
 } from '~/components/ui/snap-tile';
+import { Link } from '~/components/ui';
+import { ArrowRightIcon } from '@radix-ui/react-icons';
 
 const BrandValueContainer = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -21,7 +23,7 @@ const BrandValueContainer = ({ children }: { children: React.ReactNode }) => {
 const BrandValueBackground = () => {
   return (
     <div className="sticky top-0 grid grid-cols-1 lg:grid-cols-2 w-full min-h-screen">
-      <div className="m-2 bg-primary-900 h-[30vh] lg:h-auto rounded-lg" />
+      <div className="m-2 bg-primary-900 h-[30vh] lg:h-auto rounded-2xl" />
       <div className="bg-white h-[70vh] lg:min-h-screen" />
     </div>
   );
@@ -41,7 +43,7 @@ const BrandValueDescription = ({
 
   return (
     <div
-      className="h-[30vh] lg:h-auto flex-centre flex-col text-heading"
+      className="h-[30vh] lg:h-auto flex-centre flex-col text-heading gap-2"
       style={{
         transform: `translateY(${translateY}px)`,
       }}
@@ -88,12 +90,21 @@ const BrandExplained = () => {
               <BrandValueContainer>
                 <BrandValueDescription currentTileProgress={progress}>
                   <h3 className="font-lora font-bold text-white text-center text-[18px] w-[300px]">
-                    Giá trị của sự trò chuyện.
+                    Giá trị của sự trò chuyện
                   </h3>
                   <p className="text-white text-[13px] font-manrope w-2/3 text-center leading-[initial]">
-                    Không phải ai sinh ra bẩm sinh là một mentor, cũng không
-                    phải sinh ra đều là mentee hợp cách.
+                    Lúc ban đầu, không phải tất cả seniors đều là mentor giỏi,
+                    và cũng không phải tất cả mentees đều là những người biết
+                    lắng nghe.
                   </p>
+                  <div className="mb-2" />
+                  <Link
+                    href="/"
+                    className="font-manrope font-regular italic text-gray-200 hover:text-white text-body-sm h flex-centre gap-1"
+                  >
+                    <ArrowRightIcon />
+                    Our culture
+                  </Link>
                 </BrandValueDescription>
                 <BrandValueIllustration currentTileProgress={progress}>
                   <Image
@@ -120,9 +131,26 @@ const BrandExplained = () => {
               <BrandValueContainer>
                 <BrandValueDescription currentTileProgress={progress}>
                   <h2 className="font-lora font-bold text-white text-center text-[18px] w-[300px]">
-                    Giá trị của sự{' '}
-                    <span className="inline-block">trò chuyện.</span>
+                    &ldquo;Certified journey&rdquo;
                   </h2>
+                  <p className="text-white text-[13px] font-manrope w-3/4 text-center leading-[initial]">
+                    Trò chuyện cực kỳ có ích để chia sẻ và kết nối, nhưng đôi
+                    khi thứ thực sự hữu dụng với bạn sẽ phải chi tiết hơn như
+                    thế.{' '}
+                    <span className="inline-block font-bold">PIF Connect</span>,{' '}
+                    <span className="inline-block font-bold">PIF Dev Day</span>,
+                    và <span className="inline-block font-bold">PIF Blog</span>{' '}
+                    của chúng tôi là những công cụ hữu dụng nhất cho hành trình
+                    của bạn.
+                  </p>
+                  <div className="mb-2" />
+                  <Link
+                    href="/"
+                    className="font-manrope font-regular italic text-gray-200 hover:text-white text-body-sm h flex-centre gap-1"
+                  >
+                    <ArrowRightIcon />
+                    Our ecosystem
+                  </Link>
                 </BrandValueDescription>
                 <BrandValueIllustration currentTileProgress={progress}>
                   <Image
@@ -148,10 +176,26 @@ const BrandExplained = () => {
             return (
               <BrandValueContainer>
                 <BrandValueDescription currentTileProgress={progress}>
-                  <h2 className="font-lora font-bold text-white text-center text-[18px] w-[300px]">
-                    Giá trị của sự{' '}
-                    <span className="inline-block">trò chuyện.</span>
+                  <h2 className="-mt-10 font-lora font-bold text-white text-center text-[18px] w-[300px]">
+                    Your comfort area
                   </h2>
+                  <p className="text-white text-[13px] font-manrope w-3/4 text-center leading-[initial]">
+                    Toàn bộ{' '}
+                    <span className="inline-block font-bold">PIF Network</span>,
+                    đặc biệt là{' '}
+                    <span className="inline-block font-bold">PIF Connect</span>{' '}
+                    là responsive sandbox của bạn. Viết blog, phỏng vấn thử,
+                    interships, và thậm chí là cơ hội việc làm, tất cả đều đang
+                    cách bạn một lần click chuột và nhiều lần nỗ lực.
+                  </p>
+                  <div className="mb-2" />
+                  <Link
+                    href="/"
+                    className="font-manrope font-regular italic text-gray-200 hover:text-white text-body-sm h flex-centre gap-1"
+                  >
+                    <ArrowRightIcon />
+                    Start now!
+                  </Link>
                 </BrandValueDescription>
                 <BrandValueIllustration currentTileProgress={progress}>
                   <Image
