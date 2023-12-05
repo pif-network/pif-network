@@ -22,9 +22,12 @@ import { MentorCard } from '~/components/mentor';
 import { FAQs } from '~/shared/constant';
 import { ChevronRight } from '~/components/ui/svgs/Icons';
 import joy from '~/public/joy.png';
+import { api } from '~/lib/trpc/client';
 
 const HomePage: NextPage = () => {
   const [mentors, setMentors] = useState<User<'Mentor'>[]>();
+  const t = api.tmp.isActive.useQuery();
+  console.log(t.data);
 
   return (
     <>
