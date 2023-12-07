@@ -1,18 +1,9 @@
-import { authMiddleware, withClerkMiddleware } from '@clerk/nextjs';
-import { NextResponse } from 'next/server';
+import { authMiddleware } from '@clerk/nextjs';
 
-// export default authMiddleware({
-//   publicRoutes: ['/', '/sso-callback', '/welcome', '/welcome-back'],
-//   ignoredRoutes: ['/((?!api|trpc))(_next.*|.+.[w]+$)'],
-// });
-
-export default withClerkMiddleware(() => {
-  NextResponse.next();
+export default authMiddleware({
+  publicRoutes: ['/', '/sso-callback', '/welcome', '/welcome-back'],
+  ignoredRoutes: ['/api/trpc/(.*)'],
 });
-
-// export const config = {
-//   matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
-// };
 
 export const config = {
   matcher: [
