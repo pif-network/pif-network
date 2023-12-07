@@ -29,18 +29,19 @@ model Offer {
 }
 
 model User {
-  clerkId     Int     @id @map("clerk_id")
+  clerkId     String     @id @map("clerk_id")
   name        String  @db.TinyText
-  gender      String  @db.TinyText
-  role        Role
-  description String
-  schoolName  String  @map("school_name")
-  major       String
-  title       String
-  workplace   String
-  githubUrl   String  @map("github_url")
-  linkedinUrl String  @map("linkedin_url")
-  bookingUrl  String  @map("booking_url")
+  email       String  @db.TinyText
+  gender      String?  @db.TinyText
+  role        Role?
+  description String?
+  schoolName  String?  @map("school_name")
+  major       String?
+  title       String?
+  workplace   String?
+  githubUrl   String?  @map("github_url")
+  linkedinUrl String?  @map("linkedin_url")
+  bookingUrl  String?  @map("booking_url")
   fields      Field[]
   offers      Offer[]
 }

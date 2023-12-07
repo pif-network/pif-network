@@ -1,7 +1,13 @@
 import { authMiddleware } from '@clerk/nextjs';
 
 export default authMiddleware({
-  publicRoutes: ['/', '/sso-callback', '/welcome', '/welcome-back'],
+  publicRoutes: [
+    '/',
+    '/sso-callback',
+    '/welcome',
+    '/welcome-back',
+    '/api/webhook',
+  ],
   ignoredRoutes: ['/api/trpc/(.*)'],
 });
 

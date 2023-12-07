@@ -2,6 +2,7 @@ import { headers } from 'next/headers';
 
 import { WebhookEvent } from '@clerk/nextjs/server';
 import { Webhook } from 'svix';
+import { db } from '~/server/db';
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -52,6 +53,39 @@ export async function POST(req: Request) {
   // Get the ID and type
   const { id } = evt.data;
   const eventType = evt.type;
+
+  switch (eventType) {
+    case 'user.created':
+      const r = await db.user.create({
+        data: {
+          clerkId: id!,
+          name: evt.data.first_name + ' ' + evt.data.last_name,
+          // User can only register using oauth or email.
+          /* eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain */
+          email: evt.data.email_addresses[0]?.email_address!,
+        },
+      });
+      console.log('created user', r);
+      break;
+
+    case 'user.updated':
+    case 'user.deleted':
+    case 'session.created':
+    case 'session.ended':
+    case 'session.removed':
+    case 'session.revoked':
+    case 'email.created':
+    case 'sms.created':
+    case 'organization.created':
+    case 'organization.updated':
+    case 'organization.deleted':
+    case 'organizationMembership.created':
+    case 'organizationMembership.deleted':
+    case 'organizationMembership.updated':
+    case 'organizationInvitation.accepted':
+    case 'organizationInvitation.created':
+    case 'organizationInvitation.revoked':
+  }
 
   console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
   console.log('Webhook body:', body);
