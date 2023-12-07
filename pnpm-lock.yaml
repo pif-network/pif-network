@@ -62,6 +62,9 @@ dependencies:
   '@trpc/server':
     specifier: ^10.44.1
     version: 10.44.1
+  '@vercel/speed-insights':
+    specifier: ^1.0.0
+    version: 1.0.0
   antd:
     specifier: 4.24.10
     version: 4.24.10(react-dom@18.2.0)(react@18.2.0)
@@ -1907,6 +1910,11 @@ packages:
       '@typescript-eslint/types': 5.62.0
       eslint-visitor-keys: 3.4.3
     dev: true
+
+  /@vercel/speed-insights@1.0.0:
+    resolution: {integrity: sha512-5blmCVGGPn+3BqwBPb1jc3OnzRozNuLgJVr7xH6XjxCTvocs7z/Bml7lo+JzLKUXR1Q35qI/PlEllmNbZmP9Ew==}
+    requiresBuild: true
+    dev: false
 
   /@xobotyi/scrollbar-width@1.9.5:
     resolution: {integrity: sha512-N8tkAACJx2ww8vFMneJmaAgmjAG1tnVBZJRLRcx061tmsLRZHSEZSLuGWnwPtunsSLvSqXQ2wfp7Mgqg1I+2dQ==}

@@ -1,6 +1,7 @@
 import '../assets/style/main.css';
 
 import type { Metadata } from 'next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import { TooltipProvider } from '~/components/ui/tooltip';
 import { TRPCProvider } from '~/lib/trpc/client';
@@ -17,7 +18,10 @@ export default function RootLayout({
       <TRPCProvider>
         <TooltipProvider>
           <html lang="en">
-            <body>{children}</body>
+            <body>
+              {children}
+              <SpeedInsights />
+            </body>
           </html>
         </TooltipProvider>
       </TRPCProvider>

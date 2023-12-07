@@ -31,6 +31,7 @@
     "@trpc/next": "^10.44.1",
     "@trpc/react-query": "^10.44.1",
     "@trpc/server": "^10.44.1",
+    "@vercel/speed-insights": "^1.0.0",
     "antd": "4.24.10",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
