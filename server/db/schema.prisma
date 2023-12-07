@@ -14,34 +14,39 @@ enum Role {
   Mentee
 }
 
+enum Gender {
+  Male
+  Female
+}
+
 model Field {
   fieldId     Int    @id @default(autoincrement()) @map("field_id")
-  name        String
-  description String
+  name        String @db.VarChar(25)
+  description String @db.VarChar(255)
   users       User[]
 }
 
 model Offer {
   offerId     Int    @id @default(autoincrement()) @map("offer_id")
-  name        String
-  description String
+  name        String @db.VarChar(25)
+  description String @db.VarChar(255)
   users       User[]
 }
 
 model User {
-  clerkId     String     @id @map("clerk_id")
-  name        String  @db.TinyText
-  email       String  @db.TinyText
-  gender      String?  @db.TinyText
+  clerkId     String  @id @map("clerk_id")
+  name        String  @db.VarChar(25)
+  email       String  @db.VarChar(25)
+  gender      Gender?
   role        Role?
-  description String?
-  schoolName  String?  @map("school_name")
+  description String? @db.VarChar(255)
+  schoolName  String? @map("school_name")
   major       String?
   title       String?
   workplace   String?
-  githubUrl   String?  @map("github_url")
-  linkedinUrl String?  @map("linkedin_url")
-  bookingUrl  String?  @map("booking_url")
+  githubUrl   String? @map("github_url") @db.VarChar(80)
+  linkedinUrl String? @map("linkedin_url") @db.VarChar(80)
+  bookingUrl  String? @map("booking_url")
   fields      Field[]
   offers      Offer[]
 }
