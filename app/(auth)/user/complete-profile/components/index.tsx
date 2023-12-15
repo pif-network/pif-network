@@ -8,6 +8,7 @@ import * as z from 'zod';
 
 export * from './step-0-pack';
 export * from './step-1-pack';
+export * from './description-pack';
 export * from './step-2-pack';
 export * from './mentor-step-3-pack';
 

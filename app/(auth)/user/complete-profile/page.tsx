@@ -13,6 +13,7 @@ import { Button, Form } from '~/components/ui';
 import {
   Step0InputPack,
   Step1InputPack,
+  DescriptionPack,
   Step2InputPack,
   MentorInputPack,
   RoleChoosingInputPack,
@@ -38,8 +39,8 @@ const CompleteProfile = () => {
 
   // TODO: Well, fix this.
   const MAX_FILLING_STEPS = {
-    [USER_ROLE.MENTEE]: 2,
-    [USER_ROLE.MENTOR]: 3,
+    [USER_ROLE.MENTEE]: 3,
+    [USER_ROLE.MENTOR]: 4,
   };
 
   const formInitialValues = {
@@ -157,9 +158,11 @@ const CompleteProfile = () => {
 
                 {currentFillingStep === 1 && <Step1InputPack />}
 
-                {currentFillingStep === 2 && <Step2InputPack />}
+                {currentFillingStep === 2 && <DescriptionPack />}
 
-                {currentFillingStep === 3 &&
+                {currentFillingStep === 3 && <Step2InputPack />}
+
+                {currentFillingStep === 4 &&
                   watch.role === USER_ROLE.MENTOR && <MentorInputPack />}
               </form>
             </Form>
@@ -201,7 +204,6 @@ const CompleteProfile = () => {
                 </div>
               ) : (
                 <Button
-                  // className="w-full h-[42px] rounded-lg text-heading-sm disabled:bg-primary-800/40 disabled:border-primary-800/40"
                   className="w-full h-[42px] text-[16px]"
                   type="submit"
                   onClick={async () => {
