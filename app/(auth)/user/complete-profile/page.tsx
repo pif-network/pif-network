@@ -27,6 +27,7 @@ import { CheckCircleIcon } from '@heroicons/react/outline';
 import { ArrowLeftIcon } from '@radix-ui/react-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { api } from '~/lib/trpc/client';
 
 const CompleteProfile = () => {
   const router = useRouter();
@@ -36,6 +37,8 @@ const CompleteProfile = () => {
     isProfileSuccessfullyUpdatedModalOpen,
     setIsProfileSuccessfullyUpdatedModalOpen,
   ] = useState(false);
+
+  const postUser = api.user.new.useMutation();
 
   // TODO: Well, fix this.
   const MAX_FILLING_STEPS = {
@@ -70,6 +73,7 @@ const CompleteProfile = () => {
   const onSubmit = () => {
     try {
       setErrorMessage('');
+      postUser.mutate(watch);
 
       setIsProfileSuccessfullyUpdatedModalOpen(true);
     } catch (error) {
