@@ -3,10 +3,9 @@ import {
   FormField,
   FormItem,
   FormMessage,
-  Input,
   InputLabel,
+  TextArea,
 } from '~/components/ui';
-import { FormInput } from '.';
 
 export const DescriptionPack = () => (
   <FormField
@@ -19,11 +18,14 @@ export const DescriptionPack = () => (
             tooltipText="Đây là ấn tượng đầu tiên mà bạn muốn để lại cho mentor."
           />
           <FormControl>
-            <FormInput
-              className="w-full"
+            <TextArea
+              className="w-full h-24"
               placeholder="I am a student, majoring in CS. I am interested in AI and ML."
-              formTriggerBlur={field.onBlur}
               {...field}
+              onChange={e => {
+                field.onChange(e);
+                field.onBlur();
+              }}
             />
           </FormControl>
           <FormMessage />

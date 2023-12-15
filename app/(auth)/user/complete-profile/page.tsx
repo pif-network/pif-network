@@ -82,11 +82,12 @@ const CompleteProfile = () => {
     '-1': ['role'],
     0: ['name', 'gender'],
     1: ['schoolName', 'major', 'title', 'workplace'],
-    2: ['location', 'github', 'linkedin'],
+    2: ['description'],
+    3: ['location', 'github', 'linkedin'],
   };
 
   if (watch.role === USER_ROLE.MENTOR) {
-    STEP_FIELD_MAP[3] = ['fields', 'offers', 'bookingUrl'];
+    STEP_FIELD_MAP[4] = ['fields', 'offers', 'bookingUrl'];
   }
 
   const shouldDisableButtonNextStep = () => {
