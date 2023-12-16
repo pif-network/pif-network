@@ -9,7 +9,7 @@ export default authMiddleware({
     '/api/webhook',
     '/_vercel/speed-insights/vitals',
   ],
-  ignoredRoutes: ['/api/trpc/(.*)'],
+  // ignoredRoutes: ['/api/trpc/(.*)'],
 });
 
 export const config = {

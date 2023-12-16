@@ -38,7 +38,7 @@ const CompleteProfile = () => {
     setIsProfileSuccessfullyUpdatedModalOpen,
   ] = useState(false);
 
-  const postUser = api.user.new.useMutation();
+  const postUser = api.user.updateProfile.useMutation();
 
   // TODO: Well, fix this.
   const MAX_FILLING_STEPS = {
@@ -56,8 +56,8 @@ const CompleteProfile = () => {
     title: '',
     workplace: '',
     location: '',
-    github: '',
-    linkedin: '',
+    githubUrl: '',
+    linkedinUrl: '',
     fields: [] as string[],
     offers: [] as string[],
     bookingUrl: '',
@@ -75,7 +75,7 @@ const CompleteProfile = () => {
       setErrorMessage('');
       postUser.mutate(watch);
 
-      setIsProfileSuccessfullyUpdatedModalOpen(true);
+      // setIsProfileSuccessfullyUpdatedModalOpen(true);
     } catch (error) {
       const errorMessage = getErrorMessage(error);
       setErrorMessage(errorMessage);
@@ -87,7 +87,7 @@ const CompleteProfile = () => {
     0: ['name', 'gender'],
     1: ['schoolName', 'major', 'title', 'workplace'],
     2: ['description'],
-    3: ['location', 'github', 'linkedin'],
+    3: ['location', 'githubUrl', 'linkedinUrl'],
   };
 
   if (watch.role === USER_ROLE.MENTOR) {
