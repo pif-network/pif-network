@@ -21,14 +21,14 @@ enum Gender {
 
 model Field {
   fieldId     Int    @id @default(autoincrement()) @map("field_id")
-  name        String @db.VarChar(25)
+  name        String @unique @db.VarChar(25)
   description String @db.VarChar(255)
   users       User[]
 }
 
 model Offer {
   offerId     Int    @id @default(autoincrement()) @map("offer_id")
-  name        String @db.VarChar(25)
+  name        String @unique @db.VarChar(25)
   description String @db.VarChar(255)
   users       User[]
 }
