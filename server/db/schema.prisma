@@ -36,7 +36,7 @@ model Offer {
 model User {
   clerkId     String  @id @map("clerk_id")
   name        String  @db.VarChar(25)
-  email       String  @db.VarChar(25)
+  email       String
   gender      Gender?
   role        Role?
   description String? @db.VarChar(255)
