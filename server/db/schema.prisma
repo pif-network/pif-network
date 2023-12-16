@@ -44,6 +44,7 @@ model User {
   major       String?
   title       String?
   workplace   String?
+  location    String?
   githubUrl   String? @map("github_url") @db.VarChar(80)
   linkedinUrl String? @map("linkedin_url") @db.VarChar(80)
   bookingUrl  String? @map("booking_url")

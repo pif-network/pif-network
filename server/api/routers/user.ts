@@ -1,4 +1,3 @@
-import { z } from 'zod';
 import { createRouter, publicProcedure } from '../trpc';
 import { GENDER_OPTION, USER_ROLE } from '~/shared/constant';
 
