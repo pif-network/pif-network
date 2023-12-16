@@ -24,8 +24,6 @@ export const createInnerTRPCContext = async (
 };
 
 export const createTRPCContext = async (opts: { req: NextRequest }) => {
-  console.log('in `createTRPCContext`');
-  console.log(opts.req.body);
   const auth = getAuth(opts.req);
   const inner = await createInnerTRPCContext({ auth });
 

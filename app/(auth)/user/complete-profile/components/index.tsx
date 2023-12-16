@@ -1,3 +1,5 @@
+'use client';
+
 import { forwardRef } from 'react';
 
 import { GENDER_OPTION, USER_ROLE } from '~/shared/constant';
