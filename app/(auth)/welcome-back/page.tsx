@@ -70,18 +70,18 @@ const Login = () => {
     try {
       const v = form.watch();
       console.log(v);
-      // const result = await signIn.create({
-      //   identifier: v.email,
-      //   password:v.password,
-      // });
-      //
-      // if (result.status === 'complete') {
-      //   console.log(result);
-      //   await setActive({ session: result.createdSessionId });
-      // router.push('/');
-      // } else {
-      // console.log(result);
-      // }
+      const result = await signIn.create({
+        identifier: v.email,
+        password: v.password,
+      });
+
+      if (result.status === 'complete') {
+        console.log(result);
+        await setActive({ session: result.createdSessionId });
+        router.push(INTERNAL_PATH.COMPLETE_PROFILE);
+      } else {
+        console.log(result);
+      }
     } catch (error) {
       const errorMessage = getErrorMessage(error);
       setErrorMessage(errorMessage);
