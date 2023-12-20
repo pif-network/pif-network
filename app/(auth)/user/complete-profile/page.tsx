@@ -7,8 +7,9 @@ import Image from 'next/image';
 
 import { getErrorMessage } from '~/lib/types/service';
 import { User, UserRole } from '~/lib/types/user';
-import { ChevronRight, Home } from '~/components/ui/svgs/Icons';
+import { api } from '~/lib/trpc/client';
 import { INTERNAL_PATH, USER_ROLE } from '~/shared/constant';
+import { ChevronRight, Home } from '~/components/ui/svgs/Icons';
 import { Button, Form } from '~/components/ui';
 import {
   Step0InputPack,
@@ -27,7 +28,6 @@ import { CheckCircleIcon } from '@heroicons/react/outline';
 import { ArrowLeftIcon } from '@radix-ui/react-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { api } from '~/lib/trpc/client';
 
 const CompleteProfile = () => {
   const router = useRouter();
