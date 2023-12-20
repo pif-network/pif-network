@@ -11,15 +11,25 @@ import {
   Button,
   Divider,
   BrandIdentifier,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+  InputLabel,
+  Form,
 } from '~/components/ui';
 import { GoogleFill } from '~/components/ui/svgs/Icons';
 import { INTERNAL_PATH } from '~/shared/constant';
 
-import { FormikProvider, useFormik, Form, Field } from 'formik';
+import { FormikProvider, useFormik, Field } from 'formik';
 import { object, string } from 'yup';
 import { Alert } from 'antd';
 import { useSignIn } from '@clerk/nextjs';
 import type { OAuthStrategy } from '@clerk/types';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { FormInput } from '../user/complete-profile/components';
 
 const Login = () => {
   const { signIn, setActive, isLoaded } = useSignIn();
@@ -47,6 +57,47 @@ const Login = () => {
       .max(128, 'Password không được dài quá 128 ký tự.')
       .required('Vui lòng nhập mật khẩu.'),
   });
+  const schema = z.object({
+    email: z.string().email(),
+    password: z.string().min(6).max(128),
+  });
+  const formDefaultValues = {
+    email: '',
+    password: '',
+  };
+
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+    defaultValues: formDefaultValues,
+    mode: 'onChange',
+  });
+
+  const onSubmit = async () => {
+    console.log('Submitting..');
+
+    if (!isLoaded) {
+      return;
+    }
+    try {
+      const v = form.watch();
+      console.log(v);
+      // const result = await signIn.create({
+      //   identifier: v.email,
+      //   password:v.password,
+      // });
+      //
+      // if (result.status === 'complete') {
+      //   console.log(result);
+      //   await setActive({ session: result.createdSessionId });
+      // router.push('/');
+      // } else {
+      // console.log(result);
+      // }
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      setErrorMessage(errorMessage);
+    }
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -62,19 +113,6 @@ const Login = () => {
       }
 
       try {
-        const result = await signIn.create({
-          identifier: email,
-          password,
-        });
-
-        if (result.status === 'complete') {
-          console.log(result);
-          await setActive({ session: result.createdSessionId });
-          // router.push('/');
-        } else {
-          /* Investigate why the login hasn't completed */
-          console.log(result);
-        }
       } catch (err: any) {
         console.error('error', err.errors[0].longMessage);
       }
@@ -106,8 +144,11 @@ const Login = () => {
 
         <div className="mb-4" />
 
-        <FormikProvider value={formik}>
-          <Form className="max-w-sm flex flex-col">
+        <Form {...form}>
+          <form
+            className="max-w-sm flex flex-col"
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
             {errorMessage && (
               <Alert
                 className="mt-2 mb-6 font-manrope"
@@ -116,8 +157,44 @@ const Login = () => {
                 showIcon
               />
             )}
-            <Field name="email" type="email" as={FormikInput} />
-            <Field name="password" type="password" as={FormikInput} />
+            <FormField
+              name="email"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <InputLabel name="Email" />
+                    <FormControl>
+                      <FormInput
+                        className="w-full"
+                        placeholder="dev@pif-network.com"
+                        formTriggerBlur={field.onBlur}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
+            <FormField
+              name="password"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <InputLabel name="Password" />
+                    <FormControl>
+                      <FormInput
+                        className="w-full"
+                        placeholder="dev@pif-network.com"
+                        formTriggerBlur={field.onBlur}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
             <div className="mt-8 flex items-center justify-center">
               {formik.isSubmitting ? (
                 <div className=" flex justify-center items-center">
@@ -148,8 +225,8 @@ const Login = () => {
             >
               <GoogleFill className="pr-2" /> <span>Google</span>
             </Button>
-          </Form>
-        </FormikProvider>
+          </form>
+        </Form>
       </BrandIdentifier>
     </>
   );
