@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import { getErrorMessage } from '~/lib/types/service';
 import {
   Link,
-  Input as FormikInput,
   Button,
   Divider,
   BrandIdentifier,
@@ -19,17 +18,15 @@ import {
   Form,
 } from '~/components/ui';
 import { GoogleFill } from '~/components/ui/svgs/Icons';
+import { FormInput } from '../user/complete-profile/components';
 import { INTERNAL_PATH } from '~/shared/constant';
 
-import { FormikProvider, useFormik, Field } from 'formik';
-import { object, string } from 'yup';
 import { Alert } from 'antd';
 import { useSignIn } from '@clerk/nextjs';
 import type { OAuthStrategy } from '@clerk/types';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FormInput } from '../user/complete-profile/components';
 
 const Login = () => {
   const { signIn, setActive, isLoaded } = useSignIn();
@@ -46,17 +43,6 @@ const Login = () => {
 
   const [errorMessage, setErrorMessage] = useState<string | undefined>('');
 
-  const validationSchema = object().shape({
-    email: string()
-      .min(6, 'Email không được ngắn hơn 6 ký tự.')
-      .max(50, 'Email không được dài quá 50 ký tự.')
-      .email('Địa chỉ email không hợp lệ.')
-      .required('Vui lòng nhập địa chỉ email.'),
-    password: string()
-      .min(6, 'Password không được ngắn hơn 6 ký tự.')
-      .max(128, 'Password không được dài quá 128 ký tự.')
-      .required('Vui lòng nhập mật khẩu.'),
-  });
   const schema = z.object({
     email: z.string().email(),
     password: z.string().min(6).max(128),
@@ -71,6 +57,9 @@ const Login = () => {
     defaultValues: formDefaultValues,
     mode: 'onChange',
   });
+
+  const shouldSubmitButtonDisable =
+    !form.formState.isDirty || !form.formState.isValid;
 
   const onSubmit = async () => {
     console.log('Submitting..');
@@ -98,26 +87,6 @@ const Login = () => {
       setErrorMessage(errorMessage);
     }
   };
-
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    validationSchema,
-    onSubmit: async ({ email, password }, { setSubmitting }) => {
-      console.log('Submitting..');
-
-      if (!isLoaded) {
-        return;
-      }
-
-      try {
-      } catch (err: any) {
-        console.error('error', err.errors[0].longMessage);
-      }
-    },
-  });
 
   return (
     <>
@@ -196,21 +165,17 @@ const Login = () => {
               }}
             />
             <div className="mt-8 flex items-center justify-center">
-              {formik.isSubmitting ? (
-                <div className=" flex justify-center items-center">
+              {form.formState.isSubmitting ? (
+                <div className="w-full flex justify-center items-center">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black" />
                 </div>
               ) : (
                 <Button
-                  className={`w-full ${
-                    !(formik.isValid && formik.dirty)
-                      ? 'bg-primary-800/40 border-primary-800/60'
-                      : ''
-                  } text-[19px]`}
+                  className="w-full h-[42px] text-[16px]"
                   type="submit"
-                  // disabled={formik.isValid && formik.dirty}
+                  disabled={shouldSubmitButtonDisable}
                 >
-                  <h4>Đăng nhập</h4>
+                  Đăng nhập
                 </Button>
               )}
             </div>
