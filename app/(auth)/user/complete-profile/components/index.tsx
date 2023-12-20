@@ -1,3 +1,5 @@
+'use client';
+
 import { forwardRef } from 'react';
 
 import { GENDER_OPTION, USER_ROLE } from '~/shared/constant';
@@ -8,6 +10,7 @@ import * as z from 'zod';
 
 export * from './step-0-pack';
 export * from './step-1-pack';
+export * from './description-pack';
 export * from './step-2-pack';
 export * from './mentor-step-3-pack';
 
@@ -25,8 +28,8 @@ export const formSchema = z.object({
   title: z.string().min(2).max(50),
   workplace: z.string().min(2).max(50),
   location: z.string().min(2).max(50),
-  github: z.string().min(2).max(50),
-  linkedin: z.string().min(2).max(50),
+  githubUrl: z.string().min(2).max(50),
+  linkedinUrl: z.string().min(2).max(50),
   fields: z.array(z.string()),
   offers: z.array(z.string()),
   bookingUrl: z.string().min(2).max(50),

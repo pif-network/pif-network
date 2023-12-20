@@ -1,19 +1,12 @@
 /* This file is runned by bun. */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { PrismaClient } from '@prisma/client';
+
+import { Prisma, PrismaClient } from '@prisma/client';
 import { FIELD_METADATA, OFFER_METADATA } from '~/shared/constant';
 
 const prisma = new PrismaClient();
 
-/* @ts-ignore-next-line */
-const tablenames = await prisma.$queryRaw<
-  Array<{ tablename: string }>
->`SELECT tablename FROM pg_tables WHERE schemaname='public'`;
-const tables = tablenames
-  .map(({ tablename }) => tablename)
-  .filter(name => name !== '_prisma_migrations')
-  .map(name => `"public"."${name}"`)
-  .join(', ');
+const tables = Object.values(Prisma.ModelName);
 
 const offerSeed = Object.keys(OFFER_METADATA).map(key => {
   return {
@@ -29,8 +22,11 @@ const fieldSeed = Object.keys(FIELD_METADATA).map(key => {
 });
 
 try {
-  /* @ts-ignore-next-line */
-  await prisma.$executeRawUnsafe(`TRUNCATE TABLE ${tables} CASCADE;`);
+  for (const table of tables) {
+    console.log(`Truncating table ${table}...`);
+    /* @ts-ignore-next-line */
+    await prisma.$executeRawUnsafe(`TRUNCATE TABLE ${table} CASCADE;`);
+  }
 
   console.log('Seeding database...');
 

@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { Select } from 'antd';
 import { Fields, Offers } from '~/lib/types/user';

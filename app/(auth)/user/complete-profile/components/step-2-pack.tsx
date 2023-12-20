@@ -32,7 +32,7 @@ export const Step2InputPack = () => (
       }}
     />
     <FormField
-      name="github"
+      name="githubUrl"
       render={({ field }) => {
         return (
           <FormItem>
@@ -51,7 +51,7 @@ export const Step2InputPack = () => (
       }}
     />
     <FormField
-      name="linkedin"
+      name="linkedinUrl"
       render={({ field }) => {
         return (
           <FormItem>

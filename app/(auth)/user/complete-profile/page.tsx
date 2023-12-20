@@ -7,12 +7,14 @@ import Image from 'next/image';
 
 import { getErrorMessage } from '~/lib/types/service';
 import { User, UserRole } from '~/lib/types/user';
-import { ChevronRight, Home } from '~/components/ui/svgs/Icons';
+import { api } from '~/lib/trpc/client';
 import { INTERNAL_PATH, USER_ROLE } from '~/shared/constant';
+import { ChevronRight, Home } from '~/components/ui/svgs/Icons';
 import { Button, Form } from '~/components/ui';
 import {
   Step0InputPack,
   Step1InputPack,
+  DescriptionPack,
   Step2InputPack,
   MentorInputPack,
   RoleChoosingInputPack,
@@ -36,10 +38,12 @@ const CompleteProfile = () => {
     setIsProfileSuccessfullyUpdatedModalOpen,
   ] = useState(false);
 
+  const postUser = api.user.updateProfile.useMutation();
+
   // TODO: Well, fix this.
   const MAX_FILLING_STEPS = {
-    [USER_ROLE.MENTEE]: 2,
-    [USER_ROLE.MENTOR]: 3,
+    [USER_ROLE.MENTEE]: 3,
+    [USER_ROLE.MENTOR]: 4,
   };
 
   const formInitialValues = {
@@ -52,8 +56,8 @@ const CompleteProfile = () => {
     title: '',
     workplace: '',
     location: '',
-    github: '',
-    linkedin: '',
+    githubUrl: '',
+    linkedinUrl: '',
     fields: [] as string[],
     offers: [] as string[],
     bookingUrl: '',
@@ -69,8 +73,9 @@ const CompleteProfile = () => {
   const onSubmit = () => {
     try {
       setErrorMessage('');
+      postUser.mutate(watch);
 
-      setIsProfileSuccessfullyUpdatedModalOpen(true);
+      // setIsProfileSuccessfullyUpdatedModalOpen(true);
     } catch (error) {
       const errorMessage = getErrorMessage(error);
       setErrorMessage(errorMessage);
@@ -81,11 +86,12 @@ const CompleteProfile = () => {
     '-1': ['role'],
     0: ['name', 'gender'],
     1: ['schoolName', 'major', 'title', 'workplace'],
-    2: ['location', 'github', 'linkedin'],
+    2: ['description'],
+    3: ['location', 'githubUrl', 'linkedinUrl'],
   };
 
   if (watch.role === USER_ROLE.MENTOR) {
-    STEP_FIELD_MAP[3] = ['fields', 'offers', 'bookingUrl'];
+    STEP_FIELD_MAP[4] = ['fields', 'offers', 'bookingUrl'];
   }
 
   const shouldDisableButtonNextStep = () => {
@@ -157,9 +163,11 @@ const CompleteProfile = () => {
 
                 {currentFillingStep === 1 && <Step1InputPack />}
 
-                {currentFillingStep === 2 && <Step2InputPack />}
+                {currentFillingStep === 2 && <DescriptionPack />}
 
-                {currentFillingStep === 3 &&
+                {currentFillingStep === 3 && <Step2InputPack />}
+
+                {currentFillingStep === 4 &&
                   watch.role === USER_ROLE.MENTOR && <MentorInputPack />}
               </form>
             </Form>
@@ -201,7 +209,6 @@ const CompleteProfile = () => {
                 </div>
               ) : (
                 <Button
-                  // className="w-full h-[42px] rounded-lg text-heading-sm disabled:bg-primary-800/40 disabled:border-primary-800/40"
                   className="w-full h-[42px] text-[16px]"
                   type="submit"
                   onClick={async () => {
