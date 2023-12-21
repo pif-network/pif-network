@@ -17,7 +17,7 @@ import {
   InputLabel,
   Form,
 } from '~/components/ui';
-import { GoogleFill } from '~/components/ui/svgs/Icons';
+import { GoogleFill } from '~/components/ui/svgs/icons';
 import { FormInput } from '../user/complete-profile/components';
 import { INTERNAL_PATH } from '~/shared/constant';
 
