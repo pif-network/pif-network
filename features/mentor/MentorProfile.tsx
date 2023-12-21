@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { Button, RectangleAvatar, SectionTitle, Tag } from '~/components/ui';
-import { LocationFill, MortarboardHatFill } from '~/components/ui/svgs/Icons';
+import {
+  LocationFill,
+  MortarboardHatFill,
+  FacebookFill,
+  GithubFill,
+  LinkedinLine,
+} from '~/components/ui/svgs/icons';
 import { User } from '~/lib/types/user';
 import { FIELD_METADATA, OFFER_METADATA } from '~/shared/constant';
 
-import {
-  FacebookFilled,
-  GithubFilled,
-  LinkedinFilled,
-  PlusSquareOutlined,
-} from '@ant-design/icons';
 import autoAnimate from '@formkit/auto-animate';
 
 import { CreateReview, Review, ReviewCard } from './Review';
@@ -18,15 +18,15 @@ import { CreateReview, Review, ReviewCard } from './Review';
 const socialLinkMapper = {
   facebook: {
     dataKey: 'fbUrl',
-    icon: <FacebookFilled />,
+    icon: <FacebookFill />,
   },
   github: {
     dataKey: 'github',
-    icon: <GithubFilled />,
+    icon: <GithubFill />,
   },
   linkedIn: {
     dataKey: 'linkedin',
-    icon: <LinkedinFilled />,
+    icon: <LinkedinLine />,
   },
 };
 

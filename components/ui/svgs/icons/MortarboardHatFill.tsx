@@ -1,4 +1,4 @@
-import { SVGProps } from '.'
+import { SVGProps } from '.';
 
 const MortarboardHatFill = ({ colour, ...props }: SVGProps) => {
   return (
@@ -15,7 +15,7 @@ const MortarboardHatFill = ({ colour, ...props }: SVGProps) => {
         fill={colour}
       />
     </svg>
-  )
-}
+  );
+};
 
-export default MortarboardHatFill
+export default MortarboardHatFill;

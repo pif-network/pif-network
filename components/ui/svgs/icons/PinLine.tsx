@@ -1,4 +1,4 @@
-import { SVGProps } from '.'
+import { SVGProps } from '.';
 
 const PinLine = ({ colour, ...props }: SVGProps) => {
   return (
@@ -15,7 +15,7 @@ const PinLine = ({ colour, ...props }: SVGProps) => {
         fill={colour}
       />
     </svg>
-  )
-}
+  );
+};
 
-export default PinLine
+export default PinLine;

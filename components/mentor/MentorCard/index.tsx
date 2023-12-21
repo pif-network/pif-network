@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { User } from '~/lib/types/user';
-import { FlagLine, PinLine } from '~/components/ui/svgs/Icons';
+import { FlagLine, PinLine } from '~/components/ui/svgs/icons';
 import { FIELD_METADATA } from '~/shared/constant';
 
 const MentorCard = ({ mentor }: { mentor: User<'Mentor'> }) => {

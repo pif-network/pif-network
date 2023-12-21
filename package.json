@@ -13,7 +13,6 @@
     "postinstall": "pnpm run db:generate"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.8.1",
     "@clerk/nextjs": "^4.28.1",
     "@clerk/types": "^3.60.0",
     "@formkit/auto-animate": "0.7.0",

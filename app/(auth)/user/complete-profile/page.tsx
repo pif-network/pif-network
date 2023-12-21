@@ -9,7 +9,7 @@ import { getErrorMessage } from '~/lib/types/service';
 import { User, UserRole } from '~/lib/types/user';
 import { api } from '~/lib/trpc/client';
 import { INTERNAL_PATH, USER_ROLE } from '~/shared/constant';
-import { ChevronRight, Home } from '~/components/ui/svgs/Icons';
+import { ChevronRight, Home } from '~/components/ui/svgs/icons';
 import { Button, Form } from '~/components/ui';
 import {
   Step0InputPack,

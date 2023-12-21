@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Avatar } from 'antd';
-import { ChevronRight } from '../svgs/Icons';
+import { ChevronRight } from '../svgs/icons';
 import DoubleQuoteSm from '~/assets/feedback/feedback_double-quote-sm.png';
 import DoubleQuoteLg from '~/assets/feedback/feedback_double-quote-lg.png';
 import LineLG from '~/assets/feedback/feedback_line-lg.png';

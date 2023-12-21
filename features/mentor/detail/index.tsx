@@ -1,12 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import {
-  GithubFilled,
-  LinkedinFilled,
-  CalendarOutlined,
-  ProjectFilled,
-} from '@ant-design/icons';
+import { GithubFill, LinkedinLine } from '~/components/ui/svgs/icons';
+
+import { CalendarIcon } from '@radix-ui/react-icons';
 
 const MentorProfile = () => {
   return (
@@ -37,10 +34,10 @@ const MentorProfile = () => {
               </h5>
               <div className="pb-4">
                 <Link href="https://github.com/npthao1312">
-                  <LinkedinFilled className="text-3xl text-primary mr-3" />
+                  <LinkedinLine className="text-3xl text-primary mr-3" />
                 </Link>
                 <Link href="https://github.com/npthao1312">
-                  <GithubFilled className="text-3xl text-primary" />
+                  <GithubFill className="text-3xl text-primary" />
                 </Link>
               </div>
               <hr />
@@ -55,11 +52,11 @@ const MentorProfile = () => {
               </p>
               <ul className="mb-6 w-full rounded-lg">
                 <li>
-                  <ProjectFilled className="text-3xl text-primary" />
+                  {/* <ProjectFilled className="text-3xl text-primary" /> */}
                   <span className="ml-2">Lĩnh vực mentor</span>
                 </li>
                 <li>
-                  <CalendarOutlined className="text-3xl text-primary" />
+                  <CalendarIcon className="text-3xl text-primary" />
                   <span className="ml-2">Thời gian mentor</span>
                 </li>
               </ul>
