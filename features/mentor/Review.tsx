@@ -2,8 +2,8 @@ import { Dropdown, Menu } from 'antd';
 import { Field, Form, FormikProvider, useFormik } from 'formik';
 import { Avatar, Input as FormikInput } from '~/components/ui';
 
-import { CloseOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { User } from '~/lib/types/user';
+import { Cross2Icon, DotsHorizontalIcon } from '@radix-ui/react-icons';
 
 export interface Review {
   mentorId: string;
@@ -46,7 +46,7 @@ const ReviewForm: React.FC<FormProps> = ({
             <span className="text-caption text-gray-600">Student, UEH.</span>
           </div>
         </div>
-        <CloseOutlined className="cursor-pointer" onClick={onClose} />
+        <Cross2Icon className="cursor-pointer" onClick={onClose} />
       </div>
 
       <FormikProvider value={formik}>
@@ -101,7 +101,7 @@ export const ReviewCard = (user: User<'Mentee'>) => (
         }
       >
         <button className="h-9 w-9 rounded-[50%] hover:bg-gray-50">
-          <EllipsisOutlined style={{ fontSize: '20px' }} />
+          <DotsHorizontalIcon style={{ fontSize: '20px' }} />
         </button>
       </Dropdown>
     </div>

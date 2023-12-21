@@ -1,4 +1,4 @@
-import { SVGProps } from './';
+import { SVGProps } from '.';
 
 const LocationFill = ({ colour, ...props }: SVGProps) => (
   <svg

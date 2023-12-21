@@ -1,4 +1,4 @@
-import { SVGProps } from '.'
+import { SVGProps } from '.';
 
 const FlagLine = ({ colour, ...props }: SVGProps) => {
   return (
@@ -15,7 +15,7 @@ const FlagLine = ({ colour, ...props }: SVGProps) => {
         fill={colour}
       />
     </svg>
-  )
-}
+  );
+};
 
-export default FlagLine
+export default FlagLine;

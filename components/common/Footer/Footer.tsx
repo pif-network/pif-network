@@ -7,7 +7,7 @@ import {
   InstagramLine,
   LinkedinLine,
   CopyrightLine,
-} from '~/components/ui/svgs/Icons';
+} from '~/components/ui/svgs/icons';
 
 const Footer = () => {
   return (

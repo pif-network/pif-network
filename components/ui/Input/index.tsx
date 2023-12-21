@@ -6,7 +6,7 @@ import {
 } from '~/components/ui/tooltip';
 
 import { forwardRef } from 'react';
-import { InformationCircleIcon } from '@heroicons/react/outline';
+import { InfoCircledIcon } from '@radix-ui/react-icons';
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
@@ -61,7 +61,7 @@ const InputLabel = ({
     {tooltipText && (
       <Tooltip delayDuration={400}>
         <TooltipTrigger asChild>
-          <InformationCircleIcon className="w-5 h-5 mt-[9px] stroke-gray-600 stroke-1" />
+          <InfoCircledIcon className="w-5 h-5 mt-[9px] stroke-gray-600 stroke-1" />
         </TooltipTrigger>
         <TooltipContent>{tooltipText}</TooltipContent>
       </Tooltip>

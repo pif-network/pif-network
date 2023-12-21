@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { UserOutlined } from '@ant-design/icons';
+import { PersonIcon } from '@radix-ui/react-icons';
 
 type AvatarProps = {
   src?: string;
@@ -9,11 +9,11 @@ type AvatarProps = {
 };
 
 const emptyRectangleAvatar = (
-  <UserOutlined className="text-title text-gray-400" />
+  <PersonIcon className="text-title text-gray-400" />
 );
 
 const emptyAvatar = (
-  <UserOutlined className="text-body text-gray-400 -translate-y-0.5" />
+  <PersonIcon className="text-body text-gray-400 -translate-y-0.5" />
 );
 
 export const RectangleAvatar: React.FC<AvatarProps> = ({

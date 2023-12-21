@@ -1,4 +1,4 @@
-import { SVGProps } from '.'
+import { SVGProps } from '.';
 
 const GithubFill = ({ colour, ...props }: SVGProps) => {
   return (
@@ -15,6 +15,6 @@ const GithubFill = ({ colour, ...props }: SVGProps) => {
         fill={colour}
       />
     </svg>
-  )
-}
-export default GithubFill
+  );
+};
+export default GithubFill;

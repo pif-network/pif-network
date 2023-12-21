@@ -9,7 +9,7 @@ import { getErrorMessage } from '~/lib/types/service';
 import { User, UserRole } from '~/lib/types/user';
 import { api } from '~/lib/trpc/client';
 import { INTERNAL_PATH, USER_ROLE } from '~/shared/constant';
-import { ChevronRight, Home } from '~/components/ui/svgs/Icons';
+import { ChevronRight, Home } from '~/components/ui/svgs/icons';
 import { Button, Form } from '~/components/ui';
 import {
   Step0InputPack,
@@ -24,8 +24,7 @@ import {
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import * as z from 'zod';
 import { Alert, Modal } from 'antd';
-import { CheckCircleIcon } from '@heroicons/react/outline';
-import { ArrowLeftIcon } from '@radix-ui/react-icons';
+import { ArrowLeftIcon, CheckCircledIcon } from '@radix-ui/react-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
@@ -254,7 +253,7 @@ const CompleteProfile = () => {
         <div className="flex flex-col justify-center items-center">
           <div className="mb-7" />
 
-          <CheckCircleIcon className="animate-appear w-40 h-20 lg:w-50 lg:h-24 stroke-[#04942b]" />
+          <CheckCircledIcon className="animate-appear w-40 h-20 lg:w-50 lg:h-24 stroke-[#04942b]" />
 
           <div className="mb-7" />
 

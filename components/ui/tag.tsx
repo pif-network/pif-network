@@ -1,4 +1,4 @@
-import { CloseOutlined } from '@ant-design/icons';
+import { Cross2Icon } from '@radix-ui/react-icons';
 import { HTMLAttributes } from 'react';
 import { twMerge } from '~/lib/utils';
 import { FIELD_METADATA } from '~/shared/constant';
@@ -66,12 +66,13 @@ export const Tag: React.FC<TagProps> = ({
     >
       {children}
       {deletable && (
-        <CloseOutlined
-          className={`invisible group-hover:visible text-caption absolute top-[0.2rem] h-[1.125rem] right-1 w-3.5 cursor-pointer ${
-            type === 'outlined' ? 'bg-white' : deleteBgByType[colour]
-          }`}
-          onClick={onDelete}
-        />
+        <div onClick={onDelete}>
+          <Cross2Icon
+            className={`invisible group-hover:visible text-caption absolute top-[0.2rem] h-[1.125rem] right-1 w-3.5 cursor-pointer ${
+              type === 'outlined' ? 'bg-white' : deleteBgByType[colour]
+            }`}
+          />
+        </div>
       )}
     </div>
   );
