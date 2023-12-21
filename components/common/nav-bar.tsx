@@ -5,13 +5,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { ChevronRight } from '~/components/ui/svgs/Icons';
+import { ChevronRight } from '~/components/ui/svgs/icons';
 import { Button } from '~/components/ui';
 import { INTERNAL_PATH } from '~/shared/constant';
 import { twMerge } from '~/lib/utils';
 import { PositionContext } from '~/lib/contexts';
 
-import { MenuIcon } from '@heroicons/react/outline';
 import { UserButton } from '@clerk/nextjs';
 import { SignedIn } from '@clerk/nextjs';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';

@@ -1,4 +1,4 @@
-import { SVGProps } from '.'
+import { SVGProps } from '.';
 
 const InstagramLine = ({ colour, ...props }: SVGProps) => {
   return (
@@ -15,7 +15,7 @@ const InstagramLine = ({ colour, ...props }: SVGProps) => {
         fill={colour}
       />
     </svg>
-  )
-}
+  );
+};
 
-export default InstagramLine
+export default InstagramLine;

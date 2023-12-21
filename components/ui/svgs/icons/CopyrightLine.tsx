@@ -1,4 +1,4 @@
-import { SVGProps } from '.'
+import { SVGProps } from '.';
 
 const CopyrightLine = ({ colour, ...props }: SVGProps) => {
   return (
@@ -15,7 +15,7 @@ const CopyrightLine = ({ colour, ...props }: SVGProps) => {
         fill={colour}
       />
     </svg>
-  )
-}
+  );
+};
 
-export default CopyrightLine
+export default CopyrightLine;

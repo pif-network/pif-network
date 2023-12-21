@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 
-import { ChevronRight } from '~/components/ui/svgs/Icons';
+import { ChevronRight } from '~/components/ui/svgs/icons';
 
 interface Props {
   FAQ: { q: string; a: string | JSX.Element };

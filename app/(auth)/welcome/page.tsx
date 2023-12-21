@@ -18,7 +18,7 @@ import {
   GoogleFill,
   Home,
   SendingMailLine,
-} from '~/components/ui/svgs/Icons';
+} from '~/components/ui/svgs/icons';
 
 import { number, object, string } from 'yup';
 import { Field, Form, FormikProvider, useFormik } from 'formik';

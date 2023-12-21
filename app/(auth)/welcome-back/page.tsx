@@ -12,7 +12,7 @@ import {
   Divider,
   BrandIdentifier,
 } from '~/components/ui';
-import { GoogleFill } from '~/components/ui/svgs/Icons';
+import { GoogleFill } from '~/components/ui/svgs/icons';
 import { INTERNAL_PATH } from '~/shared/constant';
 
 import { FormikProvider, useFormik, Form, Field } from 'formik';

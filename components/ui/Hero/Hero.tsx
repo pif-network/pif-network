@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import { Button } from '~/components/ui';
-import { ChevronRight } from '~/components/ui/svgs/Icons';
+import { ChevronRight } from '~/components/ui/svgs/icons';
 
 const Hero = () => {
   return (

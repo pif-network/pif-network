@@ -1,4 +1,4 @@
-import { SVGProps } from '.'
+import { SVGProps } from '.';
 
 const LinkedinLine = ({ colour, ...props }: SVGProps) => {
   return (
@@ -15,7 +15,7 @@ const LinkedinLine = ({ colour, ...props }: SVGProps) => {
         fill={colour}
       />
     </svg>
-  )
-}
+  );
+};
 
-export default LinkedinLine
+export default LinkedinLine;

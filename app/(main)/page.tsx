@@ -20,7 +20,7 @@ import {
 } from '~/components/ui';
 import { MentorCard } from '~/components/mentor';
 import { FAQs } from '~/shared/constant';
-import { ChevronRight } from '~/components/ui/svgs/Icons';
+import { ChevronRight } from '~/components/ui/svgs/icons';
 import joy from '~/public/joy.png';
 import { api } from '~/lib/trpc/client';
 
