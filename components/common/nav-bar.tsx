@@ -11,7 +11,6 @@ import { INTERNAL_PATH } from '~/shared/constant';
 import { twMerge } from '~/lib/utils';
 import { PositionContext } from '~/lib/contexts';
 
-import { MenuIcon } from '@heroicons/react/outline';
 import { UserButton } from '@clerk/nextjs';
 import { SignedIn } from '@clerk/nextjs';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';

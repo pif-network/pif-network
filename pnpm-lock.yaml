@@ -14,9 +14,6 @@ dependencies:
   '@formkit/auto-animate':
     specifier: 0.7.0
     version: 0.7.0
-  '@heroicons/react':
-    specifier: ^1.0.6
-    version: 1.0.6(react@18.2.0)
   '@hookform/resolvers':
     specifier: ^3.3.2
     version: 3.3.2(react-hook-form@7.49.2)
@@ -523,14 +520,6 @@ packages:
 
   /@formkit/auto-animate@0.7.0:
     resolution: {integrity: sha512-RczHUr0AhRPssREoNdRjLfk2b/id9/DFnbIq18QM8L7E4zNV3XH+WO480EZ46BQHDEsv76YPJ0JbG2Y2i3GfXw==}
-    dev: false
-
-  /@heroicons/react@1.0.6(react@18.2.0):
-    resolution: {integrity: sha512-JJCXydOFWMDpCP4q13iEplA503MQO3xLoZiKum+955ZCtHINWnx26CUxVxxFQu/uLb4LW3ge15ZpzIkXKkJ8oQ==}
-    peerDependencies:
-      react: '>= 16'
-    dependencies:
-      react: 18.2.0
     dev: false
 
   /@hookform/resolvers@3.3.2(react-hook-form@7.49.2):

@@ -16,7 +16,6 @@
     "@clerk/nextjs": "^4.28.1",
     "@clerk/types": "^3.60.0",
     "@formkit/auto-animate": "0.7.0",
-    "@heroicons/react": "^1.0.6",
     "@hookform/resolvers": "^3.3.2",
     "@prisma/client": "^5.7.0",
     "@radix-ui/react-dialog": "^1.0.5",
