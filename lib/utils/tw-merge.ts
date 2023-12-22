@@ -1,12 +1,15 @@
 import { type ClassValue, clsx } from 'clsx';
 import { extendTailwindMerge } from 'tailwind-merge';
-const config = require('~/tailwind.config.js');
+import config from '~/tailwind.config.js';
 
 const customTwMerge = extendTailwindMerge({
   classGroups: {
-    'font-size': [{ text: Object.keys(config.theme.fontSize) }],
-    'font-weight': [{ font: Object.keys(config.theme.fontWeight) }],
-    color: [{ color: Object.keys(config.theme.colors) }],
+    // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+    'font-size': [{ text: Object.keys(config.theme?.fontSize!) }],
+    // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+    'font-weight': [{ font: Object.keys(config.theme?.fontWeight!) }],
+    // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+    color: [{ color: Object.keys(config.theme?.colors!) }],
   },
 });
 

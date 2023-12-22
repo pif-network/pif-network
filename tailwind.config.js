@@ -1,7 +1,7 @@
-const plugin = require('tailwindcss/plugin');
+import plugin from 'tailwindcss/plugin';
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   mode: 'jit',
   content: [
     './pages/**/*.{jsx,tsx}',
