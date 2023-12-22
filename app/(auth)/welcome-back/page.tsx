@@ -7,19 +7,26 @@ import { useRouter } from 'next/navigation';
 import { getErrorMessage } from '~/lib/types/service';
 import {
   Link,
-  Input as FormikInput,
   Button,
   Divider,
   BrandIdentifier,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+  InputLabel,
+  Form,
 } from '~/components/ui';
 import { GoogleFill } from '~/components/ui/svgs/icons';
+import { FormInput } from '../user/complete-profile/components';
 import { INTERNAL_PATH } from '~/shared/constant';
 
-import { FormikProvider, useFormik, Form, Field } from 'formik';
-import { object, string } from 'yup';
 import { Alert } from 'antd';
 import { useSignIn } from '@clerk/nextjs';
 import type { OAuthStrategy } from '@clerk/types';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const Login = () => {
   const { signIn, setActive, isLoaded } = useSignIn();
@@ -36,50 +43,50 @@ const Login = () => {
 
   const [errorMessage, setErrorMessage] = useState<string | undefined>('');
 
-  const validationSchema = object().shape({
-    email: string()
-      .min(6, 'Email không được ngắn hơn 6 ký tự.')
-      .max(50, 'Email không được dài quá 50 ký tự.')
-      .email('Địa chỉ email không hợp lệ.')
-      .required('Vui lòng nhập địa chỉ email.'),
-    password: string()
-      .min(6, 'Password không được ngắn hơn 6 ký tự.')
-      .max(128, 'Password không được dài quá 128 ký tự.')
-      .required('Vui lòng nhập mật khẩu.'),
+  const schema = z.object({
+    email: z.string().email(),
+    password: z.string().min(6).max(128),
+  });
+  const formDefaultValues = {
+    email: '',
+    password: '',
+  };
+
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+    defaultValues: formDefaultValues,
+    mode: 'onChange',
   });
 
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    validationSchema,
-    onSubmit: async ({ email, password }, { setSubmitting }) => {
-      console.log('Submitting..');
+  const shouldSubmitButtonDisable =
+    !form.formState.isDirty || !form.formState.isValid;
 
-      if (!isLoaded) {
-        return;
+  const onSubmit = async () => {
+    console.log('Submitting..');
+
+    if (!isLoaded) {
+      return;
+    }
+    try {
+      const v = form.watch();
+      console.log(v);
+      const result = await signIn.create({
+        identifier: v.email,
+        password: v.password,
+      });
+
+      if (result.status === 'complete') {
+        console.log(result);
+        await setActive({ session: result.createdSessionId });
+        router.push(INTERNAL_PATH.COMPLETE_PROFILE);
+      } else {
+        console.log(result);
       }
-
-      try {
-        const result = await signIn.create({
-          identifier: email,
-          password,
-        });
-
-        if (result.status === 'complete') {
-          console.log(result);
-          await setActive({ session: result.createdSessionId });
-          // router.push('/');
-        } else {
-          /* Investigate why the login hasn't completed */
-          console.log(result);
-        }
-      } catch (err: any) {
-        console.error('error', err.errors[0].longMessage);
-      }
-    },
-  });
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      setErrorMessage(errorMessage);
+    }
+  };
 
   return (
     <>
@@ -106,8 +113,11 @@ const Login = () => {
 
         <div className="mb-4" />
 
-        <FormikProvider value={formik}>
-          <Form className="max-w-sm flex flex-col">
+        <Form {...form}>
+          <form
+            className="max-w-sm flex flex-col"
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
             {errorMessage && (
               <Alert
                 className="mt-2 mb-6 font-manrope"
@@ -116,24 +126,56 @@ const Login = () => {
                 showIcon
               />
             )}
-            <Field name="email" type="email" as={FormikInput} />
-            <Field name="password" type="password" as={FormikInput} />
+            <FormField
+              name="email"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <InputLabel name="Email" />
+                    <FormControl>
+                      <FormInput
+                        className="w-full"
+                        placeholder="dev@pif-network.com"
+                        formTriggerBlur={field.onBlur}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
+            <FormField
+              name="password"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <InputLabel name="Password" />
+                    <FormControl>
+                      <FormInput
+                        className="w-full"
+                        placeholder="dev@pif-network.com"
+                        formTriggerBlur={field.onBlur}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
             <div className="mt-8 flex items-center justify-center">
-              {formik.isSubmitting ? (
-                <div className=" flex justify-center items-center">
+              {form.formState.isSubmitting ? (
+                <div className="w-full flex justify-center items-center">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black" />
                 </div>
               ) : (
                 <Button
-                  className={`w-full ${
-                    !(formik.isValid && formik.dirty)
-                      ? 'bg-primary-800/40 border-primary-800/60'
-                      : ''
-                  } text-[19px]`}
+                  className="w-full h-[42px] text-[16px]"
                   type="submit"
-                  // disabled={formik.isValid && formik.dirty}
+                  disabled={shouldSubmitButtonDisable}
                 >
-                  <h4>Đăng nhập</h4>
+                  Đăng nhập
                 </Button>
               )}
             </div>
@@ -148,8 +190,8 @@ const Login = () => {
             >
               <GoogleFill className="pr-2" /> <span>Google</span>
             </Button>
-          </Form>
-        </FormikProvider>
+          </form>
+        </Form>
       </BrandIdentifier>
     </>
   );
