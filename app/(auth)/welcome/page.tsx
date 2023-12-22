@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/navigation';
 
@@ -8,11 +8,17 @@ import { getErrorMessage } from '~/lib/types/service';
 import { INTERNAL_PATH, USER_ROLE } from '~/shared/constant';
 import {
   Button,
-  Input as FormikInput,
   Link,
   Divider,
   BrandIdentifier,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+  InputLabel,
 } from '~/components/ui';
+import { FormInput } from '../user/complete-profile/components';
 import {
   ChevronRight,
   GoogleFill,
@@ -20,14 +26,15 @@ import {
   SendingMailLine,
 } from '~/components/ui/svgs/icons';
 
-import { number, object, string } from 'yup';
-import { Field, Form, FormikProvider, useFormik } from 'formik';
 import { Alert } from 'antd';
 import { useSignUp } from '@clerk/nextjs';
 import type { OAuthStrategy } from '@clerk/types';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const CreateAccount = () => {
-  const [message, setMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const su = useSignUp();
   const { signUp, setActive, isLoaded } = su;
 
@@ -44,46 +51,50 @@ const CreateAccount = () => {
   const [isPendingEmailCodeVerification, setIsPendingEmailCodeVerification] =
     useState(false);
 
-  const validationSchema = object().shape({
-    email: string()
-      .min(6, 'Email không được ngắn hơn 6 ký tự.')
-      .max(50, 'Email không được dài quá 50 ký tự.')
-      .email('Địa chỉ email không hợp lệ.')
-      .required('Vui lòng nhập địa chỉ email.'),
-    password: string()
-      .min(6, 'Password không được ngắn hơn 6 ký tự.')
-      .max(128, 'Password không được dài quá 128 ký tự.')
-      .required('Vui lòng nhập mật khẩu.'),
+  const schema = z.object({
+    email: z.string().email(),
+    password: z.string().min(6).max(128),
+  });
+  const formDefaultValues = {
+    email: '',
+    password: '',
+  };
+
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+    defaultValues: formDefaultValues,
+    mode: 'onChange',
   });
 
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    validationSchema,
-    onSubmit: async ({ email, password }) => {
-      if (!isLoaded) {
-        return;
-      }
+  const shouldSubmitButtonDisable =
+    !form.formState.isDirty || !form.formState.isValid;
 
-      try {
-        await signUp.create({
-          emailAddress: email,
-          password,
-          redirectUrl: INTERNAL_PATH.COMPLETE_PROFILE,
-        });
+  const onSubmit = async () => {
+    console.log('Submitting..');
 
-        await signUp.prepareEmailAddressVerification({
-          strategy: 'email_code',
-        });
+    if (!isLoaded) {
+      return;
+    }
+    try {
+      const v = form.watch();
+      console.log(v);
 
-        setIsPendingEmailCodeVerification(true);
-      } catch (error: any) {
-        console.error(JSON.stringify(error, null, 2));
-      }
-    },
-  });
+      await signUp.create({
+        emailAddress: v.email,
+        password: v.password,
+        redirectUrl: INTERNAL_PATH.COMPLETE_PROFILE,
+      });
+
+      await signUp.prepareEmailAddressVerification({
+        strategy: 'email_code',
+      });
+
+      setIsPendingEmailCodeVerification(true);
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      setErrorMessage(errorMessage);
+    }
+  };
 
   return (
     <>
@@ -134,19 +145,58 @@ const CreateAccount = () => {
 
           <div className="mb-6 md:mb-8" />
 
-          <FormikProvider value={formik}>
-            <Form className="max-w-sm flex flex-col">
-              {message && (
+          <Form {...form}>
+            <form
+              className="max-w-sm flex flex-col"
+              onSubmit={form.handleSubmit(onSubmit)}
+            >
+              {errorMessage && (
                 <Alert
                   className="my-4 font-manrope"
-                  message={message}
+                  message={errorMessage}
                   type="error"
                   showIcon
                 />
               )}
 
-              <Field name="email" type="email" as={FormikInput} />
-              <Field name="password" type="password" as={FormikInput} />
+              <FormField
+                name="email"
+                render={({ field }) => {
+                  return (
+                    <FormItem>
+                      <InputLabel name="Email" />
+                      <FormControl>
+                        <FormInput
+                          className="w-full"
+                          placeholder="dev@pif-network.com"
+                          formTriggerBlur={field.onBlur}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
+              />
+              <FormField
+                name="password"
+                render={({ field }) => {
+                  return (
+                    <FormItem>
+                      <InputLabel name="Password" />
+                      <FormControl>
+                        <FormInput
+                          className="w-full"
+                          placeholder="dev@pif-network.com"
+                          formTriggerBlur={field.onBlur}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
+              />
 
               <div className="mb-2" />
 
@@ -155,21 +205,17 @@ const CreateAccount = () => {
               </div>
 
               <div className="mt-8 flex items-center justify-center">
-                {formik.isSubmitting ? (
-                  <div className=" flex justify-center items-center">
+                {form.formState.isSubmitting ? (
+                  <div className="w-full flex justify-center items-center">
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black" />
                   </div>
                 ) : (
                   <Button
-                    className={`w-full ${
-                      !(formik.isValid && formik.dirty)
-                        ? 'bg-primary-800/40 border-primary-800/60'
-                        : ''
-                    } text-[19px]`}
+                    className="w-full h-[42px] text-[16px]"
                     type="submit"
-                    // disabled={formik.isValid && formik.dirty}
+                    disabled={shouldSubmitButtonDisable}
                   >
-                    <h4>Đăng nhập</h4>
+                    Đăng ký
                   </Button>
                 )}
               </div>
@@ -184,8 +230,8 @@ const CreateAccount = () => {
               >
                 <GoogleFill className="pr-2" /> <span>Google</span>
               </Button>
-            </Form>
-          </FormikProvider>
+            </form>
+          </Form>
         </BrandIdentifier>
       )}
 
@@ -197,36 +243,37 @@ const CreateAccount = () => {
 export default CreateAccount;
 
 const VerifyEmailCode = ({ su }: { su: ReturnType<typeof useSignUp> }) => {
-  const formik = useFormik({
-    initialValues: {
+  const schema = z.object({
+    code: z.string(),
+  });
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+    defaultValues: {
       code: '',
     },
-    validationSchema: object().shape({
-      code: number().required(),
-    }),
-    onSubmit: async ({ code }) => {
-      if (!su.isLoaded) {
-        return;
-      }
-
-      try {
-        const completeSignUp = await su.signUp.attemptEmailAddressVerification({
-          code,
-        });
-
-        if (completeSignUp.status === 'complete') {
-          console.log(completeSignUp);
-          await su.setActive({ session: completeSignUp.createdSessionId });
-        }
-
-        if (completeSignUp.status !== 'complete') {
-          console.log(JSON.stringify(completeSignUp, null, 2));
-        }
-      } catch (error: any) {
-        console.error(JSON.stringify(error, null, 2));
-      }
-    },
+    mode: 'onChange',
   });
+  const onSubmit = async () => {
+    const v = form.watch();
+    if (!su.isLoaded) {
+      return;
+    }
+
+    try {
+      const completeSignUp = await su.signUp.attemptEmailAddressVerification(v);
+
+      if (completeSignUp.status === 'complete') {
+        console.log(completeSignUp);
+        await su.setActive({ session: completeSignUp.createdSessionId });
+      }
+
+      if (completeSignUp.status !== 'complete') {
+        console.log(JSON.stringify(completeSignUp, null, 2));
+      }
+    } catch (error: any) {
+      console.error(JSON.stringify(error, null, 2));
+    }
+  };
 
   return (
     <div className="h-screen flex flex-col justify-center items-center">
@@ -246,13 +293,25 @@ const VerifyEmailCode = ({ su }: { su: ReturnType<typeof useSignUp> }) => {
           <span className="inline-block">xác nhận tài khoản.</span>
         </h4>
 
-        <FormikProvider value={formik}>
-          <Form>
-            <Field
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FormField
               name="code"
-              as={FormikInput}
-              onChange={(event: FormEvent<HTMLInputElement>) => {
-                formik.setFieldValue('code', event.currentTarget.value.trim());
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <InputLabel name="Password" />
+                    <FormControl>
+                      <FormInput
+                        className="w-full"
+                        placeholder="000000"
+                        formTriggerBlur={field.onBlur}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
               }}
             />
 
@@ -269,8 +328,8 @@ const VerifyEmailCode = ({ su }: { su: ReturnType<typeof useSignUp> }) => {
               </Button>
               <Button type="submit">Xác nhận</Button>
             </div>
-          </Form>
-        </FormikProvider>
+          </form>
+        </Form>
       </div>
     </div>
   );
