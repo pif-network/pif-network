@@ -2,7 +2,7 @@ import Image from 'next/image';
 // import LineLG from '~/assets/section-title/section-title__line-lg.jpg'
 import LineSM from '~/assets/section-title/section-title__line-sm.jpg';
 
-const SectionTitle = ({
+export const SectionTitle = ({
   content,
   className,
 }: {
@@ -20,5 +20,3 @@ const SectionTitle = ({
     </div>
   );
 };
-
-export default SectionTitle;

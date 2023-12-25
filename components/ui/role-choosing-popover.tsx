@@ -27,7 +27,7 @@ const RoleChoosingPopoverContent = {
   [USER_ROLE.MENTEE]: MenteePopoverContent,
 };
 
-export default ({ userType }: RoleChoosingPopoverProps) => {
+export const RoleChoosingPopover = ({ userType }: RoleChoosingPopoverProps) => {
   const form = useFormContext<FormSchema>();
   const role = useWatch({
     // <- This triggers re-renders.

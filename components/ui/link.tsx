@@ -9,7 +9,7 @@ type Props = {
 } & ExternalHrefProps &
   LinkProps;
 
-const Link = forwardRef<HTMLAnchorElement, PropsWithChildren<Props>>(
+export const Link = forwardRef<HTMLAnchorElement, PropsWithChildren<Props>>(
   ({ newTab, external, href, children, ...others }, ref) => {
     if (external) {
       return (
@@ -38,5 +38,3 @@ const Link = forwardRef<HTMLAnchorElement, PropsWithChildren<Props>>(
     );
   }
 );
-
-export default Link;

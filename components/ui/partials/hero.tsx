@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Button } from '~/components/ui';
 import { ChevronRight } from '~/components/ui/svgs/icons';
 
-const Hero = () => {
+export const Hero = () => {
   return (
     <section className="h-screen/85 md:h-screen">
       <div className="h-full flex flex-col items-center">
@@ -72,5 +72,3 @@ const Hero = () => {
     </section>
   );
 };
-
-export default Hero;

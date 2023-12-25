@@ -93,7 +93,7 @@ const ValueDescription = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const BrandExplained = () => {
+export const BrandExplained = () => {
   return (
     <SnapTileWrapper numberOfTiles={3}>
       <SnapTileBackground>
@@ -226,5 +226,3 @@ const BrandExplained = () => {
     </SnapTileWrapper>
   );
 };
-
-export default BrandExplained;

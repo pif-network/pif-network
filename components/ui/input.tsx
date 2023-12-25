@@ -1,11 +1,12 @@
-import { twMerge } from '~/lib/utils';
+import { forwardRef } from 'react';
+
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from '~/components/ui/tooltip';
+import { twMerge } from '~/lib/utils';
 
-import { forwardRef } from 'react';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
 
 export interface InputProps

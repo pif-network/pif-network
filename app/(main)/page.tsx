@@ -8,16 +8,12 @@ import Image from 'next/image';
 import { User } from '~/lib/types/user';
 import { getErrorMessage } from '~/lib/types/service';
 import {
-  Skeleton,
-  Hero,
-  Benefits,
-  Values,
-  Feedback,
   Button,
   SectionTitle,
   FAQAccordionItem,
   BrandExplained,
 } from '~/components/ui';
+import { Hero } from '~/components/ui/partials';
 import { MentorCard } from '~/components/mentor';
 import { FAQs } from '~/shared/constant';
 import { ChevronRight } from '~/components/ui/svgs/icons';
