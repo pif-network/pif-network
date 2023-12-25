@@ -17,6 +17,7 @@ import {
   FormItem,
   FormMessage,
   InputLabel,
+  WordBlock,
 } from '~/components/ui';
 import { FormInput } from '../user/complete-profile/components';
 import {
@@ -289,7 +290,7 @@ const VerifyEmailCode = ({ su }: { su: ReturnType<typeof useSignUp> }) => {
 
         <h4 className="text-black font-manrope word-[0rem] text-body-md lg:text-heading-sm">
           Vui lòng kiểm tra email, và làm theo hướng dẫn để{' '}
-          <span className="inline-block">xác nhận tài khoản.</span>
+          <WordBlock>xác nhận tài khoản.</WordBlock>
         </h4>
 
         <Form {...form}>

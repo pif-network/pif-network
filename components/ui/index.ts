@@ -26,3 +26,4 @@ export { default as FAQAccordionItem } from './faq-accordion-item';
 export { default as Divider } from './Divider';
 export * from './Select';
 export * from './select';
+export { WordBlock } from './word-block';

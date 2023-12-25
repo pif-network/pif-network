@@ -9,7 +9,8 @@ import {
   SnapTileWrapper,
   SnapTileContent,
 } from '~/components/ui/snap-tile';
-import { Link } from '~/components/ui';
+import { Link, WordBlock } from '~/components/ui';
+
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 
 const BrandValueContainer = ({ children }: { children: React.ReactNode }) => {
@@ -148,12 +149,10 @@ const BrandExplained = () => {
                   <ValueDescription>
                     Trò chuyện cực kỳ có ích để chia sẻ và kết nối, nhưng đôi
                     khi thứ thực sự hữu dụng với bạn sẽ phải chi tiết hơn như
-                    thế.{' '}
-                    <span className="inline-block font-bold">PIF Connect</span>,{' '}
-                    <span className="inline-block font-bold">PIF Dev Day</span>,
-                    và <span className="inline-block font-bold">PIF Blog</span>{' '}
-                    của chúng tôi là những công cụ hữu dụng nhất cho hành trình
-                    của bạn.
+                    thế. <WordBlock bold>PIF Connect</WordBlock>,{' '}
+                    <WordBlock bold>PIF Dev Day</WordBlock>, và{' '}
+                    <WordBlock bold>PIF Blog</WordBlock> của chúng tôi là những
+                    công cụ hữu dụng nhất cho hành trình của bạn.
                   </ValueDescription>
                   <div className="mb-2" />
                   <Link
@@ -190,13 +189,11 @@ const BrandExplained = () => {
                 <BrandValueDescription currentTileProgress={progress}>
                   <ValueHeading>Your comfort area</ValueHeading>
                   <ValueDescription>
-                    Toàn bộ{' '}
-                    <span className="inline-block font-bold">PIF Network</span>,
-                    đặc biệt là{' '}
-                    <span className="inline-block font-bold">PIF Connect</span>{' '}
-                    là responsive sandbox của bạn. Viết blog, phỏng vấn thử,
-                    interships, và thậm chí là cơ hội việc làm, tất cả đều đang
-                    cách bạn một lần click chuột và nhiều lần nỗ lực.
+                    Toàn bộ <WordBlock bold>PIF Network</WordBlock>, đặc biệt là{' '}
+                    <WordBlock bold>PIF Connect</WordBlock> là responsive
+                    sandbox của bạn. Viết blog, phỏng vấn thử, interships, và
+                    thậm chí là cơ hội việc làm, tất cả đều đang cách bạn một
+                    lần click chuột và nhiều lần nỗ lực.
                   </ValueDescription>
                   <div className="mb-2" />
                   <Link

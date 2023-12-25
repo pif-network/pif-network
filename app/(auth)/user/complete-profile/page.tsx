@@ -10,7 +10,7 @@ import { User, UserRole } from '~/lib/types/user';
 import { api } from '~/lib/trpc/client';
 import { INTERNAL_PATH, USER_ROLE } from '~/shared/constant';
 import { ChevronRight, Home } from '~/components/ui/svgs/icons';
-import { Button, Form } from '~/components/ui';
+import { Button, Form, WordBlock } from '~/components/ui';
 import {
   Step0InputPack,
   Step1InputPack,
@@ -130,11 +130,8 @@ const CompleteProfile = () => {
               👋 Chào mừng bạn.
             </div>
 
-            <h1 className="text-left font-lora word-[-0.23rem] text-black text-sub-heading md:text-heading-md">
-              <span className="font-regular">Để chúng tôi hiểu thêm</span>{' '}
-              <span className="inline-block font-regular">
-                một chút về bạn nhé?
-              </span>
+            <h1 className="text-left font-lora font-regular word-[-0.23rem] text-black text-sub-heading md:text-heading-md">
+              Để chúng tôi hiểu thêm <WordBlock>một chút về bạn nhé?</WordBlock>
               <span className="font-light text-caption">*</span>
             </h1>
 
