@@ -23,7 +23,6 @@ import {
 
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import * as z from 'zod';
-import { Alert, Modal } from 'antd';
 import { ArrowLeftIcon, CheckCircledIcon } from '@radix-ui/react-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -147,14 +146,14 @@ const CompleteProfile = () => {
                 className="max-w-sm flex flex-col"
                 onSubmit={form.handleSubmit(onSubmit)}
               >
-                {errorMessage && (
-                  <Alert
-                    className="mt-2 mb-6 font-manrope"
-                    message={errorMessage}
-                    type="error"
-                    showIcon
-                  />
-                )}
+                {/* {errorMessage && ( */}
+                {/*   <Alert */}
+                {/*     className="mt-2 mb-6 font-manrope" */}
+                {/*     message={errorMessage} */}
+                {/*     type="error" */}
+                {/*     showIcon */}
+                {/*   /> */}
+                {/* )} */}
 
                 {currentFillingStep === -1 && <RoleChoosingInputPack />}
 
@@ -242,55 +241,55 @@ const CompleteProfile = () => {
         </main>
       )}
 
-      <Modal
-        width={900}
-        open={isProfileSuccessfullyUpdatedModalOpen}
-        centered
-        mask={false}
-        closable={false}
-        footer={null}
-      >
-        <div className="flex flex-col justify-center items-center">
-          <div className="mb-7" />
-
-          <CheckCircledIcon className="animate-appear w-40 h-20 lg:w-50 lg:h-24 stroke-[#04942b]" />
-
-          <div className="mb-7" />
-
-          <div className="animate-appear-long flex flex-col justify-center items-center">
-            <h1 className="-ml-[2px] font-lora font-semi-bold word-[-0.5rem] text-sub-heading md:text-heading text-black">
-              Cập nhật thông tin thành công!
-            </h1>
-
-            <div className="mb-3" />
-
-            <h4 className="text-black font-manrope word-[0rem] text-body-md lg:text-heading-sm">
-              Note: Bạn luôn có thể thay đổi thông tin cá nhân ở{' '}
-              <span className="inline-block">phần Cài đặt.</span>
-            </h4>
-
-            <div className="mb-8" />
-
-            <div className="w-[250px] flex gap-4">
-              <Button
-                // href={INTERNAL_PATH.HOME}
-                className="border-primary-900/60"
-                type="button"
-                variant="outline"
-              >
-                <Home className="w-4 h-4" />
-              </Button>
-              <Button
-                // href={INTERNAL_PATH.SEARCH}
-                className="w-full h-[36px] px-2 rounded-lg text-[14px]"
-              >
-                Tìm kiếm mentor
-                <ChevronRight className="pl-1 fill-white" />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </Modal>
+      {/* <Modal */}
+      {/*   width={900} */}
+      {/*   open={isProfileSuccessfullyUpdatedModalOpen} */}
+      {/*   centered */}
+      {/*   mask={false} */}
+      {/*   closable={false} */}
+      {/*   footer={null} */}
+      {/* > */}
+      {/*   <div className="flex flex-col justify-center items-center"> */}
+      {/*     <div className="mb-7" /> */}
+      {/**/}
+      {/*     <CheckCircledIcon className="animate-appear w-40 h-20 lg:w-50 lg:h-24 stroke-[#04942b]" /> */}
+      {/**/}
+      {/*     <div className="mb-7" /> */}
+      {/**/}
+      {/*     <div className="animate-appear-long flex flex-col justify-center items-center"> */}
+      {/*       <h1 className="-ml-[2px] font-lora font-semi-bold word-[-0.5rem] text-sub-heading md:text-heading text-black"> */}
+      {/*         Cập nhật thông tin thành công! */}
+      {/*       </h1> */}
+      {/**/}
+      {/*       <div className="mb-3" /> */}
+      {/**/}
+      {/*       <h4 className="text-black font-manrope word-[0rem] text-body-md lg:text-heading-sm"> */}
+      {/*         Note: Bạn luôn có thể thay đổi thông tin cá nhân ở{' '} */}
+      {/*         <span className="inline-block">phần Cài đặt.</span> */}
+      {/*       </h4> */}
+      {/**/}
+      {/*       <div className="mb-8" /> */}
+      {/**/}
+      {/*       <div className="w-[250px] flex gap-4"> */}
+      {/*         <Button */}
+      {/*           // href={INTERNAL_PATH.HOME} */}
+      {/*           className="border-primary-900/60" */}
+      {/*           type="button" */}
+      {/*           variant="outline" */}
+      {/*         > */}
+      {/*           <Home className="w-4 h-4" /> */}
+      {/*         </Button> */}
+      {/*         <Button */}
+      {/*           // href={INTERNAL_PATH.SEARCH} */}
+      {/*           className="w-full h-[36px] px-2 rounded-lg text-[14px]" */}
+      {/*         > */}
+      {/*           Tìm kiếm mentor */}
+      {/*           <ChevronRight className="pl-1 fill-white" /> */}
+      {/*         </Button> */}
+      {/*       </div> */}
+      {/*     </div> */}
+      {/*   </div> */}
+      {/* </Modal> */}
     </>
   );
 };

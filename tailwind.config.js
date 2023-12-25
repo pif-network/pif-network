@@ -1,7 +1,7 @@
-const plugin = require('tailwindcss/plugin');
+import plugin from 'tailwindcss/plugin';
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   mode: 'jit',
   content: [
     './pages/**/*.{jsx,tsx}',
@@ -157,7 +157,7 @@ module.exports = {
   },
   plugins: [
     // TODO: add type declaration for this, although it's not working..
-    require('tailwindcss-ripple')(),
+    // require('tailwindcss-ripple')(),
     plugin(function ({ matchUtilities, addUtilities, addComponents, theme }) {
       // matchUtilities(
       //   {

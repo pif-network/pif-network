@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { MentorCard } from '~/components/mentor';
-import { FilterSection, SectionTitle } from '~/components/ui';
+import { SectionTitle } from '~/components/ui';
 import { Fields, Offers, User } from '~/lib/types/user';
 
 const UserService = {} as any;
@@ -87,7 +87,7 @@ const SearchPage = () => {
 
       <div className="mb-16" />
 
-      <FilterSection setFilteringOptions={setFilteringOption} />
+      {/* <FilterSection setFilteringOptions={setFilteringOption} /> */}
 
       <div id="container" className="flex flex-row flex-wrap gap-y-4 py-6">
         {mentors.map((mentor, idx) => (

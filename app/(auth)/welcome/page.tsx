@@ -26,7 +26,6 @@ import {
   SendingMailLine,
 } from '~/components/ui/svgs/icons';
 
-import { Alert } from 'antd';
 import { useSignUp } from '@clerk/nextjs';
 import type { OAuthStrategy } from '@clerk/types';
 import { z } from 'zod';
@@ -150,14 +149,14 @@ const CreateAccount = () => {
               className="max-w-sm flex flex-col"
               onSubmit={form.handleSubmit(onSubmit)}
             >
-              {errorMessage && (
-                <Alert
-                  className="my-4 font-manrope"
-                  message={errorMessage}
-                  type="error"
-                  showIcon
-                />
-              )}
+              {/* {errorMessage && ( */}
+              {/*   <Alert */}
+              {/*     className="my-4 font-manrope" */}
+              {/*     message={errorMessage} */}
+              {/*     type="error" */}
+              {/*     showIcon */}
+              {/*   /> */}
+              {/* )} */}
 
               <FormField
                 name="email"
