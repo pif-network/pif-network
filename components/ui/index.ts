@@ -7,7 +7,6 @@ export * from './popover';
 export * from './command';
 export * from './dialog';
 export { default as Link } from './Link';
-export { default as FilterSection } from './FilterSection';
 export { default as SectionTitle } from './SectionTitle';
 export * from './tag';
 export * from './Avatar';

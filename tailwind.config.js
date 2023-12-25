@@ -157,7 +157,7 @@ export default {
   },
   plugins: [
     // TODO: add type declaration for this, although it's not working..
-    require('tailwindcss-ripple')(),
+    // require('tailwindcss-ripple')(),
     plugin(function ({ matchUtilities, addUtilities, addComponents, theme }) {
       // matchUtilities(
       //   {

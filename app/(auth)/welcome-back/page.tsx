@@ -21,7 +21,6 @@ import { GoogleFill } from '~/components/ui/svgs/icons';
 import { FormInput } from '../user/complete-profile/components';
 import { INTERNAL_PATH } from '~/shared/constant';
 
-import { Alert } from 'antd';
 import { useSignIn } from '@clerk/nextjs';
 import type { OAuthStrategy } from '@clerk/types';
 import { z } from 'zod';
@@ -118,14 +117,14 @@ const Login = () => {
             className="max-w-sm flex flex-col"
             onSubmit={form.handleSubmit(onSubmit)}
           >
-            {errorMessage && (
-              <Alert
-                className="mt-2 mb-6 font-manrope"
-                message={errorMessage}
-                type="error"
-                showIcon
-              />
-            )}
+            {/* {errorMessage && ( */}
+            {/*   <Alert */}
+            {/*     className="mt-2 mb-6 font-manrope" */}
+            {/*     message={errorMessage} */}
+            {/*     type="error" */}
+            {/*     showIcon */}
+            {/*   /> */}
+            {/* )} */}
             <FormField
               name="email"
               render={({ field }) => {

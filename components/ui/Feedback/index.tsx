@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { Avatar } from 'antd';
 import { ChevronRight } from '../svgs/icons';
 import DoubleQuoteSm from '~/assets/feedback/feedback_double-quote-sm.png';
 import DoubleQuoteLg from '~/assets/feedback/feedback_double-quote-lg.png';
@@ -46,14 +45,14 @@ const Feedback = () => {
 
           <div className="flex flex-row justify-between">
             <div>
-              <Avatar
-                src={MenteeAvatar.src}
-                className="absolute hidden md:inline-block md:top-[306px] md:left-[121px] md:w-[64px] md:h-[64px]"
-              ></Avatar>
-              <Avatar
-                src={MenteeAvatar.src}
-                className="absolute md:hidden sm:top-[91px] sm:left-[34px] sm:w-[19px] sm:h-[19px]"
-              ></Avatar>
+              {/* <Avatar */}
+              {/*   src={MenteeAvatar.src} */}
+              {/*   className="absolute hidden md:inline-block md:top-[306px] md:left-[121px] md:w-[64px] md:h-[64px]" */}
+              {/* ></Avatar> */}
+              {/* <Avatar */}
+              {/*   src={MenteeAvatar.src} */}
+              {/*   className="absolute md:hidden sm:top-[91px] sm:left-[34px] sm:w-[19px] sm:h-[19px]" */}
+              {/* ></Avatar> */}
 
               <div className="absolute md:top-[316px] md:left-[195px] sm:top-[92px] sm:left-[55px]">
                 <p className="text-primary-900 font-lora font-semi-bold md:text-sub-heading sm:text-[7px] md:word-[-6px] sm:word-[-2px]">

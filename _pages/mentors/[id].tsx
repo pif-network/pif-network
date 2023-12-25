@@ -25,7 +25,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   try {
     // const responseMentorInfo = await UserService.getUserById(context.query.id);
     // mentorInfo = responseMentorInfo.data.data;
-
     // const responseMentorReviews = await UserService.getAllReviewsByMentorId(
     //   mentorInfo.id
     // );

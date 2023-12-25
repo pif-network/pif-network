@@ -1,4 +1,3 @@
-import { Dropdown, Menu } from 'antd';
 import { Field, Form, FormikProvider, useFormik } from 'formik';
 import { Avatar, Input as FormikInput } from '~/components/ui';
 
@@ -91,19 +90,19 @@ export const ReviewCard = (user: User<'Mentee'>) => (
           <span className="text-caption text-gray-600">{`${user.title}, ${user.workplace}`}</span>
         </div>
       </div>
-      <Dropdown
-        trigger={['click']}
-        overlay={
-          <Menu>
-            <Menu.Item>Update review</Menu.Item>
-            <Menu.Item>Delete review</Menu.Item>
-          </Menu>
-        }
-      >
-        <button className="h-9 w-9 rounded-[50%] hover:bg-gray-50">
-          <DotsHorizontalIcon style={{ fontSize: '20px' }} />
-        </button>
-      </Dropdown>
+      {/* <Dropdown */}
+      {/*   trigger={['click']} */}
+      {/*   overlay={ */}
+      {/*     <Menu> */}
+      {/*       <Menu.Item>Update review</Menu.Item> */}
+      {/*       <Menu.Item>Delete review</Menu.Item> */}
+      {/*     </Menu> */}
+      {/*   } */}
+      {/* > */}
+      {/*   <button className="h-9 w-9 rounded-[50%] hover:bg-gray-50"> */}
+      {/*     <DotsHorizontalIcon style={{ fontSize: '20px' }} /> */}
+      {/*   </button> */}
+      {/* </Dropdown> */}
     </div>
     <p className="text-caption md:text-body-md">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi laboriosam
