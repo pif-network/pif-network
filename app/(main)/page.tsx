@@ -1,23 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Head from 'next/head';
 import { NextPage } from 'next';
 import Image from 'next/image';
 
 import { User } from '~/lib/types/user';
 import { getErrorMessage } from '~/lib/types/service';
-import {
-  Skeleton,
-  Hero,
-  Benefits,
-  Values,
-  Feedback,
-  Button,
-  SectionTitle,
-  FAQAccordionItem,
-  BrandExplained,
-} from '~/components/ui';
+import { Button, SectionTitle, FAQAccordionItem } from '~/components/ui';
+import { Hero, BrandExplained } from '~/components/ui/partials';
 import { MentorCard } from '~/components/mentor';
 import { FAQs } from '~/shared/constant';
 import { ChevronRight } from '~/components/ui/svgs/icons';
@@ -30,42 +20,37 @@ const HomePage: NextPage = () => {
   console.log(t.data);
 
   return (
-    <>
-      <Head>
-        <title>Homepage</title>
-      </Head>
+    <main>
+      <Hero />
 
-      <main>
-        <Hero />
+      <section className="mx-4">
+        <Image
+          src={joy}
+          alt="Joy at PIF."
+          sizes="100vw"
+          style={{
+            width: '100%',
+            height: 'auto',
+          }}
+        />
+      </section>
 
-        <section className="mx-4">
-          <Image
-            src={joy}
-            alt="Joy at PIF."
-            sizes="100vw"
-            style={{
-              width: '100%',
-              height: 'auto',
-            }}
-          />
-        </section>
+      <div className="mb-24" />
 
-        <div className="mb-24" />
-
-        <section className="">
-          <h1
-            className="font-lora font-bold text-[24px] text-center text-primary-900
+      <section className="">
+        <h1
+          className="font-lora font-bold text-[24px] text-center text-primary-900
               border-y border-gray-700/50 p-5"
-          >
-            Introducing PIF Network
-          </h1>
-        </section>
+        >
+          Introducing PIF Network
+        </h1>
+      </section>
 
-        <div className="mb-24" />
+      <div className="mb-24" />
 
-        <BrandExplained />
+      <BrandExplained />
 
-        {/* <section className="my-8">
+      {/* <section className="my-8">
           <div className="flex flex-col justify-center md:max-w-[525px] md:mx-auto lg:max-w-[1323px] lg:mx-auto">
             <div className="mx-auto">
               <SectionTitle
@@ -89,48 +74,44 @@ const HomePage: NextPage = () => {
           </div>
         </section> */}
 
-        {/* <Values /> */}
+      {/* <Values /> */}
 
-        {/* <div className="mt-16 md:mt-32" />
+      {/* <div className="mt-16 md:mt-32" />
 
          <Feedback /> */}
 
-        <div className="mt-16 md:mt-32" />
+      <div className="mt-16 md:mt-32" />
 
-        <article
-          id="faqs"
-          className="max-w-screen-xl mt-12 mx-auto px-4 lg:px-8"
-        >
-          <section className="space-y-3 text-center">
-            <h1 className="text-primary-900 font-lora font-semi-bold word-[-0.6rem] text-title-sm">
-              Những câu hỏi thường gặp
-            </h1>
-            <p className="max-w-lg mx-auto text-gray-600 text-body-md">
-              SheCodes trả lời những câu hỏi mà có thể bạn sẽ thắc mắc.
-            </p>
-          </section>
+      <article id="faqs" className="max-w-screen-xl mt-12 mx-auto px-4 lg:px-8">
+        <section className="space-y-3 text-center">
+          <h1 className="text-primary-900 font-lora font-semi-bold word-[-0.6rem] text-title-sm">
+            Những câu hỏi thường gặp
+          </h1>
+          <p className="max-w-lg mx-auto text-gray-600 text-body-md">
+            SheCodes trả lời những câu hỏi mà có thể bạn sẽ thắc mắc.
+          </p>
+        </section>
 
-          <section className="mt-14 max-w-2xl mx-auto">
-            {FAQs.map((item, idx) => (
-              <FAQAccordionItem key={idx} idx={idx} FAQ={item} />
-            ))}
-          </section>
+        <section className="mt-14 max-w-2xl mx-auto">
+          {FAQs.map((item, idx) => (
+            <FAQAccordionItem key={idx} idx={idx} FAQ={item} />
+          ))}
+        </section>
 
-          <section className="space-y-1 mt-5 text-center">
-            <h3 className="text-primary-900 font-lora font-semi-bold word-[-0.4rem] text-body">
-              VẪN CÒN CÂU HỎI?{' '}
-            </h3>
-            <p className="max-w-md mx-auto text-gray-600 text-body-md">
-              Nếu bạn không thể tìm thấy câu trả lời mong muốn ở trên, xin hãy
-              xem thêm tại đây hoặc liên hệ với chúng tôi.
-            </p>
-          </section>
-        </article>
+        <section className="space-y-1 mt-5 text-center">
+          <h3 className="text-primary-900 font-lora font-semi-bold word-[-0.4rem] text-body">
+            VẪN CÒN CÂU HỎI?{' '}
+          </h3>
+          <p className="max-w-md mx-auto text-gray-600 text-body-md">
+            Nếu bạn không thể tìm thấy câu trả lời mong muốn ở trên, xin hãy xem
+            thêm tại đây hoặc liên hệ với chúng tôi.
+          </p>
+        </section>
+      </article>
 
-        {/* Space to footer */}
-        <div className="mb-4" />
-      </main>
-    </>
+      {/* Space to footer */}
+      <div className="mb-4" />
+    </main>
   );
 };
 

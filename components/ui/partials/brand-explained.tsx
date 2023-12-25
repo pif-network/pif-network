@@ -9,7 +9,8 @@ import {
   SnapTileWrapper,
   SnapTileContent,
 } from '~/components/ui/snap-tile';
-import { Link } from '~/components/ui';
+import { Link, WordBlock } from '~/components/ui';
+
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 
 const BrandValueContainer = ({ children }: { children: React.ReactNode }) => {
@@ -76,7 +77,23 @@ const BrandValueIllustration = ({
   );
 };
 
-const BrandExplained = () => {
+const ValueHeading = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <h3 className="font-lora font-bold text-white text-center text-[18px] w-[300px]">
+      {children}
+    </h3>
+  );
+};
+
+const ValueDescription = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <p className="text-white text-[13px] font-manrope w-2/3 text-center leading-[initial]">
+      {children}
+    </p>
+  );
+};
+
+export const BrandExplained = () => {
   return (
     <SnapTileWrapper numberOfTiles={3}>
       <SnapTileBackground>
@@ -89,14 +106,12 @@ const BrandExplained = () => {
             return (
               <BrandValueContainer>
                 <BrandValueDescription currentTileProgress={progress}>
-                  <h3 className="font-lora font-bold text-white text-center text-[18px] w-[300px]">
-                    Giá trị của sự trò chuyện
-                  </h3>
-                  <p className="text-white text-[13px] font-manrope w-2/3 text-center leading-[initial]">
+                  <ValueHeading>Giá trị của sự trò chuyện</ValueHeading>
+                  <ValueDescription>
                     Lúc ban đầu, không phải tất cả seniors đều là mentor giỏi,
                     và cũng không phải tất cả mentees đều là những người biết
                     lắng nghe.
-                  </p>
+                  </ValueDescription>
                   <div className="mb-2" />
                   <Link
                     href="/"
@@ -130,19 +145,15 @@ const BrandExplained = () => {
             return (
               <BrandValueContainer>
                 <BrandValueDescription currentTileProgress={progress}>
-                  <h2 className="font-lora font-bold text-white text-center text-[18px] w-[300px]">
-                    &ldquo;Certified journey&rdquo;
-                  </h2>
-                  <p className="text-white text-[13px] font-manrope w-3/4 text-center leading-[initial]">
+                  <ValueHeading>&ldquo;Certified journey&rdquo;</ValueHeading>
+                  <ValueDescription>
                     Trò chuyện cực kỳ có ích để chia sẻ và kết nối, nhưng đôi
                     khi thứ thực sự hữu dụng với bạn sẽ phải chi tiết hơn như
-                    thế.{' '}
-                    <span className="inline-block font-bold">PIF Connect</span>,{' '}
-                    <span className="inline-block font-bold">PIF Dev Day</span>,
-                    và <span className="inline-block font-bold">PIF Blog</span>{' '}
-                    của chúng tôi là những công cụ hữu dụng nhất cho hành trình
-                    của bạn.
-                  </p>
+                    thế. <WordBlock bold>PIF Connect</WordBlock>,{' '}
+                    <WordBlock bold>PIF Dev Day</WordBlock>, và{' '}
+                    <WordBlock bold>PIF Blog</WordBlock> của chúng tôi là những
+                    công cụ hữu dụng nhất cho hành trình của bạn.
+                  </ValueDescription>
                   <div className="mb-2" />
                   <Link
                     href="/"
@@ -176,18 +187,14 @@ const BrandExplained = () => {
             return (
               <BrandValueContainer>
                 <BrandValueDescription currentTileProgress={progress}>
-                  <h2 className="-mt-10 font-lora font-bold text-white text-center text-[18px] w-[300px]">
-                    Your comfort area
-                  </h2>
-                  <p className="text-white text-[13px] font-manrope w-3/4 text-center leading-[initial]">
-                    Toàn bộ{' '}
-                    <span className="inline-block font-bold">PIF Network</span>,
-                    đặc biệt là{' '}
-                    <span className="inline-block font-bold">PIF Connect</span>{' '}
-                    là responsive sandbox của bạn. Viết blog, phỏng vấn thử,
-                    interships, và thậm chí là cơ hội việc làm, tất cả đều đang
-                    cách bạn một lần click chuột và nhiều lần nỗ lực.
-                  </p>
+                  <ValueHeading>Your comfort area</ValueHeading>
+                  <ValueDescription>
+                    Toàn bộ <WordBlock bold>PIF Network</WordBlock>, đặc biệt là{' '}
+                    <WordBlock bold>PIF Connect</WordBlock> là responsive
+                    sandbox của bạn. Viết blog, phỏng vấn thử, interships, và
+                    thậm chí là cơ hội việc làm, tất cả đều đang cách bạn một
+                    lần click chuột và nhiều lần nỗ lực.
+                  </ValueDescription>
                   <div className="mb-2" />
                   <Link
                     href="/"
@@ -219,5 +226,3 @@ const BrandExplained = () => {
     </SnapTileWrapper>
   );
 };
-
-export default BrandExplained;

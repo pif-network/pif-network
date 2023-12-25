@@ -9,7 +9,7 @@ interface Props {
   idx: number;
 }
 
-const FAQAccordionItem = ({ FAQ, idx }: Props) => {
+export const FAQAccordionItem = ({ FAQ, idx }: Props) => {
   const [isAnswerShow, setIsAnswerShow] = useState(false);
   const [answerH, setAnswerH] = useState('0px');
   const answerRef = useRef<HTMLDivElement>(null!);

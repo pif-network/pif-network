@@ -1,6 +1,10 @@
 import Image from 'next/image';
 
-export default ({ children }: { children: React.ReactNode }) => (
+export const BrandIdentifier = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => (
   <main className="flex h-screen max-w-max mx-auto px-4 md:ml-32 lg:mx-auto">
     <section className="h-screen w-full max-w-max md:min-w-[537px] md:pr-48 xl:pr-64 flex flex-col justify-center rounded-[36px] md:border-r">
       {children}

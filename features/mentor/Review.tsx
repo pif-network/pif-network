@@ -1,4 +1,3 @@
-import { Field, Form, FormikProvider, useFormik } from 'formik';
 import { Avatar, Input as FormikInput } from '~/components/ui';
 
 import { User } from '~/lib/types/user';
@@ -23,10 +22,10 @@ const ReviewForm: React.FC<FormProps> = ({
   onSubmit,
   onClose,
 }) => {
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-  });
+  // const formik = useFormik({
+  //   initialValues,
+  //   onSubmit,
+  // });
 
   return (
     <div
@@ -48,18 +47,18 @@ const ReviewForm: React.FC<FormProps> = ({
         <Cross2Icon className="cursor-pointer" onClick={onClose} />
       </div>
 
-      <FormikProvider value={formik}>
-        <Form>
-          <Field
-            className="p-0 pb-4 border-0 border-b hover:border-r-0 focus:border-r-0 !border-gray-200 focus:shadow-none"
-            name="content"
-            label="Review của bạn"
-            type="text"
-            placeholder="Leave a review"
-            as={FormikInput}
-          />
-        </Form>
-      </FormikProvider>
+      {/* <FormikProvider value={formik}> */}
+      {/*   <Form> */}
+      {/*     <Field */}
+      {/*       className="p-0 pb-4 border-0 border-b hover:border-r-0 focus:border-r-0 !border-gray-200 focus:shadow-none" */}
+      {/*       name="content" */}
+      {/*       label="Review của bạn" */}
+      {/*       type="text" */}
+      {/*       placeholder="Leave a review" */}
+      {/*       as={FormikInput} */}
+      {/*     /> */}
+      {/*   </Form> */}
+      {/* </FormikProvider> */}
 
       <div className="text-right mt-3 text-gray-400 text-caption md:text-body-sm">
         Press enter to submit your review.
