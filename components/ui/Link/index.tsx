@@ -10,29 +10,11 @@ type Props = {
   LinkProps;
 
 const Link = forwardRef<HTMLAnchorElement, PropsWithChildren<Props>>(
-  (
-    {
-      className,
-      newTab,
-      external,
-      href,
-      passHref,
-      prefetch,
-      replace,
-      scroll,
-      shallow,
-      locale,
-      children,
-      ...others
-    },
-    ref
-  ) => {
+  ({ newTab, external, href, children, ...others }, ref) => {
     if (external) {
-      console.log('className', className);
       return (
         <a
-          className={className}
-          href={href as string}
+          href={href}
           ref={ref}
           rel={'noreferrer'}
           target={newTab ? '_blank' : undefined}
@@ -46,13 +28,6 @@ const Link = forwardRef<HTMLAnchorElement, PropsWithChildren<Props>>(
     return (
       <NextLink
         href={href}
-        replace={replace}
-        scroll={scroll}
-        shallow={shallow}
-        locale={locale}
-        prefetch={prefetch}
-        passHref={passHref}
-        className={className}
         ref={ref}
         rel={'noreferrer'}
         target={newTab ? '_blank' : undefined}
