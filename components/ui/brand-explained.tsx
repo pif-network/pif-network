@@ -76,6 +76,22 @@ const BrandValueIllustration = ({
   );
 };
 
+const ValueHeading = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <h3 className="font-lora font-bold text-white text-center text-[18px] w-[300px]">
+      {children}
+    </h3>
+  );
+};
+
+const ValueDescription = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <p className="text-white text-[13px] font-manrope w-2/3 text-center leading-[initial]">
+      {children}
+    </p>
+  );
+};
+
 const BrandExplained = () => {
   return (
     <SnapTileWrapper numberOfTiles={3}>
@@ -89,14 +105,12 @@ const BrandExplained = () => {
             return (
               <BrandValueContainer>
                 <BrandValueDescription currentTileProgress={progress}>
-                  <h3 className="font-lora font-bold text-white text-center text-[18px] w-[300px]">
-                    Giá trị của sự trò chuyện
-                  </h3>
-                  <p className="text-white text-[13px] font-manrope w-2/3 text-center leading-[initial]">
+                  <ValueHeading>Giá trị của sự trò chuyện</ValueHeading>
+                  <ValueDescription>
                     Lúc ban đầu, không phải tất cả seniors đều là mentor giỏi,
                     và cũng không phải tất cả mentees đều là những người biết
                     lắng nghe.
-                  </p>
+                  </ValueDescription>
                   <div className="mb-2" />
                   <Link
                     href="/"
@@ -130,10 +144,8 @@ const BrandExplained = () => {
             return (
               <BrandValueContainer>
                 <BrandValueDescription currentTileProgress={progress}>
-                  <h2 className="font-lora font-bold text-white text-center text-[18px] w-[300px]">
-                    &ldquo;Certified journey&rdquo;
-                  </h2>
-                  <p className="text-white text-[13px] font-manrope w-3/4 text-center leading-[initial]">
+                  <ValueHeading>&ldquo;Certified journey&rdquo;</ValueHeading>
+                  <ValueDescription>
                     Trò chuyện cực kỳ có ích để chia sẻ và kết nối, nhưng đôi
                     khi thứ thực sự hữu dụng với bạn sẽ phải chi tiết hơn như
                     thế.{' '}
@@ -142,7 +154,7 @@ const BrandExplained = () => {
                     và <span className="inline-block font-bold">PIF Blog</span>{' '}
                     của chúng tôi là những công cụ hữu dụng nhất cho hành trình
                     của bạn.
-                  </p>
+                  </ValueDescription>
                   <div className="mb-2" />
                   <Link
                     href="/"
@@ -176,10 +188,8 @@ const BrandExplained = () => {
             return (
               <BrandValueContainer>
                 <BrandValueDescription currentTileProgress={progress}>
-                  <h2 className="-mt-10 font-lora font-bold text-white text-center text-[18px] w-[300px]">
-                    Your comfort area
-                  </h2>
-                  <p className="text-white text-[13px] font-manrope w-3/4 text-center leading-[initial]">
+                  <ValueHeading>Your comfort area</ValueHeading>
+                  <ValueDescription>
                     Toàn bộ{' '}
                     <span className="inline-block font-bold">PIF Network</span>,
                     đặc biệt là{' '}
@@ -187,7 +197,7 @@ const BrandExplained = () => {
                     là responsive sandbox của bạn. Viết blog, phỏng vấn thử,
                     interships, và thậm chí là cơ hội việc làm, tất cả đều đang
                     cách bạn một lần click chuột và nhiều lần nỗ lực.
-                  </p>
+                  </ValueDescription>
                   <div className="mb-2" />
                   <Link
                     href="/"
