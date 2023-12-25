@@ -1,10 +1,6 @@
 import { forwardRef } from 'react';
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '~/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui';
 import { twMerge } from '~/lib/utils';
 
 import { InfoCircledIcon } from '@radix-ui/react-icons';

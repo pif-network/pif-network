@@ -1,15 +1,10 @@
 import { UserRole } from '~/lib/types/user';
 import { USER_ROLE } from '~/shared/constant';
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '~/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui';
 
 import { Control, useFormContext, useWatch } from 'react-hook-form';
 import { FormSchema } from '~/app/(auth)/user/complete-profile/components';
-import { useState } from 'react';
 
 interface RoleChoosingPopoverProps {
   userType: UserRole;
