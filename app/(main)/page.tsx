@@ -7,13 +7,8 @@ import Image from 'next/image';
 
 import { User } from '~/lib/types/user';
 import { getErrorMessage } from '~/lib/types/service';
-import {
-  Button,
-  SectionTitle,
-  FAQAccordionItem,
-  BrandExplained,
-} from '~/components/ui';
-import { Hero } from '~/components/ui/partials';
+import { Button, SectionTitle, FAQAccordionItem } from '~/components/ui';
+import { Hero, BrandExplained } from '~/components/ui/partials';
 import { MentorCard } from '~/components/mentor';
 import { FAQs } from '~/shared/constant';
 import { ChevronRight } from '~/components/ui/svgs/icons';
