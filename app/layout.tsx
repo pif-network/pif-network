@@ -1,8 +1,12 @@
-import 'antd/dist/antd.css';
-import '../assets/style/main.css';
+import '~/assets/style/main.css';
+
+import type { Metadata } from 'next';
+
+import { TooltipProvider } from '~/components/ui/tooltip';
+import { TRPCProvider } from '~/lib/trpc/client';
 
 import { ClerkProvider } from '@clerk/nextjs';
-import type { Metadata } from 'next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export default function RootLayout({
   children,
@@ -11,9 +15,16 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body>{children}</body>
-      </html>
+      <TRPCProvider>
+        <TooltipProvider>
+          <html lang="en">
+            <body>
+              {children}
+              <SpeedInsights />
+            </body>
+          </html>
+        </TooltipProvider>
+      </TRPCProvider>
     </ClerkProvider>
   );
 }

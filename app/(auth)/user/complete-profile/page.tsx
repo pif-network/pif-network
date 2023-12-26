@@ -1,32 +1,31 @@
 'use client';
 
-import { RefObject, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Head from 'next/head';
 import Image from 'next/image';
 
 import { getErrorMessage } from '~/lib/types/service';
 import { User, UserRole } from '~/lib/types/user';
-import { ChevronRight, Home } from '~/components/ui/svgs/Icons';
+import { api } from '~/lib/trpc/client';
 import { INTERNAL_PATH, USER_ROLE } from '~/shared/constant';
-import {
-  Input as FormikInput,
-  Select as FormikSelect,
-  Button,
-  RoleChoosingPopover,
-} from '~/components/ui';
+import { ChevronRight, Home } from '~/components/ui/svgs/icons';
+import { Button, Form, WordBlock } from '~/components/ui';
 import {
   Step0InputPack,
   Step1InputPack,
+  DescriptionPack,
   Step2InputPack,
   MentorInputPack,
-} from '~/components/common/user/components';
+  RoleChoosingInputPack,
+  formSchema,
+} from './components';
 
-import { Field, Form, FormikHelpers, FormikProvider, useFormik } from 'formik';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { object, string } from 'yup';
-import { Alert, Modal } from 'antd';
-import { ArrowLeftIcon, CheckCircleIcon } from '@heroicons/react/outline';
+import * as z from 'zod';
+import { ArrowLeftIcon, CheckCircledIcon } from '@radix-ui/react-icons';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 
 const CompleteProfile = () => {
   const router = useRouter();
@@ -37,109 +36,83 @@ const CompleteProfile = () => {
     setIsProfileSuccessfullyUpdatedModalOpen,
   ] = useState(false);
 
-  // TODO: Well, fix this.
-  const currentUserRole = 'Mentor';
-  const MAX_FILLING_STEPS = currentUserRole === USER_ROLE.MENTOR ? 3 : 2;
+  const postUser = api.user.updateProfile.useMutation();
 
-  const STEP_FIELD_MAP: { [key: number]: string[] } = {
-    '-1': ['role'],
-    0: ['name', 'gender'],
-    1: ['schoolName', 'major', 'title', 'workplace'],
-    2: ['location', 'github', 'linkedin'],
+  // TODO: Well, fix this.
+  const MAX_FILLING_STEPS = {
+    [USER_ROLE.MENTEE]: 3,
+    [USER_ROLE.MENTOR]: 4,
   };
 
-  if (currentUserRole === USER_ROLE.MENTOR) {
-    STEP_FIELD_MAP[2] = ['fields', 'offers', 'bookingUrl'];
-    STEP_FIELD_MAP[3] = ['location', 'github', 'linkedin'];
-  } else STEP_FIELD_MAP[2] = ['location', 'github', 'linkedin'];
-
-  const validationSchema = object().shape({
-    role: string().required(),
-    name: string().required(),
-    gender: string().required(),
-    description: string().required(),
-    schoolName: string()
-      .max(50, 'Tên trường học không được dài quá 50 ký tự')
-      .required(),
-    major: string()
-      .max(50, 'Tên ngành học không được dài quá 50 ký tự')
-      .required(),
-    title: string()
-      .max(50, 'Tên công ty không được dài quá 50 ký tự')
-      .required(),
-    workplace: string()
-      .max(50, 'Tên công việc không được dài quá 50 ký tự')
-      .required(),
-    location: string().required(),
-    github: string(),
-    linkedin: string(),
-  });
-
-  const formInitialValuesWithoutMentorFields = {
-    role: '',
+  const formInitialValues = {
+    role: 'Mentee',
     name: '',
-    gender: '',
+    gender: 'male',
     description: '',
     schoolName: '',
     major: '',
     title: '',
     workplace: '',
     location: '',
-    github: '',
-    linkedin: '',
+    githubUrl: '',
+    linkedinUrl: '',
+    fields: [] as string[],
+    offers: [] as string[],
+    bookingUrl: '',
+  } as const;
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: formInitialValues,
+    mode: 'onChange',
+  });
+  const watch = form.watch();
+
+  const onSubmit = () => {
+    try {
+      setErrorMessage('');
+      postUser.mutate(watch);
+
+      // setIsProfileSuccessfullyUpdatedModalOpen(true);
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      setErrorMessage(errorMessage);
+    }
   };
 
-  const formInitialValues =
-    currentUserRole === USER_ROLE.MENTOR
-      ? {
-          ...formInitialValuesWithoutMentorFields,
-          fields: [],
-          offers: [],
-          bookingUrl: '',
-        }
-      : formInitialValuesWithoutMentorFields;
+  const STEP_FIELD_MAP: { [key: number]: string[] } = {
+    '-1': ['role'],
+    0: ['name', 'gender'],
+    1: ['schoolName', 'major', 'title', 'workplace'],
+    2: ['description'],
+    3: ['location', 'githubUrl', 'linkedinUrl'],
+  };
 
-  const formik = useFormik({
-    initialValues: formInitialValues,
-    enableReinitialize: true,
-    validationSchema,
-    onSubmit: async values => {
-      try {
-        setErrorMessage('');
-
-        setIsProfileSuccessfullyUpdatedModalOpen(true);
-      } catch (error) {
-        const errorMessage = getErrorMessage(error);
-        setErrorMessage(errorMessage);
-      }
-    },
-  });
+  if (watch.role === USER_ROLE.MENTOR) {
+    STEP_FIELD_MAP[4] = ['fields', 'offers', 'bookingUrl'];
+  }
 
   const shouldDisableButtonNextStep = () => {
-    const { errors, touched, values } = formik;
+    const {
+      formState: { touchedFields, errors },
+    } = form;
+
+    console.log('touchedFields', touchedFields);
+    console.log('errors', errors);
+    console.log('watch', watch);
 
     const currentStepHasError = STEP_FIELD_MAP[currentFillingStep]?.some(
       field => Object.keys(errors).includes(field)
     );
-    const currentStepIsTouched = STEP_FIELD_MAP[currentFillingStep]?.some(
-      field => Object.keys(touched).includes(field)
+    const currentStepAllTouched = STEP_FIELD_MAP[currentFillingStep]?.every(
+      field => Object.keys(touchedFields).includes(field)
     );
 
-    console.log('v', values);
-    console.log('e', errors);
-    console.log('t', touched);
-    console.log('currentStepHasError', currentStepHasError);
-    console.log('currentStepIsTouched', currentStepIsTouched);
     console.log('--- ---');
 
-    return (
-      STEP_FIELD_MAP[currentFillingStep]?.some(field =>
-        Object.keys(errors).includes(field)
-      ) ||
-      !STEP_FIELD_MAP[currentFillingStep]?.some(field =>
-        Object.keys(touched).includes(field)
-      )
-    );
+    if (currentFillingStep === -1) return false;
+
+    return currentStepHasError || !currentStepAllTouched;
   };
 
   const [formRef, _] = useAutoAnimate({});
@@ -157,70 +130,42 @@ const CompleteProfile = () => {
               👋 Chào mừng bạn.
             </div>
 
-            <h1 className="text-left font-lora word-[-0.23rem] text-black text-sub-heading md:text-heading-md">
-              <span className="font-regular">Để chúng tôi hiểu thêm</span>{' '}
-              <span className="inline-block font-regular">
-                một chút về bạn nhé?
-              </span>
+            <h1 className="text-left font-lora font-regular word-[-0.23rem] text-black text-sub-heading md:text-heading-md">
+              Để chúng tôi hiểu thêm <WordBlock>một chút về bạn nhé?</WordBlock>
               <span className="font-light text-caption">*</span>
             </h1>
 
-            <div className="mb-4" />
+            <div className="mb-6" />
 
-            <FormikProvider value={formik}>
-              <Form ref={formRef} className="max-w-sm flex flex-col">
-                {errorMessage && (
-                  <Alert
-                    className="mt-2 mb-6 font-manrope"
-                    message={errorMessage}
-                    type="error"
-                    showIcon
-                  />
-                )}
+            <Form {...form}>
+              <form
+                ref={formRef}
+                className="max-w-sm flex flex-col"
+                onSubmit={form.handleSubmit(onSubmit)}
+              >
+                {/* {errorMessage && ( */}
+                {/*   <Alert */}
+                {/*     className="mt-2 mb-6 font-manrope" */}
+                {/*     message={errorMessage} */}
+                {/*     type="error" */}
+                {/*     showIcon */}
+                {/*   /> */}
+                {/* )} */}
 
-                {currentFillingStep === -1 && (
-                  <div className="flex justify-start space-x-4">
-                    <RoleChoosingPopover
-                      userType={USER_ROLE.MENTEE}
-                      onClick={async () => {
-                        await formik.setFieldValue('role', USER_ROLE.MENTEE);
-                        await formik.setTouched({ role: true });
-                      }}
-                      disabled={
-                        formik.values.role
-                          ? formik.values.role !== USER_ROLE.MENTEE
-                          : undefined
-                      }
-                    />
-                    <RoleChoosingPopover
-                      userType={USER_ROLE.MENTOR}
-                      onClick={async () => {
-                        await formik.setFieldValue('role', USER_ROLE.MENTOR);
-                        await formik.setTouched({ role: true });
-                      }}
-                      disabled={
-                        formik.values.role
-                          ? formik.values.role !== USER_ROLE.MENTOR
-                          : undefined
-                      }
-                    />
-                  </div>
-                )}
+                {currentFillingStep === -1 && <RoleChoosingInputPack />}
 
-                {currentFillingStep === 0 && (
-                  <Step0InputPack setFieldValue={formik.setFieldValue} />
-                )}
+                {currentFillingStep === 0 && <Step0InputPack />}
 
                 {currentFillingStep === 1 && <Step1InputPack />}
 
-                {currentFillingStep === 2 &&
-                  currentUserRole === USER_ROLE.MENTOR && (
-                    <MentorInputPack setFieldValue={formik.setFieldValue} />
-                  )}
+                {currentFillingStep === 2 && <DescriptionPack />}
 
-                {currentFillingStep === MAX_FILLING_STEPS && <Step2InputPack />}
-              </Form>
-            </FormikProvider>
+                {currentFillingStep === 3 && <Step2InputPack />}
+
+                {currentFillingStep === 4 &&
+                  watch.role === USER_ROLE.MENTOR && <MentorInputPack />}
+              </form>
+            </Form>
 
             <div className="mb-6" />
 
@@ -239,39 +184,37 @@ const CompleteProfile = () => {
 
             <div className="w-full flex gap-4">
               <Button
-                className="h-[42px] rounded-lg border-gray-400 text-heading-sm"
-                fillType="outlined"
-                size="medium"
-                content={
-                  currentFillingStep === 0 ? (
-                    ''
-                  ) : (
-                    <ArrowLeftIcon width={24} height={24} />
-                  )
-                }
+                className="group h-[42px] border-primary-900/60"
+                variant="outline"
                 onClick={() => {
-                  if (currentFillingStep === 0) return;
+                  if (currentFillingStep === -1) return;
                   else setCurrentFillingStep(currentFillingStep - 1);
                 }}
-              />
-              {formik.isSubmitting ? (
+                disabled={currentFillingStep === -1}
+              >
+                {currentFillingStep === -1 ? (
+                  <ArrowLeftIcon className="w-5 h-5 text-gray-600" />
+                ) : (
+                  <ArrowLeftIcon className="w-5 h-5 text-gray-600 transition group-hover:-translate-x-[2px] group-hover:text-gray-700" />
+                )}
+              </Button>
+              {form.formState.isSubmitting ? (
                 <div className="w-full flex justify-center items-center">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black" />
                 </div>
               ) : (
                 <Button
-                  className="w-full h-[42px] rounded-lg text-heading-sm disabled:bg-primary-800/40 disabled:border-primary-800/40"
+                  className="w-full h-[42px] text-[16px]"
                   type="submit"
-                  fillType="filled"
-                  size="medium"
-                  content="Tiếp tục"
                   onClick={async () => {
-                    if (currentFillingStep < MAX_FILLING_STEPS)
+                    if (currentFillingStep < MAX_FILLING_STEPS[watch.role])
                       setCurrentFillingStep(currentFillingStep + 1);
-                    else await formik.submitForm();
+                    else await form.handleSubmit(onSubmit)();
                   }}
                   disabled={shouldDisableButtonNextStep()}
-                />
+                >
+                  Tiếp tục
+                </Button>
               )}
             </div>
           </section>
@@ -295,55 +238,55 @@ const CompleteProfile = () => {
         </main>
       )}
 
-      <Modal
-        width={900}
-        open={isProfileSuccessfullyUpdatedModalOpen}
-        centered
-        mask={false}
-        closable={false}
-        footer={null}
-      >
-        <div className="flex flex-col justify-center items-center">
-          <div className="mb-7" />
-
-          <CheckCircleIcon className="animate-appear w-40 h-20 lg:w-50 lg:h-24 stroke-[#04942b]" />
-
-          <div className="mb-7" />
-
-          <div className="animate-appear-long flex flex-col justify-center items-center">
-            <h1 className="-ml-[2px] font-lora font-semi-bold word-[-0.5rem] text-sub-heading md:text-heading text-black">
-              Cập nhật thông tin thành công!
-            </h1>
-
-            <div className="mb-3" />
-
-            <h4 className="text-black font-manrope word-[0rem] text-body-md lg:text-heading-sm">
-              Note: Bạn luôn có thể thay đổi thông tin cá nhân ở{' '}
-              <span className="inline-block">phần Cài đặt.</span>
-            </h4>
-
-            <div className="mb-8" />
-
-            <div className="w-[250px] flex gap-4">
-              <Button
-                className="h-[36px] w-min px-5 rounded-lg border-gray-400"
-                href={INTERNAL_PATH.HOME}
-                fillType="outlined"
-                size="medium"
-                content={<Home className="w-4 h-4" />}
-              />
-              <Button
-                className="w-full h-[36px] px-2 rounded-lg text-[14px]"
-                href={INTERNAL_PATH.SEARCH}
-                fillType="filled"
-                size="medium"
-                content="Tìm kiếm mentor"
-                rightIcon={<ChevronRight className="pl-1 fill-white" />}
-              />
-            </div>
-          </div>
-        </div>
-      </Modal>
+      {/* <Modal */}
+      {/*   width={900} */}
+      {/*   open={isProfileSuccessfullyUpdatedModalOpen} */}
+      {/*   centered */}
+      {/*   mask={false} */}
+      {/*   closable={false} */}
+      {/*   footer={null} */}
+      {/* > */}
+      {/*   <div className="flex flex-col justify-center items-center"> */}
+      {/*     <div className="mb-7" /> */}
+      {/**/}
+      {/*     <CheckCircledIcon className="animate-appear w-40 h-20 lg:w-50 lg:h-24 stroke-[#04942b]" /> */}
+      {/**/}
+      {/*     <div className="mb-7" /> */}
+      {/**/}
+      {/*     <div className="animate-appear-long flex flex-col justify-center items-center"> */}
+      {/*       <h1 className="-ml-[2px] font-lora font-semi-bold word-[-0.5rem] text-sub-heading md:text-heading text-black"> */}
+      {/*         Cập nhật thông tin thành công! */}
+      {/*       </h1> */}
+      {/**/}
+      {/*       <div className="mb-3" /> */}
+      {/**/}
+      {/*       <h4 className="text-black font-manrope word-[0rem] text-body-md lg:text-heading-sm"> */}
+      {/*         Note: Bạn luôn có thể thay đổi thông tin cá nhân ở{' '} */}
+      {/*         <span className="inline-block">phần Cài đặt.</span> */}
+      {/*       </h4> */}
+      {/**/}
+      {/*       <div className="mb-8" /> */}
+      {/**/}
+      {/*       <div className="w-[250px] flex gap-4"> */}
+      {/*         <Button */}
+      {/*           // href={INTERNAL_PATH.HOME} */}
+      {/*           className="border-primary-900/60" */}
+      {/*           type="button" */}
+      {/*           variant="outline" */}
+      {/*         > */}
+      {/*           <Home className="w-4 h-4" /> */}
+      {/*         </Button> */}
+      {/*         <Button */}
+      {/*           // href={INTERNAL_PATH.SEARCH} */}
+      {/*           className="w-full h-[36px] px-2 rounded-lg text-[14px]" */}
+      {/*         > */}
+      {/*           Tìm kiếm mentor */}
+      {/*           <ChevronRight className="pl-1 fill-white" /> */}
+      {/*         </Button> */}
+      {/*       </div> */}
+      {/*     </div> */}
+      {/*   </div> */}
+      {/* </Modal> */}
     </>
   );
 };

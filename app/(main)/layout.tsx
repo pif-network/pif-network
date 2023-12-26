@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Footer, NavBar } from '~/components/common';
+import { PositionObserver } from '~/lib/contexts';
 
 export default function RootLayout({
   children,
@@ -8,9 +9,11 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <NavBar />
-      {children}
-      <Footer />
+      <PositionObserver>
+        <NavBar />
+        {children}
+        <Footer />
+      </PositionObserver>
     </>
   );
 }

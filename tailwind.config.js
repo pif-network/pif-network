@@ -1,18 +1,13 @@
-/** @type {import('tailwindcss').Config} */
-const plugin = require('tailwindcss/plugin');
+import plugin from 'tailwindcss/plugin';
 
-module.exports = {
+/** @type {import('tailwindcss').Config} */
+export default {
   mode: 'jit',
   content: [
     './pages/**/*.{jsx,tsx}',
     './app/**/*.{jsx,tsx}',
     './components/**/*.{jsx,tsx}',
     './features/**/*.{jsx,tsx}',
-  ],
-  safeList: [
-    {
-      pattern: /^(.*?)/,
-    },
   ],
   theme: {
     screens: {
@@ -38,6 +33,7 @@ module.exports = {
       caption: ['0.75rem', { lineHeight: '1rem' }],
       'body-sm': ['0.8125rem', { lineHeight: '1.125rem' }],
       'body-md': ['0.875rem', { lineHeight: '1.1875rem' }],
+      button: ['0.875rem', { lineHeight: '1.1875rem' }],
       body: ['1rem', { lineHeight: '1.375rem' }],
       'body-lg': ['1.3125rem', { lineHeight: '1.8125rem' }],
       'sub-heading': ['1.3125rem', { lineHeight: '1.6875rem' }],
@@ -161,31 +157,30 @@ module.exports = {
   },
   plugins: [
     // TODO: add type declaration for this, although it's not working..
-    require('tailwindcss-ripple')(),
-    // @ts-expect-error: Expression not callable, importing 'plugin'
+    // require('tailwindcss-ripple')(),
     plugin(function ({ matchUtilities, addUtilities, addComponents, theme }) {
-      matchUtilities(
-        {
-          word: value => ({
-            wordSpacing: value,
-          }),
-        },
-        { values: theme('wordSpacing') }
-      );
+      // matchUtilities(
+      //   {
+      //     word: value => ({
+      //       wordSpacing: value,
+      //     }),
+      //   },
+      //   { values: theme('wordSpacing') }
+      // );
       // word-spacing for !Firefox
-      matchUtilities(
-        {
-          cword: value => ({
-            /*
-             * @see https://developer.mozilla.org/en-US/docs/Web/CSS/appearance
-             **/
-            '@supports (-webkit-appearance:push-button)': {
-              wordSpacing: value,
-            },
-          }),
-        },
-        { values: theme('wordSpacing') }
-      );
+      // matchUtilities(
+      //   {
+      //     cword: value => ({
+      //       /*
+      //        * @see https://developer.mozilla.org/en-US/docs/Web/CSS/appearance
+      //        **/
+      //       '@supports (-webkit-appearance:push-button)': {
+      //         wordSpacing: value,
+      //       },
+      //     }),
+      //   },
+      //   { values: theme('wordSpacing') }
+      // );
 
       addUtilities({
         'text-mask': {
@@ -195,6 +190,9 @@ module.exports = {
         'value-card--text-mask': {
           background:
             'linear-gradient(179.95deg, #170330 9.05%, rgba(23, 3, 48, 0.1) 48.73%, rgba(23, 3, 48, 0.410738) 48.73%, rgba(23, 3, 48, 0.1) 48.73%)',
+        },
+        '.flex-centre': {
+          ' @apply flex items-center justify-center ': {},
         },
       });
     }),

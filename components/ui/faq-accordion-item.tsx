@@ -1,13 +1,15 @@
+'use client';
+
 import { useRef, useState } from 'react';
 
-import { ChevronRight } from '~/components/ui/svgs/Icons';
+import { ChevronRight } from '~/components/ui/svgs/icons';
 
 interface Props {
   FAQ: { q: string; a: string | JSX.Element };
   idx: number;
 }
 
-const FAQAccordionItem = ({ FAQ, idx }: Props) => {
+export const FAQAccordionItem = ({ FAQ, idx }: Props) => {
   const [isAnswerShow, setIsAnswerShow] = useState(false);
   const [answerH, setAnswerH] = useState('0px');
   const answerRef = useRef<HTMLDivElement>(null!);

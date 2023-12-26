@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { Button, RectangleAvatar, SectionTitle, Tag } from '~/components/ui';
-import { LocationFill, MortarboardHatFill } from '~/components/ui/svgs/Icons';
+import {
+  LocationFill,
+  MortarboardHatFill,
+  FacebookFill,
+  GithubFill,
+  LinkedinLine,
+} from '~/components/ui/svgs/icons';
 import { User } from '~/lib/types/user';
 import { FIELD_METADATA, OFFER_METADATA } from '~/shared/constant';
 
-import {
-  FacebookFilled,
-  GithubFilled,
-  LinkedinFilled,
-  PlusSquareOutlined,
-} from '@ant-design/icons';
 import autoAnimate from '@formkit/auto-animate';
 
 import { CreateReview, Review, ReviewCard } from './Review';
@@ -18,15 +18,15 @@ import { CreateReview, Review, ReviewCard } from './Review';
 const socialLinkMapper = {
   facebook: {
     dataKey: 'fbUrl',
-    icon: <FacebookFilled />,
+    icon: <FacebookFill />,
   },
   github: {
     dataKey: 'github',
-    icon: <GithubFilled />,
+    icon: <GithubFill />,
   },
   linkedIn: {
     dataKey: 'linkedin',
-    icon: <LinkedinFilled />,
+    icon: <LinkedinLine />,
   },
 };
 
@@ -114,12 +114,9 @@ export const MentorProfile: React.FC<{
               {data.name}
             </h1>
 
-            <Button
-              fillType="outlined"
-              size="medium"
-              className="hidden md:block h-[42px] py-0 rounded-lg border-gray-400 hover:border-primary-800 font-regular text-heading-sm hover:text-primary-800"
-              content="Đặt lịch hẹn"
-            />
+            <Button className="hidden md:block h-[42px] py-0 rounded-lg border-gray-400 hover:border-primary-800 font-regular text-heading-sm hover:text-primary-800">
+              Đặt lịch hẹn
+            </Button>
           </div>
 
           <span className="text-heading-sm text-center text-primary-900">
@@ -144,12 +141,11 @@ export const MentorProfile: React.FC<{
 
           <Button
             className="block w-full md:hidden"
-            external
-            href={data.bookingUrl || ''}
-            fillType="filled"
-            size="medium"
-            content="Đặt lịch hẹn"
-          />
+            // external
+            // href={data.bookingUrl || ''}
+          >
+            Đặt lịch hẹn
+          </Button>
         </div>
       </div>
 

@@ -1,0 +1,53 @@
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+enum Role {
+  Mentor
+  Mentee
+}
+
+enum Gender {
+  Male
+  Female
+}
+
+model Field {
+  fieldId     Int    @id @default(autoincrement()) @map("field_id")
+  name        String @unique @db.VarChar(25)
+  description String @db.VarChar(255)
+  users       User[]
+}
+
+model Offer {
+  offerId     Int    @id @default(autoincrement()) @map("offer_id")
+  name        String @unique @db.VarChar(25)
+  description String @db.VarChar(255)
+  users       User[]
+}
+
+model User {
+  clerkId     String  @id @map("clerk_id")
+  name        String  @db.VarChar(25)
+  email       String
+  gender      Gender?
+  role        Role?
+  description String? @db.VarChar(255)
+  schoolName  String? @map("school_name")
+  major       String?
+  title       String?
+  workplace   String?
+  location    String?
+  githubUrl   String? @map("github_url") @db.VarChar(80)
+  linkedinUrl String? @map("linkedin_url") @db.VarChar(80)
+  bookingUrl  String? @map("booking_url")
+  fields      Field[]
+  offers      Offer[]
+}

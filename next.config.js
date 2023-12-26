@@ -1,4 +1,7 @@
-module.exports = {
+import withBundleAnalyser from 'next-bundle-analyzer';
+
+/** @type {import("next").NextConfig} */
+let config = {
   async rewrites() {
     return [
       {
@@ -21,3 +24,15 @@ module.exports = {
     ],
   },
 };
+
+const shouldAnalyse = process.env.ANALYSE === 'true';
+
+if (shouldAnalyse) {
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('INFO: ANALYSE is enabled.');
+    // import('next-bundle-analyzer').then((mod) => mod.default);
+    config = withBundleAnalyser(config)();
+  }
+}
+
+export default config;
