@@ -1,9 +1,14 @@
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui';
+import {
+  AspectRatio,
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '~/components/ui';
+import { LocationFill, MortarboardHatFill } from '~/components/ui/svgs/icons';
 
 import { User } from '@prisma/client';
-import { LocationFill, MortarboardHatFill } from '~/components/ui/svgs/icons';
 
 const MentorProfilePage = () => {
   const data: Partial<User> = {
@@ -19,23 +24,31 @@ const MentorProfilePage = () => {
     <main className="h-screen pt-28">
       <section>
         <div className="mx-24 flex">
-          <Avatar className="w-72 h-92 rounded-[28px]">
-            <AvatarImage src={url} />
-            <AvatarFallback>SCN</AvatarFallback>
-          </Avatar>
+          <div className="w-40">
+            <AspectRatio ratio={2 / 3}>
+              <Avatar className="inline">
+                <AvatarImage
+                  src={url}
+                  className="rounded-[28px] object-cover"
+                />
+                <AvatarFallback>SCN</AvatarFallback>
+              </Avatar>
+            </AspectRatio>
+          </div>
 
           <div className="flex flex-col">
             <h1 className="max-w-[12ch] text-title-sm lg:text-[36px] text-primary-900 font-lora font-bold mb-3">
               {data.name}
             </h1>
-            <div className="mb-2">
+            <div className="text-body">
               <MortarboardHatFill
                 className="inline-block mr-3"
                 colour="black"
               />
               {`Tốt nghiệp chuyên ngành ${data.major} tại ${data.schoolName}`}
             </div>
-            <div>
+            <div className="mb-2" />
+            <div className="text-body">
               <LocationFill className="inline-block mr-3" colour="black" />
               {data.location}
             </div>
