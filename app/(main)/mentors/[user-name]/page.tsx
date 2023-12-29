@@ -7,6 +7,7 @@ import {
   AvatarImage,
   Button,
   Link,
+  SectionTitle,
 } from '~/components/ui';
 import {
   GithubFill,
@@ -50,9 +51,9 @@ const MentorProfilePage = () => {
   };
   const url = 'https://github.com/shadcn.png';
   return (
-    <main className="h-screen pt-36">
+    <main className="h-screen mx-32 pt-36">
       <section>
-        <div className="mx-32 flex">
+        <div className="flex">
           <div className="w-44 mr-12">
             <AspectRatio ratio={2 / 3}>
               <Avatar className="inline">
@@ -124,7 +125,35 @@ const MentorProfilePage = () => {
           </div>
         </div>
       </section>
-      <section></section>
+
+      <div className="mb-10" />
+
+      <section className="grid lg:grid-cols-3  gap-x-20 gap-y-10 flex-col md:flex-row">
+        <div className="md:col-span-2">
+          <SectionTitle content="Giới thiệu" />
+          <div className="mb-4" />
+          <p>
+            {`Mình là ${data.name}, hiện tại mình đang làm việc tại ${data.workplace} với vai trò ${data.title}.`}
+          </p>
+        </div>
+
+        <div className="flex flex-col">
+          <div>
+            <SectionTitle content="Giới thiệu" />
+            <div className="mb-4" />
+            <p>
+              {`Mình là ${data.name}, hiện tại mình đang làm việc tại ${data.workplace} với vai trò ${data.title}.`}
+            </p>
+          </div>
+          <div>
+            <SectionTitle content="Giới thiệu" />
+            <div className="mb-4" />
+            <p>
+              {`Mình là ${data.name}, hiện tại mình đang làm việc tại ${data.workplace} với vai trò ${data.title}.`}
+            </p>
+          </div>
+        </div>
+      </section>
       <section></section>
     </main>
   );

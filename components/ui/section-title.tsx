@@ -14,7 +14,7 @@ export const SectionTitle = ({
       <Image src={LineSM} alt="decorator" className="hidden md:inline-block" />
       <Image src={LineSM} alt="decorator" className="md:hidden mb-[0.375rem]" />
 
-      <div className="text-black font-lora font-semi-bold word-[-0.4rem] md:word-[-0.6875rem] text-heading-sm md:text-title-sm lg:text-title-sm">
+      <div className="text-primary-900 font-lora font-semi-bold text-heading-sm md:text-title-sm lg:text-[36px]">
         {content}
       </div>
     </div>
