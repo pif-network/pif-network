@@ -9,6 +9,7 @@ export * from './link';
 export * from './section-title';
 export * from './tag';
 export * from './avatar';
+export * from './aspect-ratio';
 export { Tooltip, TooltipContent, TooltipTrigger } from './tooltip';
 
 export { BrandIdentifier } from './brand-identifier';

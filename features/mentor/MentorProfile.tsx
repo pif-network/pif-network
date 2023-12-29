@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { Button, RectangleAvatar, SectionTitle, Tag } from '~/components/ui';
+import { Button, SectionTitle, Tag } from '~/components/ui';
 import {
   LocationFill,
   MortarboardHatFill,
@@ -105,7 +105,7 @@ export const MentorProfile: React.FC<{
       <div className="flex flex-col md:flex-row justify-center items-center">
         {/* <div className="md:mr-[77px]"> */}
         <div className="md:mr-16">
-          <RectangleAvatar src={data.avatarUrl} />
+          {/* <RectangleAvatar src={data.avatarUrl} /> */}
         </div>
 
         <div className="w-full flex flex-col items-center md:block">

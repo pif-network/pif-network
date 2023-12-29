@@ -1,37 +1,48 @@
-import Image from 'next/image';
+'use client';
 
-import { PersonIcon } from '@radix-ui/react-icons';
+import * as React from 'react';
 
-type AvatarProps = {
-  src?: string;
-  alt?: string;
-  emptyState?: React.ReactNode;
-};
+import { twMerge } from '~/lib/utils';
 
-const emptyRectangleAvatar = (
-  <PersonIcon className="text-title text-gray-400" />
-);
+import * as AvatarPrimitive from '@radix-ui/react-avatar';
 
-const emptyAvatar = (
-  <PersonIcon className="text-body text-gray-400 -translate-y-0.5" />
-);
+const Avatar = React.forwardRef<
+  React.ElementRef<typeof AvatarPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
+>(({ className, ...props }, ref) => (
+  <AvatarPrimitive.Root
+    ref={ref}
+    className={twMerge('relative flex shrink-0 overflow-hidden', className)}
+    {...props}
+  />
+));
+Avatar.displayName = AvatarPrimitive.Root.displayName;
 
-export const RectangleAvatar: React.FC<AvatarProps> = ({
-  src,
-  alt = 'Avatar',
-  emptyState = emptyRectangleAvatar,
-}) => (
-  <div className="h-[22rem] min-w-[17rem] flex items-center justify-center border-[1px] rounded-[32px] overflow-hidden relative">
-    {src ? <Image src={src} alt={alt} fill /> : emptyState}
-  </div>
-);
+const AvatarImage = React.forwardRef<
+  React.ElementRef<typeof AvatarPrimitive.Image>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
+>(({ className, ...props }, ref) => (
+  <AvatarPrimitive.Image
+    ref={ref}
+    className={twMerge('h-full w-full', className)}
+    {...props}
+  />
+));
+AvatarImage.displayName = AvatarPrimitive.Image.displayName;
 
-export const Avatar: React.FC<AvatarProps> = ({
-  src,
-  alt = 'Avatar',
-  emptyState = emptyAvatar,
-}) => (
-  <div className="h-[30px] w-[30px] md:h-[60px] md:w-[60px] inline-flex items-center justify-center bg-gray-50 rounded-[50%] relative">
-    {src ? <Image src={src} alt={alt} fill /> : emptyState}
-  </div>
-);
+const AvatarFallback = React.forwardRef<
+  React.ElementRef<typeof AvatarPrimitive.Fallback>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
+>(({ className, ...props }, ref) => (
+  <AvatarPrimitive.Fallback
+    ref={ref}
+    className={twMerge(
+      'flex h-full w-full items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800',
+      className
+    )}
+    {...props}
+  />
+));
+AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
+
+export { Avatar, AvatarImage, AvatarFallback };
