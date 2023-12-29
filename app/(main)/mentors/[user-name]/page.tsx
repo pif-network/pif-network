@@ -24,7 +24,7 @@ const SquareSocialLink = ({
   icon: React.ReactNode;
 }) => (
   <div
-    className="flex items-center justify-center w-10 h-10 bg-white rounded-xl
+    className="flex items-center justify-center w-8 h-8 bg-white rounded-lg
       shadow--social-icon hover:-translate-y-[2px] duration-200 ease-out cursor-pointer"
   >
     <Link external href={href} className="text-sub-heading">
@@ -46,10 +46,10 @@ const MentorProfilePage = () => {
   };
   const url = 'https://github.com/shadcn.png';
   return (
-    <main className="h-screen pt-28">
+    <main className="h-screen pt-32">
       <section>
         <div className="mx-24 flex">
-          <div className="w-44 mr-14">
+          <div className="w-44 mr-12">
             <AspectRatio ratio={2 / 3}>
               <Avatar className="inline">
                 <AvatarImage
@@ -62,22 +62,28 @@ const MentorProfilePage = () => {
           </div>
 
           <div className="flex flex-col">
-            <div className="mb-7" />
+            <div className="mb-10" />
 
-            <h2 className="max-w-[12ch] text-title-sm lg:text-[36px] text-primary-900 font-lora font-bold">
-              {data.name}
-            </h2>
+            <div>
+              <h2 className="max-w-[12ch] text-title-sm lg:text-[36px] text-primary-900 font-lora font-bold">
+                {data.name}
+              </h2>
+              <p className="font-manrope text-body text-black font-medium">
+                {data.title} <span className="text-gray-600">at</span>{' '}
+                {data.workplace}
+              </p>
+            </div>
 
             <div className="mb-3" />
 
-            <div className="flex gap-4">
+            <div className="flex gap-2">
               <SquareSocialLink
                 href={data.githubUrl!}
-                icon={<GithubFill colour="black" />}
+                icon={<GithubFill colour="black" className="w-5 h-5" />}
               />
               <SquareSocialLink
                 href={data.linkedinUrl!}
-                icon={<LinkedInLogoIcon className="w-5 h-5" />}
+                icon={<LinkedInLogoIcon className="w-[18px] h-[18px]" />}
               />
             </div>
 
