@@ -194,6 +194,10 @@ export default {
         '.flex-centre': {
           ' @apply flex items-center justify-center ': {},
         },
+        '.shadow--social-icon': {
+          'box-shadow':
+            '0px 3px 9px 0px rgba(0, 0, 0, 0.12), 0px 4px 48px 0px rgba(0, 0, 0, 0.08)',
+        },
       });
     }),
   ],

@@ -14,6 +14,7 @@ import {
 } from '~/components/ui/svgs/icons';
 
 import { User } from '@prisma/client';
+import { LinkedInLogoIcon } from '@radix-ui/react-icons';
 
 const SquareSocialLink = ({
   href,
@@ -22,7 +23,10 @@ const SquareSocialLink = ({
   href: string;
   icon: React.ReactNode;
 }) => (
-  <div className="flex items-center justify-center w-10 h-10 bg-white rounded-xl shadow-[0px_4px_48px_rgba(0,0,0,0.08),0px_8px_24px_rgba(0,0,0,0.12)] hover:-translate-y-[2px] duration-200 ease-out cursor-pointer">
+  <div
+    className="flex items-center justify-center w-10 h-10 bg-white rounded-xl
+      shadow--social-icon hover:-translate-y-[2px] duration-200 ease-out cursor-pointer"
+  >
     <Link external href={href} className="text-sub-heading">
       {icon}
     </Link>
@@ -66,10 +70,14 @@ const MentorProfilePage = () => {
 
             <div className="mb-3" />
 
-            <div>
+            <div className="flex gap-4">
               <SquareSocialLink
                 href={data.githubUrl!}
                 icon={<GithubFill colour="black" />}
+              />
+              <SquareSocialLink
+                href={data.linkedinUrl!}
+                icon={<LinkedInLogoIcon className="w-5 h-5" />}
               />
             </div>
 
