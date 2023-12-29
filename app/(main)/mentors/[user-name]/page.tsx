@@ -5,6 +5,7 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
+  Button,
   Link,
 } from '~/components/ui';
 import {
@@ -49,9 +50,9 @@ const MentorProfilePage = () => {
   };
   const url = 'https://github.com/shadcn.png';
   return (
-    <main className="h-screen pt-32">
+    <main className="h-screen pt-36">
       <section>
-        <div className="mx-24 flex">
+        <div className="mx-32 flex">
           <div className="w-44 mr-12">
             <AspectRatio ratio={2 / 3}>
               <Avatar className="inline">
@@ -116,6 +117,10 @@ const MentorProfilePage = () => {
             {/*   <LocationFill className="inline-block mr-3" colour="black" /> */}
             {/*   {data.location} */}
             {/* </div> */}
+          </div>
+
+          <div className="flex-1 flex justify-end">
+            <Button variant="outline">Đặt lịch hẹn</Button>
           </div>
         </div>
       </section>
