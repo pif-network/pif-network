@@ -14,7 +14,10 @@ import {
 } from '~/components/ui/svgs/icons';
 
 import { User } from '@prisma/client';
-import { LinkedInLogoIcon } from '@radix-ui/react-icons';
+import {
+  CounterClockwiseClockIcon,
+  LinkedInLogoIcon,
+} from '@radix-ui/react-icons';
 
 const SquareSocialLink = ({
   href,
@@ -74,7 +77,7 @@ const MentorProfilePage = () => {
               </p>
             </div>
 
-            <div className="mb-3" />
+            <div className="mb-4" />
 
             <div className="flex gap-2">
               <SquareSocialLink
@@ -87,22 +90,32 @@ const MentorProfilePage = () => {
               />
             </div>
 
-            <div className="mb-3" />
+            <div className="mb-5" />
 
-            <div className="text-body-sm">
-              <MortarboardHatFill
-                className="inline-block mr-3"
-                colour="black"
-              />
-              {`Tốt nghiệp chuyên ngành ${data.major} tại ${data.schoolName}`}
+            <div>
+              <div className="p-2 flex items-center gap-2 bg-white rounded-lg shadow--statistic-box cursor-pointer">
+                <CounterClockwiseClockIcon className="w-10 h-10" />
+                <p className="flex flex-col font-manrope">
+                  <span className="font-bold text-heading-sm">140 phút</span>
+                  <span className="font-regular text-button">
+                    Thời gian trò chuyện
+                  </span>
+                </p>
+              </div>
             </div>
 
-            <div className="mb-2" />
-
-            <div className="text-body-sm">
-              <LocationFill className="inline-block mr-3" colour="black" />
-              {data.location}
-            </div>
+            {/* <div className="text-body-sm"> */}
+            {/*   <MortarboardHatFill */}
+            {/*     className="inline-block mr-3" */}
+            {/*     colour="black" */}
+            {/*   /> */}
+            {/*   {`Tốt nghiệp chuyên ngành ${data.major} tại ${data.schoolName}`} */}
+            {/* </div> */}
+            {/* <div className="mb-2" /> */}
+            {/* <div className="text-body-sm"> */}
+            {/*   <LocationFill className="inline-block mr-3" colour="black" /> */}
+            {/*   {data.location} */}
+            {/* </div> */}
           </div>
         </div>
       </section>
