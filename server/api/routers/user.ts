@@ -57,4 +57,18 @@ export const userRouter = createRouter({
         console.log(error);
       }
     }),
+  single_mentor: publicProcedure
+    .input(z.object({ clerkId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const user = await ctx.db.user.findUnique({
+        where: {
+          clerkId: input.clerkId,
+        },
+        include: {
+          fields: true,
+          offers: true,
+        },
+      });
+      return user;
+    }),
 });

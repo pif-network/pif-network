@@ -14,6 +14,7 @@ import {
   LocationFill,
   MortarboardHatFill,
 } from '~/components/ui/svgs/icons';
+import { api } from '~/lib/trpc/client';
 
 import { User } from '@prisma/client';
 import {
@@ -39,6 +40,11 @@ const SquareSocialLink = ({
 );
 
 const MentorProfilePage = () => {
+  const realData = api.user.single_mentor.useQuery({
+    clerkId: '',
+  });
+  console.log(realData.data);
+
   const data: Partial<User> = {
     name: 'Shad CN',
     description:
