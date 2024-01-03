@@ -80,10 +80,7 @@ const SearchPage = () => {
 
   return (
     <main className="container min-h-screen mx-auto px-12 pt-[121px]">
-      <SectionTitle
-        className="mb-4"
-        content="Lựa chọn mentor phù hợp với bạn tại đây"
-      />
+      <SectionTitle content="Lựa chọn mentor phù hợp với bạn tại đây" />
 
       <div className="mb-16" />
 

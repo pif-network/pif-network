@@ -129,8 +129,10 @@ const MentorProfilePage = () => {
       <div className="mb-10" />
 
       <section className="grid lg:grid-cols-3  gap-x-20 gap-y-10 flex-col md:flex-row">
-        <div className="md:col-span-2">
-          <SectionTitle content="Giới thiệu" />
+        <div className="lg:col-span-2">
+          <SectionTitle>
+            <h2 className="font-lora font-bold text-heading">Giới thiệu</h2>
+          </SectionTitle>
           <div className="mb-4" />
           <p>
             {`Mình là ${data.name}, hiện tại mình đang làm việc tại ${data.workplace} với vai trò ${data.title}.`}
@@ -139,14 +141,14 @@ const MentorProfilePage = () => {
 
         <div className="flex flex-col">
           <div>
-            <SectionTitle content="Giới thiệu" />
+            <SectionTitle content="Phạm vi mentor" />
             <div className="mb-4" />
             <p>
               {`Mình là ${data.name}, hiện tại mình đang làm việc tại ${data.workplace} với vai trò ${data.title}.`}
             </p>
           </div>
           <div>
-            <SectionTitle content="Giới thiệu" />
+            <SectionTitle content="Lĩnh vực" />
             <div className="mb-4" />
             <p>
               {`Mình là ${data.name}, hiện tại mình đang làm việc tại ${data.workplace} với vai trò ${data.title}.`}
