@@ -41,6 +41,8 @@ const SquareSocialLink = ({
 const MentorProfilePage = () => {
   const data: Partial<User> = {
     name: 'Shad CN',
+    description:
+      'Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.',
     title: 'Software Engineer',
     workplace: 'Google',
     schoolName: 'University of California, Berkeley',
@@ -134,21 +136,27 @@ const MentorProfilePage = () => {
             <h2 className="font-lora font-bold text-heading">Giới thiệu</h2>
           </SectionTitle>
           <div className="mb-4" />
-          <p>
-            {`Mình là ${data.name}, hiện tại mình đang làm việc tại ${data.workplace} với vai trò ${data.title}.`}
+          <p className="font-manrope text-body leading-snug">
+            {data.description}
           </p>
         </div>
 
         <div className="flex flex-col">
           <div>
-            <SectionTitle content="Phạm vi mentor" />
+            <SectionTitle>
+              <h2 className="font-lora font-bold text-heading-sm">
+                Phạm vi mentor
+              </h2>
+            </SectionTitle>
             <div className="mb-4" />
             <p>
               {`Mình là ${data.name}, hiện tại mình đang làm việc tại ${data.workplace} với vai trò ${data.title}.`}
             </p>
           </div>
           <div>
-            <SectionTitle content="Lĩnh vực" />
+            <SectionTitle>
+              <h2 className="font-lora font-bold text-heading-sm">Lĩnh vực</h2>
+            </SectionTitle>
             <div className="mb-4" />
             <p>
               {`Mình là ${data.name}, hiện tại mình đang làm việc tại ${data.workplace} với vai trò ${data.title}.`}
