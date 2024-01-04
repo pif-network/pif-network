@@ -8,13 +8,11 @@ import {
   Button,
   Link,
   SectionTitle,
+  Tag,
 } from '~/components/ui';
-import {
-  GithubFill,
-  LocationFill,
-  MortarboardHatFill,
-} from '~/components/ui/svgs/icons';
+import { GithubFill } from '~/components/ui/svgs/icons';
 import { api } from '~/lib/trpc/client';
+import { FIELD_METADATA, OFFER_METADATA } from '~/shared/constant';
 
 import { User } from '@prisma/client';
 import {
@@ -40,13 +38,13 @@ const SquareSocialLink = ({
 );
 
 const MentorProfilePage = () => {
-  const { data, isLoading } = api.user.single_mentor.useQuery({
+  const { data } = api.user.single_mentor.useQuery({
     clerkId: 'user_2ZctFGhv0PHviDQXGDtAv9XcHQq',
   });
   console.log(data);
   const url = 'https://github.com/shadcn.png';
 
-  if (isLoading) {
+  if (!data) {
     return (
       <div className="flex items-center justify-center w-screen h-screen">
         Loading...
@@ -137,19 +135,54 @@ const MentorProfilePage = () => {
                 Phạm vi mentor
               </h2>
             </SectionTitle>
-            <div className="mb-4" />
-            <p>
-              {`Mình là ${data.name}, hiện tại mình đang làm việc tại ${data.workplace} với vai trò ${data.title}.`}
-            </p>
+            <div className="mb-2" />
+            <div className="flex flex-wrap gap-1">
+              {data.offers?.map((offer, idx) => (
+                <Tag
+                  key={idx}
+                  type="outlined"
+                  color={
+                    OFFER_METADATA[offer.name as keyof typeof OFFER_METADATA][
+                      'tagColour'
+                    ]
+                  }
+                >
+                  {
+                    OFFER_METADATA[offer.name as keyof typeof OFFER_METADATA][
+                      'displayName'
+                    ]
+                  }
+                </Tag>
+              ))}
+            </div>
           </div>
+
+          <div className="mb-4" />
+
           <div>
             <SectionTitle>
               <h2 className="font-lora font-bold text-heading-sm">Lĩnh vực</h2>
             </SectionTitle>
-            <div className="mb-4" />
-            <p>
-              {`Mình là ${data.name}, hiện tại mình đang làm việc tại ${data.workplace} với vai trò ${data.title}.`}
-            </p>
+            <div className="mb-2" />
+            <div className="flex flex-wrap gap-1">
+              {data.fields?.map((field, idx) => (
+                <Tag
+                  key={idx}
+                  type="filled"
+                  color={
+                    FIELD_METADATA[field.name as keyof typeof FIELD_METADATA][
+                      'tagColour'
+                    ]
+                  }
+                >
+                  {
+                    FIELD_METADATA[field.name as keyof typeof FIELD_METADATA][
+                      'displayName'
+                    ]
+                  }
+                </Tag>
+              ))}
+            </div>
           </div>
         </div>
       </section>

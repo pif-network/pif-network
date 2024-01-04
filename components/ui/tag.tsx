@@ -14,28 +14,24 @@ interface TagProps extends HTMLAttributes<HTMLElement> {
   onDelete?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
-// const hoverPresetByType = {
-//   primary: {
-//     outlined: 'hover:text-primary-400 hover:border-primary-400',
-//     filled: 'hover:border-primary-400 hover:bg-primary-300',
-//   },
-//   red: {
-//     outlined: 'hover:text-red-300 hover:border-red-300',
-//     filled: 'hover:border-red-300 hover:bg-red-200',
-//   },
-//   cyan: {
-//     outlined: 'hover:text-cyan-300 hover:border-cyan-300',
-//     filled: 'hover:border-cyan-300 hover:bg-cyan-200',
-//   },
-//   gray: undefined,
-// };
-const hoverPresetByType = Object.values(FIELD_METADATA).reduce((acc, value) => {
-  acc[value.tagColour] = {
-    outlined: `hover:text-${value.tagColour}-300 hover:border-${value.tagColour}-300`,
-    filled: `hover:border-${value.tagColour}-300 hover:bg-${value.tagColour}-200`,
-  };
-  return acc;
-}, {} as { [Property in TagColour]: { outlined: string; filled: string } });
+const hoverPresetByType = {
+  purple: {
+    outlined: 'hover:text-purple-400 hover:border-purple-400',
+    filled: 'hover:border-purple-400 hover:bg-purple-300',
+  },
+  red: {
+    outlined: 'hover:text-red-300 hover:border-red-300',
+    filled: 'hover:border-red-300 hover:bg-red-200',
+  },
+  cyan: {
+    outlined: 'hover:text-yan-300 hover:border-cyan-300',
+    filled: 'hover:border-can-300 hover:bg-cyan-200',
+  },
+  prussian: {
+    outlined: 'hover:text-yan-300 hover:border-cyan-300',
+    filled: 'hover:border-can-300 hover:bg-cyan-200',
+  },
+};
 
 const deleteBgByType = Object.values(FIELD_METADATA).reduce((acc, value) => {
   acc[value.tagColour] = `bg-${value.tagColour}-200`;
