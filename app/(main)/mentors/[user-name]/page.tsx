@@ -129,7 +129,7 @@ const MentorProfilePage = () => {
 
         <div className="flex flex-col">
           <div>
-            <SectionTitle>
+            <SectionTitle size="small">
               <h2 className="font-lora font-bold text-heading-sm">
                 Phạm vi mentor
               </h2>
@@ -159,7 +159,7 @@ const MentorProfilePage = () => {
           <div className="mb-4" />
 
           <div>
-            <SectionTitle>
+            <SectionTitle size="small">
               <h2 className="font-lora font-bold text-heading-sm">Lĩnh vực</h2>
             </SectionTitle>
             <div className="mb-2" />
