@@ -40,24 +40,20 @@ const SquareSocialLink = ({
 );
 
 const MentorProfilePage = () => {
-  const realData = api.user.single_mentor.useQuery({
-    clerkId: '',
+  const { data, isLoading } = api.user.single_mentor.useQuery({
+    clerkId: 'user_2ZctFGhv0PHviDQXGDtAv9XcHQq',
   });
-  console.log(realData.data);
-
-  const data: Partial<User> = {
-    name: 'Shad CN',
-    description:
-      'Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.',
-    title: 'Software Engineer',
-    workplace: 'Google',
-    schoolName: 'University of California, Berkeley',
-    major: 'Computer Science',
-    location: 'San Francisco, CA',
-    githubUrl: '#',
-    linkedinUrl: '#',
-  };
+  console.log(data);
   const url = 'https://github.com/shadcn.png';
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center w-screen h-screen">
+        Loading...
+      </div>
+    );
+  }
+
   return (
     <main className="h-screen mx-32 pt-36">
       <section>
@@ -113,19 +109,6 @@ const MentorProfilePage = () => {
                 </p>
               </div>
             </div>
-
-            {/* <div className="text-body-sm"> */}
-            {/*   <MortarboardHatFill */}
-            {/*     className="inline-block mr-3" */}
-            {/*     colour="black" */}
-            {/*   /> */}
-            {/*   {`Tốt nghiệp chuyên ngành ${data.major} tại ${data.schoolName}`} */}
-            {/* </div> */}
-            {/* <div className="mb-2" /> */}
-            {/* <div className="text-body-sm"> */}
-            {/*   <LocationFill className="inline-block mr-3" colour="black" /> */}
-            {/*   {data.location} */}
-            {/* </div> */}
           </div>
 
           <div className="flex-1 flex justify-end">
