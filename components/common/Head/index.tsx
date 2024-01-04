@@ -1,4 +1,4 @@
-import { default as NextHead } from 'next/head'
+import { default as NextHead } from 'next/head';
 
 const Head = () => {
   return (
@@ -21,7 +21,7 @@ const Head = () => {
         sizes="16x16"
         href="/favicon-16x16.png"
       />
-      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+      <link rel="mask-icon" href="/safari-pinned-tab.svg" colour="#5bbad5" />
       <link rel="manifest" href="/site.webmanifest" key="site-manifest" />
 
       <meta name="description" content="SheCodes Vietnam Mentorship" />
@@ -49,7 +49,7 @@ const Head = () => {
       <meta key="robots" name="robots" content={'index,follow'} />
       <meta key="googlebot" name="googlebot" content={'index,follow'}></meta>
     </NextHead>
-  )
-}
+  );
+};
 
-export default Head
+export default Head;

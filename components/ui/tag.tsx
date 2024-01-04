@@ -1,14 +1,15 @@
 import { Cross2Icon } from '@radix-ui/react-icons';
+import { cva } from 'class-variance-authority';
 import { HTMLAttributes } from 'react';
 import { twMerge } from '~/lib/utils';
 import { FIELD_METADATA } from '~/shared/constant';
 
 export type TagColour =
   (typeof FIELD_METADATA)[keyof typeof FIELD_METADATA]['tagColour'];
-type TagType = 'filled' | 'outlined';
+type TagType = 'fill' | 'outline';
 
 interface TagProps extends HTMLAttributes<HTMLElement> {
-  color: TagColour;
+  colour: TagColour;
   type: TagType;
   deletable?: boolean;
   onDelete?: (e: React.MouseEvent<HTMLElement>) => void;
@@ -16,8 +17,8 @@ interface TagProps extends HTMLAttributes<HTMLElement> {
 
 const hoverPresetByType = {
   purple: {
-    outlined: 'hover:text-purple-400 hover:border-purple-400',
-    filled: 'hover:border-purple-400 hover:bg-purple-300',
+    outlined: 'hover:text-purple-400 ',
+    filled: 'hover:border-purple-400 ',
   },
   red: {
     outlined: 'hover:text-red-300 hover:border-red-300',
@@ -43,31 +44,79 @@ const defaultPresetByType = {
   filled: 'text-gray-50 bg-gray-400 border-gray-700',
 };
 
+const tagVariants = cva(
+  'cursor-pointer border font-semi-bold font-manrope text-caption rounded-3xl px-2 py-1 inline-block relative group transition-colors ease-out duration-300',
+  {
+    variants: {
+      type: {
+        fill: 'text-gray-50 bg-gray-400 border-gray-700',
+        outline: 'text-gray-600 border-gray-400',
+      },
+      colour: {
+        purple: 'hover:border-purple-400',
+        cyan: 'hover:border-cyan-300',
+        red: 'hover:border-red-400',
+        prussian: 'hover:border-prussian-400',
+      },
+    },
+    compoundVariants: [
+      {
+        type: 'fill',
+        colour: 'purple',
+        className: 'hover:bg-purple-300',
+      },
+      {
+        type: 'outline',
+        colour: 'purple',
+        className: 'hover:text-purple-400 ',
+      },
+      {
+        type: 'fill',
+        colour: 'cyan',
+        className: 'hover:bg-cyan-300 ',
+      },
+      {
+        type: 'outline',
+        colour: 'cyan',
+        className: 'hover:text-cyan-300 ',
+      },
+      {
+        type: 'fill',
+        colour: 'red',
+        className: 'hover:bg-red-300 ',
+      },
+      {
+        type: 'outline',
+        colour: 'red',
+        className: 'hover:text-red-300 ',
+      },
+      {
+        type: 'fill',
+        colour: 'prussian',
+        className: 'hover:bg-prussian-300 ',
+      },
+      {
+        type: 'outline',
+        colour: 'prussian',
+        className: 'hover:text-prussian-300 ',
+      },
+    ],
+  }
+);
+
 export const Tag: React.FC<TagProps> = ({
   children,
-  color: colour,
+  colour,
   type,
   deletable,
   onDelete,
 }) => {
-  // const colorClasses = `${} ${} `;
-  const colorClasses = twMerge(
-    defaultPresetByType[type],
-    hoverPresetByType[colour][type],
-    'transition-colors ease-out duration-300'
-  );
   return (
-    <div
-      className={`${colorClasses} cursor-pointer border font-semi-bold font-manrope text-caption rounded-3xl px-2 py-1 inline-block relative group`}
-    >
+    <div className={twMerge(tagVariants({ type, colour }))}>
       {children}
       {deletable && (
         <div onClick={onDelete}>
-          <Cross2Icon
-            className={`invisible group-hover:visible text-caption absolute top-[0.2rem] h-[1.125rem] right-1 w-3.5 cursor-pointer ${
-              type === 'outlined' ? 'bg-white' : deleteBgByType[colour]
-            }`}
-          />
+          <Cross2Icon className={''} />
         </div>
       )}
     </div>
