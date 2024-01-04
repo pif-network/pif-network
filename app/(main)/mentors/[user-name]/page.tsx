@@ -7,12 +7,12 @@ import {
   AvatarImage,
   Button,
   Link,
+  SectionTitle,
+  Tag,
 } from '~/components/ui';
-import {
-  GithubFill,
-  LocationFill,
-  MortarboardHatFill,
-} from '~/components/ui/svgs/icons';
+import { GithubFill } from '~/components/ui/svgs/icons';
+import { api } from '~/lib/trpc/client';
+import { FIELD_METADATA, OFFER_METADATA } from '~/shared/constant';
 
 import { User } from '@prisma/client';
 import {
@@ -38,21 +38,24 @@ const SquareSocialLink = ({
 );
 
 const MentorProfilePage = () => {
-  const data: Partial<User> = {
-    name: 'Shad CN',
-    title: 'Software Engineer',
-    workplace: 'Google',
-    schoolName: 'University of California, Berkeley',
-    major: 'Computer Science',
-    location: 'San Francisco, CA',
-    githubUrl: '#',
-    linkedinUrl: '#',
-  };
+  const { data } = api.user.single_mentor.useQuery({
+    clerkId: 'user_2ZctFGhv0PHviDQXGDtAv9XcHQq',
+  });
+  console.log(data);
   const url = 'https://github.com/shadcn.png';
+
+  if (!data) {
+    return (
+      <div className="flex items-center justify-center w-screen h-screen">
+        Loading...
+      </div>
+    );
+  }
+
   return (
-    <main className="h-screen pt-36">
+    <main className="h-screen mx-32 pt-36">
       <section>
-        <div className="mx-32 flex">
+        <div className="flex">
           <div className="w-44 mr-12">
             <AspectRatio ratio={2 / 3}>
               <Avatar className="inline">
@@ -104,19 +107,6 @@ const MentorProfilePage = () => {
                 </p>
               </div>
             </div>
-
-            {/* <div className="text-body-sm"> */}
-            {/*   <MortarboardHatFill */}
-            {/*     className="inline-block mr-3" */}
-            {/*     colour="black" */}
-            {/*   /> */}
-            {/*   {`Tốt nghiệp chuyên ngành ${data.major} tại ${data.schoolName}`} */}
-            {/* </div> */}
-            {/* <div className="mb-2" /> */}
-            {/* <div className="text-body-sm"> */}
-            {/*   <LocationFill className="inline-block mr-3" colour="black" /> */}
-            {/*   {data.location} */}
-            {/* </div> */}
           </div>
 
           <div className="flex-1 flex justify-end">
@@ -124,7 +114,78 @@ const MentorProfilePage = () => {
           </div>
         </div>
       </section>
-      <section></section>
+
+      <div className="mb-10" />
+
+      <section className="grid lg:grid-cols-3  gap-x-20 gap-y-10 flex-col md:flex-row">
+        <div className="lg:col-span-2">
+          <SectionTitle>
+            <h2 className="font-lora font-bold text-heading">Giới thiệu</h2>
+          </SectionTitle>
+          <div className="mb-4" />
+          <p className="font-manrope text-body leading-snug">
+            {data.description}
+          </p>
+        </div>
+
+        <div className="flex flex-col">
+          <div>
+            <SectionTitle>
+              <h2 className="font-lora font-bold text-heading-sm">
+                Phạm vi mentor
+              </h2>
+            </SectionTitle>
+            <div className="mb-2" />
+            <div className="flex flex-wrap gap-1">
+              {data.offers?.map((offer, idx) => (
+                <Tag
+                  key={idx}
+                  type="outlined"
+                  color={
+                    OFFER_METADATA[offer.name as keyof typeof OFFER_METADATA][
+                      'tagColour'
+                    ]
+                  }
+                >
+                  {
+                    OFFER_METADATA[offer.name as keyof typeof OFFER_METADATA][
+                      'displayName'
+                    ]
+                  }
+                </Tag>
+              ))}
+            </div>
+          </div>
+
+          <div className="mb-4" />
+
+          <div>
+            <SectionTitle>
+              <h2 className="font-lora font-bold text-heading-sm">Lĩnh vực</h2>
+            </SectionTitle>
+            <div className="mb-2" />
+            <div className="flex flex-wrap gap-1">
+              {data.fields?.map((field, idx) => (
+                <Tag
+                  key={idx}
+                  type="filled"
+                  color={
+                    FIELD_METADATA[field.name as keyof typeof FIELD_METADATA][
+                      'tagColour'
+                    ]
+                  }
+                >
+                  {
+                    FIELD_METADATA[field.name as keyof typeof FIELD_METADATA][
+                      'displayName'
+                    ]
+                  }
+                </Tag>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
       <section></section>
     </main>
   );
