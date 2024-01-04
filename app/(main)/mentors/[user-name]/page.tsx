@@ -14,7 +14,6 @@ import { GithubFill } from '~/components/ui/svgs/icons';
 import { api } from '~/lib/trpc/client';
 import { FIELD_METADATA, OFFER_METADATA } from '~/shared/constant';
 
-import { User } from '@prisma/client';
 import {
   CounterClockwiseClockIcon,
   LinkedInLogoIcon,
@@ -130,7 +129,7 @@ const MentorProfilePage = () => {
 
         <div className="flex flex-col">
           <div>
-            <SectionTitle>
+            <SectionTitle size="small">
               <h2 className="font-lora font-bold text-heading-sm">
                 Phạm vi mentor
               </h2>
@@ -140,8 +139,8 @@ const MentorProfilePage = () => {
               {data.offers?.map((offer, idx) => (
                 <Tag
                   key={idx}
-                  type="outlined"
-                  color={
+                  type="outline"
+                  colour={
                     OFFER_METADATA[offer.name as keyof typeof OFFER_METADATA][
                       'tagColour'
                     ]
@@ -160,7 +159,7 @@ const MentorProfilePage = () => {
           <div className="mb-4" />
 
           <div>
-            <SectionTitle>
+            <SectionTitle size="small">
               <h2 className="font-lora font-bold text-heading-sm">Lĩnh vực</h2>
             </SectionTitle>
             <div className="mb-2" />
@@ -168,8 +167,8 @@ const MentorProfilePage = () => {
               {data.fields?.map((field, idx) => (
                 <Tag
                   key={idx}
-                  type="filled"
-                  color={
+                  type="fill"
+                  colour={
                     FIELD_METADATA[field.name as keyof typeof FIELD_METADATA][
                       'tagColour'
                     ]

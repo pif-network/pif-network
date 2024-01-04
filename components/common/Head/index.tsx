@@ -1,4 +1,4 @@
-import { default as NextHead } from 'next/head'
+import { default as NextHead } from 'next/head';
 
 const Head = () => {
   return (
@@ -49,7 +49,7 @@ const Head = () => {
       <meta key="robots" name="robots" content={'index,follow'} />
       <meta key="googlebot" name="googlebot" content={'index,follow'}></meta>
     </NextHead>
-  )
-}
+  );
+};
 
-export default Head
+export default Head;

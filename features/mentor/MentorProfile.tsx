@@ -165,8 +165,8 @@ export const MentorProfile: React.FC<{
             {data.offers?.map((offer, idx) => (
               <Tag
                 key={idx}
-                type="outlined"
-                color={OFFER_METADATA[offer]['tagColour']}
+                type="outline"
+                colour={OFFER_METADATA[offer]['tagColour']}
               >
                 {OFFER_METADATA[offer]['displayName']}
               </Tag>
@@ -181,8 +181,8 @@ export const MentorProfile: React.FC<{
             {data.fields?.map((field, idx) => (
               <Tag
                 key={idx}
-                type="filled"
-                color={FIELD_METADATA[field]['tagColour']}
+                type="fill"
+                colour={FIELD_METADATA[field]['tagColour']}
               >
                 {FIELD_METADATA[field]['displayName']}
               </Tag>

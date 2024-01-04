@@ -1,7 +1,7 @@
 import plugin from 'tailwindcss/plugin';
 
 /** @type {import('tailwindcss').Config} */
-export default {
+const config = {
   mode: 'jit',
   content: [
     './pages/**/*.{jsx,tsx}',
@@ -67,26 +67,26 @@ export default {
         200: '#6F5095',
         300: '#723A9E',
         400: '#53288A',
-        800: '#25044E',
-        900: '#120227',
-      },
-      purple: {
-        100: '#9470C2',
-        200: '#6F5095',
-        300: '#723A9E',
-        400: '#53288A',
+        700: '#380674',
         800: '#25044E',
         900: '#120227',
       },
       red: {
         100: '#B36670',
         200: '#9E3A46',
-        300: '#851C2A',
+        300: '#7D2D3F',
+        400: '#BC2445',
       },
       cyan: {
         100: '#6BB8B3',
         200: '#40A59F',
         300: '#1AACA3',
+        400: '#12CEC8',
+      },
+      prussian: {
+        200: '#00A375',
+        300: '#008F64',
+        400: '#006649',
       },
     },
     ripple: {
@@ -202,3 +202,4 @@ export default {
     }),
   ],
 };
+export default config;
