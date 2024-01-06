@@ -4,6 +4,7 @@ import { forwardRef } from 'react';
 
 import { GENDER_OPTION, USER_ROLE } from '~/shared/constant';
 import { Input, RoleChoosingPopover } from '~/components/ui';
+import { userSchema } from '~/lib/types/user';
 
 import { useFormContext } from 'react-hook-form';
 import * as z from 'zod';
@@ -14,26 +15,7 @@ export * from './description-pack';
 export * from './step-2-pack';
 export * from './mentor-step-3-pack';
 
-export const formSchema = z.object({
-  role: z.enum([USER_ROLE.MENTEE, USER_ROLE.MENTOR]),
-  name: z.string().min(2).max(50),
-  gender: z.enum([
-    GENDER_OPTION.MALE.value,
-    GENDER_OPTION.FEMALE.value,
-    GENDER_OPTION.OTHER.value,
-  ]),
-  description: z.string().min(2).max(500),
-  schoolName: z.string().min(2).max(50),
-  major: z.string().min(2).max(50),
-  title: z.string().min(2).max(50),
-  workplace: z.string().min(2).max(50),
-  location: z.string().min(2).max(50),
-  githubUrl: z.string().min(2).max(50),
-  linkedinUrl: z.string().min(2).max(50),
-  fields: z.array(z.string()),
-  offers: z.array(z.string()),
-  bookingUrl: z.string().min(2).max(50),
-});
+export const formSchema = userSchema;
 
 export type FormSchema = z.infer<typeof formSchema>;
 
