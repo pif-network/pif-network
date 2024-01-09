@@ -1,5 +1,12 @@
-import { FIELD_METADATA, OFFER_METADATA, USER_ROLE } from '~/shared/constant';
+import {
+  FIELD_METADATA,
+  GENDER_OPTION,
+  OFFER_METADATA,
+  USER_ROLE,
+} from '~/shared/constant';
 import type { valueof } from '../';
+
+import { z } from 'zod';
 
 export type UserRole = valueof<typeof USER_ROLE>;
 
@@ -48,3 +55,20 @@ export interface Mentee {
 export interface Mentor {
   [key: string]: any;
 }
+
+export const userSchema = z.object({
+  role: z.enum([USER_ROLE.MENTEE, USER_ROLE.MENTOR]),
+  name: z.string().min(2).max(50),
+  gender: z.enum([GENDER_OPTION.MALE.value, GENDER_OPTION.FEMALE.value]),
+  description: z.string().min(2).max(500),
+  schoolName: z.string().min(2).max(50),
+  major: z.string().min(2).max(50),
+  title: z.string().min(2).max(50),
+  workplace: z.string().min(2).max(50),
+  location: z.string().min(2).max(50),
+  githubUrl: z.string().min(2).max(50),
+  linkedinUrl: z.string().min(2).max(50),
+  fields: z.array(z.string()),
+  offers: z.array(z.string()),
+  bookingUrl: z.string().min(2).max(50),
+});
