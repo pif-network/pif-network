@@ -11,6 +11,7 @@ export * from './tag';
 export * from './avatar';
 export * from './aspect-ratio';
 export { Tooltip, TooltipContent, TooltipTrigger } from './tooltip';
+export * from './review-card';
 
 export { BrandIdentifier } from './brand-identifier';
 export { RoleChoosingPopover } from './role-choosing-popover';
