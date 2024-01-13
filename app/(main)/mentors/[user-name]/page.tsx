@@ -9,6 +9,7 @@ import {
   Link,
   SectionTitle,
   Tag,
+  ReviewCard,
 } from '~/components/ui';
 import { GithubFill } from '~/components/ui/svgs/icons';
 import { api } from '~/lib/trpc/client';
@@ -42,6 +43,18 @@ const MentorProfilePage = () => {
   });
   console.log(data);
   const url = 'https://github.com/shadcn.png';
+  const reviews = [
+    {
+      name: 'Nguyễn Mai Anh',
+      avatar: url,
+      text: 'Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.',
+    },
+    {
+      name: 'Nguyễn Mai Anh',
+      avatar: url,
+      text: 'Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.',
+    },
+  ];
 
   if (!data) {
     return (
@@ -51,8 +64,10 @@ const MentorProfilePage = () => {
     );
   }
 
+  const boxShadowStyle =
+    'shadow-[67px_155px_101px_rgba(0,0,0,0.01),30px_69px_75px_rgba(0,0,0,0.02),7px_17px_41px_rgba(0,0,0,0.02),0px_0px_0px_rgba(0,0,0,0.02)]';
   return (
-    <main className="h-screen mx-32 pt-36">
+    <main className="mx-32 pt-36">
       <section>
         <div className="flex">
           <div className="w-44 mr-12">
@@ -116,7 +131,7 @@ const MentorProfilePage = () => {
 
       <div className="mb-10" />
 
-      <section className="grid lg:grid-cols-3  gap-x-20 gap-y-10 flex-col md:flex-row">
+      <section className="grid lg:grid-cols-3 gap-x-20 gap-y-10 flex-col md:flex-row">
         <div className="lg:col-span-2">
           <SectionTitle>
             <h2 className="font-lora font-bold text-heading">Giới thiệu</h2>
@@ -185,7 +200,18 @@ const MentorProfilePage = () => {
           </div>
         </div>
       </section>
-      <section></section>
+
+      <section>
+        <SectionTitle>
+          <h2 className="font-lora font-bold text-heading">
+            Đánh giá từ mentee
+          </h2>
+        </SectionTitle>
+
+        {reviews.map((review, idx) => (
+          <ReviewCard key={idx} {...review} />
+        ))}
+      </section>
     </main>
   );
 };
