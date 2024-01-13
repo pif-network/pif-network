@@ -64,13 +64,11 @@ const MentorProfilePage = () => {
     );
   }
 
-  const boxShadowStyle =
-    'shadow-[67px_155px_101px_rgba(0,0,0,0.01),30px_69px_75px_rgba(0,0,0,0.02),7px_17px_41px_rgba(0,0,0,0.02),0px_0px_0px_rgba(0,0,0,0.02)]';
   return (
-    <main className="mx-32 pt-36">
+    <main className="mx-6 pt-20 lg:mx-32 lg:pt-36">
       <section>
-        <div className="flex">
-          <div className="w-44 mr-12">
+        <div className="flex flex-col lg:flex-row justify-center items-center lg:items-start">
+          <div className="w-full lg:w-44 lg:mr-12 px-7 lg:px-0">
             <AspectRatio ratio={2 / 3}>
               <Avatar className="inline">
                 <AvatarImage
@@ -85,8 +83,8 @@ const MentorProfilePage = () => {
           <div className="flex flex-col">
             <div className="mb-10" />
 
-            <div>
-              <h2 className="max-w-[12ch] text-title-sm lg:text-[36px] text-primary-900 font-lora font-bold">
+            <div className="leading-12">
+              <h2 className="max-w-[12ch] text-[28px] lg:text-[36px] text-primary-900 font-lora font-bold">
                 {data.name}
               </h2>
               <p className="font-manrope text-body text-black font-medium">
