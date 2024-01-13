@@ -202,11 +202,13 @@ const MentorProfilePage = () => {
       </section>
 
       <section>
-        <SectionTitle>
-          <h2 className="font-lora font-bold text-heading">
+        <SectionTitle size="small">
+          <h2 className="font-lora font-bold text-heading-md">
             Đánh giá từ mentee
           </h2>
         </SectionTitle>
+
+        <div className="mb-4" />
 
         {reviews.map((review, idx) => (
           <ReviewCard key={idx} {...review} />
