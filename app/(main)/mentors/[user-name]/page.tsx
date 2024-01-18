@@ -68,7 +68,7 @@ const MentorProfilePage = () => {
   return (
     <main className="mx-6 pt-20 lg:mx-32 lg:pt-36">
       <section>
-        <div className="flex flex-col lg:flex-row justify-center items-center lg:items-start">
+        <div className="flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:items-start">
           <div className="w-60 lg:w-44 lg:mr-12">
             <AspectRatio ratio={2 / 3}>
               <Avatar className="inline">
@@ -109,10 +109,10 @@ const MentorProfilePage = () => {
               />
             </div>
 
-            <div className="mb-5" />
+            <div className="mb-4 lg:mb-5" />
 
-            <div>
-              <div className="p-2 flex items-center gap-2 bg-white rounded-lg shadow--statistic-box cursor-pointer">
+            <div className="flex-centre lg:block">
+              <div className="p-2 flex items-center gap-2 bg-white rounded-lg cursor-pointer">
                 <CounterClockwiseClockIcon className="w-10 h-10" />
                 <p className="flex flex-col font-manrope">
                   <span className="font-bold text-heading-sm">140 phút</span>
@@ -121,10 +121,14 @@ const MentorProfilePage = () => {
                   </span>
                 </p>
               </div>
+
+              <div className="flex-1 flex justify-end lg:hidden">
+                <Button variant="outline">Đặt lịch hẹn</Button>
+              </div>
             </div>
           </div>
 
-          <div className="flex-1 flex justify-end">
+          <div className="hidden lg:flex-1 lg:flex lg:justify-end">
             <Button variant="outline">Đặt lịch hẹn</Button>
           </div>
         </div>
@@ -201,6 +205,8 @@ const MentorProfilePage = () => {
           </div>
         </div>
       </section>
+
+      <div className="mb-4 lg:mb-0" />
 
       <section>
         <SectionTitle size="small">
