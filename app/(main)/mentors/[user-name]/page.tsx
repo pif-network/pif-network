@@ -10,6 +10,7 @@ import {
   SectionTitle,
   Tag,
   ReviewCard,
+  WordBlock,
 } from '~/components/ui';
 import { GithubFill } from '~/components/ui/svgs/icons';
 import { api } from '~/lib/trpc/client';
@@ -64,13 +65,11 @@ const MentorProfilePage = () => {
     );
   }
 
-  const boxShadowStyle =
-    'shadow-[67px_155px_101px_rgba(0,0,0,0.01),30px_69px_75px_rgba(0,0,0,0.02),7px_17px_41px_rgba(0,0,0,0.02),0px_0px_0px_rgba(0,0,0,0.02)]';
   return (
-    <main className="mx-32 pt-36">
+    <main className="mx-6 pt-20 lg:mx-32 lg:pt-36">
       <section>
-        <div className="flex">
-          <div className="w-44 mr-12">
+        <div className="flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:items-start">
+          <div className="w-60 lg:w-44 lg:mr-12">
             <AspectRatio ratio={2 / 3}>
               <Avatar className="inline">
                 <AvatarImage
@@ -83,21 +82,23 @@ const MentorProfilePage = () => {
           </div>
 
           <div className="flex flex-col">
-            <div className="mb-10" />
+            <div className="mb-4 lg:mb-10" />
 
-            <div>
-              <h2 className="max-w-[12ch] text-title-sm lg:text-[36px] text-primary-900 font-lora font-bold">
+            <div className="px-4 lg:px-0 flex-centre flex-col gap-1 lg:block leading-8 lg:leading-12 text-center lg:text-left">
+              <h2 className="max-w-[12ch] text-[28px] lg:text-[36px] text-primary-900 font-lora font-bold">
                 {data.name}
               </h2>
-              <p className="font-manrope text-body text-black font-medium">
-                {data.title} <span className="text-gray-600">at</span>{' '}
-                {data.workplace}
+              <p className="font-manrope text-body-md lg:text-body text-black font-medium">
+                <WordBlock>{data.title}</WordBlock>{' '}
+                <WordBlock>
+                  <span className="text-gray-600">at</span> {data.workplace}
+                </WordBlock>
               </p>
             </div>
 
             <div className="mb-4" />
 
-            <div className="flex gap-2">
+            <div className="flex-centre lg:justify-start lg:items-start gap-2">
               <SquareSocialLink
                 href={data.githubUrl!}
                 icon={<GithubFill colour="black" className="w-5 h-5" />}
@@ -108,10 +109,10 @@ const MentorProfilePage = () => {
               />
             </div>
 
-            <div className="mb-5" />
+            <div className="mb-4 lg:mb-5" />
 
-            <div>
-              <div className="p-2 flex items-center gap-2 bg-white rounded-lg shadow--statistic-box cursor-pointer">
+            <div className="flex-centre lg:block">
+              <div className="p-2 flex items-center gap-2 bg-white rounded-lg cursor-pointer">
                 <CounterClockwiseClockIcon className="w-10 h-10" />
                 <p className="flex flex-col font-manrope">
                   <span className="font-bold text-heading-sm">140 phút</span>
@@ -120,10 +121,14 @@ const MentorProfilePage = () => {
                   </span>
                 </p>
               </div>
+
+              <div className="flex-1 flex justify-end lg:hidden">
+                <Button variant="outline">Đặt lịch hẹn</Button>
+              </div>
             </div>
           </div>
 
-          <div className="flex-1 flex justify-end">
+          <div className="hidden lg:flex-1 lg:flex lg:justify-end">
             <Button variant="outline">Đặt lịch hẹn</Button>
           </div>
         </div>
@@ -200,6 +205,8 @@ const MentorProfilePage = () => {
           </div>
         </div>
       </section>
+
+      <div className="mb-4 lg:mb-0" />
 
       <section>
         <SectionTitle size="small">
