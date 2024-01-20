@@ -33,6 +33,18 @@ model Offer {
   users       User[]
 }
 
+model Review {
+  reviewId Int    @id @default(autoincrement()) @map("review_id")
+  content  String @db.VarChar(255)
+
+  reviewerId  String  @map("reviewer_id")
+  reviewer    User    @relation("reviewer", fields: [reviewerId], references: [clerkId])
+  revieweeId  String  @map("reviewee_id")
+  reviewee    User    @relation("reviewee", fields: [revieweeId], references: [clerkId])
+  User        User?   @relation(fields: [userClerkId], references: [clerkId])
+  userClerkId String?
+}
+
 model User {
   clerkId     String  @id @map("clerk_id")
   name        String  @db.VarChar(25)
@@ -50,4 +62,8 @@ model User {
   bookingUrl  String? @map("booking_url")
   fields      Field[]
   offers      Offer[]
+
+  reviews   Review[] @relation("reviewer")
+  reviewing Review[] @relation("reviewee")
+  Review    Review[]
 }
