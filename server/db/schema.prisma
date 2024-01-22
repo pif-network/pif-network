@@ -34,15 +34,17 @@ model Offer {
 }
 
 model Review {
-  reviewId Int    @id @default(autoincrement()) @map("review_id")
-  content  String @db.VarChar(255)
+  reviewId  Int      @id @default(autoincrement()) @map("review_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  text      String   @db.VarChar(255)
 
-  reviewerId  String  @map("reviewer_id")
-  reviewer    User    @relation("reviewer", fields: [reviewerId], references: [clerkId])
-  revieweeId  String  @map("reviewee_id")
-  reviewee    User    @relation("reviewee", fields: [revieweeId], references: [clerkId])
-  User        User?   @relation(fields: [userClerkId], references: [clerkId])
-  userClerkId String?
+  reviewerId String @map("reviewer_id")
+  reviewer   User   @relation("reviewer", fields: [reviewerId], references: [clerkId])
+  revieweeId String @map("reviewee_id")
+  reviewee   User   @relation("reviewee", fields: [revieweeId], references: [clerkId])
+
+  @@index([reviewerId])
+  @@index([revieweeId])
 }
 
 model User {
@@ -63,7 +65,6 @@ model User {
   fields      Field[]
   offers      Offer[]
 
-  reviews   Review[] @relation("reviewer")
-  reviewing Review[] @relation("reviewee")
-  Review    Review[]
+  reviews   Review[] @relation("reviewee")
+  reviewing Review[] @relation("reviewer")
 }
