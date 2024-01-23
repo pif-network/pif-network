@@ -1,4 +1,4 @@
-import { initTRPC } from '@trpc/server';
+import { initTRPC, TRPCError } from '@trpc/server';
 import type { CreateNextContextOptions } from '@trpc/server/adapters/next';
 import {
   getAuth,
@@ -37,5 +37,15 @@ const t = initTRPC.context<typeof createInnerTRPCContext>().create({
   transformer: transformer,
 });
 
+const enforceUserLoggedIn = t.middleware(({ ctx, next }) => {
+  if (!ctx.auth) {
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
+  }
+  return next({
+    ctx,
+  });
+});
+
 export const createRouter = t.router;
 export const publicProcedure = t.procedure;
+export const protectedProcedure = t.procedure.use(enforceUserLoggedIn);

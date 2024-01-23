@@ -1,8 +1,8 @@
-import { createRouter, publicProcedure } from '../trpc';
+import { createRouter, protectedProcedure, publicProcedure } from '../trpc';
 import { userSchema } from '~/lib/types/user';
 
 import { z } from 'zod';
-import { Gender } from '@prisma/client';
+import { $Enums, Gender } from '@prisma/client';
 
 const capitaliseFirstLetter = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -49,5 +49,24 @@ export const userRouter = createRouter({
         },
       });
       return user;
+    }),
+  new_review: protectedProcedure
+    .input(z.object({ text: z.string(), revieweeId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const user = await ctx.db.user.findUnique({
+        where: { clerkId: ctx.auth.userId! },
+      });
+
+      if (user?.role !== $Enums.Role.Mentee) {
+        throw new Error('Only mentees can leave a review');
+      }
+      const review = await ctx.db.review.create({
+        data: {
+          text: input.text,
+          revieweeId: input.revieweeId,
+          reviewerId: ctx.auth.userId!,
+        },
+      });
+      return review;
     }),
 });
