@@ -19,6 +19,7 @@ import { FIELD_METADATA, OFFER_METADATA } from '~/shared/constant';
 import {
   CounterClockwiseClockIcon,
   LinkedInLogoIcon,
+  Pencil2Icon,
 } from '@radix-ui/react-icons';
 
 const SquareSocialLink = ({
@@ -206,14 +207,27 @@ const MentorProfilePage = () => {
         </div>
       </section>
 
-      <div className="mb-4 lg:mb-0" />
+      <div className="mb-6 lg:mb-0" />
 
-      <section>
-        <SectionTitle size="small">
-          <h2 className="font-lora font-bold text-heading-md">
-            Đánh giá từ mentee
-          </h2>
-        </SectionTitle>
+      <section className="max-w-[575px]">
+        <div className="flex justify-between">
+          <SectionTitle size="small">
+            <h2 className="font-lora font-bold text-heading-md">
+              Đánh giá từ mentee
+            </h2>
+          </SectionTitle>
+
+          <Button
+            variant="outline"
+            size="sm"
+            className="lg:h-10 lg:px-4 rounded-lg"
+          >
+            <Pencil2Icon className="w-3 h-3 lg:w-5 lg:h-5 lg:mr-2" />{' '}
+            <span className="hidden lg:inline font-manrope text-caption">
+              Viết đánh giá
+            </span>
+          </Button>
+        </div>
 
         <div className="mb-4" />
 
