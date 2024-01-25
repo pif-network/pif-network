@@ -209,7 +209,7 @@ const MentorProfilePage = () => {
 
       <div className="mb-6 lg:mb-0" />
 
-      <section className="max-w-[525px]">
+      <section className="max-w-[575px]">
         <div className="flex justify-between">
           <SectionTitle size="small">
             <h2 className="font-lora font-bold text-heading-md">
@@ -217,9 +217,15 @@ const MentorProfilePage = () => {
             </h2>
           </SectionTitle>
 
-          <Button variant="outline" className="h-8 lg:h-12 px-3 lg:px-7">
-            <Pencil2Icon className="w-3 h-3 lg:w-5 lg:h-5 lg:mr-2" />
-            <span className="hidden lg:inline"> Viết đánh giá</span>
+          <Button
+            variant="outline"
+            size="sm"
+            className="lg:h-10 lg:px-4 rounded-lg"
+          >
+            <Pencil2Icon className="w-3 h-3 lg:w-5 lg:h-5 lg:mr-2" />{' '}
+            <span className="hidden lg:inline font-manrope text-caption">
+              Viết đánh giá
+            </span>
           </Button>
         </div>
 
