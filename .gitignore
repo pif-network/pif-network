@@ -53,3 +53,7 @@ tsconfig.tsbuildinfo
 /.idea/
 
 .mock-service/pgdata
+
+**/*/*.db
+**/*/*.db-shm
+**/*/*.db-wal
